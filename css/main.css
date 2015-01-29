@@ -37,6 +37,8 @@ h1,h2,p {
     position: relative;
     height: 100%;
     background: url("../img/lowpoly.png");
+    background-size: 100% cover;
+    background-repeat: no-repeat;
 }
 
 .bg {
@@ -48,6 +50,8 @@ h1,h2,p {
 
 .cover {
     background: url("../img/cover.png");
+    /*background-size: cover auto;*/
+    /*background-repeat: no-repeat;*/
     position: absolute;
     top: 0;
     bottom: 0;
@@ -280,16 +284,22 @@ h3.detail {
 .bg-white {
     /*background-color: #eee;*/
     background: url("../img/lowpoly-white.png");
+    background-size: 100% cover;
+    background-repeat: no-repeat;
 }
 
 .bg-ultrawhite {
     /*background-color: #eee;*/
     background: url("../img/lowpoly-ultrawhite2.png");
+    background-size: 100% cover;
+    background-repeat: no-repeat;
 }
 
 .bg-mesh {
     /*background-color: #eee;*/
     background: url("../img/mesh.png");
+    background-size: 100% cover;
+    background-repeat: no-repeat;
 }
 
 .title {
