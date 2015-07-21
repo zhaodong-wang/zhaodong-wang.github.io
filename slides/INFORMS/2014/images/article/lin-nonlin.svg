@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 538 117.6" enable-background="new 0 0 538 117.6" xml:space="preserve">
+<g>
+	
+		<line fill="none" stroke="#000000" stroke-width="0.48" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="1.92,1.44" x1="314.9" y1="15.4" x2="404.2" y2="108.4"/>
+	<path d="M161,90.1l-2-3l6,3l-6,3L161,90.1z M27,89.6h134v1H27V89.6z"/>
+	<path d="M57,4.1l3,2l-3-6l-3,6L57,4.1z M57.5,116.7V4.1h-1v112.6H57.5z"/>
+	<g>
+		<g>
+			<defs>
+				<rect id="SVGID_1_" x="147.4" y="97.5" width="39.9" height="11.3"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  overflow="visible"/>
+			</clipPath>
+		</g>
+	</g>
+	
+		<line fill="none" stroke="#5C3317" stroke-width="2.28" stroke-linejoin="round" stroke-miterlimit="10" x1="42.1" y1="18.9" x2="137.7" y2="116.8"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="0.72" stroke-linejoin="round" stroke-miterlimit="10" x1="51" y1="33.2" x2="64" y2="33.2"/>
+	<path d="M436.9,90l-2-3l6,3l-6,3L436.9,90z M302.9,89.5h134v1h-134V89.5z"/>
+	<path d="M332.9,4l3,2l-3-6l-3,6L332.9,4z M333.4,116.6V4h-1v112.6H333.4z"/>
+	
+		<line fill="none" stroke="#5C3317" stroke-width="2.28" stroke-linejoin="round" stroke-miterlimit="10" x1="314.9" y1="15.4" x2="388.3" y2="90"/>
+	
+		<line fill="none" stroke="#5C3317" stroke-width="2.28" stroke-linejoin="round" stroke-miterlimit="10" x1="388.3" y1="89.9" x2="413.7" y2="89.9"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="0.48" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="1.92,1.44" x1="57" y1="33.3" x2="44.4" y2="20.2"/>
+	<path d="M257,71.3l-2-3l6,3l-6,3L257,71.3z M189,70.8h68v1h-68V70.8z"/>
+	<path d="M193,19.1l3,2l-3-6l-3,6L193,19.1z M193.5,71.2V19.1h-1v52.1H193.5z"/>
+	<path fill="none" stroke="#5C3317" stroke-width="2.04" stroke-linejoin="round" stroke-miterlimit="10" d="M193.9,70
+		c6,0.1,12.1,0.3,18.2-7c6.1-7.3,15.1-29.7,18.5-36.8c3.4-7.1,2.7-6.3,2-5.6"/>
+	<path d="M534,71.5l-2-3l6,3l-6,3L534,71.5z M466,71h68v1h-68V71z"/>
+	<path d="M470.1,19.4l3,2l-3-6l-3,6L470.1,19.4z M470.6,71.5V19.4h-1v52.1H470.6z"/>
+	<path fill="none" stroke="#5C3317" stroke-width="2.28" stroke-linejoin="round" stroke-miterlimit="10" d="M470,71.7
+		c5.6,0,11.2,0,16.5-5.5c5.3-5.5,7.6-22.3,15.5-27.5c7.9-5.2,19.9-4.6,32-4"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="0.48" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="1.92,1.44" x1="533.9" y1="34.6" x2="469.9" y2="34.2"/>
+</g>
+<text transform="matrix(1 0 0 1 63.5868 11.8163)" font-family="'SourceSansPro-Regular'" font-size="10">Order quantity</text>
+<text transform="matrix(1 0 0 1 344.1749 11.8164)" font-family="'SourceSansPro-Regular'" font-size="10">Order quantity</text>
+<text transform="matrix(1 0 0 1 278.9092 43.8537)"><tspan x="0" y="0" font-family="'SourceSansPro-Regular'" font-size="10">Order-up-to</tspan><tspan x="15.2" y="12" font-family="'SourceSansPro-Regular'" font-size="10">level</tspan></text>
+<text transform="matrix(1 0 0 1 145.8671 104.4666)" font-family="'SourceSansPro-Regular'" font-size="10">Inventory</text>
+<text transform="matrix(1 0 0 1 507.8256 84.5935)" font-family="'SourceSansPro-Regular'" font-size="10">Stages</text>
+<text transform="matrix(1 0 0 1 237.7613 84.5935)" font-family="'SourceSansPro-Regular'" font-size="10">Stages</text>
+<text transform="matrix(1 0 0 1 416.3499 104.4666)" font-family="'SourceSansPro-Regular'" font-size="10">Inventory</text>
+<text transform="matrix(1 0 0 1 136.9752 23.7389)" font-family="'SourceSansPro-Regular'" font-size="10">Amplitudes</text>
+<text transform="matrix(1 0 0 1 412.5207 23.739)" font-family="'SourceSansPro-Regular'" font-size="10">Amplitudes</text>
+<g>
+	<path fill="none" d="M306.5,68.5"/>
+</g>
+</svg>

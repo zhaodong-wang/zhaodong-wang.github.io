@@ -1,0 +1,22 @@
+
+/* fonts */
+@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,300italic,700,700italic');/*fonts*/
+@import url('http://fonts.googleapis.com/css?family=Raleway:300,500,600,700');/*fonts*/
+
+@font-face {
+    font-family: CafeteriaBlack;
+    src: url(../fonts/Cafeteria-Black.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: CafeteriaBlack;
+    src: url(../fonts/Cafeteria-Bold.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: CafeteriaBlack;
+    src: url(../fonts/Cafeteria-Regular.woff);
+    font-weight: 300;
+}

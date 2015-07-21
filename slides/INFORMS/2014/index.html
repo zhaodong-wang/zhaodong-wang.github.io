@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=1024" />
+        <title>Bullwhip effect analysis | Zhaodong Wang et al.</title>
+        <link rel="shortcut icon" href="./images/uiuc-fig-logo.png"/>
+        <link href="css/substep.css" rel="stylesheet" />
+        <link href="css/fonts.css" rel="stylesheet" />
+        <link href="css/informs.css" rel="stylesheet" />
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/menu-effects.js"></script>
+    </head>
+    <body>
+        <header id="header">
+                <div id="slide_title" class="slide_title" onclick="location.href='#/cover'">
+                    <p id="logo_illinois">University of Illinois</p>
+                    <p id="logo_nonlin_approach">Nonlinear approach</p>
+                    <p id="logo_basic_concepts">Basic concepts</p>
+                    <p id="logo_lin_approach">Linear approach <span class="ref">(Ouyang and Daganzo, 2006)</span></p>
+                    <p id="logo_res_goal">Research goal</p>
+                    <p id="logo_gen_res">General results</p>
+                    <p id="logo_spe_case">Special case: order-up-to policy</p>
+                    <p id="logo_approx">Approximation refinement</p>
+                    <p id="logo_results">Results</p>
+                    <p id="logo_disc">Discussion</p>
+                </div>
+                <div class="top_menu">
+                    <ul>
+                        <li id="menu-intro" onclick="location.href='#/sec_intro'">Background
+                            <ul>
+                                <li><a href="#/background_1">Introduction</a></li>
+                                <li><a href="#/bgd_basic_concept_1">Basic concepts</a></li>
+                                <li><a href="#/linear_approach_1">Linear approach</a></li>
+                                <li><a href="#/res_goal">Research goal</a></li>
+                            </ul>
+                        </li>
+                        <li id="menu-method" onclick="location.href='#/sec_method'">Method
+                            <ul>
+                                <li><a href="#/nonlinear_approach_1">Nonlinear approach</a></li>
+                                <li><a href="#/gen_res">General results</a></li>
+                                <li><a href="#/spec_case">Special case</a></li>
+                                <li><a href="#/refine">Approximation refinement</a></li>
+                            </ul>
+                        </li>
+                        <li id="menu-experiments" onclick="location.href='#/sec_result'">Experiments
+                        <ul>
+                                <li><a href="#/result">Results</a></li>
+                                <li><a href="#/disc">Discussion</a></li>
+                        </ul>
+                        </li>
+                        <li id="menu-conclusion" onclick="location.href='#/sec_conclusion'">Conclusion</li>
+                    </ul>
+                </div>
+        </header>
+
+        <div id="wrap">
+                <div id="impress" data-transition-duration="1000">
+                        <div id="cover" class="step slide" data-x="0" data-y='0'>
+                            <div id="title_info">
+                                <h3 class="cafe capital" style="lineheight:40px;font-weight:400;">Informs annual meeting 2014</h3>
+                                <img src="./images/uiuc-fig-logo.png" alt="Illinois_logo">
+                                <h4>University of Illinois</h4>
+                                <div class="hrule"><span>&middot;</span></div>
+                                <h2 class="cafe capital">Bounded growth of the bullwhip effect under a class of nonlinear ordering policies</h2>
+                                <div class="hrule"><span>&middot;</span></div>
+                                <h3>Zhaodong Wang</h3>
+                                <h4>Joint work with</h4>
+                                <h3>Xin Wang</h3>
+                                <h3 style="position:relative; top: -10px;">Yanfeng Ouyang<sup>*</sup></h3>
+                                <h4>University of Illinois in Urbana-Champaign</h4>
+                            </div>
+                        </div>
+
+                        <div id="contents" class="step slide" data-x="1200" data-y='0'>
+                            <div id="contents_list" class="left_slide">
+                                <h2>Outline</h2>
+                                <div class="hrule"></div>
+                                <ul>
+                                  <li>Background</li>
+                                  <li>Methodology</li>
+                                  <li>Numerical analysis</li>
+                                  <li>Conclusion</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="sec_intro" class="step slide" data-x="600" data-y='0' data-z='-700' data-rotate-y='-90'>
+                            <div class="right_slide">
+                                <h2 class="sec_cover_title">Background</h2>
+                                <div class="sec_cover_title_hrule"></div>
+                            </div>
+                        </div>
+                        <!-- show background -->
+                        <div id="background_1" class="step slide" data-x="600" data-y='0' data-z='650' data-rotate-y='-90'>
+                            <div class="center_slide">
+                                <div class="slogan">
+                                    <h3 class="center bold" style="font-size: 35px">
+                                    What is the bullwhip effect?</h3>
+                                </div>
+                                <div id="bwe_illu_fig">
+                                        <img src="./images/article/bwe_illu.png" alt="bwe_illu" style="">
+                                </div>
+                                <p style="position:absolute;bottom:25%;right:10%;">Stages</p>
+                                <p style="position:absolute;bottom:55%;left:5%;">Upstream</p>
+                                <p style="position:absolute;bottom:55%;right:5%;">Downstream</p>
+                                <div class="background_hrule"></div>
+                                <div id="up_down_stream" style="">
+                                    <div class="substep alignleft" id="up_stream">
+                                        <p>Product flow</p>
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="right:-100px;top:-35px;">
+                                    </div>
+                                    <div class="substep alignright" id="down_stream">
+                                        <p>Order flow</p>
+                                        <img src="./images/leftarrow.svg" alt="leftarrow" style="left:-100px;top:-35px;">
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
+
+                                <ul>
+                                  <li>"No.1 issue" at Supply Chain Service at HP (Callioni, 2003)</li>
+                                  <li>12.5%&#8211;25% extra costs, $30 billion potential benefits in the U.S. grocery industry (Lee et al., 1997a)</li>
+                                  <li>Excessive upstream inventory and insufficient order fulfillment</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- moving up, showing the lists -->
+                        <div id="background_2" class="step slide" data-x="600" data-y='150' data-z='650' data-rotate-y='-90'></div>
+                        <!-- zoom, focus on one supplier -->
+                        <div id="background_3" class="step slide" data-x="600" data-y='70' data-z='800' data-rotate-y='-90' data-scale='0.35'></div>
+                        <!-- show inventory level -->
+                        <div id="bgd_basic_concept_1" class="step slide" data-x="600" data-y='70' data-z='800' data-rotate-y='-90' data-scale='0.35'>
+                                <div id="order_qt" class="substep"></div>
+                        </div>
+                        <!-- show ordering policy -->
+                        <div id="bgd_basic_concept_2" class="step slide" data-x="600" data-y='70' data-z='900' data-rotate-y='-90' data-scale='0.35'>
+                        <p id="the_op">Ordering policy</p>
+                        <div id="boom_ylabel" class="substep"></div>
+                        <div id="boom_xlabel" class="substep"></div>
+                        <p id="to_be_optimal" class="substep">Optimal (Karlin, 1958)</p>
+                        </div>
+                        <!-- show order sequences -->
+                        <div id="bgd_basic_concept_3" class="step slide" data-x="600" data-y='70' data-z='700' data-rotate-y='-90' data-scale='0.35'>
+                            <div id="boom_ylabel_3" class="substep"></div>
+                            <div id="boom_xlabel_3" class="substep"></div>
+                            <div id="order_bar" class="substep"></div>
+                            <div id="extend_time" class="substep"></div>
+                            <div id="scale_order" class="substep"></div>
+                            <div id="show_arrow_to_amp" class="substep"></div>
+                            <div id="show_question" class="substep"></div>
+                        </div>
+
+                        <!-- linear approach -->
+                        <div id="linear_approach_1" class="step slide" data-x="600" data-y='70' data-z='1000' data-rotate-y='-90' data-scale='0.35'>
+                            <div id="change_to_linear" class="substep"></div>
+                        </div>
+                        <!-- show linear module -->
+                        <div id="linear_approach_2" class="step slide" data-x="600" data-y='150' data-z='1000' data-rotate-y='-90' data-scale='0.5'>
+                            <!-- <img src="./images/article/3d-freq-input.png" alt=""
+                            style="position:absolute;width:25%;top:15%;left:5%;">
+                            <img src="./images/article/3d-freq-output.png" alt=""
+                            style="position:absolute;width:20%;top:15%;right:2%;"> -->
+                            <div id="lin_output_input_arrow" class="output_input_arrow">
+                                <div id="arrow_and_figtitle" class="arrow_and_figtitle">
+                                        <div id="fig_title_input" class="fig_title">
+                                            <h4>Stage <i>n</i></h4>
+                                        </div>
+                                        <div id="downarrow_lin" class="downarrow">
+                                            <!-- <img src="./images/downarrow.svg" alt="downarrow"> -->
+                                        </div>
+                                        <div id="fig_title_output" class="fig_title">
+                                            <h4 id="sin_to_change">Stage <i>n</i>+1</h4>
+                                        </div>
+                                </div>
+                                <div id="lin_output_input">
+                                    <div id="lin_input" class="input_ouput">
+                                    </div>
+                                    <div id="lin_input_arrow" class="input_ouput_arrow">
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="top:40%">
+                                    </div>
+                                    <div id="lin_module" class="module">
+                                        <img src="./images/article/small-lin-order.png" alt="">
+                                        <h3 id="lin_sys">Linear system</h3>
+                                    </div>
+                                    <div id="lin_output_arrow" class="input_ouput_arrow">
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="top:40%">
+                                    </div>
+                                    <div id="lin_output" class="input_ouput">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="lin_freq_domain" class="output_input_arrow">
+                                <div id="arrow_and_figtitle_freq" class="arrow_and_figtitle">
+                                        <div id="fig_title_input_freq" class="fig_title">
+                                            <h4>Frequency domain</h4>
+                                        </div>
+                                        <div id="fig_title_exp_trend" class="fig_title2">
+                                            <h4 id="exp_to_change">Exponential</h4>
+                                        </div>
+                                        <div id="fig_title_output_freq" class="fig_title">
+                                            <h4>Frequency domain</h4>
+                                        </div>
+                                </div>
+                                <div id="lin_output_input">
+                                    <div id="lin_input_freq" class="input_ouput">
+                                        <img src="./images/article/3d-freq-input.png" alt="">
+                                    </div>
+                                    <div id="lin_input_arrow_freq" class="input_ouput_arrow">
+                                    </div>
+                                    <div id="lin_module_freq" class="amp_trend">
+                                        <img src="./images/article/lin-module-freq.svg" alt="">
+                                    </div>
+                                    <div id="lin_output_arrow_freq" class="input_ouput_arrow">
+                                    </div>
+                                    <div id="lin_output_freq" class="input_ouput">
+                                        <img src="./images/article/3d-freq-output.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="lin_show_3d" class="substep"></div>
+                            <div id="lin_show_trend" class="substep"></div>
+                        </div>
+
+                        <!-- linear approach disadvantage -->
+                        <div id="disadvantage" class="step slide" data-x="600" data-y='450' data-z='1000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="center_slide">
+                                <div class="slogan" style="height:15%">
+                                    <h3 class="center bold" style="top:10%">
+                                        Disadvantage of linear approach
+                                    </h3>
+                                </div>
+                                <div id="lin_nonlin_compare" class="fig_after_sogan">
+                                        <!-- <img src="./images/article/lin-nonlin.png" alt="lin_nonlin"> -->
+                                        <img src="./images/article/lin-nonlin.svg" alt="lin_nonlin">
+                                </div>
+                                <div id="lin_nonlin_arrow">
+                                    <div class="fig_title" style="width:40%">
+                                        <h4>Linear</h4>
+                                    </div>
+                                    <div class="fig_title2" style="width:20%">
+                                        <h3 style="position:relative;top:-10px;">v.s.</h3>
+                                    </div>
+                                    <div class="fig_title" style="width:40%">
+                                        <h4>Nonlinear (optimal)</h4>
+                                    </div>
+                                </div>
+                                <div class="list_fly_in">
+                                    <ul>
+                                      <li class="substep"><span class="bold">Not realistic.</span> Real suppliers use nonlinear ordering policies.</li>
+                                      <li class="substep"><span class="bold">Not reasonable.</span> The amplitudes shouldn’t go to infinity.
+                                            <ul>
+                                                <!-- <li>Discrete sequences + constant finite average</li> -->
+                                                <li>Empirical observations. (Cachon et al., 2007)</li>
+                                            </ul>
+                                      </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- research goal -->
+                        <div id="res_goal" class="step slide" data-x="600" data-y='900' data-z='1000' data-rotate-y='-90' data-scale='0.5'>
+                                <div class="center_slide">
+                                    <div class="slogan" style="height:15%">
+                                        <h3 class="center bold" style="top:10%;font-size:30px;">
+                                        Predict the trend and the bound under nonlinear policy
+                                        </h3>
+                                    </div>
+                                    <div id="trend_amp" class="fig_after_sogan" style="height:50%">
+                                            <img src="./images/article/trend-amp.png" alt="lin_nonlin">
+                                    </div>
+                                    <div class="list_fly_in">
+                                        <ul>
+                                          <li class="substep">Develop a integrated system-control framework</li>
+                                          <li class="substep">Incorporate general nonlinear ordering policies</li>
+                                          <li class="substep">Predict the fluctuation and the bound</li>
+                                          <li class="substep">Provide managerial insights</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div id="sec_method" class="step slide" data-x="800" data-y='900' data-z='600' data-rotate-y='-180' data-scale='0.5'>
+                            <div class="right_slide">
+                                <h2 class="sec_cover_title">Methodology</h2>
+                                <div class="sec_cover_title_hrule"></div>
+                            </div>
+                        </div>
+
+                        <!-- nonlinear approach -->
+                        <div id="nonlinear_approach_1" class="step slide" data-x="600" data-y='70' data-z='1000' data-rotate-y='-90' data-scale='0.35'>
+                            <div id="change_to_nonlinear" class="substep"></div>
+                        </div>
+
+                        <!-- show nonlinear module -->
+                        <div id="nonlinear_approach_2" class="step slide" data-x="600" data-y='150' data-z='1000' data-rotate-y='-90' data-scale='0.5'>
+                            <div id="nonlin_show_3d" class="substep"></div>
+                            <div id="nonlin_show_trend" class="substep"></div>
+                        </div>
+
+                        <!-- General results -->
+                        <div id="gen_res" class="step slide" data-x="600" data-y='600' data-z='1000' data-rotate-y='-90' data-scale='0.5'>
+                        <div class="fig_frame">
+                        <img src="./images/article/gen_res.png" alt="" style="height:100%">
+                        </div>
+                        </div>
+
+                        <!-- Steady State -->
+                        <div id="std_state" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="center_slide">
+                                <div class="slogan" style="height:10%;margin-top:5%;">
+                                    <h3 class="center bold">Steady state</h3>
+                                </div>
+                                <div id="std_output_input">
+                                    <div id="std_input" class="input_ouput">
+                                    <img src="./images/article/std_input.png" alt="" style="height:100%">
+                                    </div>
+                                    <div id="std_input_arrow" class="input_ouput_arrow">
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="top:40%">
+                                    </div>
+                                    <div id="std_module" class="module">
+                                    <h3 id="std_sys">Nonlinear system</h3>
+                                    </div>
+                                    <div id="std_output_arrow" class="input_ouput_arrow">
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="top:40%">
+                                    </div>
+                                    <div id="std_output" class="input_ouput">
+                                    <img src="./images/article/std_output.png" alt="" style="height:120%;top:-25%;left:-5%;">
+                                    </div>
+                                </div>
+                                <div id="std_formula" class="substep">
+                                <img src="./images/article/std_state.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Special case -->
+                        <div id="spec_case" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/spec_case-1.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <div id="spec_case2" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/spec_case-2.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <div id="spec_case3" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/spec_case-3.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <div id="spec_case4" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/spec_case-4.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <!-- Approximation refinement -->
+                        <div id="refine" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                            <div class="center_slide">
+                                <div id="refine_3_state">
+                                    <div id="refine_state_left" class="refine_state">
+                                        <img src="./images/article/refine-sin.svg" alt="">
+                                    </div>
+                                    <div class="refine_right_arrow">
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="top:40%">
+                                    </div>
+                                    <div id="refine_state_center" class="refine_state">
+                                        <img src="./images/article/refine-inter.svg" alt="">
+                                    </div>
+                                    <div class="refine_right_arrow">
+                                        <img src="./images/rightarrow.svg" alt="rightarrow" style="top:40%">
+                                    </div>
+                                    <div id="refine_state_right" class="refine_state">
+                                        <img src="./images/article/refine-steady.svg" alt="">
+                                    </div>
+                                </div>
+                                <div id="refine_3_arrow">
+                                    <div id="refine_arrow_left">
+                                        <img src="./images/downarrow.svg" alt="downarrow">
+                                    </div>
+                                    <div id="refine_arrow_centered">
+                                        <img src="./images/downarrow.svg" alt="downarrow">
+                                    </div>
+                                    <div id="refine_arrow_right">
+                                        <img src="./images/downarrow.svg" alt="downarrow">
+                                    </div>
+                                </div>
+                                <div id="refine_3_equation">
+                                    <div id="refine_equ_left">
+                                        <img src="./images/article/refine-eq-left.png" alt="">
+                                    </div>
+                                    <div id="refine_equ_centered">
+                                        <img src="./images/article/refine-eq-center.png" alt="">
+                                    </div>
+                                    <div id="refine_equ_right">
+                                        <img src="./images/article/refine-eq-right.png" alt="">
+                                    </div>
+                                </div>
+                                <div id="refine_margin_eq">
+                                    <img src="./images/article/refine-eq-simple.png" alt="">
+                                </div>
+                                <div id="refine_show_simple" class="substep"></div>
+                                <div id="refine_show_right" class="substep"></div>
+                                <div id="refine_show_left" class="substep"></div>
+                                <div id="refine_show_inter" class="substep"></div>
+                                <div id="refine_show_final_eq" class="substep"></div>
+                            </div>
+                        </div>
+                        <!--
+                        <div id="refine" class="step slide" data-x="600" data-y='600' data-z='2000' data-rotate-y='-90' data-scale='0.5'>
+                        <div class="fig_frame">
+                        <img src="./images/article/refine1.png" alt="" style="height:100%">
+                        <div id="refine2" class="substep"></div>
+                        <div id="refine3" class="substep"></div>
+                        <div id="refine4" class="substep"></div>
+                        <div id="refine5" class="substep"></div>
+                        <div id="refine6" class="substep"></div>
+                        <div id="refine7" class="substep"></div>
+                        <div id="refine8" class="substep"></div>
+                        </div>
+                        </div> -->
+
+                        <div id="sec_result" class="step slide" data-x="1000" data-y='900' data-z='2500' data-rotate-y='-180' data-scale='0.5'>
+                            <div class="right_slide">
+                                <h2 class="sec_cover_title">Numerical analysis</h2>
+                                <div class="sec_cover_title_hrule"></div>
+                            </div>
+                        </div>
+
+                        <!-- result -->
+                        <div id="result" class="step slide" data-x="0" data-y='900' data-z='2500' data-rotate-y='-180' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/num_res-1.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <div id="result2" class="step slide" data-x="0" data-y='900' data-z='2500' data-rotate-y='-180' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/num_res-2.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <div id="result3" class="step slide" data-x="0" data-y='900' data-z='2500' data-rotate-y='-180' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/num_res-3.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <div id="result4" class="step slide" data-x="0" data-y='900' data-z='2500' data-rotate-y='-180' data-scale='0.5'>
+                            <div class="fig_frame">
+                                <img src="./images/article/num_res-4.png" alt="" style="height:100%">
+                            </div>
+                        </div>
+
+                        <!-- discussion -->
+                        <div id="disc" class="step slide" data-x="-1000" data-y='900' data-z='2500' data-rotate-y='-180' data-scale='0.5'>
+                        <div class="fig_frame">
+                        <img src="./images/article/disc.png" alt="" style="height:100%">
+                        </div>
+                        </div>
+
+                        <div id="sec_conclusion" class="step slide" data-x="0" data-y='900' data-z='3000' data-rotate-y='-270' data-scale='0.5'>
+                            <div class="right_slide">
+                                <h2 class="sec_cover_title">conclusion</h2>
+                                <div class="sec_cover_title_hrule"></div>
+                            </div>
+                        </div>
+
+                        <div id="conclusion" class="step slide" data-x="0" data-y='900' data-z='2000' data-rotate-y='-270' data-scale='0.5'>
+                            <div id="conclusion_bullets" class="center_slide">
+                                <ul>
+                                  <li>Analytical closed-form solutions are obtained to predict the bullwhip effect.</li>
+                                  <li>Existence of steady state are proved.</li>
+                                  <li>Numerical experiments verify the accuracy of proposed framework.</li>
+                                </ul>
+                                <div id="future_res" class="substep">
+                                    <h4 class="bold">Future research:</h4>
+                                    <ul>
+                                      <li>Extend the framework to multi-input multi-output systems.</li>
+                                      <li>Generalize the system input into random processes.</li>
+                                      <li>Validate the framework using empirical data.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="thank_you" class="step slide" data-x="-600" data-y='900' data-z='2500' data-rotate-y='-360' data-scale='0.5'>
+                            <div class="right_slide">
+                                <h2 class="sec_cover_title">Thank you</h2>
+                                <div class="sec_cover_title_hrule"></div>
+                                <h2 id="q_and_a">Questions and comments</h2>
+                            </div>
+                        </div>
+
+                        <!-- <div id="overview" class="step slide" data-x="200" data-y='1000' data-z='2300' data-rotate-x='45' data-rotate-y='60' data-scale='2'>
+                        </div>
+                        <div id="overview2" class="step slide" data-x="500" data-y='500' data-z='1000' data-rotate-x='-45' data-scale='3'>
+                        </div> -->
+
+                </div>
+        </div>
+
+        <footer id="footer">
+             <div id="author" class="info_left">
+                <div class="info_contents">
+                    <p>Zhaodong Wang - University of Illinois</p>
+                </div>
+             </div>
+             <div id="title" class="info_right">
+                <div class="info_contents">
+                    <p>Bullwhip effect analysis under nonlinear ordering policies</p>
+                </div>
+             </div>
+        </footer>
+
+
+        <script src="js/impress.js"></script>
+        <script src="js/raphael.js"></script>
+        <script src="js/adjust-sizes.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/plots.js"></script>
+    </body>
+</html>
+

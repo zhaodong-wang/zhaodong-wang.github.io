@@ -1,0 +1,56 @@
+texpreamble("
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont[
+          ItalicFont=HelveticaNeueLTStd-LtIt.otf,
+          BoldFont=HelveticaNeueLTStd-BdCn.otf,
+          BoldItalicFont=HelveticaNeueLTStd-BdCnO.otf,Ligatures=TeX]{HelveticaNeueLTStd-Lt.otf}
+\setsansfont[ItalicFont=HelveticaNeueLTStd-MdIt]{HelveticaNeueLTStd-Md.otf}
+\setmonofont{Courier New}
+%\setmainfont[Ligatures=TeX]{Adobe Caslon Pro}
+\setmathfont{latinmodern-math.otf}
+\setmathfont[range={\mathup/{greek,Greek},\mathcal,\mathbb}]{xits-math.otf}
+\setmathfont[range={\mathup/{num,latin,Latin},\mathcal,\mathbb}]{Helvetica Neue Light}
+\setmathfont[range=\mathit/{num,latin,Latin}]{Helvetica Neue Light}
+\setmathfont[range=\mathbfup/{num,latin,Latin}]{Helvetica Neue Light}
+\setmathfont[range=\mathbfit/{num,latin,Latin}]{Helvetica Neue Light}
+\setmathfont[range=\mathsf/{num,latin,Latin}]{Helvetica Neue Light}
+\setmathfont[range=\mathsfit/{num,latin,Latin}]{Helvetica Neue Light}
+\setmathfont[range=\mathbfsf/{num,latin,Latin}]{Helvetica Neue Light}
+\setmathfont[range=\mathbfsfit/{num,latin,Latin}]{Helvetica Neue Light}
+\def\mathscriptup#1{{\ensuremath{\hbox{\scriptsize #1}}}}
+\def\mathtextup#1{{\ensuremath{\hbox{#1}}}}");
+
+import graph;
+size(200,175,IgnoreAspect);
+defaultpen(fontsize(9pt));
+
+file in=input("amp-es.txt").line();
+real[][] a=in.dimension(0,0);
+a=transpose(a);
+
+file in2=input("amp-es-lin.txt").line();
+real[][] b=in2.dimension(0,0);
+b=transpose(b);
+
+real[] x0=a[0];
+real[] y1=a[1];
+real[] y2=a[2];
+real[] x1=b[0];
+real[] y3=b[1];
+
+pair[] pred=pairs(x0,y1);
+path p1=graph(x0,y1,operator --),p2=graph(x0,y2,operator --);
+draw(graph(x1,y3,y3<=230,operator --),dashed+green+linewidth(1),"\color{black} Linear model");
+draw(p2,red+linewidth(1),"\color{black} Prediction");
+draw(p1,blue+linewidth(1),"\color{black} Simulation",marker(scale(0.8mm)*rotate(45)*cross(4),blue,above=true));
+real hmax=20/(0.04*pi);
+draw(Label("159.2",align=(-1,0),position=0),(1,hmax)--(10,hmax),black+dashed+linewidth(0.5));
+draw(Label("41.8",align=(-1,0),position=0),(1,y1[2])--(3,y1[2]),black+dashed+linewidth(0.5));
+write(y1[2]);
+
+add(legend(white),(10.5,10),NW,NoFill);
+xlimits(1,10);
+ylimits(0,200);
+xaxis(Label("Stages",align=(0,-3)),Bottom,LeftTicks(Step=2,n=1));
+yaxis(Label("Amplitudes",align=(-1.5,0)),Left,RightTicks);

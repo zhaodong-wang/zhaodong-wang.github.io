@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 63.4 45.6" enable-background="new 0 0 63.4 45.6" xml:space="preserve">
+<g>
+	<path d="M11,4l3,2l-3-6L8,6L11,4z M11.5,44.3V4h-1v40.3H11.5z"/>
+	<path d="M59.4,42.6l-2-3l6,3l-6,3L59.4,42.6z M11,42.1h48.4v1H11V42.1z"/>
+	<path fill="#AF5F46" d="M23,13.3l2,2l-2-6l-2,6L23,13.3z M23.9,42.6V13.3h-1.8v29.3H23.9z"/>
+	<path fill="#AF5F46" d="M47,13.3l2,2l-2-6l-2,6L47,13.3z M47.9,42.6V13.3h-1.8v29.3H47.9z"/>
+	
+		<line fill="none" stroke="#000000" stroke-width="0.72" stroke-linejoin="round" stroke-miterlimit="8" stroke-dasharray="2.88,2.16" x1="47" y1="9.2" x2="11" y2="9.2"/>
+	<g>
+		<g>
+			<defs>
+				<line id="SVGID_1_" x1="10.8" y1="15.3" x2="10.8" y2="2.8"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  overflow="visible"/>
+			</clipPath>
+		</g>
+	</g>
+</g>
+<text transform="matrix(1 0 0 1 1.1993 12.0849)" font-family="'SourceSansPro-It'" font-size="12">a</text>
+</svg>

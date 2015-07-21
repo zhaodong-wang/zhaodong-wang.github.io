@@ -1,0 +1,5 @@
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+     version="1.0" width="50px" height="50px" viewBox="-600, -500 ,1500, 1500" >
+  <polygon  style="stroke:none; fill:#5c3317;" transform="scale(0.8) rotate(270)"
+    points="-600,100 200,100  -200,500 100,500 600,0 100,-500 -200,-500 200,-100 -600,-100 " />
+</svg>
