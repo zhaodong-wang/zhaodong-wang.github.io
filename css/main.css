@@ -14,8 +14,8 @@ h1,h2,p {
 }
 
 .base {
-    font-family: 'Kozuka Gothic Pro', 'Segoe UI Light', sans-serif, 'Source Sans Pro';
-    font-weight: 200;
+    font-family: 'MyriadSet Pro', 'Kozuka Gothic Pro', 'Segoe UI Light', sans-serif, 'Source Sans Pro';
+    font-weight: 100;
     font-style: normal;
     font-size: 20px;
     text-decoration: none;
@@ -37,7 +37,7 @@ h1,h2,p {
     position: relative;
     height: 100%;
     background: url("../img/lowpoly.png");
-    background-size: 100% cover;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -222,13 +222,13 @@ h3.detail {
 
 .pub_group {
 	font-size: 150%;
-    font-weight: 400;
+    font-weight: 200;
     line-height: 150%;
     position: absolute;
     width: 20%;
     float: left;
     margin-top: 2%;
-    padding-left: 13%;
+    padding-left: 11%;
     text-align: center;
 }
 
@@ -249,7 +249,7 @@ h3.detail {
 .profile h1 {
     font-size: 150%;
     text-align: left;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 150%;
 }
 
@@ -257,7 +257,7 @@ h3.detail {
     margin: 10px 0;
     font-size: 100%;
     text-align: left;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 150%;
 }
 
@@ -283,22 +283,22 @@ h3.detail {
 
 .bg-white {
     /*background-color: #eee;*/
-    background: url("../img/lowpoly-white.png");
-    background-size: 100% cover;
+    background-image: url("../img/lowpoly-white.png");
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
 .bg-ultrawhite {
     /*background-color: #eee;*/
     background: url("../img/lowpoly-ultrawhite2.png");
-    background-size: 100% cover;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
 .bg-mesh {
     /*background-color: #eee;*/
-    background: url("../img/mesh.png");
-    background-size: 100% cover;
+    background-image: url("../img/mesh.png");
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -350,7 +350,7 @@ h3.detail {
 }
 
 .circle h1 {
-    font-weight: normal;
+    font-weight: 300;
     font-size: 110%;
     line-height: 120%;
     text-align: center;
@@ -428,6 +428,7 @@ h3.detail {
     width: 120px;
     height: 120px;
     margin-right: 0;
+    margin-top: 0;
 }
 
 #pubs .pic {
@@ -453,7 +454,7 @@ h3.detail {
     text-align: right;
     margin: 20px 20px 20px 15%;
     font-size: 100%;
-    font-weight: 200;
+    font-weight: 250;
     line-height: 150%;
     width: 10%;
 }
@@ -515,6 +516,14 @@ h3.detail {
     -o-transition: all 1s ease-in-out 0s;
 }
 
+.stroke5 {
+    width: 50%;
+    transition: all 1s ease-in-out 0s;
+    -moz-transition: all 1s ease-in-out 0s;
+    -webkit-transition: all 1s ease-in-out 0s;
+    -o-transition: all 1s ease-in-out 0s;
+}
+
 #contact {
     background-color: #333;
     color: #fff;
@@ -542,7 +551,7 @@ h3.detail {
 }
 
 .info {
-	font-weight: 400;
+	font-weight: 300;
     font-size: 85%;
     line-height: 250%;
     display: inline-block;

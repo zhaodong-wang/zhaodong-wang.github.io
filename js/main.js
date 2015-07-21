@@ -34,8 +34,8 @@ onscroll = function() {
     if (b >= a) c.className = "fixed";
     else c.className = null;
     var d = document.getElementById("skill");
-    if (b >= d.offsetTop) {
-        for (var i = 0; i < 5; i++) {
+    if (b >= d.offsetTop - 0.3 * a) {
+        for (var i = 0; i < 6; i++) {
             document.getElementById("skill" + i).className += (" stroke" + i)
         }
     }
