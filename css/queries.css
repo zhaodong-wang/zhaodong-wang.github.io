@@ -1,0 +1,15 @@
+/* =Responsive Structure
+----------------------------------------------- */
+@media (max-width: 1140px) {
+	#nav .name {
+		display: none;
+		position: absolute;
+	}
+
+	.pub_group h1 {
+	    font-size: 150%;
+	    line-height: 120%;
+	    width: 80%;
+	    top: 5%;
+	}
+}
