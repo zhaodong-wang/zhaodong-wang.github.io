@@ -30,9 +30,9 @@ var move = function() {
 onscroll = function() {
     var a = document.getElementById("about").offsetTop;
     var b = document.documentElement.scrollTop || document.body.scrollTop;
-    var c = document.getElementById("nav");
-    if (b >= a) c.className = "fixed";
-    else c.className = null;
+    var c = document.getElementsByTagName("header");
+    if (b >= a) c[0].className = "fixed";
+    else c[0].className = null;
     var d = document.getElementById("skill");
     if (b >= d.offsetTop - 0.3 * a) {
         for (var i = 0; i < 6; i++) {

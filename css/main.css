@@ -15,7 +15,7 @@ h1,h2,p {
 
 .base {
     font-family: 'MyriadSet Pro', 'Kozuka Gothic Pro', 'Segoe UI Light', sans-serif, 'Source Sans Pro';
-    font-weight: 100;
+    font-weight: 200;
     font-style: normal;
     font-size: 20px;
     text-decoration: none;
@@ -36,7 +36,7 @@ h1,h2,p {
 #home {
     position: relative;
     height: 100%;
-    background: url("../img/lowpoly.png");
+    background: url("../img/lowpoly.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -121,27 +121,30 @@ h3.detail {
     height: 50px;
 }
 
-#nav {
-    z-index: 1;
-    background-color: #fff;
+header {
     position: absolute;
-    height: 100px;
+    background: #fff;
     width: 100%;
+    height: 100px;
+    z-index: 100;
     box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+header * {
     transition: all .3s ease-in-out 0s;
     -moz-transition: all .3s ease-in-out 0s;
     -webkit-transition: all .3s ease-in-out 0s;
     -o-transition: all .3s ease-in-out 0s;
 }
 
-#nav * {
-    transition: all .3s ease-in-out 0s;
-    -moz-transition: all .3s ease-in-out 0s;
-    -webkit-transition: all .3s ease-in-out 0s;
-    -o-transition: all .3s ease-in-out 0s;
+nav {
+    float: right;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
 }
 
-#nav.fixed {
+header.fixed {
     position: fixed;
     height: 60px;
     top: 0;
@@ -151,7 +154,7 @@ h3.detail {
     -o-transition: all .3s ease-in-out 0s;
 }
 
-#nav.fixed * {
+header.fixed * {
     line-height: 60px!important;
     transition: all .3s ease-in-out 0s;
     -moz-transition: all .3s ease-in-out 0s;
@@ -159,37 +162,49 @@ h3.detail {
     -o-transition: all .3s ease-in-out 0s;
 }
 
-#nav .name {
+header .name {
     cursor: pointer;
     font-size: 150%;
     font-weight: 400;
     line-height: 100px;
     background-color: #000;
     display: inline-block;
+    float: left;
+    position: absolute;
     margin-left: 5%;
     padding: 0 30px;
     color: #fff;
     vertical-align: middle;
 }
 
-#nav ul {
+nav ul {
     display: inline-block;
     vertical-align: middle;
     line-height: 100px;
     margin: 0 5%;
     padding: 0;
+    float: right;
 }
 
-#nav li {
+nav li {
     display: inline-block;
     margin: 0 15px;
     line-height: 100px;
     text-decoration: none;
     cursor: pointer;
+    float: left;
 }
 
-#nav li:hover {
+nav li:hover {
     color: #888;
+}
+
+#menu-icon {
+    display: none;
+    width: 40px;
+    height: 40px;
+    background: url(../img/menu-icon.svg) center;
+    background-size: 100%;
 }
 
 .wrapper {
@@ -292,14 +307,14 @@ h3.detail {
 
 .bg-white {
     /*background-color: #eee;*/
-    background-image: url("../img/lowpoly-white.png");
+    background-image: url("../img/lowpoly-white.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .bg-ultrawhite {
     /*background-color: #eee;*/
-    background: url("../img/lowpoly-ultrawhite2.png");
+    background: url("../img/lowpoly-ultrawhite.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -313,7 +328,7 @@ h3.detail {
 
 .title {
     font-size: 250%;
-    font-weight: lighter;
+    font-weight: 100;
     text-align: center;
     color: #eb6e1e;
     line-height: 120%;
@@ -324,6 +339,7 @@ h3.detail {
     color: #000;
     font-size: 40%;
     line-height: 150%;
+    font-weight: 200;
     margin: 0;
 }
 
@@ -585,4 +601,10 @@ a:hover {
     color: #fff;
     text-align: center;
     line-height: 400%;
+}
+
+.hrule {
+    width: 100%;
+    height: 1px;
+    background-color: #bbb;
 }
