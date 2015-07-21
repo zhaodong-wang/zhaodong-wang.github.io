@@ -193,6 +193,10 @@
 
 @media only screen and (max-width: 400px) {
 
+	#about .profile {
+		width: 100%;
+	}
+
 	.title {
 		font-size: 200%;
 		font-weight: 200;
