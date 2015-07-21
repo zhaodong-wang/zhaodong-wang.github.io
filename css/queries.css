@@ -193,8 +193,8 @@
 
 @media only screen and (max-width: 400px) {
 
-	#about .profile {
-		width: 100%;
+	#about .profile p {
+		word-break: normal;
 	}
 
 	.title {
