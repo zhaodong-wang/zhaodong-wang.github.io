@@ -252,10 +252,12 @@
 
 	.skills {
 		margin-left: 2%;
+		margin-right: 2%;
+		width: 20%;
 	}
 
 	.line {
-		margin-left: 25px;
+		margin-left: 0;
 		width: 50%;
 	}
 
