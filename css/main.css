@@ -377,7 +377,9 @@ nav li:hover {
     color: #fff;
     width: 120px;
     height: 120px;
-    border-radius: 100%;
+    -webkit-border-radius: 100% !important;
+    -moz-border-radius: 100% !important;
+    border-radius: 100% !important;
     overflow: hidden !important;
     margin: auto;
     margin-top: 50px;
