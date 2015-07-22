@@ -1,10 +1,10 @@
 /*********************************************************/
 /* Created by Zhaodong Wang */
-/* Copyright (c) 2014 DreamCoder. All rights reserved. */
+/* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 var move = function() {
     var f = null;
-    return function(a, b, c) {
+    return function(a, b, c, callback) {
         if (f) {
             clearTimeout(f);
             f = null
@@ -24,6 +24,7 @@ var move = function() {
                 f = setTimeout("move('" + a + "'," + b + "," + c + ")", 10)
             }
         }
+        (callback && typeof(callback) === "function") && callback();
     }
 }();
 
@@ -32,7 +33,10 @@ onscroll = function() {
     var b = document.documentElement.scrollTop || document.body.scrollTop;
     var c = document.getElementsByTagName("header");
     if (b >= a) c[0].className = "fixed";
-    else c[0].className = null;
+    else {
+        c[0].className = null;
+        hideMenu();
+    };
     var d = document.getElementById("skill");
     if (b >= d.offsetTop - 0.3 * a) {
         for (var i = 0; i < 6; i++) {
@@ -40,3 +44,35 @@ onscroll = function() {
         }
     }
 };
+
+var winHeight = $(window).height();
+
+function hideMenu() {
+    $('nav ul, nav:active ul').css({'height': winHeight, 'opacity': 0});
+    $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(0)'});
+}
+
+function toggleMenu() {
+    if ($('nav ul').css('opacity') == 1) {
+        $('nav ul, nav:active ul').css({'height': winHeight, 'opacity': 0});
+        $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(0)'});
+    }
+    else {
+        $('nav ul, nav:active ul').css({'height': winHeight, 'opacity': 1});
+        $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(2px)'});
+    }
+}
+
+$(document).ready(function(){
+    $('#menu-icon').click(function(){
+        var yPos = $(window).scrollTop();
+        var about_offset = $('#about').offset().top;
+        if (yPos < about_offset) {
+            $('html, body').animate({
+                    scrollTop: $("#about").offset().top
+                }, 500, toggleMenu);
+        }
+        else toggleMenu();
+    });
+});
+

@@ -62,12 +62,12 @@
 	nav {
 		width: initial;
 		height: 40px;
-		padding: 30px 30px 70px 30px;
+		padding: 30px 30px 30px 30px;
 	}
 
 	header.fixed nav {
 		height: 40px;
-		padding: 10px 30px 70px 30px;
+		padding: 10px 30px 10px 30px;
 	}
 
 	#menu-icon {
@@ -80,27 +80,36 @@
 
 	nav ul, nav:active ul {
 		line-height: 150%;
-		display: none;
+		display: block;
 		position: absolute;
 		padding: 0;
-		width: 30%;
+		width: 100%;
 		right: 0;
+		margin: 0;
+		vertical-align: initial;
+		top: 60px;
+		opacity: 0;
+		z-index: 100;
+		background: rgb(34,34,34); /* for IE */
+		background: rgba(34,34,34,0.75);
 	}
 
 	nav li {
 		line-height: 150%;
-		text-align: right;
+		text-align: center;
 		width: 100%;
 		padding: 5% 0;
 		margin: 0;
+		color: #eee;
+		font-size: 150%;
 	}
 
-	nav:hover ul {
+	/*nav:hover ul {
 		display: block;
-	}
+	}*/
 
-	header.fixed li {
-		line-height: 150%!important;
+	header.fixed ul, header.fixed li {
+		line-height: 120%!important;
 	}
 }
 
@@ -129,7 +138,7 @@
 	}
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
 	h1.detail {
 		font-size: 300%;
 	}
@@ -192,6 +201,9 @@
 }
 
 @media only screen and (max-width: 400px) {
+	nav li {
+		font-size: 100%;
+	}
 
 	#about .profile p {
 		word-break: normal;

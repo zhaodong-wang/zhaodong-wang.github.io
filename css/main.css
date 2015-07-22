@@ -1,6 +1,6 @@
 /*********************************************************/
 /* Created by Zhaodong Wang */
-/* Copyright (c) 2014 DreamCoder. All rights reserved. */
+/* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
 html,body {
@@ -23,6 +23,11 @@ h1,h2,p {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "liga","kern";
+    -webkit-transition: -webkit-transform 0.2s linear;
+    -moz-transition: -moz-transform 0.2s linear;
+    -o-transition: -ms-transform 0.2s linear;
+    -ms-transition: -o-transform 0.2s linear;
+    transition: transform 0.2s linear;
 }
 
 .bold {
@@ -201,6 +206,7 @@ nav li {
     text-decoration: none;
     cursor: pointer;
     float: left;
+    color: #333;
 }
 
 nav li:hover {
@@ -213,6 +219,15 @@ nav li:hover {
     height: 40px;
     background: url(../img/menu-icon.svg) center;
     background-size: 100%;
+}
+
+#menu-bg {
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    display: none;
+    z-index: 99;
+    -webkit-filter: blur(10px);
 }
 
 .wrapper {
@@ -616,3 +631,11 @@ a:hover {
     height: 1px;
     background-color: #bbb;
 }
+
+.menu-move-left {
+    -webkit-transform: translateX(80%);
+    -moz-transform: translateX(80%);
+    -ms-transform: translateX(80%);
+    -o-transform: translateX(80%);
+    transform: translateX(80%);
+  }
