@@ -18,13 +18,12 @@
 	.pub_group h1 {
 	    font-size: 150%;
 	    line-height: 120%;
-	    width: 80%;
-	    top: 5%;
 	}
 
 	#about .pic {
 		margin-left: 5%;
 	}
+
 	#about .profile {
 		margin-right: 5%;
 	}
@@ -65,10 +64,6 @@
 
 	.pub_group {
 		margin-left: 5%;
-	}
-	.pub_group h1 {
-	    width: 100%;
-	    top: 5%;
 	}
 
 	nav {
@@ -143,10 +138,23 @@
 		margin-left: 2%;
 	}
 
-	.pub_group h1 {
-	    width: 100%;
-	    top: 5%;
+	#pubs .pic, #pubs .pic img {
+		width: 100px;
+		height: 100px;
 	}
+
+	.pub_group h1 {
+		font-size: 120%;
+	}
+
+	#pubs .profile {
+		width: 60%;
+	}
+
+	.content {
+		width: 60%;
+	}
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -185,26 +193,15 @@
 	.content {
 		margin-right: 0;
 		margin-left: 5%;
-		width: 60%;
 	}
 
-	#pubs .pic {
-		margin-right: 0;
-	}
-	#pubs .pic, #pubs .pic img {
-		width: 90px;
-		height: 90px;
-	}
 
 	.pub_group {
 		height: 150px;
 	}
-	.pub_group h1 {
-		font-size: 120%;
-	}
+
 	#pubs .profile {
 		margin: 60px 0 0 10%;
-		width: 60%;
 	}
 	#contact .element {
 		width: 100%;
@@ -263,12 +260,7 @@
 
 	.pub_group {
 		width: 100%;
-		height: 60px;
 		margin-left: 0;
-	}
-
-	#pubs .pic {
-		display: none;
 	}
 
 	#pubs .profile {
