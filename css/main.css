@@ -382,14 +382,12 @@ nav li:hover {
     margin: auto;
     margin-top: 50px;
     position: relative;
-    z-index: 1;
 }
 
 .circle .half {
     position: relative;
     height: 50%;
     width: 100%;
-    z-index: 0;
 }
 
 .circle .half.light {
