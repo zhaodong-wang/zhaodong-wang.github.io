@@ -1,5 +1,11 @@
 /* =Responsive Structure
 ----------------------------------------------- */
+@media only screen and (max-width: 2000px) {
+	nav li {
+    	color: #333;
+	}
+}
+
 @media only screen and (max-width: 1140px) {
 	header .name {
 	    font-size: 120%;
@@ -22,6 +28,9 @@
 	#about .profile {
 		margin-right: 5%;
 	}
+	nav li {
+    	color: #333;
+	}
 }
 
 @media only screen and (max-width: 950px) {
@@ -34,6 +43,9 @@
 	}
 	#contact .element {
 		width: 80%;
+	}
+	nav li {
+    	color: #333;
 	}
 }
 
@@ -202,7 +214,7 @@
 
 @media only screen and (max-width: 400px) {
 	nav li {
-		font-size: 100%;
+		font-size: 150%;
 	}
 
 	#about .profile p {

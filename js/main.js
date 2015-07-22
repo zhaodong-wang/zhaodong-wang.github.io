@@ -35,7 +35,7 @@ onscroll = function() {
     if (b >= a) c[0].className = "fixed";
     else {
         c[0].className = null;
-        hideMenu();
+        if ($(window).width() <= 850) hideMenu();
     };
     var d = document.getElementById("skill");
     if (b >= d.offsetTop - 0.3 * a) {
