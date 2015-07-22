@@ -48,17 +48,17 @@ onscroll = function() {
 var winHeight = $(window).height();
 
 function hideMenu() {
-    $('nav ul, nav:active ul').css({'height': winHeight, 'opacity': 0});
+    $('nav ul, nav:active ul').css({'height': winHeight, 'display': 'none'});
     $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(0)'});
 }
 
 function toggleMenu() {
-    if ($('nav ul').css('opacity') == 1) {
-        $('nav ul, nav:active ul').css({'height': winHeight, 'opacity': 0});
+    if ($('nav ul').css('display') == 'block') {
+        $('nav ul, nav:active ul').css({'height': winHeight, 'display': 'none'});
         $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(0)'});
     }
     else {
-        $('nav ul, nav:active ul').css({'height': winHeight, 'opacity': 1});
+        $('nav ul, nav:active ul').css({'height': winHeight, 'display': 'block'});
         $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(2px)'});
     }
 }

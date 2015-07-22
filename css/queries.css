@@ -92,7 +92,7 @@
 
 	nav ul, nav:active ul {
 		line-height: 150%;
-		display: block;
+		display: none;
 		position: absolute;
 		padding: 0;
 		width: 100%;
@@ -100,7 +100,6 @@
 		margin: 0;
 		vertical-align: initial;
 		top: 60px;
-		opacity: 0;
 		z-index: 100;
 		background: rgb(34,34,34); /* for IE */
 		background: rgba(34,34,34,0.75);
