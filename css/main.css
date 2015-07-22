@@ -377,8 +377,6 @@ nav li:hover {
     color: #fff;
     width: 120px;
     height: 120px;
-    border-radius: 100%;
-    overflow: hidden;
     margin: auto;
     margin-top: 50px;
     position: relative;
@@ -389,15 +387,26 @@ nav li:hover {
     position: relative;
     height: 50%;
     width: 100%;
+    border-radius: 50% / 100%;
+
     z-index: 0;
 }
 
 .circle .half.light {
     background-color: #fb7e2e;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    transform-origin: top;
+    transform: rotateX(-150deg);
+    -webkit-transform: rotateX(-150deg);
+    -moz-transform: rotateX(-150deg);
+    -o-transform: rotateX(-150deg);
 }
 
 .circle .half.dark {
     background-color: #eb6e1e;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .circle h1 {

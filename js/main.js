@@ -2,50 +2,108 @@
 /* Created by Zhaodong Wang */
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
+/*-----------------------------------------------------------------------------------*/
+/*  SCROLL AND MOVE
+/*-----------------------------------------------------------------------------------*/
 var move = function() {
-    var f = null;
-    return function(a, b, c, callback) {
-        if (f) {
-            clearTimeout(f);
-            f = null
+    var event_func = null;
+    return function(target_elem, move_dist, aux_dist, callback) {
+        if (event_func) {
+            clearTimeout(event_func);
+            event_func = null
         }
-        if (a) {
-            var d = document.getElementById(a).offsetTop - b;
+        if (target_elem) {
+            var scroll_len = document.getElementById(target_elem).offsetTop - move_dist;
             var e = document.documentElement.scrollTop || document.body.scrollTop;
             if (document.body.scrollHeight - e <= document.body.clientHeight) return;
-            c = c || 200;
-            if (c < 10) c = 10;
-            d = (d - e) / c;
-            if (d > 0) d = Math.ceil(d);
-            else d = Math.floor(d);
-            if (d) {
-                scrollBy(0, d);
-                c -= 15;
-                f = setTimeout("move('" + a + "'," + b + "," + c + ")", 10)
+            aux_dist = aux_dist || 200;
+            if (aux_dist < 10) aux_dist = 10;
+            scroll_len = (scroll_len - e) / aux_dist;
+            if (scroll_len > 0) scroll_len = Math.ceil(scroll_len);
+            else scroll_len = Math.floor(scroll_len);
+            if (scroll_len) {
+                scrollBy(0, scroll_len);
+                aux_dist -= 15;
+                event_func = setTimeout("move('" + target_elem + "'," + move_dist + "," + aux_dist + ")", 10)
             }
         }
         (callback && typeof(callback) === "function") && callback();
     }
 }();
 
+// redefine easing functions
+
+$.extend($.easing,
+{
+    easeOutBounce: function (x, t, b, c, d) {
+        if ((t/=d) < (1/2.75)) {
+            return c*(7.5625*t*t) + b;
+        } else if (t < (2/2.75)) {
+            return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
+        } else if (t < (2.5/2.75)) {
+            return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
+        } else {
+            return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
+        }
+    }
+})
+
+function getRotationDegrees(obj) {
+    var matrix = obj.css("-webkit-transform") ||
+    obj.css("-moz-transform")    ||
+    obj.css("-ms-transform")     ||
+    obj.css("-o-transform")      ||
+    obj.css("transform");
+    if(matrix !== 'none') {
+        var values = matrix.split('(')[1].split(')')[0].split(',');
+        var a = values[0];
+        var b = values[1];
+        var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
+    } else { var angle = 0; }
+    return (angle < 0) ? angle + 360 : angle;
+}
+
+
+
+function flipDiv(obj) {
+    if (typeof obj.attr('data-transform') == 'undefined') {
+        obj.animate({ rotateX: '-150deg' }, 0);
+        obj.animate({ rotateX: '0deg' }, 1500, 'easeOutBounce').delay(500);
+    }
+}
+
+var winHeight = $(window).height();
+
 onscroll = function() {
-    var a = document.getElementById("about").offsetTop;
-    var b = document.documentElement.scrollTop || document.body.scrollTop;
-    var c = document.getElementsByTagName("header");
-    if (b >= a) c[0].className = "fixed";
+    var about_offset = $("#about").offset().top;
+    var edu_offset = $("#edu").offset().top;
+    var project_offset = $("#project").offset().top;
+    var pubs_offset = $("#pubs").offset().top;
+    var skill_offset = $("#skill").offset().top;
+    var contact_offset = $("#contact").offset().top;
+    var doc_offset = $(window).scrollTop() || $("body").scrollTop();
+    if (doc_offset >= about_offset) $('header').addClass('fixed');
     else {
-        c[0].className = null;
+        $('header').removeClass('fixed');
         if ($(window).width() <= 850) hideMenu();
     };
-    var d = document.getElementById("skill");
-    if (b >= d.offsetTop - 0.3 * a) {
+    $('.circle .half.light').each(function(){
+        var offsetTemp = $(this).offset().top - about_offset;
+        if ($(this).offset().top - $(window).scrollTop() < 0.38 * winHeight) {
+            flipDiv($(this));
+        }
+    });
+
+    if (doc_offset >= skill_offset - 0.3 * about_offset) {
         for (var i = 0; i < 6; i++) {
-            document.getElementById("skill" + i).className += (" stroke" + i)
+            $("#skill" + i).addClass(" stroke" + i);
         }
     }
 };
 
-var winHeight = $(window).height();
+/*-----------------------------------------------------------------------------------*/
+/*  Menu effects
+/*-----------------------------------------------------------------------------------*/
 
 function hideMenu() {
     $('nav ul, nav:active ul').css({'height': winHeight, 'display': 'none'});
