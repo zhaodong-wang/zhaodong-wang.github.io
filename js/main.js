@@ -69,7 +69,7 @@ onscroll = function() {
     });
 
     $('#myPhoto, #myProfile, #edu .content, #project .content, #pubs .profile').each(function(){
-        if ($(this).offset().top - $(window).scrollTop() < 0.5 * winHeight &&
+        if ($(this).offset().top - $(window).scrollTop() < 0.6 * winHeight &&
             $(this).offset().top - $(window).scrollTop() > 0) {
             $(this).css({
                 webkitTransform: 'translateX(0)',
