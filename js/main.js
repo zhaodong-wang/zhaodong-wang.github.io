@@ -87,9 +87,11 @@ onscroll = function() {
         $('header').removeClass('fixed');
         if ($(window).width() <= 850) hideMenu();
     };
+
     $('.circle .half.light').each(function(){
-        var offsetTemp = $(this).offset().top - about_offset;
-        if ($(this).offset().top - $(window).scrollTop() < 0.38 * winHeight) {
+        var contentOffSet = $(this).parent().parent().next().offset().top - $(window).scrollTop()
+        if (contentOffSet < 0.5 * winHeight &&
+            contentOffSet > 0) {
             flipDiv($(this));
         }
     });
