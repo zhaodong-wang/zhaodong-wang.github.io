@@ -68,7 +68,7 @@ onscroll = function() {
         }
     });
 
-    $('#about .pic, #about .profile').each(function(){
+    $('#edu .content, #project .content, #pubs .profile').each(function(){
         if ($(this).offset().top - $(window).scrollTop() < 0.5 * winHeight &&
             $(this).offset().top - $(window).scrollTop() > 0) {
             $(this).css({
