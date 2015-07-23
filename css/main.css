@@ -291,11 +291,6 @@ nav li:hover {
     vertical-align: middle;
     width: 50%;
     margin: 60px 12% 0 5%;
-    -webkit-transition: all 0.7s ease-in-out 0s;
-    -moz-transition: all 0.7s ease-in-out 0s;
-    -o-transition: all 0.7s ease-in-out 0s;
-    -ms-transition: all 0.7s ease-in-out 0s;
-    transition: all 0.7s ease-in-out 0s;
 }
 
 .profile h1 {
@@ -393,6 +388,7 @@ nav li:hover {
     height: 50%;
     width: 100%;
     border-radius: 50% / 100%;
+
     z-index: 0;
 }
 
@@ -453,11 +449,6 @@ nav li:hover {
     text-align: left;
     font-weight: normal;
     line-height: 150%;
-    -webkit-transition: all 0.7s ease-in-out 0s;
-    -moz-transition: all 0.7s ease-in-out 0s;
-    -o-transition: all 0.7s ease-in-out 0s;
-    -ms-transition: all 0.7s ease-in-out 0s;
-    transition: all 0.7s ease-in-out 0s;
 }
 
 .content h1 {
@@ -508,18 +499,18 @@ nav li:hover {
     position: relative;
     margin-right: auto;
     margin-left: auto;
-    transform: scale(1);
-    -moz-transform: scale(1);
-    -webkit-transform: scale(1);
-    -o-transform: scale(1);
-    transition: background-color .3s ease-in-out 0s;
-    -moz-transition: background-color .3s ease-in-out 0s;
-    -webkit-transition: background-color .3s ease-in-out 0s;
-    -o-transition: background-color .3s ease-in-out 0s;
-    transition: transform .5s cubic-bezier(.2,5,.7,5) 0s;
-    -moz-transition: -moz-transform .5s cubic-bezier(.2,5,.7,5) 0s;
-    -webkit-transition: -webkit-transform .5s cubic-bezier(.2,5,.7,5) 0s;
-    -o-transition: -o-transform .5s cubic-bezier(.2,5,.7,5) 0s;
+    transition: all .3s ease-in-out 0s;
+    -moz-transition: all .3s ease-in-out 0s;
+    -webkit-transition: all .3s ease-in-out 0s;
+    -o-transition: all .3s ease-in-out 0s;
+}
+
+#pubs .element:hover .pic {
+    background-color: #eb6e1e;
+    transition: all .3s ease-in-out 0s;
+    -moz-transition: all .3s ease-in-out 0s;
+    -webkit-transition: all .3s ease-in-out 0s;
+    -o-transition: all .3s ease-in-out 0s;
 }
 
 .skills {
@@ -656,30 +647,10 @@ a:hover {
     background-color: #bbb;
 }
 
-.slow-transition {
-    -webkit-transition: all 0.7s ease-in-out 0s;
-    -moz-transition: all 0.7s ease-in-out 0s;
-    -o-transition: all 0.7s ease-in-out 0s;
-    -ms-transition: all 0.7s ease-in-out 0s;
-    transition: all 0.7s ease-in-out 0s;
-}
-
-.move-left {
-    -webkit-transform: translateX(-80%);
-    -moz-transform: translateX(-80%);
-    -ms-transform: translateX(-80%);
-    -o-transform: translateX(-80%);
-    transform: translateX(-80%);
-    opacity: 0;
-}
-
-.move-right {
+.menu-move-left {
     -webkit-transform: translateX(80%);
     -moz-transform: translateX(80%);
     -ms-transform: translateX(80%);
     -o-transform: translateX(80%);
     transform: translateX(80%);
-    opacity: 0;
-}
-
-
+  }
