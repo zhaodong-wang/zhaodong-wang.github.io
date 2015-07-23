@@ -656,7 +656,7 @@ a:hover {
     background-color: #bbb;
 }
 
-.slow-transition {
+#myPhoto {
     -webkit-transition: all 0.7s ease-in-out 0s;
     -moz-transition: all 0.7s ease-in-out 0s;
     -o-transition: all 0.7s ease-in-out 0s;

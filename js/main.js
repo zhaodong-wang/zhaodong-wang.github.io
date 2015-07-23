@@ -31,40 +31,6 @@ var move = function() {
     }
 }();
 
-// redefine easing functions
-
-$.extend($.easing,
-{
-    easeOutBounce: function (x, t, b, c, d) {
-        if ((t/=d) < (1/2.75)) {
-            return c*(7.5625*t*t) + b;
-        } else if (t < (2/2.75)) {
-            return c*(7.5625*(t-=(1.5/2.75))*t + .75) + b;
-        } else if (t < (2.5/2.75)) {
-            return c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b;
-        } else {
-            return c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b;
-        }
-    }
-})
-
-function getRotationDegrees(obj) {
-    var matrix = obj.css("-webkit-transform") ||
-    obj.css("-moz-transform")    ||
-    obj.css("-ms-transform")     ||
-    obj.css("-o-transform")      ||
-    obj.css("transform");
-    if(matrix !== 'none') {
-        var values = matrix.split('(')[1].split(')')[0].split(',');
-        var a = values[0];
-        var b = values[1];
-        var angle = Math.round(Math.atan2(b, a) * (180/Math.PI));
-    } else { var angle = 0; }
-    return (angle < 0) ? angle + 360 : angle;
-}
-
-
-
 function flipDiv(obj) {
     if (typeof obj.attr('data-transform') == 'undefined') {
         obj.animate({ rotateX: '-150deg' }, 0);
@@ -74,6 +40,10 @@ function flipDiv(obj) {
 
 var winHeight = $(window).height();
 
+var indexToLightUp;
+var indexToLightUpTemp;
+var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
+
 onscroll = function() {
     var about_offset = $("#about").offset().top;
     var edu_offset = $("#edu").offset().top;
@@ -82,7 +52,9 @@ onscroll = function() {
     var skill_offset = $("#skill").offset().top;
     var contact_offset = $("#contact").offset().top;
     var doc_offset = $(window).scrollTop() || $("body").scrollTop();
-    if (doc_offset >= about_offset) $('header').addClass('fixed');
+    if (doc_offset >= about_offset) {
+        $('header').addClass('fixed');
+    }
     else {
         $('header').removeClass('fixed');
         if ($(window).width() <= 850) hideMenu();
@@ -95,6 +67,55 @@ onscroll = function() {
             flipDiv($(this));
         }
     });
+
+    // $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
+    //     if ($(this).offset().top - $(window).scrollTop() < 0.5 * winHeight &&
+    //         $(this).offset().top - $(window).scrollTop() > 0) {
+    //         $(this).removeClass('move-left');
+    //         $(this).removeClass('move-right');
+    //     }
+    // });
+
+    // var minDistance = Number.POSITIVE_INFINITY;
+
+    // // get the index of closest item
+    // $('.pub_group .pic').each(function(i){
+    //     var distTemp = Math.abs($(this).offset().top - $(window).scrollTop() - 0.5 * winHeight);
+    //     if (distTemp <= minDistance) {
+    //         minDistance = distTemp;
+    //         indexToLightUp = i;
+    //     }
+    // });
+
+    // $('.pub_group .pic').each(function(i){
+    //     var matches = $(this).css('webkitTransform').match(matrixRegex);
+    //     var scaleX = matches[1];
+    //     if (i == indexToLightUp) {
+    //         $(this).css({'background-color': '#eb6e1e'});
+    //         if ((typeof indexToLightUpTemp == 'undefined') ||
+    //             (indexToLightUpTemp != indexToLightUp)) {
+    //             if (scaleX == 1) {
+    //                 $(this).css({
+    //                     'transform': 'scale(1.02)',
+    //                     'mozTransform': 'scale(1.02)',
+    //                     'webkitTransform': 'scale(1.02)',
+    //                     'oTransform': 'scale(1.02)'
+    //                 });
+    //             };
+    //             indexToLightUpTemp = indexToLightUp;
+    //         }
+    //     } else {
+    //         $(this).css({'background-color': '#333'});
+    //         if (scaleX >= 1 && scaleX <= 1.02) {
+    //             $(this).css({
+    //                 'transform': 'scale(1)',
+    //                 'mozTransform': 'scale(1)',
+    //                 'webkitTransform': 'scale(1)',
+    //                 'oTransform': 'scale(1)'
+    //             });
+    //         }
+    //     }
+    // });
 
     if (doc_offset >= skill_offset - 0.3 * about_offset) {
         for (var i = 0; i < 6; i++) {
@@ -124,6 +145,8 @@ function toggleMenu() {
 }
 
 $(document).ready(function(){
+    // $('#about .pic').addClass('move-left');
+    // $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
     $('#menu-icon').click(function(){
         var yPos = $(window).scrollTop();
         var about_offset = $('#about').offset().top;
