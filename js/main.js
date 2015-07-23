@@ -62,7 +62,7 @@ onscroll = function() {
 
     $('.circle .half.light').each(function(){
         var contentOffSet = $(this).parent().parent().next().offset().top - $(window).scrollTop()
-        if (contentOffSet < 0.5 * winHeight &&
+        if (contentOffSet < 0.6 * winHeight &&
             contentOffSet > 0) {
             flipDiv($(this));
         }
