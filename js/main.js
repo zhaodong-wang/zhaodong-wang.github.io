@@ -68,7 +68,7 @@ function getRotationDegrees(obj) {
 function flipDiv(obj) {
     if (typeof obj.attr('data-transform') == 'undefined') {
         obj.animate({ rotateX: '-150deg' }, 0);
-        obj.animate({ rotateX: '0deg' }, 1500, 'easeOutBounce').delay(500);
+        obj.animate({ rotateX: '0deg' }, 1500, 'easeOutBounce');
     }
 }
 
@@ -87,12 +87,12 @@ onscroll = function() {
         $('header').removeClass('fixed');
         if ($(window).width() <= 850) hideMenu();
     };
-    // $('.circle .half.light').each(function(){
-    //     var offsetTemp = $(this).offset().top - about_offset;
-    //     if ($(this).offset().top - $(window).scrollTop() < 0.38 * winHeight) {
-    //         flipDiv($(this));
-    //     }
-    // });
+    $('.circle .half.light').each(function(){
+        var offsetTemp = $(this).offset().top - about_offset;
+        if ($(this).offset().top - $(window).scrollTop() < 0.38 * winHeight) {
+            flipDiv($(this));
+        }
+    });
 
     if (doc_offset >= skill_offset - 0.3 * about_offset) {
         for (var i = 0; i < 6; i++) {
