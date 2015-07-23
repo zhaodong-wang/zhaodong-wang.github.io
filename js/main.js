@@ -145,8 +145,20 @@ function toggleMenu() {
 }
 
 $(document).ready(function(){
-    $('#about .pic').addClass('move-left');
-    $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
+    $('#about .pic').css({
+        webkitTransform: 'translateX(-80%)',
+        mozTransform: 'translateX(-80%)',
+        oTransform: 'translateX(-80%)',
+        transform: 'translateX(-80%)',
+        opacity: 0
+    });
+    $('#about .profile, #edu .content, #project .content, #pubs .profile').css({
+        webkitTransform: 'translateX(80%)',
+        mozTransform: 'translateX(80%)',
+        oTransform: 'translateX(80%)',
+        transform: 'translateX(80%)',
+        opacity: 0
+    });
     $('#menu-icon').click(function(){
         var yPos = $(window).scrollTop();
         var about_offset = $('#about').offset().top;
