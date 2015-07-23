@@ -68,18 +68,18 @@ onscroll = function() {
         }
     });
 
-    // $('#edu .content, #project .content, #pubs .profile').each(function(){
-    //     if ($(this).offset().top - $(window).scrollTop() < 0.6 * winHeight &&
-    //         $(this).offset().top - $(window).scrollTop() > 0) {
-    //         $(this).css({
-    //             webkitTransform: 'translateX(0)',
-    //             mozTransform: 'translateX(0)',
-    //             oTransform: 'translateX(0)',
-    //             transform: 'translateX(0)',
-    //             opacity: 1
-    //         });
-    //     }
-    // });
+    $('#myPhoto, #myProfile, #edu .content, #project .content, #pubs .profile').each(function(){
+        if ($(this).offset().top - $(window).scrollTop() < 0.6 * winHeight &&
+            $(this).offset().top - $(window).scrollTop() > 0) {
+            $(this).css({
+                webkitTransform: 'translateX(0)',
+                mozTransform: 'translateX(0)',
+                oTransform: 'translateX(0)',
+                transform: 'translateX(0)',
+                opacity: 1
+            });
+        }
+    });
 
     var minDistance = Number.POSITIVE_INFINITY;
 
@@ -150,20 +150,20 @@ function toggleMenu() {
 }
 
 $(document).ready(function(){
-    // $('#myPhoto').css({
-    //     webkitTransform: 'translateX(-80%)',
-    //     mozTransform: 'translateX(-80%)',
-    //     oTransform: 'translateX(-80%)',
-    //     transform: 'translateX(-80%)',
-    //     opacity: 0
-    // });
-    // $('#myProfile, #edu .content, #project .content, #pubs .profile').css({
-    //     webkitTransform: 'translateX(80%)',
-    //     mozTransform: 'translateX(80%)',
-    //     oTransform: 'translateX(80%)',
-    //     transform: 'translateX(80%)',
-    //     opacity: 0
-    // });
+    $('#myPhoto').css({
+        webkitTransform: 'translateX(-80%)',
+        mozTransform: 'translateX(-80%)',
+        oTransform: 'translateX(-80%)',
+        transform: 'translateX(-80%)',
+        opacity: 0
+    });
+    $('#myProfile, #edu .content, #project .content, #pubs .profile').css({
+        webkitTransform: 'translateX(80%)',
+        mozTransform: 'translateX(80%)',
+        oTransform: 'translateX(80%)',
+        transform: 'translateX(80%)',
+        opacity: 0
+    });
 
     $('#menu-icon').click(function(){
         var yPos = $(window).scrollTop();

@@ -386,6 +386,8 @@ nav li:hover {
     margin-top: 50px;
     position: relative;
     z-index: 1;
+    -webkit-perspective: 900000px;
+    perspective: 900000px;
 }
 
 .circle .half {
