@@ -397,6 +397,9 @@ nav li:hover {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     transform-origin: top;
+    -webkit-transform-origin: top;
+    -moz-transform-origin: top;
+    -o-transform-origin: top;
     transform: rotateX(-150deg);
     -webkit-transform: rotateX(-150deg);
     -moz-transform: rotateX(-150deg);
