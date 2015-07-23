@@ -69,7 +69,7 @@ $(function(){
 
         $('.circle .half.light').each(function(){
             var contentOffSet = $(this).parent().parent().next().offset().top - doc_offset
-            if (contentOffSet < 0.75 * winHeight &&
+            if (contentOffSet < 0.8 * winHeight &&
                 contentOffSet > 0.2 * winHeight) {
                 flipDiv($(this));
             }
@@ -77,14 +77,14 @@ $(function(){
 
         $('#about .pic').each(function(){
             var contentOffSet = $(this).next().offset().top - doc_offset
-            if (contentOffSet < 0.75 * winHeight &&
+            if (contentOffSet < 0.8 * winHeight &&
                 contentOffSet > 0.2 * winHeight) {
                 $(this).removeClass('move-left');
             }
         });
 
         $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
-            if ($(this).offset().top - doc_offset < 0.75 * winHeight &&
+            if ($(this).offset().top - doc_offset < 0.8 * winHeight &&
                 $(this).offset().top - doc_offset > 0.2 * winHeight) {
                 $(this).removeClass('move-right');
             }
