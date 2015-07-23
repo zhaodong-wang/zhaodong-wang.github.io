@@ -43,6 +43,7 @@ var winHeight = $(window).height();
 var indexToLightUp;
 var indexToLightUpTemp;
 var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
+
 onscroll = function() {
     var about_offset = $("#about").offset().top;
     var edu_offset = $("#edu").offset().top;
