@@ -68,7 +68,7 @@ onscroll = function() {
         }
     });
 
-    $('#edu .content, #project .content, #pubs .profile').each(function(){
+    $('#myPhoto, #myProfile, #edu .content, #project .content, #pubs .profile').each(function(){
         if ($(this).offset().top - $(window).scrollTop() < 0.5 * winHeight &&
             $(this).offset().top - $(window).scrollTop() > 0) {
             $(this).css({
@@ -150,20 +150,21 @@ function toggleMenu() {
 }
 
 $(document).ready(function(){
-    $('#about .pic').css({
+    $('#myPhoto').css({
         webkitTransform: 'translateX(-80%)',
         mozTransform: 'translateX(-80%)',
         oTransform: 'translateX(-80%)',
         transform: 'translateX(-80%)',
         opacity: 0
     });
-    $('#about .profile, #edu .content, #project .content, #pubs .profile').css({
+    $('#myProfile, #edu .content, #project .content, #pubs .profile').css({
         webkitTransform: 'translateX(80%)',
         mozTransform: 'translateX(80%)',
         oTransform: 'translateX(80%)',
         transform: 'translateX(80%)',
         opacity: 0
     });
+
     $('#menu-icon').click(function(){
         var yPos = $(window).scrollTop();
         var about_offset = $('#about').offset().top;
