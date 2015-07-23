@@ -68,18 +68,18 @@ onscroll = function() {
         }
     });
 
-    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
-        if ($(this).offset().top - $(window).scrollTop() < 0.5 * winHeight &&
-            $(this).offset().top - $(window).scrollTop() > 0) {
-            $(this).css({
-                webkitTransform: 'translateX(0)',
-                mozTransform: 'translateX(0)',
-                oTransform: 'translateX(0)',
-                transform: 'translateX(0)',
-                opacity: 1
-            });
-        }
-    });
+    // $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
+    //     if ($(this).offset().top - $(window).scrollTop() < 0.5 * winHeight &&
+    //         $(this).offset().top - $(window).scrollTop() > 0) {
+    //         $(this).css({
+    //             webkitTransform: 'translateX(0)',
+    //             mozTransform: 'translateX(0)',
+    //             oTransform: 'translateX(0)',
+    //             transform: 'translateX(0)',
+    //             opacity: 1
+    //         });
+    //     }
+    // });
 
     var minDistance = Number.POSITIVE_INFINITY;
 
