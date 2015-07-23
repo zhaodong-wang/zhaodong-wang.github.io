@@ -145,8 +145,8 @@ function toggleMenu() {
 }
 
 $(document).ready(function(){
-    $('#about .pic').addClass('move-left');
-    $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
+    // $('#about .pic').addClass('move-left');
+    // $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
     $('#menu-icon').click(function(){
         var yPos = $(window).scrollTop();
         var about_offset = $('#about').offset().top;
