@@ -400,10 +400,10 @@ nav li:hover {
     -webkit-transform-origin: top;
     -moz-transform-origin: top;
     -o-transform-origin: top;
-    transform: rotateX(-150deg);
+    /*transform: rotateX(-150deg);
     -webkit-transform: rotateX(-150deg);
     -moz-transform: rotateX(-150deg);
-    -o-transform: rotateX(-150deg);
+    -o-transform: rotateX(-150deg);*/
 }
 
 .circle .half.dark {
