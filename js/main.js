@@ -24,7 +24,7 @@ function move(element, duration, easing, callback) {
         }, duration, easing, callback);
 }
 
-function scrollEvents() {
+function scrollAnimations() {
     var about_offset = $("#about").offset().top;
     var edu_offset = $("#edu").offset().top;
     var project_offset = $("#project").offset().top;
@@ -120,17 +120,25 @@ function scrollEvents() {
     }
 }
 
-$('body').on({
-    'touchmove': function(ee) {
-        scrollEvents();
-    }
-});
+window.onload = function()
+{
+    scrollAnimations();
+    window.onscroll = function()
+    {
+        scrollAnimations();
+    };
+};
+// $('body').on({
+//     'touchmove': function(ee) {
+//         scrollAnimations();
+//     }
+// });
 
-$(function(){
-    $(window).scroll(function(){
-        scrollEvents();
-    });
-});
+// $(function(){
+//     $(window).scroll(function(){
+//         scrollAnimations();
+//     });
+// });
 
 
 /*-----------------------------------------------------------------------------------*/
