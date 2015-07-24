@@ -120,30 +120,33 @@ function scrollAnimations() {
     }
 }
 
-window.onload = function()
+
+var isScrollable = true;
+
+document.addEventListener('touchstart', function(e) {
+    isScrollable = false;
+}, false);
+
+document.addEventListener('touchend', function(e) {
+    isScrollable = true;
+}, false);
+
+document.addEventListener('touchcancel', function(e) {
+    isScrollable = true;
+}, false);
+
+document.addEventListener('touchmove', function(e) {
+    if (!isScrollable) {
+         scrollAnimations();
+    }
+}, false);
+
+window.onscroll = function()
 {
-    scrollAnimations();
-    window.onscroll = function()
-    {
+    if (isScrollable) {
         scrollAnimations();
     };
 };
-
-document.addEventListener('touchmove', function(e) {
-    scrollAnimations();
-}, false);
-
-// $('body').on({
-//     'touchmove': function(ee) {
-//         scrollAnimations();
-//     }
-// });
-
-// $(function(){
-//     $(window).scroll(function(){
-//         scrollAnimations();
-//     });
-// });
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -251,17 +254,19 @@ function updateSizes(){
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
 }
 
+
+
 $(window).resize(function(){
    updateSizes();
 });
 
 $(window).load(function(){
     updateSizes();
-
     // initialize styles
     $('#about .pic').addClass('move-left');
     $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').addClass('move-right');
     $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').parent().css({'overflow-x':'hidden'});
+    scrollAnimations();
 })
 
 
