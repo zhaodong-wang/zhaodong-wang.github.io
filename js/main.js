@@ -24,7 +24,6 @@ function move(element, duration, easing, callback) {
         }, duration, easing, callback);
 }
 
-
 $(function(){
     $(window).scroll(function(){
         var about_offset = $("#about").offset().top;
@@ -63,7 +62,7 @@ $(function(){
             }
         });
 
-        $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
+        $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').each(function(){
             if ($(this).offset().top - doc_offset < upperRatio * winHeight &&
                 $(this).offset().top - doc_offset > lowerRatio * winHeight) {
                 $(this).removeClass('move-right');
@@ -136,25 +135,50 @@ function hideMenu() {
 }
 
 function toggleMenu() {
+    var speed = 50;
+    var animDuration = 300;
+    var totalDelay;
     if ($('.bg-ultrawhite').css('webkitFilter') != 'blur(2px)') {
         $('nav ul, nav:active ul')
-            .queue(function(){
-                $(this).css({'display': 'block'}).dequeue();
+            .queue(function(next){
+                $(this).css({'display': 'block'});
+                next();
             })
-            .queue(function(){
-                $(this).animate({'opacity': 1}, 100, 'easeOutCubic').dequeue();
+            .animate({'opacity': 1}, 100, 'easeOutCubic')
+            .queue(function(next){
+                $('nav li').each(function(index){
+                    $(this).delay(index * speed).animate({
+                        'left' : 0,
+                        'opacity': 1
+                    }, animDuration);
+                });
+                next();
             });
         $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(2px)'});
     }
     else {
         $('nav ul, nav:active ul')
-            .queue(function(){
-                $(this).animate({'opacity': 0}, 100, 'easeOutCubic').dequeue();
+            .queue(function(next){
+                $('nav li').each(function(index){
+                    $(this).delay(index * speed).animate({
+                        'left' : '100%',
+                        'opacity': 0
+                    }, animDuration);
+                    totalDelay = index * speed + animDuration;
+                });
+                next();
             })
-            .queue(function(){
-                $(this).css({'display': 'none'}).dequeue();
+            .delay(totalDelay)
+            .queue(function(next){
+                $(this).animate({'opacity': 0}, 100, 'easeOutCubic');
+                $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(0)'});
+                next();
+            })
+            .queue(function(next){
+                $(this).css({'display': 'none'});
+                next();
             });
-        $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(0)'});
+
     }
 }
 
@@ -209,9 +233,12 @@ $(window).load(function(){
 
     // initialize styles
     $('#about .pic').addClass('move-left');
-    $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
-    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').parent().css({'overflow-x':'hidden'});
-
+    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').parent().css({'overflow-x':'hidden'});
+    $('nav li').css({
+        'left' : '100%',
+        'opacity': 0
+    })
 })
 
 
@@ -222,15 +249,13 @@ $(document).ready(function(){
     $('#menu-icon').click(function(){
         var doc_offset = $(window).scrollTop() || $("body").scrollTop();
         var about_offset = $('#about').offset().top;
-        if (doc_offset <= about_offset) {
+        if (doc_offset < about_offset) {
             $('html').animate({
                     scrollTop: $("#about").offset().top
                 }, 500);
             $('body').animate({
                     scrollTop: $("#about").offset().top
-                }, 500, function(){
-                    setTimeout(toggleMenu, 500);
-                });
+                }, 500, toggleMenu);
         }
         else toggleMenu();
     });
