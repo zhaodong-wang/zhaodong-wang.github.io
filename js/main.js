@@ -166,14 +166,14 @@ function toggleMenu() {
                 $(this).css({'display': 'block'}).dequeue();
             })
             .queue(function(){
-                $(this).animate({'opacity': 1}, 300, 'easeOutCubic').dequeue();
+                $(this).animate({'opacity': 1}, 100, 'easeOutCubic').dequeue();
             });
         $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').css({'webkitFilter': 'blur(2px)'});
     }
     else {
         $('nav ul, nav:active ul')
             .queue(function(){
-                $(this).animate({'opacity': 0}, 300, 'easeOutCubic').dequeue();
+                $(this).animate({'opacity': 0}, 100, 'easeOutCubic').dequeue();
             })
             .queue(function(){
                 $(this).css({'display': 'none'}).dequeue();
