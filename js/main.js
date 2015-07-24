@@ -147,10 +147,12 @@ function toggleMenu() {
             .animate({'opacity': 1}, 100, 'easeOutCubic')
             .queue(function(next){
                 $('nav li').each(function(index){
-                    $(this).delay(index * speed).animate({
-                        'left' : 0,
-                        'opacity': 1
-                    }, animDuration);
+                    var that = $(this);
+                    setTimeout(function(){
+                        if (that.hasClass('move-right')) {
+                            that.removeClass('move-right');
+                        };
+                    }, index * speed);
                 });
                 next();
             });
@@ -160,10 +162,12 @@ function toggleMenu() {
         $('nav ul, nav:active ul')
             .queue(function(next){
                 $('nav li').each(function(index){
-                    $(this).delay(index * speed).animate({
-                        'left' : '100%',
-                        'opacity': 0
-                    }, animDuration);
+                    var that = $(this);
+                    setTimeout(function(){
+                        if (!that.hasClass('move-right')) {
+                            that.addClass('move-right');
+                        };
+                    }, index * speed);
                     totalDelay = index * speed + animDuration;
                 });
                 next();
@@ -233,12 +237,8 @@ $(window).load(function(){
 
     // initialize styles
     $('#about .pic').addClass('move-left');
-    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
+    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').addClass('move-right');
     $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').parent().css({'overflow-x':'hidden'});
-    $('nav li').css({
-        'left' : '100%',
-        'opacity': 0
-    })
 })
 
 
