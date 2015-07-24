@@ -24,101 +24,111 @@ function move(element, duration, easing, callback) {
         }, duration, easing, callback);
 }
 
+function scrollEvents() {
+    var about_offset = $("#about").offset().top;
+    var edu_offset = $("#edu").offset().top;
+    var project_offset = $("#project").offset().top;
+    var pubs_offset = $("#pubs").offset().top;
+    var skill_offset = $("#skill").offset().top;
+    var contact_offset = $("#contact").offset().top;
+    var doc_offset = $(window).scrollTop() || $("body").scrollTop();
+    var aaa = $('header').height();
+    if (doc_offset >= about_offset) {
+        if (!$('header').hasClass('fixed')) {
+            $('header').addClass('fixed');
+        };
+    }
+    else {
+        if ($('header').hasClass('fixed')) {
+            $('header').removeClass('fixed');
+        };
+        if (winWidth <= 850) hideMenu();
+    };
+
+    $('.circle .half.light').each(function(){
+        var contentOffSet = $(this).parent().parent().next().offset().top - doc_offset
+        if (contentOffSet < upperRatio * winHeight &&
+            contentOffSet > lowerRatio * winHeight) {
+            flipDiv($(this));
+        }
+    });
+
+    $('#about .pic').each(function(){
+        var contentOffSet = $(this).next().offset().top - doc_offset
+        if (contentOffSet < upperRatio * winHeight &&
+            contentOffSet > lowerRatio * winHeight) {
+            $(this).removeClass('move-left');
+        }
+    });
+
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').each(function(){
+        if ($(this).offset().top - doc_offset < upperRatio * winHeight &&
+            $(this).offset().top - doc_offset > lowerRatio * winHeight) {
+            $(this).removeClass('move-right');
+        }
+    });
+
+    if (pubs_offset - $(window).scrollTop() < 0.1 * winHeight) {
+        var minDistance = Number.POSITIVE_INFINITY;
+
+        // get the index of closest item
+        $('.pub_group .pic').each(function(i){
+            var distTemp = Math.abs($(this).offset().top - doc_offset - 0.5 * winHeight);
+            if (distTemp <= minDistance) {
+                minDistance = distTemp;
+                indexToLightUp = i;
+            }
+        });
+        // light up the item that is nearest to the center of the window
+        $('.pub_group .pic').each(function(i){
+            var matches = $(this).css('webkitTransform').match(matrixRegex);
+            var scaleX = matches[1];
+            if (i == indexToLightUp) {
+                $(this).css({'background-color': '#eb6e1e'});
+                if ((typeof indexToLightUpTemp == 'undefined') ||
+                    (indexToLightUpTemp != indexToLightUp)) {
+                    if (scaleX == 1) {
+                        $(this).css({
+                            'transform': 'scale(1.02)',
+                            'mozTransform': 'scale(1.02)',
+                            'webkitTransform': 'scale(1.02)',
+                            'oTransform': 'scale(1.02)'
+                        });
+                    };
+                    indexToLightUpTemp = indexToLightUp;
+                }
+            } else {
+                $(this).css({'background-color': '#333'});
+                if (scaleX >= 1 && scaleX <= 1.02) {
+                    $(this).css({
+                        'transform': 'scale(1)',
+                        'mozTransform': 'scale(1)',
+                        'webkitTransform': 'scale(1)',
+                        'oTransform': 'scale(1)'
+                    });
+                }
+            }
+        });
+    }
+
+
+    if (skill_offset - doc_offset < 0.2 * winHeight &&
+        skill_offset - doc_offset > - 0.2 * winHeight) {
+        for (var i = 0; i < 6; i++) {
+            $("#skill" + i).addClass(" stroke" + i);
+        }
+    }
+}
+
+$('body').on({
+    'touchmove': function(ee) {
+        scrollEvents();
+    }
+});
+
 $(function(){
     $(window).scroll(function(){
-        var about_offset = $("#about").offset().top;
-        var edu_offset = $("#edu").offset().top;
-        var project_offset = $("#project").offset().top;
-        var pubs_offset = $("#pubs").offset().top;
-        var skill_offset = $("#skill").offset().top;
-        var contact_offset = $("#contact").offset().top;
-        var doc_offset = $(window).scrollTop() || $("body").scrollTop();
-        var aaa = $('header').height();
-        if (doc_offset >= about_offset) {
-            if (!$('header').hasClass('fixed')) {
-                $('header').addClass('fixed');
-            };
-        }
-        else {
-            if ($('header').hasClass('fixed')) {
-                $('header').removeClass('fixed');
-            };
-            if (winWidth <= 850) hideMenu();
-        };
-
-        $('.circle .half.light').each(function(){
-            var contentOffSet = $(this).parent().parent().next().offset().top - doc_offset
-            if (contentOffSet < upperRatio * winHeight &&
-                contentOffSet > lowerRatio * winHeight) {
-                flipDiv($(this));
-            }
-        });
-
-        $('#about .pic').each(function(){
-            var contentOffSet = $(this).next().offset().top - doc_offset
-            if (contentOffSet < upperRatio * winHeight &&
-                contentOffSet > lowerRatio * winHeight) {
-                $(this).removeClass('move-left');
-            }
-        });
-
-        $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').each(function(){
-            if ($(this).offset().top - doc_offset < upperRatio * winHeight &&
-                $(this).offset().top - doc_offset > lowerRatio * winHeight) {
-                $(this).removeClass('move-right');
-            }
-        });
-
-        if (pubs_offset - $(window).scrollTop() < 0.1 * winHeight) {
-            var minDistance = Number.POSITIVE_INFINITY;
-
-            // get the index of closest item
-            $('.pub_group .pic').each(function(i){
-                var distTemp = Math.abs($(this).offset().top - doc_offset - 0.5 * winHeight);
-                if (distTemp <= minDistance) {
-                    minDistance = distTemp;
-                    indexToLightUp = i;
-                }
-            });
-            // light up the item that is nearest to the center of the window
-            $('.pub_group .pic').each(function(i){
-                var matches = $(this).css('webkitTransform').match(matrixRegex);
-                var scaleX = matches[1];
-                if (i == indexToLightUp) {
-                    $(this).css({'background-color': '#eb6e1e'});
-                    if ((typeof indexToLightUpTemp == 'undefined') ||
-                        (indexToLightUpTemp != indexToLightUp)) {
-                        if (scaleX == 1) {
-                            $(this).css({
-                                'transform': 'scale(1.02)',
-                                'mozTransform': 'scale(1.02)',
-                                'webkitTransform': 'scale(1.02)',
-                                'oTransform': 'scale(1.02)'
-                            });
-                        };
-                        indexToLightUpTemp = indexToLightUp;
-                    }
-                } else {
-                    $(this).css({'background-color': '#333'});
-                    if (scaleX >= 1 && scaleX <= 1.02) {
-                        $(this).css({
-                            'transform': 'scale(1)',
-                            'mozTransform': 'scale(1)',
-                            'webkitTransform': 'scale(1)',
-                            'oTransform': 'scale(1)'
-                        });
-                    }
-                }
-            });
-        }
-
-
-        if (skill_offset - doc_offset < 0.2 * winHeight &&
-            skill_offset - doc_offset > - 0.2 * winHeight) {
-            for (var i = 0; i < 6; i++) {
-                $("#skill" + i).addClass(" stroke" + i);
-            }
-        }
+        scrollEvents();
     });
 });
 
