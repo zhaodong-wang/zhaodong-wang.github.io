@@ -27,7 +27,7 @@ var indexToLightUp;
 var indexToLightUpTemp;
 var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
 
-if (winHeight <= 420) {
+if (winWidth <= 420) {
     var upperRatio = 0.8;
     var lowerRatio = 0.2;
 } else {
