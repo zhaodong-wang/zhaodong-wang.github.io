@@ -148,7 +148,7 @@ var isScrollable = true;
 //     };
 // };
 
-document.addEventListener("touchmove", scrollAnimations, false);
+// document.addEventListener("touchmove", scrollAnimations, false);
 document.addEventListener("scroll", scrollAnimations, false);
 
 /*-----------------------------------------------------------------------------------*/
