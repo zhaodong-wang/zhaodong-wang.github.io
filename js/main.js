@@ -191,6 +191,7 @@ $(document).ready(function(){
 
     $('#about .pic').addClass('move-left');
     $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').parent().css({'overflow-x':'hidden'});
     $('#menu-icon').click(function(){
         var doc_offset = $(window).scrollTop() || $("body").scrollTop();
         var about_offset = $('#about').offset().top;
