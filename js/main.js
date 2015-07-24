@@ -3,6 +3,17 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 /*-----------------------------------------------------------------------------------*/
+/*  DYNAMIC EFFECTS
+/*-----------------------------------------------------------------------------------*/
+
+function flipDiv(obj) {
+    if (typeof obj.attr('data-transform') == 'undefined') {
+        obj.animate({ rotateX: '-150deg' }, 0);
+        obj.animate({ rotateX: '0deg' }, 1500, 'easeOutBounce');
+    }
+}
+
+/*-----------------------------------------------------------------------------------*/
 /*  SCROLL AND MOVE
 /*-----------------------------------------------------------------------------------*/
 function move(element, duration, easing, callback) {
@@ -13,27 +24,6 @@ function move(element, duration, easing, callback) {
         }, duration, easing, callback);
 }
 
-function flipDiv(obj) {
-    if (typeof obj.attr('data-transform') == 'undefined') {
-        obj.animate({ rotateX: '-150deg' }, 0);
-        obj.animate({ rotateX: '0deg' }, 1500, 'easeOutBounce');
-    }
-}
-
-var winHeight = $(window).height();
-var winWidth = $(window).width();
-
-var indexToLightUp;
-var indexToLightUpTemp;
-var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
-
-if (winWidth <= 420) {
-    var upperRatio = 0.8;
-    var lowerRatio = 0.2;
-} else {
-    var upperRatio = 0.6;
-    var lowerRatio = 0.1;
-}
 
 $(function(){
     $(window).scroll(function(){
@@ -130,16 +120,12 @@ $(function(){
                 $("#skill" + i).addClass(" stroke" + i);
             }
         }
-        var xxx = $('header').width();
     });
 });
 
-// onscroll = function() {
-
-// };
 
 /*-----------------------------------------------------------------------------------*/
-/*  Menu effects
+/*  MENU EFFECTS
 /*-----------------------------------------------------------------------------------*/
 
 function hideMenu() {
@@ -172,16 +158,67 @@ function toggleMenu() {
     }
 }
 
-$(document).ready(function(){
+/*-----------------------------------------------------------------------------------*/
+/*  PREPROCESSING
+/*-----------------------------------------------------------------------------------*/
+
+var winHeight;
+var winWidth;
+var indexToLightUp;
+var indexToLightUpTemp;
+var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
+var upperRatio;
+var lowerRatio;
+
+function updateSizes(){
+    winHeight = $(window).height();
+    winWidth = $(window).width();
+
+    if (winWidth <= 420) {
+        upperRatio = 0.8;
+        lowerRatio = 0.2;
+    } else {
+        upperRatio = 0.6;
+        lowerRatio = 0.1;
+    }
+
+    // Responsively adjust the size of elements
     var menuHeight = winHeight - 60;
     if (winWidth < 850) {
         $('nav ul, nav:active ul').css({'width': winWidth, 'height': menuHeight, 'display': 'none', 'opacity': 0});
         $('#menu-bg').css({'width': winWidth});
     }
 
+    var widthInfo = Number.NEGATIVE_INFINITY; // the maximum width among all info
+    $('#contact .element').each(function(){
+        var tempWidth = $(this).children('.icon').outerWidth(true);
+        tempWidth += $(this).children('.info').outerWidth(true);
+        if (tempWidth > widthInfo) {
+            widthInfo = tempWidth;
+        };
+    })
+    $('#contact .element').css({'width': Math.ceil(widthInfo)});
+}
+
+$(window).resize(function(){
+   updateSizes();
+});
+
+$(window).load(function(){
+    updateSizes();
+
+    // initialize styles
     $('#about .pic').addClass('move-left');
     $('#about .profile, #edu .content, #project .content, #pubs .profile').addClass('move-right');
     $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').parent().css({'overflow-x':'hidden'});
+
+})
+
+
+
+$(document).ready(function(){
+
+    // the menu bar for short format
     $('#menu-icon').click(function(){
         var doc_offset = $(window).scrollTop() || $("body").scrollTop();
         var about_offset = $('#about').offset().top;
@@ -197,6 +234,8 @@ $(document).ready(function(){
         }
         else toggleMenu();
     });
+
+    // next icon in #home
     $('#nextInHome').click(function(){
         move('#about',0);
     });
