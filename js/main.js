@@ -123,31 +123,33 @@ function scrollAnimations() {
 
 var isScrollable = true;
 
-document.addEventListener('touchstart', function(e) {
-    isScrollable = false;
-}, false);
+// document.addEventListener('touchstart', function(e) {
+//     isScrollable = false;
+// }, false);
 
-document.addEventListener('touchend', function(e) {
-    isScrollable = true;
-}, false);
+// document.addEventListener('touchend', function(e) {
+//     isScrollable = true;
+// }, false);
 
-document.addEventListener('touchcancel', function(e) {
-    isScrollable = true;
-}, false);
+// document.addEventListener('touchcancel', function(e) {
+//     isScrollable = true;
+// }, false);
 
-document.addEventListener('touchmove', function(e) {
-    if (!isScrollable) {
-         scrollAnimations();
-    }
-}, false);
+// document.addEventListener('touchmove', function(e) {
+//     if (!isScrollable) {
+//          scrollAnimations();
+//     }
+// }, false);
 
-window.onscroll = function()
-{
-    if (isScrollable) {
-        scrollAnimations();
-    };
-};
+// window.onscroll = function()
+// {
+//     if (isScrollable) {
+//         scrollAnimations();
+//     };
+// };
 
+document.addEventListener("touchmove", scrollAnimations, false);
+document.addEventListener("scroll", scrollAnimations, false);
 
 /*-----------------------------------------------------------------------------------*/
 /*  MENU EFFECTS
