@@ -27,6 +27,14 @@ var indexToLightUp;
 var indexToLightUpTemp;
 var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
 
+if (winHeight <= 420) {
+    var upperRatio = 0.8;
+    var lowerRatio = 0.2;
+} else {
+    var upperRatio = 0.6;
+    var lowerRatio = 0.1;
+}
+
 $(function(){
     $(window).scroll(function(){
         var about_offset = $("#about").offset().top;
@@ -46,28 +54,28 @@ $(function(){
             if ($('header').hasClass('fixed')) {
                 $('header').removeClass('fixed');
             };
-            if ($(window).width() <= 850) hideMenu();
+            if (winWidth <= 850) hideMenu();
         };
 
         $('.circle .half.light').each(function(){
             var contentOffSet = $(this).parent().parent().next().offset().top - doc_offset
-            if (contentOffSet < 0.8 * winHeight &&
-                contentOffSet > 0.2 * winHeight) {
+            if (contentOffSet < upperRatio * winHeight &&
+                contentOffSet > lowerRatio * winHeight) {
                 flipDiv($(this));
             }
         });
 
         $('#about .pic').each(function(){
             var contentOffSet = $(this).next().offset().top - doc_offset
-            if (contentOffSet < 0.8 * winHeight &&
-                contentOffSet > 0.2 * winHeight) {
+            if (contentOffSet < upperRatio * winHeight &&
+                contentOffSet > lowerRatio * winHeight) {
                 $(this).removeClass('move-left');
             }
         });
 
         $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
-            if ($(this).offset().top - doc_offset < 0.8 * winHeight &&
-                $(this).offset().top - doc_offset > 0.2 * winHeight) {
+            if ($(this).offset().top - doc_offset < upperRatio * winHeight &&
+                $(this).offset().top - doc_offset > lowerRatio * winHeight) {
                 $(this).removeClass('move-right');
             }
         });
