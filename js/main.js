@@ -5,31 +5,13 @@
 /*-----------------------------------------------------------------------------------*/
 /*  SCROLL AND MOVE
 /*-----------------------------------------------------------------------------------*/
-var move = function() {
-    var event_func = null;
-    return function(target_elem, move_dist, aux_dist, callback) {
-        if (event_func) {
-            clearTimeout(event_func);
-            event_func = null
-        }
-        if (target_elem) {
-            var scroll_len = document.getElementById(target_elem).offsetTop - move_dist;
-            var e = document.documentElement.scrollTop || document.body.scrollTop;
-            if (document.body.scrollHeight - e <= document.body.clientHeight) return;
-            aux_dist = aux_dist || 200;
-            if (aux_dist < 10) aux_dist = 10;
-            scroll_len = (scroll_len - e) / aux_dist;
-            if (scroll_len > 0) scroll_len = Math.ceil(scroll_len);
-            else scroll_len = Math.floor(scroll_len);
-            if (scroll_len) {
-                scrollBy(0, scroll_len);
-                aux_dist -= 15;
-                event_func = setTimeout("move('" + target_elem + "'," + move_dist + "," + aux_dist + ")", 10)
-            }
-        }
-        (callback && typeof(callback) === "function") && callback();
-    }
-}();
+function move(element, duration, easing, callback) {
+    duration = duration || 1000;
+    easing = easing || "easeInOutCubic";
+    $('html, body').animate({
+            scrollTop: $(element).offset().top
+        }, duration, easing, callback);
+}
 
 function flipDiv(obj) {
     if (typeof obj.attr('data-transform') == 'undefined') {
@@ -196,7 +178,10 @@ $(document).ready(function(){
         var doc_offset = $(window).scrollTop() || $("body").scrollTop();
         var about_offset = $('#about').offset().top;
         if (doc_offset <= about_offset) {
-            $('html body').animate({
+            $('html').animate({
+                    scrollTop: $("#about").offset().top
+                }, 500);
+            $('body').animate({
                     scrollTop: $("#about").offset().top
                 }, 500, function(){
                     setTimeout(toggleMenu, 500);
@@ -205,7 +190,7 @@ $(document).ready(function(){
         else toggleMenu();
     });
     $('#nextInHome').click(function(){
-        move('about',0);
+        move('#about',0);
     });
 });
 
