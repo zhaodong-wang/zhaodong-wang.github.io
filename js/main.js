@@ -128,6 +128,12 @@ window.onload = function()
         scrollAnimations();
     };
 };
+
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    scrollAnimations();
+}, false);
+
 // $('body').on({
 //     'touchmove': function(ee) {
 //         scrollAnimations();
