@@ -187,7 +187,7 @@ function toggleMenu() {
                 $(this).css({'display': 'block'});
                 next();
             })
-            .animate({'opacity': 1}, 100, 'easeOutCubic')
+            .animate({'opacity': 1}, 200, 'easeOutCubic')
             .queue(function(next){
                 $('nav li').each(function(index){
                     var that = $(this);
@@ -217,7 +217,7 @@ function toggleMenu() {
             })
             .delay(totalDelay)
             .queue(function(next){
-                $(this).animate({'opacity': 0}, 100, 'easeOutCubic');
+                $(this).animate({'opacity': 0}, 200, 'easeOutCubic');
                 $('.bg-ultrawhite, .bg-mesh, .bg-white, footer').css({'webkitFilter': 'blur(0)'});
                 next();
             })

@@ -341,10 +341,10 @@ nav li:hover {
     background-image: url("../img/lowpoly-white.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    transition: all .4s ease-in-out 0s;
-    -moz-transition: all .4s ease-in-out 0s;
-    -webkit-transition: all .4s ease-in-out 0s;
-    -o-transition: all .4s ease-in-out 0s;
+    transition: all .2s ease-in-out 0s;
+    -moz-transition: all .2s ease-in-out 0s;
+    -webkit-transition: all .2s ease-in-out 0s;
+    -o-transition: all .2s ease-in-out 0s;
 }
 
 .bg-ultrawhite {
@@ -352,10 +352,10 @@ nav li:hover {
     background: url("../img/lowpoly-ultrawhite.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    transition: all .4s ease-in-out 0s;
-    -moz-transition: all .4s ease-in-out 0s;
-    -webkit-transition: all .4s ease-in-out 0s;
-    -o-transition: all .4s ease-in-out 0s;
+    transition: all .2s ease-in-out 0s;
+    -moz-transition: all .2s ease-in-out 0s;
+    -webkit-transition: all .2s ease-in-out 0s;
+    -o-transition: all .2s ease-in-out 0s;
 }
 
 .bg-mesh {
@@ -363,10 +363,10 @@ nav li:hover {
     background-image: url("../img/mesh.png");
     background-size: cover;
     background-repeat: no-repeat;
-    transition: all .4s ease-in-out 0s;
-    -moz-transition: all .4s ease-in-out 0s;
-    -webkit-transition: all .4s ease-in-out 0s;
-    -o-transition: all .4s ease-in-out 0s;
+    transition: all .2s ease-in-out 0s;
+    -moz-transition: all .2s ease-in-out 0s;
+    -webkit-transition: all .2s ease-in-out 0s;
+    -o-transition: all .2s ease-in-out 0s;
 
 }
 
@@ -671,10 +671,10 @@ footer {
     color: #fff;
     text-align: center;
     line-height: 400%;
-    transition: all .4s ease-in-out 0s;
-    -moz-transition: all .4s ease-in-out 0s;
-    -webkit-transition: all .4s ease-in-out 0s;
-    -o-transition: all .4s ease-in-out 0s;
+    transition: all .2s ease-in-out 0s;
+    -moz-transition: all .2s ease-in-out 0s;
+    -webkit-transition: all .2s ease-in-out 0s;
+    -o-transition: all .2s ease-in-out 0s;
 }
 
 .hrule {
