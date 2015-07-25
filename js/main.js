@@ -61,12 +61,25 @@ function scrollAnimations() {
         }
     });
 
-    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').each(function(){
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile').each(function(){
         if ($(this).offset().top - doc_offset < upperRatio * winHeight &&
             $(this).offset().top - doc_offset > lowerRatio * winHeight) {
             $(this).removeClass('move-right');
         }
     });
+
+    var speed = 50;
+    if (contact_offset - doc_offset < (1 - lowerRatio) * winHeight) {
+        $('#contact .element').each(function(index){
+            var that = $(this);
+            setTimeout(function(){
+                if (that.hasClass('move-right')) {
+                    that.removeClass('move-right');
+                };
+            }, index * speed);
+        });
+    }
+
 
     if (pubs_offset - $(window).scrollTop() < 0.1 * winHeight) {
         var minDistance = Number.POSITIVE_INFINITY;
@@ -241,8 +254,20 @@ function updateSizes(){
     // Responsively adjust the size of elements
     var menuHeight = winHeight - 60;
     if (winWidth < 850) {
-        $('nav ul, nav:active ul').css({'width': winWidth, 'height': menuHeight, 'display': 'none', 'opacity': 0});
+        $('nav ul, nav:active ul').css({'width': winWidth, 'height': menuHeight});
+        if ($('nav ul').css('display') == 'none') {
+            $('nav li').addClass('move-right');
+            $('nav ul, nav:active ul').css({'display': 'none', 'opacity': 0});
+        }
         $('#menu-bg').css({'width': winWidth});
+    } else {
+        $('nav ul, nav:active ul').removeAttr('style');
+        $('.bg-ultrawhite, .bg-mesh, .bg-white, #footer').removeAttr('style');
+        $('nav li').each(function(){
+            if ($(this).hasClass('move-right')) {
+                $(this).removeClass('move-right');
+            };
+        })
     }
 
     var widthInfo = Number.NEGATIVE_INFINITY; // the maximum width among all info
@@ -254,6 +279,7 @@ function updateSizes(){
         };
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
+
 }
 
 
@@ -266,8 +292,8 @@ $(window).load(function(){
     updateSizes();
     // initialize styles
     $('#about .pic').addClass('move-left');
-    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').addClass('move-right');
-    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element, nav li').parent().css({'overflow-x':'hidden'});
+    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').parent().css({'overflow-x':'hidden'});
     scrollAnimations();
 })
 
