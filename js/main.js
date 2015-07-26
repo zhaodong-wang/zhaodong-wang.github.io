@@ -34,7 +34,7 @@ function scrollAnimations() {
     // var doc_offset = $(window).scrollTop() || $("body").scrollTop();
     // var doc_offset = (scrollContent.y) * (scrollContent.directionY);
     // var doc_offset = - (this.y>>0);
-    scrollContent.maxScrollY = maximumScrollY;
+    scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
     var maxscroll = scrollContent.maxScrollY;
     var doc_offset = 0;
     if (doc_offset >= about_offset) {
@@ -290,9 +290,9 @@ $(window).load(function(){
     scrollContent.on('scrollEnd', scrollAnimations);
 
     updateSizes();
-    var sss = $('footer').offset().top;
-    var aaa = $('footer').outerHeight(true);
-    maximumScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
+    // var sss = $('footer').offset().top;
+    // var aaa = $('footer').outerHeight(true);
+    // maximumScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
