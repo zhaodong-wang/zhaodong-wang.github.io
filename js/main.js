@@ -259,7 +259,6 @@ function updateSizes(){
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
     scrollContent.refresh();
-    maximumScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 }
 
 
@@ -291,6 +290,9 @@ $(window).load(function(){
     scrollContent.on('scrollEnd', scrollAnimations);
 
     updateSizes();
+    var sss = $('footer').offset().top;
+    var aaa = $('footer').outerHeight(true);
+    maximumScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
