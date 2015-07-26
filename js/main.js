@@ -256,6 +256,12 @@ function updateSizes(){
         };
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
+    var sss = scrollContent.maxScrollY;
+    var aaa = $('footer').offset().top;
+    var bbb = $('footer').outerHeight(true);
+    var ccc = $('footer').offset().top + $('footer').outerHeight(true) - winHeight;
+    // sss = scrollContent.maxScrollY;
+    var kkk;
 }
 
 
@@ -267,15 +273,6 @@ $(window).resize(function(){
 var scrollContent;
 
 $(window).load(function(){
-    updateSizes();
-    // initialize styles
-    $('#about .pic').addClass('move-left');
-    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
-    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').parent().css({
-        'overflow-x':'hidden',
-        'webkitTransform': 'translateZ(0px)'
-    });
-
     scrollContent = new IScroll('#wrapper', {
         probeType: 3,
         mouseWheel: true,
@@ -285,6 +282,16 @@ $(window).load(function(){
     scrollAnimations();
     scrollContent.on('scroll', scrollAnimations);
     scrollContent.on('scrollEnd', scrollAnimations);
+
+    updateSizes();
+    // initialize styles
+    $('#about .pic').addClass('move-left');
+    $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').parent().css({
+        'overflow-x':'hidden',
+        'webkitTransform': 'translateZ(0px)'
+    });
+
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
