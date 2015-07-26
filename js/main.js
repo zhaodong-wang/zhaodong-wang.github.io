@@ -257,6 +257,7 @@ function updateSizes(){
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
     scrollContent.refresh();
+    scrollContent.maxScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 }
 
 
