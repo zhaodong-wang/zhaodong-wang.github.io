@@ -271,7 +271,10 @@ $(window).load(function(){
     // initialize styles
     $('#about .pic').addClass('move-left');
     $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
-    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').parent().css({'overflow-x':'hidden'});
+    $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').parent().css({
+        'overflow-x':'hidden',
+        'webkitTransform': 'translateZ(0px)'
+    });
 
     scrollContent = new IScroll('#wrapper', {
         probeType: 3,
