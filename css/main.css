@@ -140,7 +140,7 @@ header {
     position: fixed;
     background: #fff;
     width:inherit;
-    height: 0px;
+    height: 100vh;
     z-index: 100;
     box-shadow: 0 3px 5px rgba(0,0,0,0.2);
     overflow: hidden;
