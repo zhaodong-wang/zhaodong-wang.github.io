@@ -218,7 +218,7 @@ var lowerRatio;
 function updateSizes(){
     winHeight = $(window).height();
     winWidth = $(window).width();
-    $('#home').css({'height': winHeight});
+    // $('#home').css({'height': winHeight});
     if (winWidth <= 420) {
         upperRatio = 0.85;
         lowerRatio = 0.2;
@@ -230,7 +230,7 @@ function updateSizes(){
     // Responsively adjust the size of elements
     var menuHeight = winHeight - 60;
     if (winWidth < 850) {
-        $('nav ul, nav:active ul').css({'width': winWidth, 'height': menuHeight});
+        // $('nav ul, nav:active ul').css({'width': winWidth, 'height': menuHeight});
         if ($('nav ul').css('display') == 'none') {
             $('nav li').addClass('move-right');
             $('nav ul, nav:active ul').css({'display': 'none', 'opacity': 0});
@@ -293,10 +293,17 @@ $(document).ready(function(){
 
     // the menu bar for short format
     $('#menu-icon').click(toggleMenu);
-
     // next icon in #home
     $('#nextInHome').click(function(){
         move('#about',0);
     });
+
+    // device detection
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        $('#menu-icon').mouseover(toggleMenu);
+        $('#nextInHome').mouseover(function(){
+            move('#about',0);
+        });
+    }
 });
 

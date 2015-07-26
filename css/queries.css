@@ -93,6 +93,8 @@
 		vertical-align: initial;
 		top: 60px;
 		z-index: 100;
+		width: 100vw;
+		height: 100vh;
 		background: rgb(34,34,34); /* for IE */
 		background: rgba(34,34,34,0.75);
 		overflow-x: hidden;
