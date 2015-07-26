@@ -218,7 +218,7 @@ var lowerRatio;
 function updateSizes(){
     winHeight = $(window).height();
     winWidth = $(window).width();
-
+    $('#home').css({'height': winHeight});
     if (winWidth <= 420) {
         upperRatio = 0.85;
         lowerRatio = 0.2;
@@ -255,7 +255,6 @@ function updateSizes(){
         };
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
-    $('#home').css({'height': winHeight});
 }
 
 
