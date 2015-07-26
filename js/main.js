@@ -290,19 +290,7 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 $(document).ready(function(){
 
     // the menu bar for short format
-    $('#menu-icon').click(function(){
-        var doc_offset = $(window).scrollTop() || $("body").scrollTop();
-        var about_offset = $('#about').offset().top;
-        if (doc_offset < about_offset) {
-            $('html').animate({
-                    scrollTop: $("#about").offset().top
-                }, 500);
-            $('body').animate({
-                    scrollTop: $("#about").offset().top
-                }, 500, toggleMenu);
-        }
-        else toggleMenu();
-    });
+    $('#menu-icon').click(toggleMenu);
 
     // next icon in #home
     $('#nextInHome').click(function(){

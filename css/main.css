@@ -726,6 +726,7 @@ footer {
     bottom: 0;
     left: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 #scroller {
