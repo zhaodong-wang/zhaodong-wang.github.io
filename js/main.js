@@ -34,7 +34,8 @@ function scrollAnimations() {
     // var doc_offset = $(window).scrollTop() || $("body").scrollTop();
     // var doc_offset = (scrollContent.y) * (scrollContent.directionY);
     // var doc_offset = - (this.y>>0);
-    var maxscroll = this.maxScrollY;
+    scrollContent.maxScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
+    var maxscroll = scrollContent.maxScrollY;
     var doc_offset = 0;
     if (doc_offset >= about_offset) {
         if (!$('header').hasClass('fixed')) {
@@ -257,7 +258,6 @@ function updateSizes(){
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
     scrollContent.refresh();
-    scrollContent.maxScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 }
 
 
