@@ -18,10 +18,9 @@ function flipDiv(obj) {
 /*-----------------------------------------------------------------------------------*/
 function move(element, duration, easing, callback) {
     duration = duration || 1000;
-    easing = easing || "easeInOutCubic";
-    $('html, body').animate({
-            scrollTop: $(element).offset().top
-        }, duration, easing, callback);
+    easing = easing || IScroll.utils.ease.elastic;
+    scrollContent.scrollToElement(element, duration);
+    scrollAnimations();
 }
 
 function scrollAnimations() {
@@ -32,8 +31,10 @@ function scrollAnimations() {
     var skill_offset = $("#skill").offset().top;
     var contact_offset = $("#contact").offset().top;
     var footer_offset = $("footer").offset().top;
-    var doc_offset = $(window).scrollTop() || $("body").scrollTop();
-    var aaa = $('header').height();
+    // var doc_offset = $(window).scrollTop() || $("body").scrollTop();
+    // var doc_offset = (scrollContent.y) * (scrollContent.directionY);
+    // var doc_offset = - (this.y>>0);
+    var doc_offset = 0;
     if (doc_offset >= about_offset) {
         if (!$('header').hasClass('fixed')) {
             $('header').addClass('fixed');
@@ -135,37 +136,6 @@ function scrollAnimations() {
     }
 }
 
-
-var isScrollable = true;
-
-// document.addEventListener('touchstart', function(e) {
-//     isScrollable = false;
-// }, false);
-
-// document.addEventListener('touchend', function(e) {
-//     isScrollable = true;
-// }, false);
-
-// document.addEventListener('touchcancel', function(e) {
-//     isScrollable = true;
-// }, false);
-
-// document.addEventListener('touchmove', function(e) {
-//     if (!isScrollable) {
-//          scrollAnimations();
-//     }
-// }, false);
-
-// window.onscroll = function()
-// {
-//     if (isScrollable) {
-//         scrollAnimations();
-//     };
-// };
-
-// document.addEventListener("touchmove", scrollAnimations, false);
-document.addEventListener("scroll", scrollAnimations, false);
-
 /*-----------------------------------------------------------------------------------*/
 /*  MENU EFFECTS
 /*-----------------------------------------------------------------------------------*/
@@ -173,6 +143,7 @@ document.addEventListener("scroll", scrollAnimations, false);
 function hideMenu() {
     if ($('.bg-ultrawhite').css('webkitFilter') == 'blur(2px)') {
         $('nav ul, nav:active ul').css({'display': 'none', 'opacity': 0});
+        $('header').css({'overflow': 'hidden'});
         $('.bg-ultrawhite, .bg-mesh, .bg-white, footer').css({'webkitFilter': 'blur(0)'});
     }
 }
@@ -182,8 +153,10 @@ function toggleMenu() {
     var animDuration = 300;
     var totalDelay;
     if ($('.bg-ultrawhite').css('webkitFilter') != 'blur(2px)') {
+
         $('nav ul, nav:active ul')
             .queue(function(next){
+                $('header').css({'overflow': 'initial'});
                 $(this).css({'display': 'block'});
                 next();
             })
@@ -223,6 +196,7 @@ function toggleMenu() {
             })
             .queue(function(next){
                 $(this).css({'display': 'none'});
+                $('header').css({'overflow': 'hidden'});
                 next();
             });
 
@@ -281,7 +255,7 @@ function updateSizes(){
         };
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
-
+    $('#home').css({'height': winHeight});
 }
 
 
@@ -290,15 +264,27 @@ $(window).resize(function(){
    updateSizes();
 });
 
+var scrollContent;
+
 $(window).load(function(){
     updateSizes();
     // initialize styles
     $('#about .pic').addClass('move-left');
     $('#about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').addClass('move-right');
     $('#about .pic, #about .profile, #edu .content, #project .content, #pubs .profile, #contact .element').parent().css({'overflow-x':'hidden'});
+
+    scrollContent = new IScroll('#wrapper', {
+        probeType: 3,
+        mouseWheel: true,
+        click: true
+    });
+
     scrollAnimations();
+    scrollContent.on('scroll', scrollAnimations);
+    scrollContent.on('scrollEnd', scrollAnimations);
 })
 
+document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 
 $(document).ready(function(){

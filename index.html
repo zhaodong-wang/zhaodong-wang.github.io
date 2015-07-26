@@ -17,6 +17,7 @@
         <title>Zhaodong Wang - HOME</title>
         <link rel="shortcut icon" href="img/myIcon.png">
         <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/iscroll-probe.js"></script>
         <script src="js/jquery-ui.min.js"></script>
         <link href="css/main.css" rel="stylesheet">
         <link href="css/queries.css" rel="stylesheet">
@@ -27,6 +28,24 @@
 
     <body class="base">
 
+    <header>
+        <div class="name" onclick="move('#home',0);">Zhaodong Wang</div>
+        <nav>
+            <div id="menu-icon"></div>
+            <div id="menu-bg"></div>
+            <ul>
+                <li onclick="move('#about',0); if ($(window).width() <= 850) toggleMenu();">ABOUT</li>
+                <li onclick="move('#edu',0); if ($(window).width() <= 850) toggleMenu();">EDUCATION</li>
+                <li onclick="move('#project',0); if ($(window).width() <= 850) toggleMenu();">PROJECTS</li>
+                <li onclick="move('#pubs',0); if ($(window).width() <= 850) toggleMenu();">PUBLICATIONS</li>
+                <li onclick="move('#skill',0); if ($(window).width() <= 850) toggleMenu();">SKILLS</li>
+                <li onclick="move('#contact',0); if ($(window).width() <= 850) toggleMenu();">CONTACT</li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="wrapper">
+    <div id="scroller">
         <div id="home" class="bg">
             <div class="cover bg"></div>
             <div class="intro">
@@ -40,21 +59,7 @@
             </div>
         </div>
 
-        <header>
-            <div class="name" onclick="move('#home',0);">Zhaodong Wang</div>
-            <nav>
-                <div id="menu-icon"></div>
-                <div id="menu-bg"></div>
-                <ul>
-                    <li onclick="move('#about',0); if ($(window).width() <= 850) toggleMenu();">ABOUT</li>
-                    <li onclick="move('#edu',0); if ($(window).width() <= 850) toggleMenu();">EDUCATION</li>
-                    <li onclick="move('#project',0); if ($(window).width() <= 850) toggleMenu();">PROJECTS</li>
-                    <li onclick="move('#pubs',0); if ($(window).width() <= 850) toggleMenu();">PUBLICATIONS</li>
-                    <li onclick="move('#skill',0); if ($(window).width() <= 850) toggleMenu();">SKILLS</li>
-                    <li onclick="move('#contact',0); if ($(window).width() <= 850) toggleMenu();">CONTACT</li>
-                </ul>
-            </nav>
-        </header>
+
 
         <div id="about" class="bg-ultrawhite">
             <div class="wrapper">
@@ -411,7 +416,8 @@
         <footer>
             Copyright&nbsp;&copy;&nbsp;2014&nbsp;<a href="http://www.zhaodongwang.net" target="_blank">Zhaodong Wang</a>
         </footer>
-
+    </div>
+    </div>
     </body>
 </html>
 
