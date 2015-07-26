@@ -34,6 +34,7 @@ function scrollAnimations() {
     // var doc_offset = $(window).scrollTop() || $("body").scrollTop();
     // var doc_offset = (scrollContent.y) * (scrollContent.directionY);
     // var doc_offset = - (this.y>>0);
+    var maxscroll = this.maxScrollY;
     var doc_offset = 0;
     if (doc_offset >= about_offset) {
         if (!$('header').hasClass('fixed')) {
