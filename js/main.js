@@ -31,9 +31,6 @@ function scrollAnimations() {
     var skill_offset = $("#skill").offset().top;
     var contact_offset = $("#contact").offset().top;
     var footer_offset = $("footer").offset().top;
-    // var doc_offset = $(window).scrollTop() || $("body").scrollTop();
-    // var doc_offset = (scrollContent.y) * (scrollContent.directionY);
-    // var doc_offset = - (this.y>>0);
     scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
     var maxscroll = scrollContent.maxScrollY;
     var doc_offset = 0;
@@ -221,7 +218,6 @@ var maximumScrollY;
 function updateSizes(){
     winHeight = $(window).height();
     winWidth = $(window).width();
-    // $('#home').css({'height': winHeight});
     if (winWidth <= 420) {
         upperRatio = 0.85;
         lowerRatio = 0.2;
@@ -290,9 +286,6 @@ $(window).load(function(){
     scrollContent.on('scrollEnd', scrollAnimations);
 
     updateSizes();
-    // var sss = $('footer').offset().top;
-    // var aaa = $('footer').outerHeight(true);
-    // maximumScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
