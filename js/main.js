@@ -34,7 +34,7 @@ function scrollAnimations() {
     // var doc_offset = $(window).scrollTop() || $("body").scrollTop();
     // var doc_offset = (scrollContent.y) * (scrollContent.directionY);
     // var doc_offset = - (this.y>>0);
-    scrollContent.maxScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
+    scrollContent.maxScrollY = maximumScrollY;
     var maxscroll = scrollContent.maxScrollY;
     var doc_offset = 0;
     if (doc_offset >= about_offset) {
@@ -216,6 +216,7 @@ var indexToLightUpTemp;
 var matrixRegex = /matrix\((-?\d*\.?\d+),\s*0,\s*0,\s*(-?\d*\.?\d+),\s*0,\s*0\)/; // get the scale of element
 var upperRatio;
 var lowerRatio;
+var maximumScrollY;
 
 function updateSizes(){
     winHeight = $(window).height();
@@ -258,6 +259,7 @@ function updateSizes(){
     })
     $('#contact .element').css({'width': Math.ceil(widthInfo)});
     scrollContent.refresh();
+    maximumScrollY = - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
 }
 
 
