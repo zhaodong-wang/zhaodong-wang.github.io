@@ -220,7 +220,7 @@ function updateSizes(){
     winWidth = $(window).width();
 
     if (winWidth <= 420) {
-        upperRatio = 0.8;
+        upperRatio = 0.85;
         lowerRatio = 0.2;
     } else {
         upperRatio = 0.6;
