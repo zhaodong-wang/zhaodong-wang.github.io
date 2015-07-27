@@ -52,9 +52,11 @@ h1,h2,p {
 #home {
     position: relative;
     height: 100vh;
-    background: url("../img/lowpoly.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    /*background: url("../img/lowpoly.jpg");*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    background: -webkit-radial-gradient(center, ellipse, #eb6e1e 0%, #000000 100%);
+    background: radial-gradient(ellipse at center, #eb6e1e 0%, #000000 100%);
 }
 
 .bg {
