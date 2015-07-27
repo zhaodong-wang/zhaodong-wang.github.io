@@ -115,5 +115,17 @@ function onResize() {
     onLoad();
 }
 
+var ifRuningAnim = true;
+
+function stopAnimation() {
+    clearTimeout(refreshTimeout);
+    ifRuningAnim = false;
+}
+
+function restartAnimation() {
+    refresh();
+    ifRuningAnim = true;
+}
+
 window.onload = onLoad;
 window.onresize = onResize;

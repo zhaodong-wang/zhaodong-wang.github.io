@@ -33,10 +33,16 @@ function scrollAnimations() {
     var footer_offset = $("footer").offset().top;
     scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
     var maxscroll = scrollContent.maxScrollY;
+    // a small parallax effect
+    $('.intro').css({'bottom': - 0.3 * scrollContent.y});
+
     var doc_offset = 0;
     if (doc_offset >= about_offset) {
         if (!$('header').hasClass('fixed')) {
             $('header').addClass('fixed');
+        };
+        if (ifRuningAnim) {
+            stopAnimation();
         };
     }
     else {
@@ -44,6 +50,9 @@ function scrollAnimations() {
             $('header').removeClass('fixed');
         };
         if (winWidth <= 850) hideMenu();
+        if (!ifRuningAnim) {
+            restartAnimation();
+        }
     };
 
     $('.circle .half.light').each(function(){
