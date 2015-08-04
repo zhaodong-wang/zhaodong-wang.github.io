@@ -185,7 +185,8 @@ $(document).ready(function(){
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
-        $('.nav-link-menu').mouseover(toggleMenu);
+        $('.nav-link-menu').on('click touchstart',toggleMenu);
+        // $('.nav-link-menu').mouseover(toggleMenu);
 
         // menu items
         $('#menu-about').mouseover(function(){
