@@ -1,5 +1,14 @@
 /* =Responsive Structure
 ----------------------------------------------- */
+@media only screen and (max-width: 1140px) {
+	#about .pic {
+		margin-left: 5%;
+	}
+
+	#about .profile {
+		margin-right: 5%;
+	}
+}
 
 @media only screen and (max-width: 600px) {
 	h1.detail {
@@ -42,7 +51,7 @@
 
 @media only screen and (max-width: 420px) {
 	.detail, .detail_info, .scroll-words p {
-	    letter-spacing: .02em;
+	    letter-spacing: .075em;
 	}
 
 	h1.detail {

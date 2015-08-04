@@ -290,7 +290,7 @@ nav li:hover {
     position: relative;
     margin: auto;
     color: #555;
-    font-weight: 900;
+    font-weight: 800;
     line-height: 120%;
     padding: 0;
     padding-left: 5%;
@@ -318,7 +318,7 @@ nav li:hover {
 }
 
 .detail_info {
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: .05em;
 }
 

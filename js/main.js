@@ -38,57 +38,6 @@ function slideShowIterative(obj, numChild, duration, easing) {
     });
 }
 
-// function slideShowIterative(obj, numChild, duration, easing) {
-// 	duration = duration || 1000;
-// 	easing = easing || 'easeInOutCirc';
-//     var tempNumChild = numChild - 1;
-// 	obj
-//     .delay(2500)
-//     .animate({'top': '-300%'}, duration, easing)
-//     .queue(function(next){
-//         $(this).css({'top': '-300%'});
-//         next();
-//     })
-//     .delay(2500)
-//     .animate({'top': '-200%'}, duration, easing)
-//     .queue(function(next){
-//         $(this).css({'top': '-200%'});
-//         next();
-//     })
-//     .delay(2500)
-//     .animate({'top': '-100%'}, duration, easing)
-//     .queue(function(next){
-//         $(this).css({'top': '-100%'});
-//         next();
-//     })
-//     .delay(2500)
-//     .animate({'top': '0'}, duration, easing)
-//     .queue(function(next){
-//         $(this).css({'top': '0'});
-//         next();
-//     })
-//     .delay(2500)
-//     .animate({'top': '100%'}, duration, easing)
-//     .queue(function(next){
-//         $(this).css({'top': '100%'});
-//         next();
-//     })
-//     .queue(function(next){
-//         $(this).css({'top': '-500%'});
-//         next();
-//     })
-//     .delay(2500)
-//     .animate({'top': '-' + tempNumChild + '00%'}, duration, easing)
-//     .queue(function(next){
-//         $(this).css({'top': '-400%'});
-//         next();
-//     })
-//     .queue(function(next){
-//         slideShowIterative(obj, numChild);
-//         next();
-//     });
-// }
-
 /*-----------------------------------------------------------------------------------*/
 /*  SCROLL AND MOVE
 /*-----------------------------------------------------------------------------------*/
@@ -192,7 +141,7 @@ $(window).load(function(){
     setTimeout(function(){
     	$('.detail').removeClass('hide');
     }, 100);
-    slideShowIterative($('.scroll-words p'), numSlideItem + 1);
+    slideShowIterative($('.scroll-words p'), numSlideItem);
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -206,8 +155,8 @@ $(document).ready(function(){
     $('.scroll-words p').each(function(){
         numSlideItem += 1;
     });
-    numSlideItem -= 1;
-    $('.scroll-words p').css({'top': '-'+ numSlideItem + '00%'});
+    var tempNumsSlideItem = numSlideItem - 1;
+    $('.scroll-words p').css({'top': '-'+ tempNumsSlideItem + '00%'});
 
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

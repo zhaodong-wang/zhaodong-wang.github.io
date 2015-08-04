@@ -288,24 +288,168 @@
 
 @font-face {
     font-family:'Brandon';
-    font-weight: 500;
+    font-weight: 300;
     font-size: 25px;
-    src: url('font/brandon/Brandon_bld.eot');
-    src: url('font/brandon/Brandon_bld.eot') format('embedded-opentype'),
-         url('font/brandon/Brandon_bld.woff2') format('woff2'),
-         url('font/brandon/Brandon_bld.woff') format('woff'),
-         url('font/brandon/Brandon_bld.ttf') format('truetype'),
-         url('font/brandon/Brandon_bld.svg#Brandon_bld') format('svg');
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Thin.eot');
+    src: url('font/brandon/BrandonGrotesque_Thin.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Thin.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Thin.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Thin.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Thin.svg#BrandonGrotesque_Thin') format('svg');
 }
 
 @font-face {
     font-family:'Brandon';
     font-weight: 300;
     font-size: 25px;
-    src: url('font/brandon/Brandon_reg.eot');
-    src: url('font/brandon/Brandon_reg.eot') format('embedded-opentype'),
-         url('font/brandon/Brandon_reg.woff2') format('woff2'),
-         url('font/brandon/Brandon_reg.woff') format('woff'),
-         url('font/brandon/Brandon_reg.ttf') format('truetype'),
-         url('font/brandon/Brandon_reg.svg#Brandon_reg') format('svg');
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Thin_italic.eot');
+    src: url('font/brandon/BrandonGrotesque_Thin_italic.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Thin_italic.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Thin_italic.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Thin_italic.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Thin_italic.svg#BrandonGrotesque_Thin_italic') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 400;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Light.eot');
+    src: url('font/brandon/BrandonGrotesque_Light.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Light.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Light.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Light.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Light.svg#BrandonGrotesque_Light') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 400;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Light_italic.eot');
+    src: url('font/brandon/BrandonGrotesque_Light_italic.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Light_italic.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Light_italic.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Light_italic.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Light_italic.svg#BrandonGrotesque_Light_italic') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 500;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Regular.eot');
+    src: url('font/brandon/BrandonGrotesque_Regular.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Regular.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Regular.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Regular.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Regular.svg#BrandonGrotesque_Regular') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 500;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Regular_italic.eot');
+    src: url('font/brandon/BrandonGrotesque_Regular_italic.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Regular_italic.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Regular_italic.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Regular_italic.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Regular_italic.svg#BrandonGrotesque_Regular_italic') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 600;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Medium.eot');
+    src: url('font/brandon/BrandonGrotesque_Medium.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Medium.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Medium.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Medium.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Medium.svg#BrandonGrotesque_Medium') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 600;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Medium_italic.eot');
+    src: url('font/brandon/BrandonGrotesque_Medium_italic.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Medium_italic.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Medium_italic.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Medium_italic.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Medium_italic.svg#BrandonGrotesque_Medium_italic') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 700;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Bold.eot');
+    src: url('font/brandon/BrandonGrotesque_Bold.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Bold.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Bold.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Bold.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Bold.svg#BrandonGrotesque_Bold') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 700;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Bold_italic.eot');
+    src: url('font/brandon/BrandonGrotesque_Bold_italic.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Bold_italic.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Bold_italic.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Bold_italic.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Bold_italic.svg#BrandonGrotesque_Bold_italic') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 800;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Black.eot');
+    src: url('font/brandon/BrandonGrotesque_Black.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Black.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Black.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Black.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Black.svg#BrandonGrotesque_Black') format('svg');
+}
+
+@font-face {
+    font-family:'Brandon';
+    font-weight: 800;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/brandon/BrandonGrotesque_Black_italic.eot');
+    src: url('font/brandon/BrandonGrotesque_Black_italic.eot') format('embedded-opentype'),
+         url('font/brandon/BrandonGrotesque_Black_italic.woff2') format('woff2'),
+         url('font/brandon/BrandonGrotesque_Black_italic.woff') format('woff'),
+         url('font/brandon/BrandonGrotesque_Black_italic.ttf') format('truetype'),
+         url('font/brandon/BrandonGrotesque_Black_italic.svg#BrandonGrotesque_Black_italic') format('svg');
 }
