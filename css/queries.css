@@ -65,6 +65,10 @@
 		font-size: 90%;
 	}
 
+	header {
+		height: 60px;
+	}
+
 	.nav-link-menu {
 	    padding: 20px;
 	}

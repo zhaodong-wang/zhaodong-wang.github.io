@@ -209,32 +209,6 @@ $(document).ready(function(){
     numSlideItem -= 1;
     $('.scroll-words p').css({'top': '-'+ numSlideItem + '00%'});
 
-    // menu items
-    $('#menu-about').click(function(){
-        move('#about', 0);
-        toggleMenu();
-    });
-    $('#menu-edu').click(function(){
-        move('#edu', 0);
-        toggleMenu();
-    });
-    $('#menu-proj').click(function(){
-        move('#project', 0);
-        toggleMenu();
-    });
-    $('#menu-pub').click(function(){
-        move('#pubs', 0);
-        toggleMenu();
-    });
-    $('#menu-skills').click(function(){
-        move('#skill', 0);
-        toggleMenu();
-    });
-    $('#menu-contact').click(function(){
-        move('#contact', 0);
-        toggleMenu();
-    });
-
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
