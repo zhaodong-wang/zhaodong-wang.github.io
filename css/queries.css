@@ -1,175 +1,17 @@
 /* =Responsive Structure
 ----------------------------------------------- */
-@media only screen and (max-width: 2000px) {
-	nav li {
-    	color: #333;
-	}
-}
-
-@media only screen and (max-width: 1140px) {
-	header .name {
-	    font-size: 120%;
-	    font-weight: 400;
-	    line-height: 100px;
-	    margin-left: 1%;
-	    padding: 0 10px;
-	}
-
-	.pub_group h1 {
-	    font-size: 150%;
-	    line-height: 120%;
-	}
-
-	#about .pic {
-		margin-left: 5%;
-	}
-
-	#about .profile {
-		margin-right: 5%;
-	}
-	nav li {
-    	color: #333;
-	}
-}
-
-@media only screen and (max-width: 950px) {
-	header .name {
-	    font-size: 100%;
-	    font-weight: 300;
-	    line-height: 100px;
-	    margin-left: 0;
-	    padding: 0 5px;
-	}
-
-	nav li {
-    	color: #333;
-	}
-}
-
-@media only screen and (max-width: 850px) {
-
-	header .name {
-	    font-size: 120%;
-	    font-weight: 400;
-	    line-height: 100px;
-	    margin-left: 0;
-	    padding: 0 10px;
-	}
-
-	.meta {
-		margin-left: 5%;
-	}
-
-	.pub_group {
-		margin-left: 5%;
-	}
-
-	nav {
-		width: initial;
-		height: 40px;
-		padding: 30px 30px 30px 30px;
-	}
-
-	header.fixed nav {
-		height: 40px;
-		padding: 10px 30px 10px 30px;
-	}
-
-	#menu-icon {
-		display:inline-block;
-	}
-
-	#menu-icon:hover {
-		cursor: pointer;
-	}
-
-	nav ul, nav:active ul {
-		line-height: 150%;
-		position: fixed;
-		display: none;
-		padding: 0;
-		right: 0;
-		margin: 0;
-		vertical-align: initial;
-		top: 60px;
-		z-index: 100;
-		width: 100vw;
-		height: 100vh;
-		background: rgb(34,34,34); /* for IE */
-		background: rgba(34,34,34,0.75);
-		overflow-x: hidden;
-	}
-
-	nav li {
-		line-height: 150%;
-		text-align: center;
-		width: 100%;
-		padding: 5% 0;
-		margin: 0;
-		color: #eee;
-		font-size: 150%;
-		position: relative;
-		-webkit-transition: -webkit-transform 0.3s ease-in-out 0s;
-		-moz-transition: -moz-transform 0.3s ease-in-out 0s;
-		-o-transition: -o-transform 0.3s ease-in-out 0s;
-		-ms-transition: -ms-transform 0.3s ease-in-out 0s;
-		transition: transform 0.3s ease-in-out 0s;
-	}
-
-	/*nav:hover ul {
-		display: block;
-	}*/
-
-	header.fixed ul, header.fixed li {
-		line-height: 120%!important;
-	}
-}
-
-
-@media only screen and (max-width: 700px) {
-	.meta {
-		margin-left: 1%;
-	}
-
-	.circle {
-		width: 100px;
-		height: 100px;
-	}
-
-	.circle h1 {
-		font-size: 100%;
-	}
-
-	.pub_group {
-		margin-left: 2%;
-	}
-
-	#pubs .pic, #pubs .pic img {
-		width: 100px;
-		height: 100px;
-	}
-
-	.pub_group h1 {
-		font-size: 120%;
-	}
-
-	#pubs .profile {
-		width: 60%;
-	}
-
-	.content {
-		width: 60%;
-	}
-
-}
 
 @media only screen and (max-width: 600px) {
 	h1.detail {
-		font-size: 300%;
+		font-size: 250%;
 	}
 
 	h2.detail_info {
 		font-size: 1.2em;
+	}
+
+	.scroll-words p {
+    	font-size: 180%;
 	}
 
 	#about .pic {
@@ -196,96 +38,52 @@
 		width: 90%;
 	}
 
-	.content {
-		margin-right: 0;
-		margin-left: 5%;
-	}
-
-
-	.pub_group {
-		height: 150px;
-	}
-
-	#pubs .profile {
-		margin: 60px 0 0 10%;
-	}
-
 }
 
 @media only screen and (max-width: 420px) {
-	nav li {
-		font-size: 150%;
-	}
-
-	#about .profile p {
-		word-break: normal;
-	}
-
-	.title {
-		font-size: 200%;
-		font-weight: 200;
-	}
-
 	h1.detail {
-		font-size: 220%;
+		font-size: 180%;
 	}
 
 	h2.detail_info {
-		font-size: 1em;
+		font-size: .8em;
 	}
 
 	h3.detail_info {
-		font-size: 1em;
+		font-size: .6em;
+	}
+
+	.scroll-words p {
+    	font-size: 130%;
 	}
 
 	.profile p {
 		font-size: 90%;
 	}
 
-	.meta {
-		width: 100%;
-		margin: 0;
+	.nav-link-menu {
+	    padding: 20px;
 	}
 
-	.content h1 {
-		font-size: 120%;
-		line-height: 150%;
+	.nav-link-menu-content {
+	    width: 30px;
+	    height: 20px;
+	    -webkit-perspective: 30px;
+	    -moz-perspective: 30px;
+	    perspective: 30px;
 	}
 
-	.content h2 {
-		font-size: 100%;
-		line-height: 150%;
+	/* Hamburger innards (thanks to beta.rallyinteractive.com) */
+
+	.nav-link-menu-inner {
+	    top: 7.5px;
 	}
 
-	.content {
-		margin-right: 0;
-		margin-left: 12%;
-		width: 80%;
-	}
+	/* Hamburger animations, toggle */
 
-	.pub_group {
-		width: 100%;
-		margin-left: 0;
-	}
-
-	#pubs .profile {
-		width: 90%;
-		margin-left: 5%;
-		margin-right: 5%;
-	}
-
-	.skills {
-		margin-left: 2%;
-		margin-right: 2%;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		width: 20%;
-	}
-
-	.line {
-		margin-left: 5%;
-		width: 50%;
-		margin-top: 10px;
-		margin-bottom: 10px;
+	.nav-link-menu.active .nav-link-menu-outer-before {
+	    -webkit-transform: translateY(-1px) translateX(-3px) rotate(-45deg);
+	    -moz-transform: translateY(-1px) translateX(-3px) rotate(-45deg);
+	    transform: translateY(-1px) translateX(-3px) rotate(-45deg);
 	}
 }
