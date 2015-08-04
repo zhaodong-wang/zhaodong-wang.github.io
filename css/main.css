@@ -43,7 +43,7 @@ a:hover {
 }
 
 .base {
-    font-family: 'Lato', 'MyriadSet Pro', 'Kozuka Gothic Pro', 'Segoe UI Light', sans-serif, 'Source Sans Pro';
+    font-family: 'Brandon', 'MyriadSet Pro', 'Kozuka Gothic Pro', 'Segoe UI Light', sans-serif, 'Source Sans Pro';
     font-weight: 400;
     font-style: normal;
     font-size: 20px;
@@ -246,7 +246,7 @@ nav li {
     padding: .25em 0;
     color: #fff;
     font-size: 150%;
-    font-weight: 300;
+    font-weight: 400;
     position: relative;
     -webkit-transition: all .5s cubic-bezier(.19,1,.22,1) 0s;
     -moz-transition: all .5s cubic-bezier(.19,1,.22,1) 0s;
@@ -408,7 +408,7 @@ h3.detail_info {
 .profile h1 {
     font-size: 150%;
     text-align: left;
-    font-weight: 500;
+    font-weight: 700;
     line-height: 150%;
     font-family: "Brandon";
     color: #333;
@@ -418,7 +418,7 @@ h3.detail_info {
     margin: 10px 0;
     font-size: 90%;
     text-align: left;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 150%;
 }
 
