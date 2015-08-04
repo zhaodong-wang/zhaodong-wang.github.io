@@ -42,7 +42,7 @@
 
 @media only screen and (max-width: 420px) {
 	.detail, .detail_info, .scroll-words p {
-	    letter-spacing: .05em;
+	    letter-spacing: .02em;
 	}
 
 	h1.detail {
