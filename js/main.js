@@ -18,12 +18,17 @@ function flipDiv(obj) {
 function slideShowIterative(obj, numChild, duration, easing) {
 	duration = duration || 1000;
 	easing = easing || 'easeInOutCirc';
-	for (var i = numChild - 2; i >= 0; i--) {
-		obj.delay((numChild - 1 - i) * duration).animate({'top': '-' + i + '00%'}, duration, easing);
-	};
     var tempNumChild = numChild - 1;
 	obj
-    .delay(numChild * duration)
+    .delay(500)
+    .animate({'top': '-300%'}, duration, easing)
+    .delay(500)
+    .animate({'top': '-200%'}, duration, easing)
+    .delay(500)
+    .animate({'top': '-100%'}, duration, easing)
+    .delay(500)
+    .animate({'top': '0'}, duration, easing)
+    .delay(500)
     .animate({'top': '100%'}, duration, easing)
     .animate({'top': '-' + numChild + '00%'}, 0, 'linear')
     .delay(500)
