@@ -20,18 +20,18 @@ function slideShowIterative(obj, numChild, duration, easing) {
 	easing = easing || 'easeInOutCirc';
     var tempNumChild = numChild - 1;
 	obj
-    .delay(500)
+    .delay(2500)
     .animate({'top': '-300%'}, duration, easing)
-    .delay(500)
+    .delay(2500)
     .animate({'top': '-200%'}, duration, easing)
-    .delay(500)
+    .delay(2500)
     .animate({'top': '-100%'}, duration, easing)
-    .delay(500)
+    .delay(2500)
     .animate({'top': '0'}, duration, easing)
-    .delay(500)
+    .delay(2500)
     .animate({'top': '100%'}, duration, easing)
     .animate({'top': '-' + numChild + '00%'}, 0, 'linear')
-    .delay(500)
+    .delay(2500)
     .animate({'top': '-' + tempNumChild + '00%'}, duration, easing)
     .queue(function(next){
         slideShowIterative(obj, numChild);
