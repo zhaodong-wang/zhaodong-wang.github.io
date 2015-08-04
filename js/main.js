@@ -22,17 +22,44 @@ function slideShowIterative(obj, numChild, duration, easing) {
 	obj
     .delay(2500)
     .animate({'top': '-300%'}, duration, easing)
+    .queue(function(next){
+        $(this).css({'top': '-300%'});
+        next();
+    })
     .delay(2500)
     .animate({'top': '-200%'}, duration, easing)
+    .queue(function(next){
+        $(this).css({'top': '-200%'});
+        next();
+    })
     .delay(2500)
     .animate({'top': '-100%'}, duration, easing)
+    .queue(function(next){
+        $(this).css({'top': '-100%'});
+        next();
+    })
     .delay(2500)
     .animate({'top': '0'}, duration, easing)
+    .queue(function(next){
+        $(this).css({'top': '0'});
+        next();
+    })
     .delay(2500)
     .animate({'top': '100%'}, duration, easing)
-    .animate({'top': '-' + numChild + '00%'}, 0, 'linear')
+    .queue(function(next){
+        $(this).css({'top': '100%'});
+        next();
+    })
+    .queue(function(next){
+        $(this).css({'top': '-500%'});
+        next();
+    })
     .delay(2500)
     .animate({'top': '-' + tempNumChild + '00%'}, duration, easing)
+    .queue(function(next){
+        $(this).css({'top': '-400%'});
+        next();
+    })
     .queue(function(next){
         slideShowIterative(obj, numChild);
         next();

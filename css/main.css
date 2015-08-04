@@ -300,6 +300,7 @@ nav li:hover {
     letter-spacing: .1em;
     top: .25em;
     -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
     /*z-index: 3;*/
 }
 
@@ -342,6 +343,9 @@ h3.detail_info {
     display: block;
     width: 100%;
     overflow: hidden;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden;
 }
 
 .scroll-words p {
