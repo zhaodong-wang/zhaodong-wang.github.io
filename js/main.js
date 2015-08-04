@@ -183,7 +183,7 @@ $(document).ready(function(){
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
-        $('.nav-link-menu').on('click touchstart',toggleMenu);
+        $('.nav-link-menu').on('touchstart',toggleMenu);
     } else {
         $('.nav-link-menu').click(toggleMenu);
     }
