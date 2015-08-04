@@ -41,6 +41,10 @@
 }
 
 @media only screen and (max-width: 420px) {
+	.detail, .detail_info, .scroll-words p {
+	    letter-spacing: .05em;
+	}
+
 	h1.detail {
 		font-size: 180%;
 	}

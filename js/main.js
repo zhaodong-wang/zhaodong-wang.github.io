@@ -153,8 +153,6 @@ $(document).ready(function(){
     });
     numSlideItem -= 1;
     $('.scroll-words p').css({'top': '-'+ numSlideItem + '00%'});
-    // toggle Menu
-	$('.nav-link-menu').click(toggleMenu);
 
     // menu items
     $('#menu-about').click(function(){
@@ -186,33 +184,8 @@ $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
         $('.nav-link-menu').on('click touchstart',toggleMenu);
-        // $('.nav-link-menu').mouseover(toggleMenu);
-
-        // menu items
-        $('#menu-about').mouseover(function(){
-            move('#about', 0);
-            toggleMenu();
-        });
-        $('#menu-edu').mouseover(function(){
-            move('#edu', 0);
-            toggleMenu();
-        });
-        $('#menu-proj').mouseover(function(){
-            move('#project', 0);
-            toggleMenu();
-        });
-        $('#menu-pub').mouseover(function(){
-            move('#pubs', 0);
-            toggleMenu();
-        });
-        $('#menu-skills').mouseover(function(){
-            move('#skill', 0);
-            toggleMenu();
-        });
-        $('#menu-contact').mouseover(function(){
-            move('#contact', 0);
-            toggleMenu();
-        });
+    } else {
+        $('.nav-link-menu').click(toggleMenu);
     }
 
 });
