@@ -14,57 +14,80 @@ function flipDiv(obj) {
     }
 }
 
-
 function slideShowIterative(obj, numChild, duration, easing) {
-	duration = duration || 1000;
-	easing = easing || 'easeInOutCirc';
+    duration = duration || 1000;
+    easing = easing || 'easeInOutCirc';
     var tempNumChild = numChild - 1;
-	obj
-    .delay(2500)
-    .animate({'top': '-300%'}, duration, easing)
-    .queue(function(next){
-        $(this).css({'top': '-300%'});
-        next();
-    })
-    .delay(2500)
-    .animate({'top': '-200%'}, duration, easing)
-    .queue(function(next){
-        $(this).css({'top': '-200%'});
-        next();
-    })
-    .delay(2500)
-    .animate({'top': '-100%'}, duration, easing)
-    .queue(function(next){
-        $(this).css({'top': '-100%'});
-        next();
-    })
-    .delay(2500)
-    .animate({'top': '0'}, duration, easing)
-    .queue(function(next){
-        $(this).css({'top': '0'});
-        next();
-    })
-    .delay(2500)
-    .animate({'top': '100%'}, duration, easing)
-    .queue(function(next){
-        $(this).css({'top': '100%'});
-        next();
-    })
-    .queue(function(next){
-        $(this).css({'top': '-500%'});
-        next();
-    })
-    .delay(2500)
-    .animate({'top': '-' + tempNumChild + '00%'}, duration, easing)
-    .queue(function(next){
-        $(this).css({'top': '-400%'});
-        next();
-    })
+    obj
+    .delay(1500)
+    .animate({translateY: '100%'}, duration, easing)
+    .delay(1500)
+    .animate({translateY: '200%'}, duration, easing)
+    .delay(1500)
+    .animate({translateY: '300%'}, duration, easing)
+    .delay(1500)
+    .animate({translateY: '400%'}, duration, easing)
+    .delay(1500)
+    .animate({translateY: '500%'}, duration, easing)
+    .animate({translateY: '-100%'}, 0, 'linear')
+    .delay(500)
+    .animate({translateY: '0'}, duration, easing)
     .queue(function(next){
         slideShowIterative(obj, numChild);
         next();
     });
 }
+
+// function slideShowIterative(obj, numChild, duration, easing) {
+// 	duration = duration || 1000;
+// 	easing = easing || 'easeInOutCirc';
+//     var tempNumChild = numChild - 1;
+// 	obj
+//     .delay(2500)
+//     .animate({'top': '-300%'}, duration, easing)
+//     .queue(function(next){
+//         $(this).css({'top': '-300%'});
+//         next();
+//     })
+//     .delay(2500)
+//     .animate({'top': '-200%'}, duration, easing)
+//     .queue(function(next){
+//         $(this).css({'top': '-200%'});
+//         next();
+//     })
+//     .delay(2500)
+//     .animate({'top': '-100%'}, duration, easing)
+//     .queue(function(next){
+//         $(this).css({'top': '-100%'});
+//         next();
+//     })
+//     .delay(2500)
+//     .animate({'top': '0'}, duration, easing)
+//     .queue(function(next){
+//         $(this).css({'top': '0'});
+//         next();
+//     })
+//     .delay(2500)
+//     .animate({'top': '100%'}, duration, easing)
+//     .queue(function(next){
+//         $(this).css({'top': '100%'});
+//         next();
+//     })
+//     .queue(function(next){
+//         $(this).css({'top': '-500%'});
+//         next();
+//     })
+//     .delay(2500)
+//     .animate({'top': '-' + tempNumChild + '00%'}, duration, easing)
+//     .queue(function(next){
+//         $(this).css({'top': '-400%'});
+//         next();
+//     })
+//     .queue(function(next){
+//         slideShowIterative(obj, numChild);
+//         next();
+//     });
+// }
 
 /*-----------------------------------------------------------------------------------*/
 /*  SCROLL AND MOVE
