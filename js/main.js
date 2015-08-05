@@ -68,25 +68,28 @@ function toggleMenu() {
     	            }, (numNavItem - index) * speed);
     	            totalDelay = index * speed + animDuration;
     	        });
+                $('.nav-link-menu').removeClass('active');
+                $('.nav-link-menu-inner').animate({'opacity': 1}, 800, 'easeOutCirc');
     	        next();
     	    })
     	    .delay(totalDelay)
     	    .queue(function(next){
     	        $(this).css({'display': 'none'});
-    	        $('.nav-link-menu, .fill').removeClass('active');
+    	        $('.fill').removeClass('active');
+                $('.nav-link-menu-inner, .nav-link-menu-outer-before, .nav-link-menu-outer-after').animate({'background-color': '#333'}, 800, 'easeOutCirc');
     	        next();
     	    })
     	    .delay(500)
     	    .queue(function(next){
     	        $('nav').removeClass('active');
-    	        $('.nav-link-menu-outer-before, .nav-link-menu-outer-after').removeAttr('style');
     	        next();
     	    });
     }
     else {
     	$('nav ul')
-    		.queue(function(next){
-    	        $('.nav-link-menu-outer-before, .nav-link-menu-outer-after').css({'borderColor': '#ccc'});
+            .queue(function(next){
+                $('.nav-link-menu-inner').animate({'opacity': 0}, { duration: 300, queue: false }, 'easeOutCirc');
+                $('.nav-link-menu-inner, .nav-link-menu-outer-before, .nav-link-menu-outer-after').animate({'background-color': '#ccc'}, { duration: 800, queue: false }, 'easeOutCirc');
     	        $('.nav-link-menu, .fill, nav').addClass('active');
     	        next();
     	    })
@@ -139,7 +142,7 @@ $(window).load(function(){
     updateSizes();
 
     setTimeout(function(){
-    	$('.detail').removeClass('hide');
+    	$('.detail, .detail_info').removeClass('hide');
     }, 100);
     slideShowIterative($('.scroll-words p'), numSlideItem);
 })
@@ -162,8 +165,16 @@ $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
         $('.nav-link-menu').on('touchstart',toggleMenu);
+        $('.mosaic').click(function(){
+            $(this).toggleClass('active');
+        });
     } else {
         $('.nav-link-menu').click(toggleMenu);
+        $('.mosaic').hover(function(){
+            $(this).toggleClass('active');
+        });
     }
+
+
 
 });

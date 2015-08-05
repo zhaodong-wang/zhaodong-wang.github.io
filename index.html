@@ -61,17 +61,17 @@
         </div>
         <ul>
             <li onclick="move('#about',0); toggleMenu();">ABOUT</li>
-            <li onclick="move('#edu',0); toggleMenu();">EDUCATION</li>
-            <li onclick="move('#project',0); toggleMenu();">PROJECTS</li>
-            <li onclick="move('#pubs',0); toggleMenu();">PUBLICATIONS</li>
-            <li onclick="move('#skill',0); toggleMenu();">SKILLS</li>
+            <li onclick="move('#education',0); toggleMenu();">EDUCATION</li>
+            <li onclick="move('#projects',0); toggleMenu();">PROJECTS</li>
+            <li onclick="move('#publications',0); toggleMenu();">PUBLICATIONS</li>
+            <li onclick="move('#skills',0); toggleMenu();">SKILLS</li>
             <li onclick="move('#contact',0); toggleMenu();">CONTACT</li>
         </ul>
     </nav>
 
     <div id="scroll-content">
     <div id="scroller">
-        <div id="home" class="bg">
+        <div id="home" class="bg bg-white">
             <div class="intro">
                 <div class="detail-container">
                     <h1 class="detail hide">Zhaodong</h1>
@@ -79,14 +79,22 @@
                 <div class="detail-container">
                     <h1 class="detail hide">Wang</h1>
                 </div>
-                <h2 class="detail_info">University of Illinois at Urbana-Champaign</h2>
-                <h3 class="detail_info">Department of Civil Engineering</h3>
-                <div class="scroll-words">
+                <div class="detail-container" style="margin-top: 5px;">
+                    <h2 class="detail_info hide">University of Illinois at Urbana-Champaign</h2>
+                </div>
+                <div class="detail-container">
+                    <h3 class="detail_info hide">Department of Civil Engineering</h3>
+                </div>
+                <div class="scroll-words" style="margin-top: 5px;">
                     <p>Optimization</p>
                     <p>Control Theory</p>
                     <p>Graphic Design</p>
                     <p>Modeling</p>
                     <p>Phd Candidate</p>
+                </div>
+                <div class="next-logo" onclick="move('#about', 0)">
+                    <div class="next-logo-left"></div>
+                    <div class="next-logo-right"></div>
                 </div>
             </div>
         </div>
@@ -104,6 +112,55 @@
                         at <a href="http://illinois.edu/">University of Illinois at Urbana-Champaign.</a>
                         I am doing research in the area of logistic system optimization, supply chain management and traffic flow theory under the supervision of Prof. <a href="http://web.engr.illinois.edu/~yfouyang/index.htm">Yanfeng Ouyang</a>. I got my B.E. degree in <a href="http://www.tsinghua.edu.cn/publish/ceen/">Department of Civil Engineering</a>, <a href="http://www.tsinghua.edu.cn/publish/newthuen/">Tsinghua University</a>.
                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="gallary" class="bg bg-white">
+            <div class="wrapper">
+                <div id="education" class="mosaic">
+                    <div class="cover"></div>
+                    <div class="title">
+                        <h1>Education</h1>
+                    </div>
+                    <div class="aux-info">
+                         <p class="time-from">09</p>
+                         <hr class="small">
+                         <p class="time-to">15</p>
+                    </div>
+                </div>
+                <div id="projects" class="mosaic">
+                    <div class="cover"></div>
+                    <div class="title">
+                        <h1>Projects</h1>
+                    </div>
+                    <div class="aux-info">
+                         <p class="time-from">13</p>
+                         <hr class="small">
+                         <p class="time-to">15</p>
+                    </div>
+                </div>
+                <div id="publications" class="mosaic">
+                    <div class="cover"></div>
+                    <div class="title">
+                        <h1>Publications</h1>
+                    </div>
+                    <div class="aux-info">
+                         <p class="time-from">14</p>
+                         <hr class="small">
+                         <p class="time-to">15</p>
+                    </div>
+                </div>
+                <div id="skills" class="mosaic">
+                    <div class="cover"></div>
+                    <div class="title">
+                        <h1>Skills</h1>
+                    </div>
+                    <div class="aux-info">
+                         <p class="time-from">10</p>
+                         <hr class="small">
+                         <p class="time-to">15</p>
+                    </div>
                 </div>
             </div>
         </div>

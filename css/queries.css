@@ -47,11 +47,27 @@
 		width: 90%;
 	}
 
+	#education, #projects, #publications, #skills {
+		width: 100%;
+		background-size: auto 100%;
+	}
+
+	#education.active, #projects.active, #publications.active, #skills.active {
+		background-size: auto 110%;
+	}
+
+	.mosaic .title h1 {
+    	font-size: 200%;
+    	letter-spacing: .05em
+	}
+
 }
 
 @media only screen and (max-width: 420px) {
 	.detail, .detail_info, .scroll-words p {
 	    letter-spacing: .075em;
+	    line-height: 100%;
+	    top: 0em;
 	}
 
 	h1.detail {
@@ -79,7 +95,8 @@
 	}
 
 	.nav-link-menu {
-	    padding: 20px;
+		right: 7.5%;
+	    padding: 20px 0px 20px 0;
 	}
 
 	.nav-link-menu-content {
