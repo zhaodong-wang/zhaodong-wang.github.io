@@ -21,7 +21,7 @@ $(window).load(function(){
     });
 
     updateSizes();
-    scrollContentEdu.refresh();
+    scrollContentIndex.refresh();
     // scrollContentIndex.on('scroll', scrollAnimations);
     // scrollContentIndex.on('scrollEnd', scrollAnimations);
 
