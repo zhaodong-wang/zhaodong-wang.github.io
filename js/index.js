@@ -12,7 +12,6 @@ $(window).resize(function(){
 
 $(window).load(function(){
 
-    updateSizes();
 
     // add iScroll object
     scrollContentIndex = new IScroll('#scroll-content', {
@@ -20,6 +19,7 @@ $(window).load(function(){
         mouseWheel: true,
         click: true
     });
+    updateSizes();
 
     // scrollContentIndex.on('scroll', scrollAnimations);
     // scrollContentIndex.on('scrollEnd', scrollAnimations);

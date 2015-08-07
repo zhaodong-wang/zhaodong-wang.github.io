@@ -12,7 +12,6 @@ $(window).resize(function(){
 
 $(window).load(function(){
     // add iScroll object
-    updateSizes();
 
     scrollContentEdu = new IScroll('#scroll-content', {
         probeType: 3,
@@ -20,6 +19,7 @@ $(window).load(function(){
         click: true
     });
 
+    updateSizes();
     // scrollContentEdu.on('scroll', scrollAnimations);
     // scrollContentEdu.on('scrollEnd', scrollAnimations);
 
