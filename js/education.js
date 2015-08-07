@@ -5,32 +5,32 @@
 
 var scrollContentEdu;
 
-$(window).resize(function(){
-   updateSizes();
-   if (!scrollContentEdu) scrollContentEdu.refresh();
-});
+// $(window).resize(function(){
+//    updateSizes();
+//    if (!scrollContentEdu) scrollContentEdu.refresh();
+// });
 
-$(window).load(function(){
-    // add iScroll object
+// $(window).load(function(){
+//     // add iScroll object
 
-    scrollContentEdu = new IScroll('#scroll-content', {
-        probeType: 3,
-        mouseWheel: true,
-        click: true
-    });
+//     scrollContentEdu = new IScroll('#scroll-content', {
+//         probeType: 3,
+//         mouseWheel: true,
+//         click: true
+//     });
 
-    updateSizes();
-    scrollContentEdu.refresh();
-    // scrollContentEdu.on('scroll', scrollAnimations);
-    // scrollContentEdu.on('scrollEnd', scrollAnimations);
+//     updateSizes();
+//     scrollContentEdu.refresh();
+//     // scrollContentEdu.on('scroll', scrollAnimations);
+//     // scrollContentEdu.on('scrollEnd', scrollAnimations);
 
 
-    // fadeout cover and show the main page
-    $('.title-container').removeClass('hide');
-    $('.sub-home').removeClass('hide');
-})
+//     // fadeout cover and show the main page
+//     $('.title-container').removeClass('hide');
+//     $('.sub-home').removeClass('hide');
+// })
 
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 $(document).ready(function(){
 	// get the number of menu items
