@@ -5,10 +5,10 @@
 
 var scrollContentEdu;
 
-$(window).resize(function(){
-   updateSizes();
-   // if (!scrollContentEdu) scrollContentEdu.refresh();
-});
+// $(window).resize(function(){
+//    updateSizes();
+//    // if (!scrollContentEdu) scrollContentEdu.refresh();
+// });
 
 $(window).load(function(){
     // add iScroll object
