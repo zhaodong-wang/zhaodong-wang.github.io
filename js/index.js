@@ -7,7 +7,7 @@ var scrollContentIndex;
 
 $(window).resize(function(){
    updateSizes();
-   if (!scrollContentIndex) scrollContentEdu.refresh();
+   // if (!scrollContentIndex) scrollContentEdu.refresh();
 });
 
 $(window).load(function(){
