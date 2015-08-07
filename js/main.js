@@ -97,10 +97,63 @@ function slideShowIterative(obj, numChild, duration, easing) {
     });
 }
 
+function pageTransition(obj, targetPage) {
+    obj
+    .queue(function(next){
+        $('.cover-transition').css({
+            'display': 'block'
+        });
+        next();
+    })
+    .queue(function(next){
+        $('.cover-transition').animate({
+            'opacity': 1
+        }, 400);
+        next();
+    })
+    .delay(400)
+    .queue(function(next){
+        window.location.href = targetPage;
+        next();
+    });
+}
+
+function addFromCircle(obj) {
+    var $circle = $('<div class="circle from pulse"></div>');
+    obj.before($circle);
+    $circle.animate({
+        'opacity': 0,
+        'width': '100px',
+        'height': '100px',
+        'top': '-10px',
+        'left': '-10px'
+    }, 1000, 'easeOutCirc');
+
+    setTimeout(function __remove() {
+        $circle.remove();
+    }, 1000);
+}
+
+function addToCircle(obj) {
+    var $circle = $('<div class="circle to pulse"></div>');
+    obj.after($circle);
+    $circle.animate({
+        'opacity': 0,
+        'width': '100px',
+        'height': '100px',
+        'bottom': '-10px',
+        'left': '-10px'
+    }, 1000, 'easeOutCirc');
+
+    setTimeout(function __remove() {
+        $circle.remove();
+    }, 1000);
+}
+
 /*-----------------------------------------------------------------------------------*/
 /*  SCROLL AND MOVE
 /*-----------------------------------------------------------------------------------*/
-function move(element, duration, easing, callback) {
+function move(scrollContent, element, duration, easing, callback) {
     duration = duration || 1000;
     easing = easing || IScroll.utils.ease.elastic;
     scrollContent.scrollToElement(element, duration);
@@ -118,7 +171,7 @@ function toggleMenu() {
     if ($('.nav-link-menu').hasClass('active')) {
     	$('nav ul')
     	    .queue(function(next){
-    	        $('nav li').each(function(index){
+    	        $('nav li, nav hr').each(function(index){
     	            var that = $(this);
     	            setTimeout(function(){
     	                if (!that.hasClass('move-right')) {
@@ -158,7 +211,7 @@ function toggleMenu() {
     	    })
     	    .delay(500)
     	    .queue(function(next){
-    	        $('nav li').each(function(index){
+    	        $('nav li, nav hr').each(function(index){
     	            var that = $(this);
     	            setTimeout(function(){
     	                if (that.hasClass('move-right')) {
@@ -171,101 +224,33 @@ function toggleMenu() {
     }
 }
 
-var scrollContent;
 var numNavItem = 0;
 var numSlideItem = 0;
+var winHeight;
+var winWidth;
 
 function updateSizes(){
+    winHeight = $(window).height();
+    winWidth = $(window).width();
 	var itemHeight = $('.scroll-words p').outerHeight(true);
 	$('.scroll-words').css({'height': itemHeight});
 	if ($('nav ul').css('display') == 'none') {
-            $('nav li').addClass('move-right');
+            $('nav li, nav hr').addClass('move-right');
         }
-}
 
-$(window).resize(function(){
-   updateSizes();
-});
-
-$(window).load(function(){
-    // add iScroll object
-    scrollContent = new IScroll('#scroll-content', {
-        probeType: 3,
-        mouseWheel: true,
-        click: true
-    });
-
-    // scrollContent.on('scroll', scrollAnimations);
-    // scrollContent.on('scrollEnd', scrollAnimations);
-
-    updateSizes();
-
-    $('body')
-    .delay(2000)
-    .queue(function(next){
-        $('.pre-loader-container').clearQueue();
-        $('.pre-loader-container').stop(true, true);
-        next();
-    })
-    .delay(500)
-    .queue(function(next){
-        transformLoader();
-        next();
-    })
-    .delay(1500)
-    .queue(function(next){
-        $('.pre-loader').fadeOut(1000);
-        next();
-    })
-    .delay(1200)
-    .queue(function(next){
-        $('.detail, .detail_info').removeClass('hide');
-        slideShowIterative($('.scroll-words p'), numSlideItem);
-        next();
-    });
-})
-
-document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-$(document).ready(function(){
-	// get the number of menu items
-    $('nav li').each(function(){
-        numNavItem += 1;
-    });
-    // get the number of slide show items
-    $('.scroll-words p').each(function(){
-        numSlideItem += 1;
-    });
-    $('.scroll-words p').css({'top': '-'+ numSlideItem + '00%'});
-
-    // device detection
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        // toggle Menu
-        $('.nav-link-menu').on('touchstart',toggleMenu);
-        $('.mosaic').click(function(){
-            $(this).toggleClass('active');
-        });
+    if (winWidth < 600) {
+        $('.meta').css({'height': '200px'});
+        $('.element').each(function(){
+            var totalHeight = 0;
+            totalHeight += $(this).children('.meta').outerHeight(true);
+            totalHeight += $(this).children('.content').outerHeight(true);
+            $(this).css({'height': totalHeight});
+        })
     } else {
-        $('.nav-link-menu').click(toggleMenu);
-        $('.mosaic').hover(function(){
-            $(this).toggleClass('active');
+        $('.meta').each(function(){
+            var tempHeight = $(this).next().outerHeight(true);
+            $(this).css({'height': tempHeight});
+            $(this).parent().css({'height': tempHeight});
         });
     }
-
-    $('.pre-loader-container')
-    .queue(function(next){
-        $(this).animate({translateY: '50px'}, 0);
-        next();
-    })
-    .queue(function(next){
-        $(this).css({
-            'opacity': 1
-        });
-        $(this).animate({translateY: '0px'}, 600, 'easeInOutCirc');
-        next();
-    })
-    .queue(function(next){
-        spinLoader();
-        next();
-    });
-});
+}

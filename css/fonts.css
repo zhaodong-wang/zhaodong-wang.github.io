@@ -1,76 +1,4 @@
 @font-face {
-	font-family:'MyriadSet Pro';
-	font-weight: 600;
-	font-size: 25px;
-	src: url('font/myriadsetpro/myriadsetpro_bold.eot');
-    src: url('font/myriadsetpro/myriadsetpro_bold.eot') format('embedded-opentype'),
-         url('font/myriadsetpro/myriadsetpro_bold.woff2') format('woff2'),
-         url('font/myriadsetpro/myriadsetpro_bold.woff') format('woff'),
-         url('font/myriadsetpro/myriadsetpro_bold.ttf') format('truetype'),
-         url('font/myriadsetpro/myriadsetpro_bold.svg#myriadsetpro_bold') format('svg');
-}
-
-@font-face {
-	font-family:'MyriadSet Pro';
-	font-weight: 500;
-	font-size: 25px;
-	src: url('font/myriadsetpro/myriadsetpro_semibold.eot');
-    src: url('font/myriadsetpro/myriadsetpro_semibold.eot') format('embedded-opentype'),
-         url('font/myriadsetpro/myriadsetpro_semibold.woff2') format('woff2'),
-         url('font/myriadsetpro/myriadsetpro_semibold.woff') format('woff'),
-         url('font/myriadsetpro/myriadsetpro_semibold.ttf') format('truetype'),
-         url('font/myriadsetpro/myriadsetpro_semibold.svg#myriadsetpro_semibold') format('svg');
-}
-
-@font-face {
-	font-family:'MyriadSet Pro';
-	font-weight: 400;
-	font-size: 25px;
-	src: url('font/myriadsetpro/myriadsetpro_medium.eot');
-    src: url('font/myriadsetpro/myriadsetpro_medium.eot') format('embedded-opentype'),
-         url('font/myriadsetpro/myriadsetpro_medium.woff2') format('woff2'),
-         url('font/myriadsetpro/myriadsetpro_medium.woff') format('woff'),
-         url('font/myriadsetpro/myriadsetpro_medium.ttf') format('truetype'),
-         url('font/myriadsetpro/myriadsetpro_medium.svg#myriadsetpro_medium') format('svg');
-}
-
-@font-face {
-	font-family:'MyriadSet Pro';
-	font-weight: 300;
-	font-size: 25px;
-	src: url('font/myriadsetpro/myriadsetpro_text.eot');
-    src: url('font/myriadsetpro/myriadsetpro_text.eot') format('embedded-opentype'),
-         url('font/myriadsetpro/myriadsetpro_text.woff2') format('woff2'),
-         url('font/myriadsetpro/myriadsetpro_text.woff') format('woff'),
-         url('font/myriadsetpro/myriadsetpro_text.ttf') format('truetype'),
-         url('font/myriadsetpro/myriadsetpro_text.svg#myriadsetpro_text') format('svg');
-}
-
-@font-face {
-	font-family:'MyriadSet Pro';
-	font-weight: 200;
-	font-size: 25px;
-	src: url('font/myriadsetpro/myriadsetpro_thin.eot');
-    src: url('font/myriadsetpro/myriadsetpro_thin.eot') format('embedded-opentype'),
-         url('font/myriadsetpro/myriadsetpro_thin.woff2') format('woff2'),
-         url('font/myriadsetpro/myriadsetpro_thin.woff') format('woff'),
-         url('font/myriadsetpro/myriadsetpro_thin.ttf') format('truetype'),
-         url('font/myriadsetpro/myriadsetpro_thin.svg#myriadsetpro_thin') format('svg');
-}
-
-@font-face {
-	font-family:'MyriadSet Pro';
-	font-weight: 100;
-	font-size: 25px;
-	src: url('font/myriadsetpro/myriadsetpro_ultralight.eot');
-    src: url('font/myriadsetpro/myriadsetpro_ultralight.eot') format('embedded-opentype'),
-         url('font/myriadsetpro/myriadsetpro_ultralight.woff2') format('woff2'),
-         url('font/myriadsetpro/myriadsetpro_ultralight.woff') format('woff'),
-         url('font/myriadsetpro/myriadsetpro_ultralight.ttf') format('truetype'),
-         url('font/myriadsetpro/myriadsetpro_ultralight.svg#myriadsetpro_ultralight') format('svg');
-}
-
-@font-face {
     font-family: 'Lato';
     src: url('font/lato/LatoLatin/LatoLatinHair-Regular.eot'); /* IE9 Compat Modes */
     src: url('font/lato/LatoLatin/LatoLatinHair-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -452,4 +380,88 @@
          url('font/brandon/BrandonGrotesque_Black_italic.woff') format('woff'),
          url('font/brandon/BrandonGrotesque_Black_italic.ttf') format('truetype'),
          url('font/brandon/BrandonGrotesque_Black_italic.svg#BrandonGrotesque_Black_italic') format('svg');
+}
+
+@font-face {
+    font-family:'ACaslon';
+    font-weight: 400;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/acaslon/ACaslonProRegular.eot');
+    src: url('font/acaslon/ACaslonProRegular.eot') format('embedded-opentype'),
+         url('font/acaslon/ACaslonProRegular.woff2') format('woff2'),
+         url('font/acaslon/ACaslonProRegular.woff') format('woff'),
+         url('font/acaslon/ACaslonProRegular.ttf') format('truetype'),
+         url('font/acaslon/ACaslonProRegular.svg#ACaslonProRegular') format('svg');
+}
+
+@font-face {
+    font-family:'ACaslon';
+    font-weight: 400;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/acaslon/ACaslonProItalic.eot');
+    src: url('font/acaslon/ACaslonProItalic.eot') format('embedded-opentype'),
+         url('font/acaslon/ACaslonProItalic.woff2') format('woff2'),
+         url('font/acaslon/ACaslonProItalic.woff') format('woff'),
+         url('font/acaslon/ACaslonProItalic.ttf') format('truetype'),
+         url('font/acaslon/ACaslonProItalic.svg#ACaslonProItalic') format('svg');
+}
+
+@font-face {
+    font-family:'ACaslon';
+    font-weight: 500;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/acaslon/ACaslonProSemibold.eot');
+    src: url('font/acaslon/ACaslonProSemibold.eot') format('embedded-opentype'),
+         url('font/acaslon/ACaslonProSemibold.woff2') format('woff2'),
+         url('font/acaslon/ACaslonProSemibold.woff') format('woff'),
+         url('font/acaslon/ACaslonProSemibold.ttf') format('truetype'),
+         url('font/acaslon/ACaslonProSemibold.svg#ACaslonProSemibold') format('svg');
+}
+
+@font-face {
+    font-family:'ACaslon';
+    font-weight: 500;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/acaslon/ACaslonProSemiboldItalic.eot');
+    src: url('font/acaslon/ACaslonProSemiboldItalic.eot') format('embedded-opentype'),
+         url('font/acaslon/ACaslonProSemiboldItalic.woff2') format('woff2'),
+         url('font/acaslon/ACaslonProSemiboldItalic.woff') format('woff'),
+         url('font/acaslon/ACaslonProSemiboldItalic.ttf') format('truetype'),
+         url('font/acaslon/ACaslonProSemiboldItalic.svg#ACaslonProSemiboldItalic') format('svg');
+}
+
+@font-face {
+    font-family:'ACaslon';
+    font-weight: 600;
+    font-size: 25px;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url('font/acaslon/ACaslonProBold.eot');
+    src: url('font/acaslon/ACaslonProBold.eot') format('embedded-opentype'),
+         url('font/acaslon/ACaslonProBold.woff2') format('woff2'),
+         url('font/acaslon/ACaslonProBold.woff') format('woff'),
+         url('font/acaslon/ACaslonProBold.ttf') format('truetype'),
+         url('font/acaslon/ACaslonProBold.svg#ACaslonProBold') format('svg');
+}
+
+@font-face {
+    font-family:'ACaslon';
+    font-weight: 600;
+    font-size: 25px;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url('font/acaslon/ACaslonProBoldItalic.eot');
+    src: url('font/acaslon/ACaslonProBoldItalic.eot') format('embedded-opentype'),
+         url('font/acaslon/ACaslonProBoldItalic.woff2') format('woff2'),
+         url('font/acaslon/ACaslonProBoldItalic.woff') format('woff'),
+         url('font/acaslon/ACaslonProBoldItalic.ttf') format('truetype'),
+         url('font/acaslon/ACaslonProBoldItalic.svg#ACaslonProBoldItalic') format('svg');
 }
