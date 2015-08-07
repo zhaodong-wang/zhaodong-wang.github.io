@@ -19,8 +19,9 @@ $(window).load(function(){
         mouseWheel: true,
         click: true
     });
-    updateSizes();
 
+    updateSizes();
+    scrollContentEdu.refresh();
     // scrollContentIndex.on('scroll', scrollAnimations);
     // scrollContentIndex.on('scrollEnd', scrollAnimations);
 
