@@ -24,10 +24,13 @@
         <link href="css/queries.css" rel="stylesheet">
         <link href="css/fonts.css" rel="stylesheet">
         <script src="js/main.js"></script>
+        <script src="js/education.js"></script>
         <script src="js/jquery.transform-0.9.5.min.js" type="text/javascript"></script>
     </head>
 
     <body class="base">
+
+    <div class="cover-transition"></div>
 
     <header>
         <div class="nav-link-menu">
@@ -61,7 +64,9 @@
             </div>
         </div>
         <ul>
-            <li onclick="move('#about',0); toggleMenu();">ABOUT</li>
+            <li class="title">Menu</li>
+            <hr class="small">
+            <li onclick="pageTransition($('body'), 'index.html');">ABOUT</li>
             <li onclick="move('#education',0); toggleMenu();">EDUCATION</li>
             <li onclick="move('#projects',0); toggleMenu();">PROJECTS</li>
             <li onclick="move('#publications',0); toggleMenu();">PUBLICATIONS</li>
@@ -72,15 +77,93 @@
 
     <div id="scroll-content">
     <div id="scroller">
-        <div id="edu-home" class="bg sub-home">
+        <div id="edu-home" class="sub-home hide">
             <div class="cover dark">
-
+                <div class="title-container hide">
+                    <div class="title">
+                        <h1>Education</h1>
+                    </div>
+                    <div class="sub-title">
+                        <h2>Academic career</h2>
+                        <hr class="small">
+                        <p>Sept. 09 &#8211; Aug. 15</p>
+                    </div>
+                </div>
             </div>
         </div>
 
 
+        <div id="uiuc" class="element left">
+            <div class="meta">
+                <div class="double-circles">
+                    <div class="circle from">
+                        <div class="half">
+                            <i>Aug.</i>
+                        </div>
+                        <div class="half">
+                            <p>2013</p>
+                        </div>
+                    </div>
+                    <div class="bar">
+                    </div>
+                    <div class="circle to">
+                        <div class="half">
+                            <i>Jun.</i>
+                        </div>
+                        <div class="half">
+                            <p>2015</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+         --><div class="content">
+                <h1>University of Illinois at Urbana-Champaign</h1>
+                <h2 class="italic">Master's Degree in Civil Engineering</h2>
+                <h3>Course work</h3>
+                <span class="bold">Mathematics</span>: Nonlinear Programming; Theory of Probability; Random Processes<br>
+                <span class="bold">Physics</span>: Control System Theory and Design;<br>
+                <span class="bold">Programming and Computer</span>: Fundamental Algorithms; Numerical Analysis;<br>
+                <span class="bold">Traffic and Logistics</span>: Traffic Flow Theory; Logistics Systems Analysis; Optimization of Large Systems.
+            </div>
+        </div>
+
+        <div id="tsinghua" class="element right">
+            <div class="meta">
+                <div class="double-circles">
+                    <div class="circle from">
+                        <div class="half">
+                            <i>Sept.</i>
+                        </div>
+                        <div class="half">
+                            <p>2009</p>
+                        </div>
+                    </div>
+                    <div class="bar">
+                    </div>
+                    <div class="circle to">
+                        <div class="half">
+                            <i>Jun.</i>
+                        </div>
+                        <div class="half">
+                            <p>2013</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+         --><div class="content">
+                <h1>Tsinghua University</h1>
+                <h2 class="italic">Bachelor's Degree in Civil Engineering</h2>
+                <h3>Course work</h3>
+                <span class="bold">Mathematics</span>: Calculus; Linear Algebra and Analytic Geometry; Probability and Statistics; Finite Element Method;<br>
+                <span class="bold">Physics</span>: Engineering Mechanics; Material Mechanics; Structural Mechanics; Hydrodynamics; Steel Structure; Soil Mechanics; Fundamentals of Elasticity; Concrete Structure;<br>
+                <span class="bold">Design</span>: Architecture Design and Construction; Design of Concrete Structure;<br>
+                <span class="bold">Programming and Computer</span>: Fundamentals of Computer Programming; CAD Technology;<br>
+                <span class="bold">Traffic and Logistics</span>: Social Infrastructure Planning.
+            </div>
+        </div>
+
         <footer>
-            Copyright &copy; 2014 <a href="http://www.zhaodongwang.net" target="_blank">Zhaodong Wang</a>
+            Copyright &copy; 2015 <a href="http://www.zhaodongwang.net" target="_blank">Zhaodong Wang</a>
         </footer>
     </div>
     </div>
