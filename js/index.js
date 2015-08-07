@@ -7,7 +7,7 @@ var scrollContentIndex;
 
 $(window).resize(function(){
    updateSizes();
-   // if (!scrollContentIndex) scrollContentEdu.refresh();
+   if (!scrollContentIndex) scrollContentEdu.refresh();
 });
 
 $(window).load(function(){
@@ -20,7 +20,7 @@ $(window).load(function(){
     });
 
     updateSizes();
-    // scrollContentIndex.refresh();
+    scrollContentIndex.refresh();
     // scrollContentIndex.on('scroll', scrollAnimations);
     // scrollContentIndex.on('scrollEnd', scrollAnimations);
 

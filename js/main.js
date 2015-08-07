@@ -238,19 +238,19 @@ function updateSizes(){
             $('nav li, nav hr').addClass('move-right');
         }
 
-    // if (winWidth < 600) {
-    //     $('.meta').css({'height': '200px'});
-    //     $('.element').each(function(){
-    //         var totalHeight = 0;
-    //         totalHeight += $(this).children('.meta').outerHeight(true);
-    //         totalHeight += $(this).children('.content').outerHeight(true);
-    //         $(this).css({'height': totalHeight});
-    //     })
-    // } else {
-    //     $('.meta').each(function(){
-    //         var tempHeight = $(this).next().outerHeight(true);
-    //         $(this).css({'height': tempHeight});
-    //         $(this).parent().css({'height': tempHeight});
-    //     });
-    // }
+    if (winWidth < 600) {
+        $('.meta').css({'height': '200px'});
+        $('.element').each(function(){
+            var totalHeight = 0;
+            totalHeight += $(this).children('.meta').outerHeight(true);
+            totalHeight += $(this).children('.content').outerHeight(true);
+            $(this).css({'height': totalHeight});
+        })
+    } else {
+        $('.meta').each(function(){
+            var tempHeight = $(this).next().outerHeight(true);
+            $(this).css({'height': tempHeight});
+            $(this).parent().css({'height': tempHeight});
+        });
+    }
 }
