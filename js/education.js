@@ -20,7 +20,7 @@ $(window).load(function(){
     });
 
     updateSizes();
-    scrollContentEdu.refresh();
+    // scrollContentEdu.refresh();
     // scrollContentEdu.on('scroll', scrollAnimations);
     // scrollContentEdu.on('scrollEnd', scrollAnimations);
 
