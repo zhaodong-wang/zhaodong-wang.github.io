@@ -85,6 +85,11 @@ $(document).ready(function(){
                 next();
             })
         });
+        $('.next-logo').each(function(){
+            $(this).on('touchstart', function(){
+                addNextCircle($(this));
+            });
+        });
     } else {
         $('.nav-link-menu').click(toggleMenu);
         $('.mosaic').hover(function(){
@@ -92,6 +97,11 @@ $(document).ready(function(){
         });
         $('#education').click(function(){
             pageTransition($(this), 'education.html');
+        });
+        $('.next-logo').each(function(){
+            $(this).mouseenter(function(){
+                addNextCircle($(this));
+            });
         });
     }
 

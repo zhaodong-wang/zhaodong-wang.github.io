@@ -31,6 +31,10 @@
     background-image: url(../img/education.jpg);
 }
 
+#proj-home {
+    background-image: url(../img/projects.jpg);
+}
+
 .cover.dark {
     position: absolute;
     width: 100%;
@@ -145,6 +149,34 @@
     transform: translateX(-100%);
 }
 
+.next-logo {
+    border: 1px solid #999;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0.835, 0, 0.19, 1), opacity .3s cubic-bezier(0.835, 0, 0.19, 1);
+    -moz-transition: -moz-transform .3s cubic-bezier(0.835, 0, 0.19, 1), opacity .3s cubic-bezier(0.835, 0, 0.19, 1);
+    -o-transition: -o-transform .3s cubic-bezier(0.835, 0, 0.19, 1), opacity .3s cubic-bezier(0.835, 0, 0.19, 1);
+    -ms-transition: -ms-transform .3s cubic-bezier(0.835, 0, 0.19, 1), opacity .3s cubic-bezier(0.835, 0, 0.19, 1);
+    transition: transform .3s cubic-bezier(0.835, 0, 0.19, 1), opacity .3s cubic-bezier(0.835, 0, 0.19, 1);
+}
+
+.next-logo.pulse {
+    border: 1px solid #aaa;
+    -webkit-transition: opacity 0s cubic-bezier(0.835, 0, 0.19, 1);
+    -moz-transition: opacity 0s cubic-bezier(0.835, 0, 0.19, 1);
+    -o-transition: opacity 0s cubic-bezier(0.835, 0, 0.19, 1);
+    -ms-transition: opacity 0s cubic-bezier(0.835, 0, 0.19, 1);
+    transition: opacity 0s cubic-bezier(0.835, 0, 0.19, 1);
+}
+
+.next-logo:hover {
+    background-color: rgba(150,150,150,0.2);
+}
+
+.next-logo.hide {
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    transform: translateY(100%);
+}
 /*the contents*/
 
 .element {
@@ -265,18 +297,8 @@
 }
 
 .circle.pulse {
-    z-index: 1;
     border: 1px solid rgba(0,0,0,0.8);
-    opacity: 1;
-    /*width: 100px;
-    height: 100px;
-    top: -10px;
-    left: -10px;*/
 }
-
-/*.circle:hover {
-    background: #f1f1f1;
-}*/
 
 .circle .half {
     width: 100%;

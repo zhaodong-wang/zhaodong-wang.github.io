@@ -24,7 +24,7 @@
         <link href="css/queries.css" rel="stylesheet">
         <link href="css/fonts.css" rel="stylesheet">
         <script src="js/main.js"></script>
-        <script src="js/education.js"></script>
+        <script src="js/projects.js"></script>
         <script src="js/jquery.transform-0.9.5.min.js" type="text/javascript"></script>
     </head>
 
@@ -67,8 +67,8 @@
             <li class="title">Menu</li>
             <hr class="small">
             <li onclick="pageTransition($('body'), 'index.html');">ABOUT</li>
-            <li onclick="move(scrollContentEdu, '#uiuc', 0); toggleMenu();">EDUCATION</li>
-            <li onclick="pageTransition($('body'), 'projects.html');">PROJECTS</li>
+            <li onclick="pageTransition($('body'), 'education.html');">EDUCATION</li>
+            <li onclick="move(scrollContentProj, '#loco-foot-print', 0)">PROJECTS</li>
             <li onclick="move('#publications',0); toggleMenu();">PUBLICATIONS</li>
             <li onclick="move('#skills',0); toggleMenu();">SKILLS</li>
             <li onclick="move('#contact',0); toggleMenu();">CONTACT</li>
@@ -77,19 +77,19 @@
 
     <div id="scroll-content">
     <div id="scroller">
-        <div id="edu-home" class="sub-home hide">
+        <div id="proj-home" class="sub-home hide">
             <div class="cover dark">
                 <div class="title-container hide">
                     <div class="title">
-                        <h1>Education</h1>
+                        <h1>Projects</h1>
                     </div>
                     <div class="sub-title">
-                        <h2>Academic career</h2>
+                        <h2>Projects & Researches</h2>
                         <hr class="small">
-                        <p>Sept. 09 &#8211; Aug. 15</p>
+                        <p>Sept. 13 &#8211; Aug. 15</p>
                     </div>
                 </div>
-                <div class="next-logo hide" onclick="move(scrollContentEdu, '#uiuc', 0)">
+                <div class="next-logo hide" onclick="move(scrollContentProj, '#loco-foot-print', 0)">
                     <div class="next-logo-left"></div>
                     <div class="next-logo-right"></div>
                 </div>
@@ -97,12 +97,12 @@
         </div>
 
 
-        <div id="uiuc" class="element left">
+        <div id="loco-foot-print" class="element left">
             <div class="meta">
                 <div class="double-circles">
                     <div class="circle from">
                         <div class="half">
-                            <i>Aug.</i>
+                            <i>Sept.</i>
                         </div>
                         <div class="half">
                             <p>2013</p>
@@ -121,32 +121,58 @@
                 </div>
             </div><!--
          --><div class="content">
-                <h1>University of Illinois at Urbana-Champaign</h1>
-                <h2 class="italic">Master's Degree in Civil Engineering</h2>
-                <h3>Course work</h3>
-                <span class="bold">Mathematics</span>: Nonlinear Programming; Theory of Probability; Random Processes<br>
-                <span class="bold">Physics</span>: Control System Theory and Design;<br>
-                <span class="bold">Programming and Computer</span>: Fundamental Algorithms; Numerical Analysis;<br>
-                <span class="bold">Traffic and Logistics</span>: Traffic Flow Theory; Logistics Systems Analysis; Optimization of Large Systems.
+                <h1>Locomotive Footprint Project</h1>
+                <h3>Joint work with: Siyang Xie, Xi Chen, Kamalesh Somani, Prof. Yanfeng Ouyang</h3>
+                This project presents a linear mixed-integer mathematical model for a locomotive service system that integrates decisions on facility location, service vehicle routing, and fueling schedule. A solution framework is proposed and applied to a large-scale empirical case. Numerical results show that the proposed framework effectively solves the problem and reduces the overall costs.
             </div>
         </div>
 
-        <div id="tsinghua" class="element right">
+        <div id="bullwhip-effect" class="element right">
             <div class="meta">
                 <div class="double-circles">
                     <div class="circle from">
                         <div class="half">
-                            <i>Sept.</i>
+                            <i>Oct.</i>
                         </div>
                         <div class="half">
-                            <p>2009</p>
+                            <p>2013</p>
                         </div>
                     </div>
                     <div class="bar">
                     </div>
                     <div class="circle to">
                         <div class="half">
-                            <i>Jun.</i>
+                            <i>Sept.</i>
+                        </div>
+                        <div class="half">
+                            <p>2014</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+         --><div class="content">
+                <h1>Bullwhip Effect Analysis Under Nonlinear Ordering Policies</h1>
+                <h3>Joint work with: Xin Wang, Prof. Yanfeng Ouyang</h3>
+                This research analyzes the bullwhip effect in multi-echelon supply chains under nonlinear ordering policies (such as base-stock policies). A describing-function approach is used to derive closed-form formulas to predict amplification of order fluctuations. The analytical results are verified by simulations and hold promise to explain empirical observations.
+            </div>
+        </div>
+
+        <div id="emission-mitigation" class="element left">
+            <div class="meta">
+                <div class="double-circles">
+                    <div class="circle from">
+                        <div class="half">
+                            <i>Mar.</i>
+                        </div>
+                        <div class="half">
+                            <p>2013</p>
+                        </div>
+                    </div>
+                    <div class="bar">
+                    </div>
+                    <div class="circle to">
+                        <div class="half">
+                            <i>Sept.</i>
                         </div>
                         <div class="half">
                             <p>2013</p>
@@ -155,14 +181,9 @@
                 </div>
             </div><!--
          --><div class="content">
-                <h1>Tsinghua University</h1>
-                <h2 class="italic">Bachelor's Degree in Civil Engineering</h2>
-                <h3>Course work</h3>
-                <span class="bold">Mathematics</span>: Calculus; Linear Algebra and Analytic Geometry; Probability and Statistics; Finite Element Method;<br>
-                <span class="bold">Physics</span>: Engineering Mechanics; Material Mechanics; Structural Mechanics; Hydrodynamics; Steel Structure; Soil Mechanics; Fundamentals of Elasticity; Concrete Structure;<br>
-                <span class="bold">Design</span>: Architecture Design and Construction; Design of Concrete Structure;<br>
-                <span class="bold">Programming and Computer</span>: Fundamentals of Computer Programming; CAD Technology;<br>
-                <span class="bold">Traffic and Logistics</span>: Social Infrastructure Planning.
+                <h1>Emission Mitigation of Intelligent Vehicles</h1>
+                <h3>Joint work with: Xiqun Chen, Prof. Yanfeng Ouyang, Prof. Meng Li</h3>
+                This research proposes a nonlinear model predictive control (MPC) approach for emission mitigation via longitudinal control of intelligent vehicles in a congested platoon. To relieve the real-time optimization burden, we also propose an instantaneous control model which is essentially a simplified MPC approach with a short and identical prediction and control horizon.
             </div>
         </div>
 

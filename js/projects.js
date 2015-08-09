@@ -3,26 +3,26 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
-var scrollContentEdu;
+var scrollContentProj;
 
 $(window).resize(function(){
    updateSizes();
-   if (!scrollContentEdu) scrollContentEdu.refresh();
+   if (!scrollContentProj) scrollContentProj.refresh();
 });
 
 $(window).load(function(){
     // add iScroll object
 
-    scrollContentEdu = new IScroll('#scroll-content', {
+    scrollContentProj = new IScroll('#scroll-content', {
         probeType: 3,
         mouseWheel: true,
         click: true
     });
 
     updateSizes();
-    scrollContentEdu.refresh();
-    // scrollContentEdu.on('scroll', scrollAnimations);
-    // scrollContentEdu.on('scrollEnd', scrollAnimations);
+    scrollContentProj.refresh();
+    // scrollContentProj.on('scroll', scrollAnimations);
+    // scrollContentProj.on('scrollEnd', scrollAnimations);
 
 
     // fadeout cover and show the main page

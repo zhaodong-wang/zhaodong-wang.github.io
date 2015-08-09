@@ -118,7 +118,26 @@ function pageTransition(obj, targetPage) {
     });
 }
 
-function addFromCircle(obj) {
+
+function addNextCircle(obj, duration) {
+    duration = 500 || duration;
+    var $circle = $('<div class="next-logo pulse"></div>');
+    obj.before($circle);
+    $circle.animate({
+        'opacity': 0,
+        'width': '100px',
+        'height': '100px',
+        'right': '90px',
+        'bottom': '90px'
+    }, duration, 'easeOutCirc');
+
+    setTimeout(function __remove() {
+        $circle.remove();
+    }, duration);
+}
+
+function addFromCircle(obj, duration) {
+    duration = 500 || duration;
     var $circle = $('<div class="circle from pulse"></div>');
     obj.before($circle);
     $circle.animate({
@@ -127,14 +146,15 @@ function addFromCircle(obj) {
         'height': '100px',
         'top': '-10px',
         'left': '-10px'
-    }, 1000, 'easeOutCirc');
+    }, duration, 'easeOutCirc');
 
     setTimeout(function __remove() {
         $circle.remove();
-    }, 1000);
+    }, duration);
 }
 
-function addToCircle(obj) {
+function addToCircle(obj, duration) {
+    duration = 500 || duration;
     var $circle = $('<div class="circle to pulse"></div>');
     obj.after($circle);
     $circle.animate({
@@ -143,11 +163,11 @@ function addToCircle(obj) {
         'height': '100px',
         'bottom': '-10px',
         'left': '-10px'
-    }, 1000, 'easeOutCirc');
+    }, duration, 'easeOutCirc');
 
     setTimeout(function __remove() {
         $circle.remove();
-    }, 1000);
+    }, duration);
 }
 
 /*-----------------------------------------------------------------------------------*/
