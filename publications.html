@@ -1,0 +1,251 @@
+<!--
+/**********************************************************/
+/* Created by Zhaodong Wang */
+/* Copyright (c) 2015. All rights reserved. */
+/*********************************************************/
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="Zhaodong Wang">
+        <!--[if lt IE 9]>
+        <script src="js/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <title>Zhaodong Wang - HOME</title>
+        <link rel="shortcut icon" href="img/myIcon.png">
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/iscroll-probe.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <link href="css/main.css" rel="stylesheet">
+        <link href="css/forks.css" rel="stylesheet">
+        <link href="css/queries.css" rel="stylesheet">
+        <link href="css/fonts.css" rel="stylesheet">
+        <script src="js/main.js"></script>
+        <script src="js/publications.js"></script>
+        <script src="js/jquery.transform-0.9.5.min.js" type="text/javascript"></script>
+    </head>
+
+    <body class="base">
+
+    <div class="cover-transition"></div>
+
+    <header>
+        <div class="nav-link-menu">
+            <div class="nav-link-menu-content">
+                <div class="nav-link-menu-outer">
+                <div class="nav-link-menu-outer-before">
+                </div>
+                    <span class="nav-link-menu-inner">
+                    </span>
+                <div class="nav-link-menu-outer-after">
+                </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-column">
+            <div class="fill">
+            </div>
+        </div>
+        <div class="nav-column">
+            <div class="fill">
+            </div>
+        </div>
+        <div class="nav-column">
+            <div class="fill">
+            </div>
+        </div>
+        <div class="nav-column">
+            <div class="fill">
+            </div>
+        </div>
+        <ul>
+            <li class="title">Menu</li>
+            <hr class="small">
+            <li onclick="pageTransition($('body'), 'index.html');">ABOUT</li>
+            <li onclick="pageTransition($('body'), 'education.html');">EDUCATION</li>
+            <li onclick="pageTransition($('body'), 'projects.html');">PROJECTS</li>
+            <li onclick="move(scrollContentPub, '#papers', 0); toggleMenu();">PUBLICATIONS</li>
+            <li onclick="pageTransition($('body'), 'skills.html');">SKILLS</li>
+            <li onclick="move('#contact',0); toggleMenu();">CONTACT</li>
+        </ul>
+    </nav>
+
+    <div id="scroll-content">
+    <div id="scroller">
+        <div id="pub-home" class="sub-home hide">
+            <div class="cover dark">
+                <div class="title-container hide">
+                    <div class="title">
+                        <h1>Publications</h1>
+                    </div>
+                    <div class="sub-title small">
+                        <h2>Papers</h2>
+                        <hr class="small">
+                        <p id="paper-counter">0</p>
+                    </div>
+                    <div class="sub-title small">
+                        <h2>Manuscripts</h2>
+                        <hr class="small">
+                        <p id="manu-counter">0</p>
+                    </div>
+                    <div class="sub-title small">
+                        <h2>Conferences</h2>
+                        <hr class="small">
+                        <p id="conf-counter">0</p>
+                    </div>
+                </div>
+                <div class="next-logo hide" onclick="move(scrollContentPub, '#papers', 0)">
+                    <div class="next-logo-left"></div>
+                    <div class="next-logo-right"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="papers" class="element left">
+            <div class="meta">
+                <div class="single-circle">
+                    <div class="title">
+                        <h1>Papers</h1>
+                    </div>
+                    <div class="circle-container">
+                        <div class="circle to">
+                            <img src="img/papers.svg">
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+         --><div class="content">
+                <div class="publication">
+                    <h1>
+                        <a href="">Facility location design under continuous traffic equilibrium</a>
+                    </h1>
+                    <p>
+                        Yanfeng Ouyang, <span class="bold">Zhaodong Wang</span> and Hai Yang<br>
+                        <span class="italic">Transportation Research Part B, 2015. In press.</span>
+                    </p>
+                </div>
+                <div class="publication">
+                    <h1>
+                        <a href="http://www.sciencedirect.com/science/article/pii/S0377221715003677" target="_blank">Bounded growth of the bullwhip effect under a class of nonlinear ordering policies</a>
+                    </h1>
+                    <p>
+                        <span class="bold">Zhaodong Wang</span>, Xin Wang and Yanfeng Ouyang<br>
+                        <span class="italic">European Journal of Operational Research, 2015. In press.</span>
+                    </p>
+                </div>
+                <div class="publication">
+                    <h1>
+                        <a href="http://onlinelibrary.wiley.com/doi/10.1111/mice.12130/abstract;jsessionid=392D31FD5470AC275A7D3F8EC94EA477.f03t03" target="_blank">Emission mitigation via longitudinal control of intelligent vehicles in a congested platoon</a>
+                    </h1>
+                    <p>
+                        <span class="bold">Zhaodong Wang</span>, Xiqun (Michael) Chen, Yanfeng Ouyang and Meng Li<br>
+                        <span class="italic">Computer-Aided Civil and Infrastructure Engineering, 2014. Accepted.</span>
+                    </p>
+                </div>
+                <div class="publication">
+                    <h1>
+                        <a href="">Integrated planning of multi-type locomotive service facilities under location, routing and inventory considerations</a>
+                    </h1>
+                    <p>
+                        Siyang Xie, Xi Chen, <span class="bold">Zhaodong Wang</span>, Yanfeng Ouyang, Kamalesh Somani and Jing Huang<br>
+                        <span class="italic">Interfaces, 2015. Submitted.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="manuscripts" class="element left">
+            <div class="meta">
+                <div class="single-circle">
+                    <div class="title">
+                        <h1>Manuscripts</h1>
+                    </div>
+                    <div class="circle-container">
+                        <div class="circle to">
+                            <img src="img/manuscripts.svg">
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+         --><div class="content">
+                <div class="publication">
+                    <h1>
+                        Integrated location, routing and inventory planning for service network design
+                    </h1>
+                    <p>
+                        Siyang Xie, <span class="bold">Zhaodong Wang</span>, Xi Chen and Yanfeng Ouyang
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="conferences" class="element left">
+            <div class="meta">
+                <div class="single-circle">
+                    <div class="title">
+                        <h1>Conferences</h1>
+                    </div>
+                    <div class="circle-container">
+                        <div class="circle to">
+                            <img src="img/conferences.svg">
+                        </div>
+                    </div>
+                </div>
+            </div><!--
+         --><div class="content">
+                <div class="publication">
+                    <h1>
+                        Emission mitigation via longitudinal control of intelligent vehicles in a congested platoon
+                    </h1>
+                    <p>
+                        <span class="bold">Zhaodong Wang</span>, Xiqun (Michael) Chen, Yanfeng Ouyang and Meng Li<br>
+                        <span class="italic">Transportation Research Board, 2015</span>
+                    </p>
+                </div>
+                <div class="publication">
+                    <h1>
+                        Infrastructure Planning of Mechanical Locomotive Facilities for Repair, Maintenance, Service and Fueling
+                    </h1>
+                    <p>
+                        Xi Chen, Siyang Xie, <span class="bold">Zhaodong Wang</span>, Kamalesh Somani, Yanfeng Ouyang<br>
+                        <span class="italic">INFORMS, 2014</span>
+                    </p>
+                </div>
+                <div class="publication">
+                    <h1>
+                        Bounded growth of the bullwhip effect under a class of nonlinear ordering policies <br><a href="slides/INFORMS/2014/index.html" target="_blank">--> Slides</a> <span style="font-size: 80%;">(not available on mobile devices)<span>
+                    </h1>
+                    <p>
+                        <span class="bold">Zhaodong Wang</span>, Xin Wang, Yanfeng Ouyang<br>
+                        <span class="italic">INFORMS, 2014</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Copyright &copy; 2015 <a href="http://www.zhaodongwang.net" target="_blank">Zhaodong Wang</a>
+        </footer>
+    </div>
+    </div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

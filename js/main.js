@@ -119,16 +119,23 @@ function pageTransition(obj, targetPage) {
 }
 
 
-function addNextCircle(obj, duration) {
-    duration = 500 || duration;
+function addNextCircle(obj, duration, scale) {
+    var duration = duration || 500;
+    var scale = scale || 1.2;
     var $circle = $('<div class="next-logo pulse"></div>');
     obj.before($circle);
+    var oldWidth = parseInt(obj.css('width'), 10);
+    var oldHeight = parseInt(obj.css('height'), 10);
+    var width = scale * oldWidth;
+    var height = scale * oldHeight;
+    var right = parseInt(obj.css('right'), 10) - (width - oldWidth)/2;
+    var bottom = parseInt(obj.css('bottom'), 10) - (height - oldHeight)/2;
     $circle.animate({
         'opacity': 0,
-        'width': '100px',
-        'height': '100px',
-        'right': '90px',
-        'bottom': '90px'
+        'width': width + 'px',
+        'height': height + 'px',
+        'right': right + 'px',
+        'bottom': bottom + 'px'
     }, duration, 'easeOutCirc');
 
     setTimeout(function __remove() {
@@ -136,16 +143,23 @@ function addNextCircle(obj, duration) {
     }, duration);
 }
 
-function addFromCircle(obj, duration) {
-    duration = 500 || duration;
+function addFromCircle(obj, duration, scale) {
+    var duration = duration || 500;
+    var scale = scale || 1.2;
     var $circle = $('<div class="circle from pulse"></div>');
     obj.before($circle);
+    var oldWidth = parseInt(obj.css('width'), 10);
+    var oldHeight = parseInt(obj.css('height'), 10);
+    var width = scale * oldWidth;
+    var height = scale * oldHeight;
+    var top = - (height - oldHeight)/2;
+    var left = - (width - oldWidth)/2;
     $circle.animate({
         'opacity': 0,
-        'width': '100px',
-        'height': '100px',
-        'top': '-10px',
-        'left': '-10px'
+        'width': width + 'px',
+        'height': height + 'px',
+        'top': top + 'px',
+        'left': left + 'px'
     }, duration, 'easeOutCirc');
 
     setTimeout(function __remove() {
@@ -153,21 +167,62 @@ function addFromCircle(obj, duration) {
     }, duration);
 }
 
-function addToCircle(obj, duration) {
-    duration = 500 || duration;
+function addToCircle(obj, duration, scale) {
+    var duration = duration || 500;
+    var scale = scale || 1.2;
     var $circle = $('<div class="circle to pulse"></div>');
-    obj.after($circle);
+    obj.before($circle);
+    var oldWidth = parseInt(obj.css('width'), 10);
+    var oldHeight = parseInt(obj.css('height'), 10);
+    var width = scale * oldWidth;
+    var height = scale * oldHeight;
+    var bottom = - (height - oldHeight)/2;
+    var left = - (width - oldWidth)/2;
     $circle.animate({
         'opacity': 0,
-        'width': '100px',
-        'height': '100px',
-        'bottom': '-10px',
-        'left': '-10px'
+        'width': width + 'px',
+        'height': height + 'px',
+        'bottom': bottom + 'px',
+        'left': left + 'px'
     }, duration, 'easeOutCirc');
 
     setTimeout(function __remove() {
         $circle.remove();
     }, duration);
+}
+
+function animateNumber(obj, endVal) {
+    var startVal = obj.text();
+    var currentVal = startVal;
+    var iterval = setInterval(function ()
+    {
+        if (currentVal === endVal)
+        {
+            clearInterval(iterval);
+        }
+        else
+        {
+            currentVal++;
+            obj.text(currentVal);
+        }
+    }, 100);
+}
+
+function animateStroke(obj, endPercent) {
+    var startVal = parseInt(obj.css('width'), 10);
+    var startPercent = Math.round(startVal / parseInt(obj.parent().css('width'), 10) * 2 * 100);
+    var currentPercent = startPercent;
+    if (currentPercent < parseInt(endPercent, 10)) {
+        var endWidth = parseInt(endPercent, 10) / 2;
+        obj.animate({width: endWidth + '%'}, {
+            duration: 1000,
+            easing: 'swing',
+            progress: function(promiseAnim, progressNum, remainMs) {
+                var currentPercent = Math.round(parseInt(endPercent, 10) * progressNum);
+                obj.next().text(currentPercent + '%');
+            }
+        });
+    };
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -194,9 +249,7 @@ function toggleMenu() {
     	        $('nav li, nav hr').each(function(index){
     	            var that = $(this);
     	            setTimeout(function(){
-    	                if (!that.hasClass('move-right')) {
-    	                    that.addClass('move-right');
-    	                };
+    	                that.toggleClass('move-right');
     	            }, (numNavItem - index) * speed);
     	            totalDelay = index * speed + animDuration;
     	        });
@@ -234,9 +287,7 @@ function toggleMenu() {
     	        $('nav li, nav hr').each(function(index){
     	            var that = $(this);
     	            setTimeout(function(){
-    	                if (that.hasClass('move-right')) {
-    	                    that.removeClass('move-right');
-    	                };
+    	                that.toggleClass('move-right');
     	            }, index * speed);
     	        });
     	        next();
@@ -260,7 +311,7 @@ function updateSizes(){
 
     if (winWidth < 600) {
         $('.meta').css({'height': '200px'});
-        $('.element').each(function(){
+        $('.element').not('#skill-main').each(function(){
             var totalHeight = 0;
             totalHeight += $(this).children('.meta').outerHeight(true);
             totalHeight += $(this).children('.content').outerHeight(true);

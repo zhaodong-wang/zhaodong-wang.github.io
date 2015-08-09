@@ -74,7 +74,7 @@ $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
         $('.nav-link-menu').on('touchstart',toggleMenu);
-        $('.mosaic').click(function(){
+        $('#education').click(function(){
             $(this).queue(function(next){
                 $(this).toggleClass('active');
                 next();
@@ -82,6 +82,28 @@ $(document).ready(function(){
             .delay(700)
             .queue(function(next){
                 pageTransition($(this), 'education.html');
+                next();
+            })
+        });
+        $('#projects').click(function(){
+            $(this).queue(function(next){
+                $(this).toggleClass('active');
+                next();
+            })
+            .delay(700)
+            .queue(function(next){
+                pageTransition($(this), 'projects.html');
+                next();
+            })
+        });
+        $('#publications').click(function(){
+            $(this).queue(function(next){
+                $(this).toggleClass('active');
+                next();
+            })
+            .delay(700)
+            .queue(function(next){
+                pageTransition($(this), 'publications.html');
                 next();
             })
         });
@@ -97,6 +119,12 @@ $(document).ready(function(){
         });
         $('#education').click(function(){
             pageTransition($(this), 'education.html');
+        });
+        $('#projects').click(function(){
+            pageTransition($(this), 'projects.html');
+        });
+        $('#publications').click(function(){
+            pageTransition($(this), 'publications.html');
         });
         $('.next-logo').each(function(){
             $(this).mouseenter(function(){

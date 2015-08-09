@@ -3,30 +3,35 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
-var scrollContentProj;
+var scrollContentPub;
 
 $(window).resize(function(){
    updateSizes();
-   if (!scrollContentProj) scrollContentProj.refresh();
+   if (!scrollContentPub) scrollContentPub.refresh();
 });
 
 $(window).load(function(){
     // add iScroll object
 
-    scrollContentProj = new IScroll('#scroll-content', {
+    scrollContentPub = new IScroll('#scroll-content', {
         probeType: 3,
         mouseWheel: true,
         click: true
     });
 
     updateSizes();
-    scrollContentProj.refresh();
-    // scrollContentProj.on('scroll', scrollAnimations);
-    // scrollContentProj.on('scrollEnd', scrollAnimations);
+    scrollContentPub.refresh();
+    // scrollContentPub.on('scroll', scrollAnimations);
+    // scrollContentPub.on('scrollEnd', scrollAnimations);
 
 
     // fadeout cover and show the main page
     $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    setTimeout(function(){
+        animateNumber($('#paper-counter'), 4);
+        animateNumber($('#manu-counter'), 2);
+        animateNumber($('#conf-counter'), 8);
+    }, 500);
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -46,36 +51,26 @@ $(document).ready(function(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
         $('.nav-link-menu').on('touchstart',toggleMenu);
-        $('.circle.from').each(function(){
+        $('.next-logo').each(function(){
             $(this).on('touchstart', function(){
-                addFromCircle($(this));
+                addNextCircle($(this));
             });
         });
         $('.circle.to').each(function(){
             $(this).on('touchstart', function(){
-                addToCircle($(this));
-            });
-        });
-        $('.next-logo').each(function(){
-            $(this).on('touchstart', function(){
-                addNextCircle($(this));
+                addToCircle($(this), 1000, 1.5);
             });
         });
     } else {
         $('.nav-link-menu').click(toggleMenu);
-        $('.circle.from').each(function(){
+        $('.next-logo').each(function(){
             $(this).mouseenter(function(){
-                addFromCircle($(this));
+                addNextCircle($(this));
             });
         });
         $('.circle.to').each(function(){
             $(this).mouseenter(function(){
-                addToCircle($(this));
-            });
-        });
-        $('.next-logo').each(function(){
-            $(this).mouseenter(function(){
-                addNextCircle($(this));
+                addToCircle($(this), 1000, 1.5);
             });
         });
     }
