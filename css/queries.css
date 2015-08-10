@@ -87,6 +87,9 @@
     	letter-spacing: .05em
 	}
 
+	#gallary .wrapper {
+		height: 240vh;
+	}
 
 	.title-container {
 	    width: 100%;
@@ -308,6 +311,7 @@
 	.contact-column {
 		width: 100%;
 		padding: 30px 0 0 0;
+		display: block;
 	}
 
 	.contact-column small {
