@@ -112,6 +112,11 @@ $(document).ready(function(){
                 addNextCircle($(this));
             });
         });
+        $('.contact-wrapper').each(function(){
+            $(this).on('touchstart', function(){
+                $(this).toggleClass('active');
+            });
+        });
     } else {
         $('.nav-link-menu').click(toggleMenu);
         $('.mosaic').hover(function(){
@@ -129,6 +134,11 @@ $(document).ready(function(){
         $('.next-logo').each(function(){
             $(this).mouseenter(function(){
                 addNextCircle($(this));
+            });
+        });
+        $('.contact-wrapper').each(function(){
+            $(this).hover(function(){
+                $(this).toggleClass('active');
             });
         });
     }
