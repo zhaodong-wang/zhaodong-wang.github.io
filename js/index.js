@@ -7,71 +7,40 @@
 /*  SCROLL AND MOVE
 /*-----------------------------------------------------------------------------------*/
 
-var startY;
-
+var aboutMove;
 function scrollAnimations() {
-    var about_offset = $("#about").offset().top;
     // scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
     // var maxscroll = scrollContent.maxScrollY;
 
-    // automatically hide menu
-    if (this.y < startY) $('header').addClass('hide');
-    if (this.y > startY) $('header').removeClass('hide');
-    startY = this.y;
-    var ratio = this.y / $('#home').height();
+    commonScrollAnimations(this);
+
+    var aboutOffset = $("#about").offset().top;
+    ratio = this.y / $('#home').height();
     // var ratio = this.y / winHeight;
     // cover home page
-    if (about_offset >= 0) {
+    if (aboutOffset >= 0) {
         $('#home .cover').css({'opacity': - ratio});
         $('#about .pic').css({
-            '-webkit-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
-            'transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            '-webkit-transform': 'translateX(' + Math.round( - (1 + ratio) * aboutMove) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( - (1 + ratio) * aboutMove) + '%)',
+            'transform': 'translateX(' + Math.round( - (1 + ratio) * aboutMove) + '%)',
             'opacity': - ratio
         });
         $('#about .profile').css({
-            '-webkit-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
-            'transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            '-webkit-transform': 'translateX(' + Math.round((1 + ratio) * aboutMove) + '%)',
+            '-moz-transform': 'translateX(' + Math.round((1 + ratio) * aboutMove) + '%)',
+            'transform': 'translateX(' + Math.round((1 + ratio) * aboutMove) + '%)',
             'opacity': - ratio
         });
     };
     $('.mosaic').each(function(){
-        var offset = $(this).offset().top - 0.2 * winHeight;
+        var offset = $(this).offset().top - 0.2 * $('#home').height();
         $(this).children('.title').css({
             '-webkit-transform': 'translateY(' + offset * 0.5 + 'px)',
             '-moz-transform': 'translateY(' + offset * 0.5 + 'px)',
             'transform': 'translateY(' + offset * 0.5 + 'px)'
         });
     });
-}
-
-function scrollEndAnimations() {
-    var about_offset = $("#about").offset().top;
-    // scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
-    // var maxscroll = scrollContent.maxScrollY;
-
-    // automatically hide menu
-    if (this.y < startY) $('header').addClass('hide');
-    if (this.y > startY) $('header').removeClass('hide');
-    startY = this.y;
-    var ratio = this.y / $('#home').height();
-    // cover home page
-    if (about_offset >= 0) {
-        // move about page
-        $('#about .pic').css({
-            '-webkit-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
-            'transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
-            'opacity': - ratio
-        });
-        $('#about .profile').css({
-            '-webkit-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
-            'transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
-            'opacity': - ratio
-        });
-    };
 }
 
 var scrollContentIndex;
@@ -95,7 +64,7 @@ $(window).load(function(){
 
     scrollAnimations();
     scrollContentIndex.on('scroll', scrollAnimations);
-    scrollContentIndex.on('scrollEnd', scrollEndAnimations);
+    scrollContentIndex.on('scrollEnd', scrollAnimations);
     startY = scrollContentIndex.y;
     // fadeout preloader and show the main page
     $('body')
@@ -141,6 +110,7 @@ $(document).ready(function(){
 
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        aboutMove = 50;
         // toggle Menu
         $('#education').click(function(){
             $(this).queue(function(next){
@@ -192,6 +162,7 @@ $(document).ready(function(){
             });
         });
     } else {
+        aboutMove = 200;
         $('.mosaic').hover(function(){
             $(this).toggleClass('active');
         });

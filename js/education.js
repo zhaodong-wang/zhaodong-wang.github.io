@@ -3,6 +3,16 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
+function scrollAnimations() {
+    commonScrollAnimations(this);
+    ratio = this.y / $('#edu-home').height();
+    $('.element').each(function(){
+        if ($(this).offset().top < 100 || ifBottom) {
+            animateCircleTo($(this).find('.circle.to'));
+        };
+    });
+}
+
 var scrollContentEdu;
 
 $(window).resize(function(){
@@ -21,8 +31,11 @@ $(window).load(function(){
 
     updateSizes();
     scrollContentEdu.refresh();
-    // scrollContentEdu.on('scroll', scrollAnimations);
-    // scrollContentEdu.on('scrollEnd', scrollAnimations);
+
+    scrollAnimations();
+    scrollContentEdu.on('scroll', scrollAnimations);
+    scrollContentEdu.on('scrollEnd', scrollAnimations);
+    startY = scrollContentEdu.y;
 
 
     // fadeout cover and show the main page

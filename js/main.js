@@ -118,7 +118,6 @@ function pageTransition(obj, targetPage) {
     });
 }
 
-
 function addNextCircle(obj, duration, scale) {
     var duration = duration || 500;
     var scale = scale || 1.2;
@@ -171,6 +170,7 @@ function addToCircle(obj, duration, scale) {
     var duration = duration || 500;
     var scale = scale || 1.2;
     var $circle = $('<div class="circle to pulse"></div>');
+    $circle.attr('style', obj.attr('style'));
     obj.before($circle);
     var oldWidth = parseInt(obj.css('width'), 10);
     var oldHeight = parseInt(obj.css('height'), 10);
@@ -210,18 +210,38 @@ function animateNumber(obj, endVal) {
 
 function animateStroke(obj, endPercent) {
     var startVal = parseInt(obj.css('width'), 10);
-    var startPercent = Math.round(startVal / parseInt(obj.parent().css('width'), 10) * 2 * 100);
-    var currentPercent = startPercent;
-    if (currentPercent < parseInt(endPercent, 10)) {
-        var endWidth = parseInt(endPercent, 10) / 2;
-        obj.animate({width: endWidth + '%'}, {
-            duration: 1000,
-            easing: 'swing',
-            progress: function(promiseAnim, progressNum, remainMs) {
-                var currentPercent = Math.round(parseInt(endPercent, 10) * progressNum);
-                obj.next().text(currentPercent + '%');
-            }
-        });
+    if (startVal == 0) {
+        var startPercent = Math.round(startVal / parseInt(obj.parent().css('width'), 10) * 2 * 100);
+        var currentPercent = startPercent;
+        if (currentPercent < parseInt(endPercent, 10)) {
+            var endWidth = parseInt(endPercent, 10) / 2;
+            obj.animate({width: endWidth + '%'}, {
+                duration: 1000,
+                easing: 'swing',
+                progress: function(promiseAnim, progressNum, remainMs) {
+                    var currentPercent = Math.round(parseInt(endPercent, 10) * progressNum);
+                    obj.next().text(currentPercent + '%');
+                }
+            });
+        };
+    };
+}
+
+function animateCircleTo(obj) {
+    if (obj.css('opacity') == 0) {
+        obj.animate({
+            'opacity': 1,
+            'bottom': 0
+        }, {
+            duration: 500,
+            queue: false
+        })
+        obj.prev().animate({
+            'height': '38px'
+        }, {
+            duration: 500,
+            queue: false
+        })
     };
 }
 
@@ -234,6 +254,22 @@ function move(scrollContent, element, duration, easing, callback) {
     scrollContent.scrollToElement(element, duration);
     // scrollAnimations();
 }
+
+var startY;
+var ratio;
+var ifBottom;
+
+function commonScrollAnimations(obj) {
+    ifBottom = obj.y <= obj.maxScrollY;
+    // scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
+    // var maxscroll = scrollContent.maxScrollY;
+
+    // automatically hide menu
+    if (obj.y < startY) $('header').addClass('hide');
+    if (obj.y > startY) $('header').removeClass('hide');
+    startY = obj.y;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /*  MENU EFFECTS

@@ -3,6 +3,16 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
+function scrollAnimations() {
+    commonScrollAnimations(this);
+    ratio = this.y / $('#proj-home').height();
+    $('.element').each(function(){
+        if ($(this).offset().top < 100 || ifBottom) {
+            animateCircleTo($(this).find('.circle.to'));
+        };
+    });
+}
+
 var scrollContentProj;
 
 $(window).resize(function(){
@@ -21,9 +31,11 @@ $(window).load(function(){
 
     updateSizes();
     scrollContentProj.refresh();
-    // scrollContentProj.on('scroll', scrollAnimations);
-    // scrollContentProj.on('scrollEnd', scrollAnimations);
 
+    scrollAnimations();
+    scrollContentProj.on('scroll', scrollAnimations);
+    scrollContentProj.on('scrollEnd', scrollAnimations);
+    startY = scrollContentProj.y;
 
     // fadeout cover and show the main page
     $('.title-container, .sub-home, .next-logo').removeClass('hide');
