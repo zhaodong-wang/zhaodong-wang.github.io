@@ -18,21 +18,22 @@ function scrollAnimations() {
     if (this.y < startY) $('header').addClass('hide');
     if (this.y > startY) $('header').removeClass('hide');
     startY = this.y;
-
+    var ratio = this.y / $('#home').height();
+    // var ratio = this.y / winHeight;
     // cover home page
     if (about_offset >= 0) {
-        $('#home .cover').css({'opacity': - this.y / winHeight});
+        $('#home .cover').css({'opacity': - ratio});
         $('#about .pic').css({
-            '-webkit-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
-            'transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
-            'opacity': - this.y / winHeight
+            '-webkit-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            'transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            'opacity': - ratio
         });
         $('#about .profile').css({
-            '-webkit-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
-            'transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
-            'opacity': - this.y / winHeight
+            '-webkit-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            'transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            'opacity': - ratio
         });
     };
     $('.mosaic').each(function(){
@@ -54,21 +55,21 @@ function scrollEndAnimations() {
     if (this.y < startY) $('header').addClass('hide');
     if (this.y > startY) $('header').removeClass('hide');
     startY = this.y;
-
+    var ratio = this.y / $('#home').height();
     // cover home page
     if (about_offset >= 0) {
         // move about page
         $('#about .pic').css({
-            '-webkit-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
-            'transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
-            'opacity': - this.y / winHeight
+            '-webkit-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            'transform': 'translateX(' + Math.round( - 200 - ratio * 200) + '%)',
+            'opacity': - ratio
         });
         $('#about .profile').css({
-            '-webkit-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
-            '-moz-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
-            'transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
-            'opacity': - this.y / winHeight
+            '-webkit-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            'transform': 'translateX(' + Math.round( 200 + ratio * 200) + '%)',
+            'opacity': - ratio
         });
     };
 }
