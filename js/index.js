@@ -3,11 +3,81 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
+/*-----------------------------------------------------------------------------------*/
+/*  SCROLL AND MOVE
+/*-----------------------------------------------------------------------------------*/
+
+var startY;
+
+function scrollAnimations() {
+    var about_offset = $("#about").offset().top;
+    // scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
+    // var maxscroll = scrollContent.maxScrollY;
+
+    // automatically hide menu
+    if (this.y < startY) $('header').addClass('hide');
+    if (this.y > startY) $('header').removeClass('hide');
+    startY = this.y;
+
+    // cover home page
+    if (about_offset >= 0) {
+        $('#home .cover').css({'opacity': - this.y / winHeight});
+        $('#about .pic').css({
+            '-webkit-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
+            'transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
+            'opacity': - this.y / winHeight
+        });
+        $('#about .profile').css({
+            '-webkit-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
+            'transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
+            'opacity': - this.y / winHeight
+        });
+    };
+    $('.mosaic').each(function(){
+        var offset = $(this).offset().top - 0.2 * winHeight;
+        $(this).children('.title').css({
+            '-webkit-transform': 'translateY(' + offset * 0.5 + 'px)',
+            '-moz-transform': 'translateY(' + offset * 0.5 + 'px)',
+            'transform': 'translateY(' + offset * 0.5 + 'px)'
+        });
+    });
+}
+
+function scrollEndAnimations() {
+    var about_offset = $("#about").offset().top;
+    // scrollContent.maxScrollY = scrollContent.y - $('footer').offset().top - $('footer').outerHeight(true) + winHeight;
+    // var maxscroll = scrollContent.maxScrollY;
+
+    // automatically hide menu
+    if (this.y < startY) $('header').addClass('hide');
+    if (this.y > startY) $('header').removeClass('hide');
+    startY = this.y;
+
+    // cover home page
+    if (about_offset >= 0) {
+        // move about page
+        $('#about .pic').css({
+            '-webkit-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
+            'transform': 'translateX(' + Math.round( - 200 - this.y / winHeight * 200) + '%)',
+            'opacity': - this.y / winHeight
+        });
+        $('#about .profile').css({
+            '-webkit-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
+            '-moz-transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
+            'transform': 'translateX(' + Math.round( 200 + this.y / winHeight * 200) + '%)',
+            'opacity': - this.y / winHeight
+        });
+    };
+}
+
 var scrollContentIndex;
 
 $(window).resize(function(){
    updateSizes();
-   if (!scrollContentIndex) scrollContentEdu.refresh();
+   if (!scrollContentIndex) scrollContentIndex.refresh();
 });
 
 $(window).load(function(){
@@ -21,9 +91,11 @@ $(window).load(function(){
 
     updateSizes();
     scrollContentIndex.refresh();
-    // scrollContentIndex.on('scroll', scrollAnimations);
-    // scrollContentIndex.on('scrollEnd', scrollAnimations);
 
+    scrollAnimations();
+    scrollContentIndex.on('scroll', scrollAnimations);
+    scrollContentIndex.on('scrollEnd', scrollEndAnimations);
+    startY = scrollContentIndex.y;
     // fadeout preloader and show the main page
     $('body')
     .delay(2000)
@@ -60,10 +132,6 @@ $(window).load(function(){
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 $(document).ready(function(){
-	// get the number of menu items
-    $('nav li').each(function(){
-        numNavItem += 1;
-    });
     // get the number of slide show items
     $('.scroll-words p').each(function(){
         numSlideItem += 1;
@@ -73,7 +141,6 @@ $(document).ready(function(){
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
-        $('.nav-link-menu').on('touchstart',toggleMenu);
         $('#education').click(function(){
             $(this).queue(function(next){
                 $(this).toggleClass('active');
@@ -107,10 +174,16 @@ $(document).ready(function(){
                 next();
             })
         });
-        $('.next-logo').each(function(){
-            $(this).on('touchstart', function(){
-                addNextCircle($(this));
-            });
+        $('#skills').click(function(){
+            $(this).queue(function(next){
+                $(this).toggleClass('active');
+                next();
+            })
+            .delay(700)
+            .queue(function(next){
+                pageTransition($(this), 'skills.html');
+                next();
+            })
         });
         $('.contact-wrapper').each(function(){
             $(this).on('touchstart', function(){
@@ -118,7 +191,6 @@ $(document).ready(function(){
             });
         });
     } else {
-        $('.nav-link-menu').click(toggleMenu);
         $('.mosaic').hover(function(){
             $(this).toggleClass('active');
         });
@@ -131,10 +203,8 @@ $(document).ready(function(){
         $('#publications').click(function(){
             pageTransition($(this), 'publications.html');
         });
-        $('.next-logo').each(function(){
-            $(this).mouseenter(function(){
-                addNextCircle($(this));
-            });
+        $('#skills').click(function(){
+            pageTransition($(this), 'skills.html');
         });
         $('.contact-wrapper').each(function(){
             $(this).hover(function(){

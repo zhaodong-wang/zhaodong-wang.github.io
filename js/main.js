@@ -325,3 +325,121 @@ function updateSizes(){
         });
     }
 }
+
+$(document).ready(function(){
+    // get the number of menu items
+    $('nav li').each(function(){
+        numNavItem += 1;
+    });
+
+    // device detection
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        // toggle Menu
+        $('.nav-link-menu').on('touchstart',toggleMenu);
+        $('.next-logo').each(function(){
+            $(this).on('touchstart', function(){
+                addNextCircle($(this));
+            });
+        });
+        $('.nav-home').each(function(){
+            $(this).click(function(){
+                $(this).queue(function(next){
+                    $(this).toggleClass('active');
+                    next();
+                })
+                .delay(700)
+                .queue(function(next){
+                    pageTransition($(this), 'index.html');
+                    next();
+                })
+            });
+        });
+        $('.nav-education').each(function(){
+            $(this).click(function(){
+                $(this).queue(function(next){
+                    $(this).toggleClass('active');
+                    next();
+                })
+                .delay(700)
+                .queue(function(next){
+                    pageTransition($(this), 'education.html');
+                    next();
+                })
+            });
+        });
+        $('.nav-projects').each(function(){
+            $(this).click(function(){
+                $(this).queue(function(next){
+                    $(this).toggleClass('active');
+                    next();
+                })
+                .delay(700)
+                .queue(function(next){
+                    pageTransition($(this), 'projects.html');
+                    next();
+                })
+            });
+        });
+        $('.nav-publications').each(function(){
+            $(this).click(function(){
+                $(this).queue(function(next){
+                    $(this).toggleClass('active');
+                    next();
+                })
+                .delay(700)
+                .queue(function(next){
+                    pageTransition($(this), 'publications.html');
+                    next();
+                })
+            });
+        });
+        $('.nav-skills').each(function(){
+            $(this).click(function(){
+                $(this).queue(function(next){
+                    $(this).toggleClass('active');
+                    next();
+                })
+                .delay(700)
+                .queue(function(next){
+                    pageTransition($(this), 'skills.html');
+                    next();
+                })
+            });
+        });
+    } else {
+        $('.nav-link-menu').click(toggleMenu);
+        $('.next-logo').each(function(){
+            $(this).mouseenter(function(){
+                addNextCircle($(this));
+            });
+        });
+        $('.left, .right').hover(function(){
+            $(this).toggleClass('active');
+        });
+        $('.nav-home').each(function(){
+            $(this).click(function(){
+                pageTransition($(this), 'index.html');
+            });
+        });
+        $('.nav-education').each(function(){
+            $(this).click(function(){
+                pageTransition($(this), 'education.html');
+            });
+        });
+        $('.nav-projects').each(function(){
+            $(this).click(function(){
+                pageTransition($(this), 'projects.html');
+            });
+        });
+        $('.nav-publications').each(function(){
+            $(this).click(function(){
+                pageTransition($(this), 'publications.html');
+            });
+        });
+        $('.nav-skills').each(function(){
+            $(this).click(function(){
+                pageTransition($(this), 'skills.html');
+            });
+        });
+    }
+});

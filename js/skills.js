@@ -34,37 +34,16 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 var skillPercents = ['75%', '65%', '65%', '50%', '80%', '50%'];
 
 $(document).ready(function(){
-	// get the number of menu items
-    $('nav li').each(function(){
-        numNavItem += 1;
-    });
-    // get the number of slide show items
-    $('.scroll-words p').each(function(){
-        numSlideItem += 1;
-    });
-    $('.scroll-words p').css({'top': '-'+ numSlideItem + '00%'});
 
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // toggle Menu
-        $('.nav-link-menu').on('touchstart',toggleMenu);
-        $('.next-logo').each(function(){
-            $(this).on('touchstart', function(){
-                addNextCircle($(this));
-            });
-        });
         $('#skill-main .title').on('touchstart', function(){
             $('.line').each(function(index){
                 animateStroke($(this), skillPercents[index]);
             });
         });
     } else {
-        $('.nav-link-menu').click(toggleMenu);
-        $('.next-logo').each(function(){
-            $(this).mouseenter(function(){
-                addNextCircle($(this));
-            });
-        });
         $('#skill-main .title').click(function(){
             $('.line').each(function(index){
                 animateStroke($(this), skillPercents[index]);

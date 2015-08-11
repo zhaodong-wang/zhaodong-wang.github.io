@@ -321,4 +321,36 @@
 	.contact-bottom ul li {
 	    margin-top: 8px;
 	}
+
+	.navigator .left, .navigator .right {
+	    background-size: auto 110%;
+	}
+
+	.nav-container {
+	    height: 70%;
+	    top: 30%;
+	    padding-right: 10px;
+	    padding-left: 10px;
+	}
+
+	.nav-container h1 {
+		font-size: 80%;
+		font-weight: 600;
+		letter-spacing: .1em;
+		line-height: 100%;
+	}
+
+	.nav-container hr {
+	    margin: 15px 0 15px 0;
+	}
+
+	.nav-container i {
+		font-size: 60%;
+	}
+
+	/*dynamic effects*/
+
+	.left.active, .right.active{
+	    background-size: auto 100%;
+	}
 }
