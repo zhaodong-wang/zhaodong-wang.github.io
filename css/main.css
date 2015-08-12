@@ -212,6 +212,10 @@ header.hide {
     transition: transform .6s cubic-bezier(0.835, 0, 0.19, 1);
 }
 
+.nav-link-home:hover {
+    cursor: pointer;
+}
+
 .nav-link-home.hide {
     -webkit-transform: translateY(-100%);
     -moz-transform: translateY(-100%);
