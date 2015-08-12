@@ -71,7 +71,7 @@ $(window).load(function(){
     .delay(2000)
     .queue(function(next){
         $('.pre-loader-container').clearQueue();
-        $('.pre-loader-container').stop(true, false);
+        $('.pre-loader-container').stop(true, true);
         next();
     })
     .delay(500)
