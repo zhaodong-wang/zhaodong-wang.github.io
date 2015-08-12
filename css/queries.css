@@ -228,9 +228,9 @@
 	/* Hamburger animations, toggle */
 
 	.nav-link-menu.active .nav-link-menu-outer-before {
-	    -webkit-transform: translateY(-1px) translateX(-3px) rotate(-45deg);
-	    -moz-transform: translateY(-1px) translateX(-3px) rotate(-45deg);
-	    transform: translateY(-1px) translateX(-3px) rotate(-45deg);
+	    -webkit-transform: translateY(0px) translateX(-3px) rotate(-45deg);
+	    -moz-transform: translateY(0px) translateX(-3px) rotate(-45deg);
+	    transform: translateY(0px) translateX(-3px) rotate(-45deg);
 	}
 
 	.sub-home {

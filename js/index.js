@@ -95,6 +95,7 @@ $(window).load(function(){
     .queue(function(next){
         $('.detail, .detail_info').removeClass('hide');
         slideShowIterative($('.scroll-words p'), numSlideItem);
+        $('header').removeClass('hide');
         next();
     });
 })

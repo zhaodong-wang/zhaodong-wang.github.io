@@ -44,7 +44,16 @@ $(window).load(function(){
     startY = scrollContentSkill.y;
 
     // fadeout cover and show the main page
-    $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    $('body')
+    .queue(function(next){
+        $('.title-container, .sub-home, .next-logo').removeClass('hide');
+        next();
+    })
+    .delay(800)
+    .queue(function(next){
+        $('header').removeClass('hide');
+        next();
+    });
     scrollAnimations();
 })
 

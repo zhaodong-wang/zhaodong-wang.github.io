@@ -62,7 +62,16 @@ $(window).load(function(){
 
 
     // fadeout cover and show the main page
-    $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    $('body')
+    .queue(function(next){
+        $('.title-container, .sub-home, .next-logo').removeClass('hide');
+        next();
+    })
+    .delay(800)
+    .queue(function(next){
+        $('header').removeClass('hide');
+        next();
+    });
     setTimeout(function(){
         animateNumber($('#paper-counter'), 4);
         animateNumber($('#manu-counter'), 2);

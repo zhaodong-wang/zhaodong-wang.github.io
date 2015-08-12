@@ -25,7 +25,7 @@ function scrollAnimations() {
     $('.pano').each(function(){
         var offset = $(this).offset().top - $('#edu-home').height();
         $(this).css({'background-position-y': 0.3 * offset - 0.8 * $(this).height()});
-    })
+    });
 }
 
 var scrollContentEdu;
@@ -53,7 +53,16 @@ $(window).load(function(){
 
 
     // fadeout cover and show the main page
-    $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    $('body')
+    .queue(function(next){
+        $('.title-container, .sub-home, .next-logo').removeClass('hide');
+        next();
+    })
+    .delay(800)
+    .queue(function(next){
+        $('header').removeClass('hide');
+        next();
+    });
     scrollAnimations();
 })
 

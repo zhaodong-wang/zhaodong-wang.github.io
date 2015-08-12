@@ -512,14 +512,15 @@
 }
 
 .nav-container h1 {
+    font-size: 120%;
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
     transform: translateX(0);
-    -webkit-transition: all 0.5s cubic-bezier(0.835, 0, 0.19, 1);
-    -o-transition: all 0.5s cubic-bezier(0.835, 0, 0.19, 1);
-    transition: all 0.5s cubic-bezier(0.835, 0, 0.19, 1);
+    -webkit-transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
+    -o-transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
+    transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
 }
 
 .nav-container hr {
@@ -543,9 +544,9 @@
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
     transform: translateX(0);
-    -webkit-transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
-    -o-transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
-    transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
+    -webkit-transition: all 0.5s cubic-bezier(0.835, 0, 0.19, 1);
+    -o-transition: all 0.5s cubic-bezier(0.835, 0, 0.19, 1);
+    transition: all 0.5s cubic-bezier(0.835, 0, 0.19, 1);
 }
 
 .navigator .left .nav-container h1 {
