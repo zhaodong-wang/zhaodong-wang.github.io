@@ -15,6 +15,9 @@ function scrollAnimations() {
             strokeAnimated = true;
         };
     }
+    if ($('#skill-home').next().offset().top > 0) {
+        $('#skill-home').css({'background-position-y': -0.5 * this.y});
+    };
 }
 
 var scrollContentSkill;
@@ -36,13 +39,13 @@ $(window).load(function(){
     updateSizes();
     scrollContentSkill.refresh();
 
-    scrollAnimations();
     scrollContentSkill.on('scroll', scrollAnimations);
     scrollContentSkill.on('scrollEnd', scrollAnimations);
     startY = scrollContentSkill.y;
 
     // fadeout cover and show the main page
     $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    scrollAnimations();
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -51,19 +54,4 @@ var skillPercents = ['75%', '65%', '65%', '50%', '80%', '50%'];
 
 $(document).ready(function(){
 
-    // // device detection
-    // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    //     // toggle Menu
-    //     $('#skill-main .title').on('touchstart', function(){
-    //         $('.line').each(function(index){
-    //             animateStroke($(this), skillPercents[index]);
-    //         });
-    //     });
-    // } else {
-    //     $('#skill-main .title').click(function(){
-    //         $('.line').each(function(index){
-    //             animateStroke($(this), skillPercents[index]);
-    //         });
-    //     });
-    // }
 });

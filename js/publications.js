@@ -32,6 +32,9 @@ function scrollAnimations() {
             }
         });
     }
+    if ($('#pub-home').next().offset().top > 0) {
+        $('#pub-home').css({'background-position-y': -0.5 * this.y});
+    };
 }
 
 var scrollContentPub;
@@ -53,7 +56,6 @@ $(window).load(function(){
     updateSizes();
     scrollContentPub.refresh();
 
-    scrollAnimations();
     scrollContentPub.on('scroll', scrollAnimations);
     scrollContentPub.on('scrollEnd', scrollAnimations);
     startY = scrollContentPub.y;
@@ -66,6 +68,7 @@ $(window).load(function(){
         animateNumber($('#manu-counter'), 2);
         animateNumber($('#conf-counter'), 8);
     }, 500);
+    scrollAnimations();
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -80,13 +83,13 @@ $(document).ready(function(){
         // toggle Menu
         $('.circle.to').each(function(){
             $(this).on('touchstart', function(){
-                addToCircle($(this), 700, 1.3);
+                addToCircle($(this), 700, 1.4);
             });
         });
     } else {
         $('.circle.to').each(function(){
             $(this).mouseenter(function(){
-                addToCircle($(this), 700, 1.3);
+                addToCircle($(this), 700, 1.4);
             });
         });
     }

@@ -353,4 +353,8 @@
 	.left.active, .right.active{
 	    background-size: auto 100%;
 	}
+
+	.pano {
+	    background-size: auto 300%;
+	}
 }

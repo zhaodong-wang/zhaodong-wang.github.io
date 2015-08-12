@@ -120,7 +120,7 @@ function pageTransition(obj, targetPage) {
 
 function addNextCircle(obj, duration, scale) {
     var duration = duration || 500;
-    var scale = scale || 1.2;
+    var scale = scale || 1.4;
     var $circle = $('<div class="next-logo pulse"></div>');
     obj.before($circle);
     var oldWidth = parseInt(obj.css('width'), 10);
@@ -144,7 +144,7 @@ function addNextCircle(obj, duration, scale) {
 
 function addFromCircle(obj, duration, scale) {
     var duration = duration || 500;
-    var scale = scale || 1.2;
+    var scale = scale || 1.4;
     var $circle = $('<div class="circle from pulse"></div>');
     obj.before($circle);
     var oldWidth = parseInt(obj.css('width'), 10);
@@ -168,7 +168,7 @@ function addFromCircle(obj, duration, scale) {
 
 function addToCircle(obj, duration, scale) {
     var duration = duration || 500;
-    var scale = scale || 1.2;
+    var scale = scale || 1.4;
     var $circle = $('<div class="circle to pulse"></div>');
     $circle.attr('style', obj.attr('style'));
     obj.before($circle);
@@ -449,7 +449,7 @@ $(document).ready(function(){
                 addNextCircle($(this));
             });
         });
-        $('.left, .right').hover(function(){
+        $('.navigator .left, .navigator .right').hover(function(){
             $(this).toggleClass('active');
         });
         $('.nav-home').each(function(){

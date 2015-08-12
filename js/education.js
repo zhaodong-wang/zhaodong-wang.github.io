@@ -11,6 +11,21 @@ function scrollAnimations() {
             animateCircleTo($(this).find('.circle.to'));
         };
     });
+    $('.element img.bg-logo').each(function(){
+        var offset = $(this).offset().top + 0.5 * $(this).height() - 0.6 * $('#edu-home').height();
+        $(this).css({
+            '-webkit-transform': 'translateY(' + offset * 0.3 + 'px)',
+            '-moz-transform': 'translateY(' + offset * 0.3 + 'px)',
+            'transform': 'translateY(' + offset * 0.3 + 'px)'
+        });
+    });
+    if ($('#edu-home').next().offset().top > 0) {
+        $('#edu-home').css({'background-position-y': -0.5 * this.y});
+    };
+    $('.pano').each(function(){
+        var offset = $(this).offset().top - $('#edu-home').height();
+        $(this).css({'background-position-y': 0.3 * offset - 0.8 * $(this).height()});
+    })
 }
 
 var scrollContentEdu;
@@ -32,7 +47,6 @@ $(window).load(function(){
     updateSizes();
     scrollContentEdu.refresh();
 
-    scrollAnimations();
     scrollContentEdu.on('scroll', scrollAnimations);
     scrollContentEdu.on('scrollEnd', scrollAnimations);
     startY = scrollContentEdu.y;
@@ -40,6 +54,7 @@ $(window).load(function(){
 
     // fadeout cover and show the main page
     $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    scrollAnimations();
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

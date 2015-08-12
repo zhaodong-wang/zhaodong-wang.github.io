@@ -11,6 +11,9 @@ function scrollAnimations() {
             animateCircleTo($(this).find('.circle.to'));
         };
     });
+    if ($('#proj-home').next().offset().top > 0) {
+        $('#proj-home').css({'background-position-y': -0.5 * this.y});
+    };
 }
 
 var scrollContentProj;
@@ -32,13 +35,13 @@ $(window).load(function(){
     updateSizes();
     scrollContentProj.refresh();
 
-    scrollAnimations();
     scrollContentProj.on('scroll', scrollAnimations);
     scrollContentProj.on('scrollEnd', scrollAnimations);
     startY = scrollContentProj.y;
 
     // fadeout cover and show the main page
     $('.title-container, .sub-home, .next-logo').removeClass('hide');
+    scrollAnimations();
 })
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

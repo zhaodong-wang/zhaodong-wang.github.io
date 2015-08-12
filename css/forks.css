@@ -14,11 +14,11 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-    -webkit-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    -moz-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    -o-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    -ms-transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    transition: all 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-transition: background-size 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -moz-transition: background-size 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -o-transition: background-size 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -ms-transition: background-size 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: background-size 2s cubic-bezier(0.165, 0.84, 0.44, 1);
     -webkit-transition-delay: .5s;
     transition-delay: .5s;
 }
@@ -576,13 +576,13 @@
 
 /*dynamic effects*/
 
-.left.active, .right.active{
+.navigator .left.active, .right.active{
     background-size: 100% auto;
 }
 
-.left.active .nav-container h1,
-.left.active .nav-container hr,
-.left.active .nav-container i {
+.navigator .left.active .nav-container h1,
+.navigator .left.active .nav-container hr,
+.navigator .left.active .nav-container i {
     -webkit-transform: translateX(400px);
     -moz-transform: translateX(400px);
     -ms-transform: translateX(400px);
@@ -590,12 +590,44 @@
     transform: translateX(400px);
 }
 
-.right.active .nav-container h1,
-.right.active .nav-container hr,
-.right.active .nav-container i {
+.navigator .right.active .nav-container h1,
+.navigator .right.active .nav-container hr,
+.navigator .right.active .nav-container i {
     -webkit-transform: translateX(-400px);
     -moz-transform: translateX(-400px);
     -ms-transform: translateX(-400px);
     -o-transform: translateX(-400px);
     transform: translateX(-400px);
 }
+
+/*end*/
+
+.element img.bg-logo {
+    opacity: 0.75;
+    width: auto;
+    height: 350px;
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+}
+
+.element.left img.bg-logo {
+    right: 15%;
+}
+
+.element.right img.bg-logo {
+    left: 15%;
+}
+
+.pano {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 30vh;
+    width: 100vw;
+}
+
+#tsinghua-bg {
+    background-image: url(../img/tsinghua-bg-min.jpg);
+}
+
