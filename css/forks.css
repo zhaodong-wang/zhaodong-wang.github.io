@@ -548,35 +548,35 @@
     transition: all 0.7s cubic-bezier(0.835, 0, 0.19, 1);
 }
 
-.left .nav-container h1 {
+.navigator .left .nav-container h1 {
     color: #bbb;
 }
 
-.left .nav-container {
+.navigator .left .nav-container {
     text-align: right;
 }
 
-.left .nav-container * {
+.navigator .left .nav-container * {
     float: right;
     clear: right;
 }
 
-.right .nav-container h1 {
+.navigator .right .nav-container h1 {
     color: #444;
 }
 
-.right .nav-container {
+.navigator .right .nav-container {
     text-align: left;
 }
 
-.right .nav-container * {
+.navigator .right .nav-container * {
     float: left;
     clear: left;
 }
 
 /*dynamic effects*/
 
-.navigator .left.active, .right.active{
+.navigator .left.active, .navigator .right.active {
     background-size: 100% auto;
 }
 

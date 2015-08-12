@@ -336,6 +336,12 @@
 	    background-size: auto 110%;
 	}
 
+	/*dynamic effects*/
+
+	.navigator .left.active, .navigator .right.active {
+	    background-size: auto 100%;
+	}
+
 	.nav-container {
 	    height: 70%;
 	    top: 30%;
