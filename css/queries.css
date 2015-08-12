@@ -373,4 +373,10 @@
 	.pano {
 	    background-size: auto 300%;
 	}
+
+	#home-bg {
+	    width: 200%;
+	    height: auto;
+	}
+
 }
