@@ -888,6 +888,7 @@ hr.small {
 .container {
     width: 70%;
     margin: auto;
+    padding-top: 30px;
     position: relative;
     display: block;
     text-align: center;
