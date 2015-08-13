@@ -41,6 +41,11 @@ function scrollAnimations() {
             'transform': 'translateY(' + offset * 0.5 + 'px)'
         });
     });
+
+    if ($("#contact").offset().top + $("#contact").outerHeight(true) < 1.1 * $('#home').height()) {
+        if (directionY == 1) $('.contact-column, .contact-bottom').addClass('move');
+        if (directionY == -1) $('.contact-column, .contact-bottom').removeClass('move');
+    };
 }
 
 var scrollContentIndex;

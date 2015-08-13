@@ -337,6 +337,20 @@
 	    margin-top: 8px;
 	}
 
+	.contact-column.move {
+	    -webkit-transform: translateY(-30px);
+	    -moz-transform: translateY(-30px);
+	    -o-transform: translateY(-30px);
+	    transform: translateY(-30px);
+	}
+
+	.contact-bottom.move ul li {
+	    -webkit-transform: translateY(-30px);
+	    -moz-transform: translateY(-30px);
+	    -o-transform: translateY(-30px);
+	    transform: translateY(-30px);
+	}
+
 	.navigator .left, .navigator .right {
 	    background-size: auto 110%;
 	}

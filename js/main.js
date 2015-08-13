@@ -229,6 +229,7 @@ function move(scrollContent, element, duration, easing, callback) {
 var startY;
 var ratio;
 var ifBottom;
+var directionY; // 0: still; 1: down; -1: up;
 
 function commonScrollAnimations(obj) {
     ifBottom = obj.y <= obj.maxScrollY;
@@ -236,8 +237,11 @@ function commonScrollAnimations(obj) {
     // var maxscroll = scrollContent.maxScrollY;
 
     // automatically hide menu
-    if (obj.y < startY) $('header').addClass('hide');
-    if (obj.y > startY) $('header').removeClass('hide');
+    if (obj.y < startY) directionY = 1;
+    if (obj.y == startY) directionY = 0;
+    if (obj.y > startY) directionY = -1;
+    if (directionY == 1) $('header').addClass('hide');
+    if (directionY == -1) $('header').removeClass('hide');
     startY = obj.y;
 }
 

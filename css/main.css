@@ -953,6 +953,34 @@ hr.small {
     -o-transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.contact-column.move {
+    -webkit-transform: translateY(-50px);
+    -moz-transform: translateY(-50px);
+    -o-transform: translateY(-50px);
+    transform: translateY(-50px);
+}
+
+#contact-email {
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#contact-address {
+    transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#contact-phone {
+    transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .contact-wrapper.active img {
     -webkit-transform: translateY(-10%);
     -moz-transform: translateY(-10%);
@@ -1037,6 +1065,62 @@ li:hover a span:before {
     -moz-transform: translateY(60px);
     -o-transform: translateY(60px);
     transform: translateY(60px);
+}
+
+.contact-bottom.move ul li {
+    -webkit-transform: translateY(-50px);
+    -moz-transform: translateY(-50px);
+    -o-transform: translateY(-50px);
+    transform: translateY(-50px);
+}
+
+#icon-facebook {
+    transition: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#icon-twitter {
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#icon-gplus {
+    transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#icon-linkedin {
+    transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#icon-renren {
+    transition: all 2.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 2.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 2.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 2.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#icon-weibo {
+    transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#icon-instagram {
+    transition: all 3.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: all 3.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-transition: all 3.5s cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: all 3.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 footer {
