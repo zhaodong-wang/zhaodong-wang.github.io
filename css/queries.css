@@ -306,7 +306,12 @@
 	}
 
 	.container {
-	    width: 90%;
+	    width: 80%;
+	}
+
+	.contact-bottom {
+		width: 100%;
+		padding: 50px 0;
 	}
 
 	#contact img {

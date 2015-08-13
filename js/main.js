@@ -351,10 +351,6 @@ $(document).ready(function(){
             if ($(this).parent().parent().attr('id') == 'main-home') {
                 $(this).queue(function(next){
                     recoverLoader($('.pre-loader-container.forks'));
-                    next();
-                })
-                .delay(700)
-                .queue(function(next){
                     move(scrollContentIndex, '#home', 0);
                     next();
                 })
