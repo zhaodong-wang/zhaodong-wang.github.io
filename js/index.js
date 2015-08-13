@@ -56,7 +56,9 @@ $(window).load(function(){
     scrollContentIndex = new IScroll('#scroll-content', {
         probeType: 3,
         mouseWheel: true,
-        click: true
+        click: true,
+        useTransition: false,
+        bindToWrapper: true
     });
 
     updateSizes();
@@ -76,7 +78,7 @@ $(window).load(function(){
     })
     .delay(500)
     .queue(function(next){
-        transformLoader();
+        transformLoader($('.pre-loader-container').not('.forks'));
         next();
     })
     .delay(1500)
@@ -84,7 +86,7 @@ $(window).load(function(){
         $('.pre-loader').css({
             'opacity': 0
         })
-        $('.pre-loader-container').animate({scale: '0.7' }, 500, 'easeInOutQuart');
+        $('.pre-loader-container').not('.forks').animate({scale: '0.7' }, 500, 'easeInOutQuart');
         next();
     })
     .delay(610)
@@ -186,7 +188,7 @@ $(document).ready(function(){
         });
     }
 
-    $('.pre-loader-container')
+    $('.pre-loader-container').not('.forks')
     .queue(function(next){
         $(this).animate({translateY: '50px'}, 0);
         next();
@@ -199,7 +201,7 @@ $(document).ready(function(){
         next();
     })
     .queue(function(next){
-        spinLoader();
+        spinLoader($('.pre-loader-container').not('.forks'));
         next();
     });
 

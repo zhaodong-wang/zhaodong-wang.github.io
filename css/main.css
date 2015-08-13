@@ -135,7 +135,11 @@ small {
     transition: opacity .6s cubic-bezier(0.6, 0, .4, 1);
 }
 
-.stick {
+.pre-loader-container.forks {
+    opacity: 1;
+}
+
+.pre-loader-container .stick {
     width: 40px;
     height: 3px;
     background-color: #bc8420;
@@ -145,7 +149,7 @@ small {
     transition: transform .6s cubic-bezier(0.6, 0, .4, 1);
 }
 
-.stick.left {
+.pre-loader-container .stick.left {
     width: 37px;
     -webkit-transform-origin: bottom left;
     -moz-transform-origin: bottom left;
@@ -155,7 +159,7 @@ small {
     transform: rotate(90deg);
 }
 
-.stick.right {
+.pre-loader-container .stick.right {
     right: 0;
     width: 37px;
     -webkit-transform-origin: bottom right;
@@ -166,19 +170,57 @@ small {
     transform: rotate(-90deg);
 }
 
-.stick.top {
+.pre-loader-container .stick.top {
     -webkit-transform-origin: bottom right;
     -moz-transform-origin: bottom right;
     transform-origin: bottom right;
 }
 
-.stick.bottom {
+.pre-loader-container .stick.bottom {
     -webkit-transform-origin: bottom left;
     -moz-transform-origin: bottom left;
     transform-origin: bottom left;
     -webkit-transform: translateY(37px);
     -moz-transform: translateY(37px);
     transform: translateY(37px);
+}
+
+/* animated */
+
+.pre-loader-container.active .stick.left {
+    -webkit-transform: rotate(90deg) scaleX(1.380) translateX(-12px);
+    -moz-transform: rotate(90deg) scaleX(1.380) translateX(-12px);
+    transform: rotate(90deg) scaleX(1.380) translateX(-12px);
+}
+.pre-loader-container.active .stick.top {
+    -webkit-transform: rotate(20.1deg) scaleX(1.300) translateX(7px);
+    -moz-transform: rotate(20.1deg) scaleX(1.300) translateX(7px);
+    transform: rotate(20.1deg) scaleX(1.300) translateX(7px);
+}
+.pre-loader-container.active .stick.right {
+    -webkit-transform: rotate(-70.1deg) scaleX(0.960) translate(3px, 12px);
+    -moz-transform: rotate(-70.1deg) scaleX(0.960) translate(3px, 12px);
+    transform: rotate(-70.1deg) scaleX(0.960) translate(3px, 12px);
+}
+.pre-loader-container.active .stick.left.inner {
+    -webkit-transform: rotate(70deg) scaleX(1.1) translateX(-12px) translateY(-6px);
+    -moz-transform: rotate(70deg) scaleX(1.1) translateX(-12px) translateY(-6px);
+    transform: rotate(70deg) scaleX(1.1) translateX(-12px) translateY(-6px);
+}
+.pre-loader-container.active .stick.right.inner {
+    -webkit-transform: rotate(30deg) scaleX(0.7) translate(23px, 33px);
+    -moz-transform: rotate(30deg) scaleX(0.7) translate(23px, 33px);
+    transform: rotate(30deg) scaleX(0.7) translate(23px, 33px);
+}
+.pre-loader-container.active .stick.top.inner {
+    -webkit-transform: rotate(-30deg) scaleX(0.95) translate(7px, 9px);
+    -moz-transform: rotate(-30deg) scaleX(0.95) translate(7px, 9px);
+    transform: rotate(-30deg) scaleX(0.95) translate(7px, 9px);
+}
+.pre-loader-container.active .stick.bottom.inner {
+    -webkit-transform: rotate(-42deg) scaleX(0.5) translate(-43px, 29px);
+    -moz-transform: rotate(-42deg) scaleX(0.5) translate(-43px, 29px);
+    transform: rotate(-42deg) scaleX(0.5) translate(-43px, 29px);
 }
 
 /* hamburger */
