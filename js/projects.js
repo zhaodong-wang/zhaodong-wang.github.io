@@ -11,6 +11,11 @@ function scrollAnimations() {
     if ($('#proj-home').next().offset().top > 0) {
         $('#proj-home').css({'background-position-y': - 0.5 * this.y});
     };
+
+    $('.pano').each(function(){
+        var offset = $(this).offset().top - $('#proj-home').height();
+        $(this).css({'background-position-y': 0.3 * offset - 0.3 * $(this).height()});
+    });
 }
 
 function scrollEndAnimations() {

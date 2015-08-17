@@ -628,11 +628,19 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% auto;
-    height: 30vh;
+    height: 40vh;
     width: 100vw;
 }
 
 #tsinghua-bg {
     background-image: url(../img/tsinghua-bg-min.jpg);
+}
+
+#locomotive-bg {
+    background-image: url(../img/locomotive-bg-min.jpg);
+}
+
+#auto-car-bg {
+    background-image: url(../img/auto-car-bg-min.jpg);
 }
 
