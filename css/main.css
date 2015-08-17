@@ -90,6 +90,10 @@ small {
 	font-weight: 700;
 }
 
+b {
+    font-weight: 700;
+}
+
 .italic {
 	font-style: italic;
 }

@@ -3,14 +3,12 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
+var circlesToAnimated = [];
+
 function scrollAnimations() {
     commonScrollAnimations(this);
     ratio = this.y / $('#edu-home').height();
-    $('.element').each(function(){
-        if ($(this).offset().top < 100 || ifBottom) {
-            animateCircleTo($(this).find('.circle.to'));
-        };
-    });
+
     $('.element img.bg-logo').each(function(){
         var offset = $(this).offset().top + 0.5 * $(this).height() - 0.6 * $('#edu-home').height();
         $(this).css({
@@ -25,6 +23,41 @@ function scrollAnimations() {
     $('.pano').each(function(){
         var offset = $(this).offset().top - $('#edu-home').height();
         $(this).css({'background-position-y': 0.3 * offset - 0.8 * $(this).height()});
+    });
+}
+
+function scrollEndAnimations() {
+    commonScrollAnimations(this);
+    $('.element').each(function(i){
+        if ($(this).offset().top < $('#edu-home').height() &&
+            $(this).offset().top > - $(this).outerHeight(true)) {
+            if (!circlesToAnimated[i]) {
+                circlesToAnimated[i] = true;
+                animateCircleTo($(this).find('.circle.to'));
+                $(this).find('.temp div').each(function(i){
+                    var height = $(this).height();
+                    var width = parseInt($(this).width(), 10);
+                    var obj = $(this);
+                    $({ val: 0 }).delay(i * 25).animate({ val: width }, {
+                        duration: 600,
+                        easing: 'swing',
+                        step: function (now) {
+                            obj.css({
+                                clip: 'rect(0, ' + now + 'px, ' + height + 'px, 0)'
+                            })
+                        }
+                    });
+                })
+            };
+        } else {
+            if (circlesToAnimated[i]) {
+                circlesToAnimated[i] = false;
+                recoverCircleTo($(this).find('.circle.to'));
+                $(this).find('.temp div').each(function(i){
+                    $(this).css({clip: 'rect(0, 0px, ' + $(this).height() + 'px, 0)'});
+                });
+            };
+        };
     });
 }
 
@@ -48,10 +81,10 @@ $(window).load(function(){
     scrollContentEdu.refresh();
 
     scrollContentEdu.on('scroll', scrollAnimations);
-    scrollContentEdu.on('scrollEnd', scrollAnimations);
+    scrollContentEdu.on('scrollEnd', scrollEndAnimations);
     startY = scrollContentEdu.y;
 
-
+    copyTexts($('.element .content').children().not('.temp'));
     // fadeout cover and show the main page
     $('body')
     .queue(function(next){
@@ -69,6 +102,15 @@ $(window).load(function(){
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 $(document).ready(function(){
+
+    $('.element').each(function(){
+        circlesToAnimated.push(false);
+    });
+
+    // $('.content h1').click(function(){
+    //     copyTexts($(this).parent().children().not('.temp'));
+    // })
+    // copyTexts($('#tsinghua .content').children().not('.temp'));
 
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

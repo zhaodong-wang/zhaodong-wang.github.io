@@ -61,9 +61,7 @@ $(window).load(function(){
     scrollContentIndex = new IScroll('#scroll-content', {
         probeType: 3,
         mouseWheel: true,
-        click: true,
-        useTransition: false,
-        bindToWrapper: true
+        click: true
     });
 
     updateSizes();

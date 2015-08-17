@@ -200,20 +200,111 @@ function animateStroke(obj, endPercent) {
 
 function animateCircleTo(obj) {
     if (obj.css('opacity') == 0) {
-        obj.animate({
-            'opacity': 1,
-            'bottom': 0
-        }, {
-            duration: 500,
-            queue: false
+        obj.queue(function(next){
+            addFromCircle(obj.prev().prev());
+            next();
         })
-        obj.prev().animate({
-            'height': '38px'
-        }, {
-            duration: 500,
-            queue: false
+        .delay(600)
+        .queue(function(next){
+            obj.animate({
+                'opacity': 1,
+                'bottom': 0
+            }, {
+                duration: 500,
+                queue: false
+            });
+            obj.prev().animate({
+                'height': '38px'
+            }, {
+                duration: 500,
+                queue: false
+            });
+            next();
+        })
+        .delay(600)
+        .queue(function(next){
+            addToCircle(obj);
+            next();
         })
     };
+}
+
+function recoverCircleTo(obj) {
+    if (obj.css('opacity') == 1) {
+        obj.removeAttr('style');
+        obj.prev().removeAttr('style');
+    }
+}
+
+
+function copyTexts(obj) {
+    obj.each(function(){
+        var element = $(this);
+        var clone = element.clone();
+
+        clone.attr('style', element.attr('style'));
+        clone.addClass('temp');
+        clone.css({
+            opacity: 1,
+            position: 'absolute',
+            width: element.width(),
+            height: element.height(),
+        });
+        var elmText = clone.html();
+        clone.html(function(ind, htm){
+            // returns all spaces or tags with their content
+            var $repText = '<span>' + elmText.replace(/(<\s*.*?[^>]*>(.*?)<\s*\s*.*?>)|(\s+)/ig, '$1 </span><span>');
+            $repText = $repText + '</span>';
+            return $repText;
+        });
+        element.before(clone);
+    });
+
+    obj.parent().children('.temp').each(function(){
+        var clone = $(this);
+        var lineHeight = clone.css('line-height');
+        var line;
+        var lines = [];
+        var words = clone.children('span');
+        var lastTop;
+        for (var i = 0; i < words.length; i++) {
+            var word = words[i];
+            if ($(word).offset().top != lastTop) {
+              lastTop = $(word).offset().top;
+              line = [];
+              lines.push(line);
+            }
+            line.push(word.outerHTML);
+        };
+        clone.empty();
+        for (var i = 0; i < lines.length; i++) {
+            clone.append("<div class='line" + (i + 1) + "'>" + lines[i].join(' ') + "</div>");
+        };
+        clone.children('div').each(function(i){
+            $(this).css({
+                display: 'block',
+                opacity: 0.9,
+                position: 'absolute',
+                top: i * parseInt(lineHeight, 10) + 'px',
+                clip: 'rect(0, 0,' + lineHeight + ', 0)'
+            });
+        })
+        if (clone.css('text-align') == 'left') {
+            clone.children('div').each(function(i){
+                $(this).css({
+                    'text-align': 'left',
+                    left: 0,
+                });
+            })
+        } else {
+            clone.children('div').each(function(i){
+                $(this).css({
+                    'text-align': 'right',
+                    right: 0,
+                });
+            })
+        };
+    })
 }
 
 /*-----------------------------------------------------------------------------------*/

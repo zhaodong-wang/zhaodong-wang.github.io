@@ -5,36 +5,48 @@
 
 var indexToLightUp;
 var indexToLightUpTemp;
+var circlesToAnimated = [];
 
 function scrollAnimations() {
     commonScrollAnimations(this);
     ratio = this.y / $('#proj-home').height();
-    if ($('#papers').offset().top < 100 || ifBottom) {
-        var minDistance = Number.POSITIVE_INFINITY;
-
-        // get the index of closest item
-        $('.element').each(function(i){
-            var distTemp = Math.abs($(this).offset().top - 0.5 * $('#proj-home').height());
-            if (distTemp <= minDistance) {
-                minDistance = distTemp;
-                indexToLightUp = i;
-            }
-        });
-
-        // light up the item that is nearest to the center of the window
-        $('.element').each(function(i){
-            if (i == indexToLightUp) {
-                if ((typeof indexToLightUpTemp == 'undefined') ||
-                    (indexToLightUpTemp != indexToLightUp)) {
-                    addToCircle($(this).find('.circle.to'), 700, 1.3);
-                    indexToLightUpTemp = indexToLightUp;
-                }
-            }
-        });
-    }
     if ($('#pub-home').next().offset().top > 0) {
         $('#pub-home').css({'background-position-y': -0.5 * this.y});
     };
+}
+
+function scrollEndAnimations() {
+    commonScrollAnimations(this);
+    $('.element').each(function(i){
+        if ($(this).offset().top < $('#pub-home').height() &&
+            $(this).offset().top > - $(this).outerHeight(true)) {
+            if (!circlesToAnimated[i]) {
+                circlesToAnimated[i] = true;
+                addToCircle($(this).find('.circle.to'), 700, 1.3);
+                $(this).find('.temp div').each(function(i){
+                    var height = $(this).height();
+                    var width = parseInt($(this).width(), 10);
+                    var obj = $(this);
+                    $({ val: 0 }).delay(i * 25).animate({ val: width }, {
+                        duration: 600,
+                        easing: 'swing',
+                        step: function (now) {
+                            obj.css({
+                                clip: 'rect(0, ' + now + 'px, ' + height + 'px, 0)'
+                            })
+                        }
+                    });
+                })
+            };
+        } else {
+            if (circlesToAnimated[i]) {
+                circlesToAnimated[i] = false;
+                $(this).find('.temp div').each(function(i){
+                    $(this).css({clip: 'rect(0, 0px, ' + $(this).height() + 'px, 0)'});
+                });
+            };
+        };
+    });
 }
 
 var scrollContentPub;
@@ -57,10 +69,11 @@ $(window).load(function(){
     scrollContentPub.refresh();
 
     scrollContentPub.on('scroll', scrollAnimations);
-    scrollContentPub.on('scrollEnd', scrollAnimations);
+    scrollContentPub.on('scrollEnd', scrollEndAnimations);
     startY = scrollContentPub.y;
 
 
+    copyTexts($('.element .publication').children().not('.temp'));
     // fadeout cover and show the main page
     $('body')
     .queue(function(next){
@@ -86,6 +99,10 @@ $(document).ready(function(){
     $('.circle.to').css({
         'opacity': 1,
         'bottom': 0
+    });
+
+    $('.element').each(function(){
+        circlesToAnimated.push(false);
     });
     // device detection
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

@@ -257,6 +257,10 @@
     text-align: right;
 }
 
+.content h1, .content h2, .content h3, .content p {
+    opacity: 0.3;
+}
+
 .content h1 {
     color: #333;
     margin: 0;
