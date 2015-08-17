@@ -31,9 +31,16 @@ function scrollEndAnimations() {
                         duration: 600,
                         easing: 'swing',
                         step: function (now) {
-                            obj.css({
-                                clip: 'rect(0, ' + now + 'px, ' + height + 'px, 0)'
-                            })
+                            if (obj.hasClass('text-center')) {
+                                obj.css({
+                                    clip: 'rect(0, ' + (width/2 + now/2) + 'px, ' + height + 'px, ' + (width/2 - now/2) + 'px)'
+                                })
+                            } else {
+                                obj.css({
+                                    clip: 'rect(0, ' + now + 'px, ' + height + 'px, 0)'
+                                })
+                            };
+
                         }
                     });
                 })
@@ -42,7 +49,13 @@ function scrollEndAnimations() {
             if (circlesToAnimated[i]) {
                 circlesToAnimated[i] = false;
                 $(this).find('.temp div').each(function(i){
-                    $(this).css({clip: 'rect(0, 0px, ' + $(this).height() + 'px, 0)'});
+                    if ($(this).hasClass('text-center')) {
+                        $(this).css({
+                            clip: 'rect(0, ' + $(this).width()/2 + 'px, ' + $(this).height() + 'px, ' + $(this).width()/2 + 'px)'
+                        });
+                    } else {
+                        $(this).css({clip: 'rect(0, 0px, ' + $(this).height() + 'px, 0)'});
+                    }
                 });
             };
         };
@@ -72,8 +85,8 @@ $(window).load(function(){
     scrollContentPub.on('scrollEnd', scrollEndAnimations);
     startY = scrollContentPub.y;
 
-
     copyTexts($('.element .publication').children().not('.temp'));
+    copyTexts($('.title h1').not('.temp'), "center");
     // fadeout cover and show the main page
     $('body')
     .queue(function(next){

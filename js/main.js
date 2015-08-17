@@ -237,7 +237,8 @@ function recoverCircleTo(obj) {
 }
 
 
-function copyTexts(obj) {
+function copyTexts(obj, align) {
+    var align = align || "left";
     obj.each(function(){
         var element = $(this);
         var clone = element.clone();
@@ -263,6 +264,9 @@ function copyTexts(obj) {
     obj.parent().children('.temp').each(function(){
         var clone = $(this);
         var lineHeight = clone.css('line-height');
+        if (lineHeight == "normal") {
+            lineHeight = clone.height() + 'px';
+        };
         var line;
         var lines = [];
         var words = clone.children('span');
@@ -285,23 +289,53 @@ function copyTexts(obj) {
                 display: 'block',
                 opacity: 0.9,
                 position: 'absolute',
-                top: i * parseInt(lineHeight, 10) + 'px',
-                clip: 'rect(0, 0,' + lineHeight + ', 0)'
+                top: i * parseInt(lineHeight, 10) + 'px'
             });
         })
+        if (align == "left") {
+            clone.children('div').each(function(i){
+                $(this).css({
+                    clip: 'rect(0, 0,' + lineHeight + ', 0)'
+                });
+            })
+        } else if (align == "center") {
+            clone.children('div').each(function(i){
+                var sss = 'rect(0, ' + $(this).width()/2 + 'px, ' + lineHeight + ', ' + $(this).width()/2 + 'px)';
+                $(this).css({
+                    clip: 'rect(0, ' + $(this).width()/2 + 'px, ' + lineHeight + ', ' + $(this).width()/2 + 'px)'
+                });
+            })
+        } else {
+            clone.children('div').each(function(i){
+                $(this).css({
+                    clip: 'rect(0, ' + $(this).width() + 'px, ' + lineHeight + ', ' + $(this).width() + 'px)'
+                });
+            })
+        };
         if (clone.css('text-align') == 'left') {
             clone.children('div').each(function(i){
                 $(this).css({
                     'text-align': 'left',
                     left: 0,
                 });
+                $(this).addClass('text-left');
             })
-        } else {
+        } else if (clone.css('text-align') == 'right') {
             clone.children('div').each(function(i){
                 $(this).css({
                     'text-align': 'right',
                     right: 0,
                 });
+                $(this).addClass('text-right');
+            })
+        } else {
+            clone.children('div').each(function(i){
+                $(this).css({
+                    'text-align': 'center',
+                    right: 0,
+                    left: 0
+                });
+                $(this).addClass('text-center');
             })
         };
     })
