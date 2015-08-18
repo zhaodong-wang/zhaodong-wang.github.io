@@ -58,6 +58,8 @@ var scrollContentProj;
 $(window).resize(function(){
    updateSizes();
    if (!scrollContentProj) scrollContentProj.refresh();
+   $('.temp').remove();
+   copyTexts($('.element .content').children().not('.temp'));
 });
 
 $(window).load(function(){

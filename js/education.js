@@ -66,6 +66,8 @@ var scrollContentEdu;
 $(window).resize(function(){
    updateSizes();
    if (!scrollContentEdu) scrollContentEdu.refresh();
+   $('.temp').remove();
+   copyTexts($('.element .content').children().not('.temp'));
 });
 
 $(window).load(function(){

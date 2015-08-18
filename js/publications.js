@@ -65,8 +65,11 @@ function scrollEndAnimations() {
 var scrollContentPub;
 
 $(window).resize(function(){
-   updateSizes();
-   if (!scrollContentPub) scrollContentPub.refresh();
+    updateSizes();
+    if (!scrollContentPub) scrollContentPub.refresh();
+    $('.temp').remove();
+    copyTexts($('.element .publication').children().not('.temp'));
+    copyTexts($('.title h1').not('.temp'), "center");
 });
 
 $(window).load(function(){
