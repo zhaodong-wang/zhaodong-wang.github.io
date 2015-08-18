@@ -631,6 +631,7 @@
     background-size: 100% auto;
     height: 40vh;
     width: 100vw;
+    position: relative;
 }
 
 #tsinghua-bg {
@@ -645,3 +646,20 @@
     background-image: url(../img/auto-car-bg-min.jpg);
 }
 
+.pano img {
+    position: absolute;
+    height: auto;
+    z-index: 2;
+}
+
+#google-driverless-car {
+    width: 170px;
+    bottom: -100px;
+    left: 10%;
+}
+
+#csx {
+    width: 250px;
+    bottom: -150px;
+    right: 10%;
+}

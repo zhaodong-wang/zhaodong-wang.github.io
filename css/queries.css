@@ -398,4 +398,24 @@
 	    height: auto;
 	}
 
+	#locomotive-bg {
+	    background-size: auto 200%;
+	}
+
+	#auto-car-bg {
+	    background-size: auto 200%;
+	}
+
+	#google-driverless-car {
+	    width: 120px;
+	    height: auto;
+	    bottom: -80px;
+	}
+
+	#csx {
+	    width: 180px;
+	    bottom: -100px;
+	    right: 5%;
+	}
+
 }

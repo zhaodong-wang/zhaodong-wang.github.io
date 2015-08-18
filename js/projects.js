@@ -15,6 +15,11 @@ function scrollAnimations() {
     $('.pano').each(function(){
         var offset = $(this).offset().top - $('#proj-home').height();
         $(this).css({'background-position-y': 0.3 * offset - 0.3 * $(this).height()});
+        $(this).children('img').css({
+            '-webkit-transform': 'translateY(' + (offset + 0.5 * $('#proj-home').height()) * 0.2 + 'px)',
+            '-moz-transform': 'translateY(' + (offset + 0.5 * $('#proj-home').height()) * 0.2 + 'px)',
+            'transform': 'translateY(' + (offset + 0.5 * $('#proj-home').height()) * 0.2 + 'px)'
+        });
     });
 }
 
