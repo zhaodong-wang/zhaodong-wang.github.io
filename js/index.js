@@ -163,7 +163,7 @@ $(document).ready(function(){
             })
         });
         $('.contact-wrapper').each(function(){
-            $(this).on('touchstart', function(){
+            $(this).click(function(){
                 $(this).toggleClass('active');
             });
         });
