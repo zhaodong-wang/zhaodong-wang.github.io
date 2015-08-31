@@ -119,24 +119,31 @@ $(document).ready(function(){
         // toggle Menu
         $('.circle.from').each(function(){
             $(this).on('touchstart', function(){
-                addFromCircle($(this));
+                if ($(this).next().next().css('opacity') == 1) {
+                    addFromCircle($(this));
+                };
             });
         });
         $('.circle.to').each(function(){
             $(this).on('touchstart', function(){
-                addToCircle($(this));
+                if ($(this).css('opacity') == 1) {
+                    addToCircle($(this));
+                };
             });
         });
     } else {
         $('.circle.from').each(function(){
             $(this).mouseenter(function(){
-                addFromCircle($(this));
+                if ($(this).next().next().css('opacity') == 1) {
+                    addFromCircle($(this));
+                };
             });
         });
         $('.circle.to').each(function(){
             $(this).mouseenter(function(event){
-                event.stopPropagation();
-                addToCircle($(this));
+                if ($(this).css('opacity') == 1) {
+                    addToCircle($(this));
+                };
             });
         });
     }
