@@ -289,6 +289,7 @@ function copyTexts(obj, align) {
                 display: 'block',
                 opacity: 0.9,
                 position: 'absolute',
+                width: '100%',
                 top: i * parseInt(lineHeight, 10) + 'px'
             });
         })
