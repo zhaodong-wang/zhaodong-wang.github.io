@@ -59,7 +59,7 @@ $(window).load(function(){
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
-var skillPercents = ['75%', '65%', '65%', '50%', '80%', '50%'];
+var skillPercents = ['80%', '75%', '65%', '65%', '50%', '40%'];
 
 $(document).ready(function(){
 
