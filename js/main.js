@@ -60,6 +60,8 @@ function slideShowIterative(obj, numChild, duration, easing) {
     .animate({translateY: '600%'}, duration, easing)
     .delay(1500)
     .animate({translateY: '700%'}, duration, easing)
+    .delay(1500)
+    .animate({translateY: '800%'}, duration, easing)
     .animate({translateY: '0'}, 0, 'linear')
     .delay(500)
     .queue(function(next){
