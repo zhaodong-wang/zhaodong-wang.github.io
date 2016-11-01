@@ -638,6 +638,10 @@
     background-image: url(../img/tsinghua-bg-min.jpg);
 }
 
+#machine-learning-bg {
+    background-image: url(../img/ml-min.jpg);
+}
+
 #locomotive-bg {
     background-image: url(../img/locomotive-bg-min.jpg);
 }
@@ -662,4 +666,10 @@
     width: 250px;
     bottom: -150px;
     right: 10%;
+}
+
+#mlp {
+    width: 180px;
+    top: 10px;
+    left: 10%;
 }
