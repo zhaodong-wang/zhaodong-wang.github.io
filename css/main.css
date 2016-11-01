@@ -609,6 +609,8 @@ h3.detail_info {
     border-radius: 1.5px;
     top: 40px;
     left: 24px;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(0px,0px,0px);
     -webkit-transition: -webkit-transform .1s cubic-bezier(0.6, 0, .4, 1);
     -moz-transition: -moz-transform .1s cubic-bezier(0.6, 0, .4, 1);
     transition: transform .1s cubic-bezier(0.6, 0, .4, 1);
