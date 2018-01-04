@@ -250,8 +250,8 @@ function copyTexts(obj, align) {
         clone.css({
             opacity: 1,
             position: 'absolute',
-            width: element.width(),
-            height: element.height(),
+            width: element[0].getBoundingClientRect().width,
+            height: element[0].getBoundingClientRect().height,
         });
         var elmText = clone.html();
         clone.html(function(ind, htm){
@@ -303,15 +303,14 @@ function copyTexts(obj, align) {
             })
         } else if (align == "center") {
             clone.children('div').each(function(i){
-                var sss = 'rect(0, ' + $(this).width()/2 + 'px, ' + lineHeight + ', ' + $(this).width()/2 + 'px)';
                 $(this).css({
-                    clip: 'rect(0, ' + $(this).width()/2 + 'px, ' + lineHeight + ', ' + $(this).width()/2 + 'px)'
+                    clip: 'rect(0, ' + $(this)[0].getBoundingClientRect().width/2 + 'px, ' + lineHeight + ', ' + $(this)[0].getBoundingClientRect().width/2 + 'px)'
                 });
             })
         } else {
             clone.children('div').each(function(i){
                 $(this).css({
-                    clip: 'rect(0, ' + $(this).width() + 'px, ' + lineHeight + ', ' + $(this).width() + 'px)'
+                    clip: 'rect(0, ' + $(this)[0].getBoundingClientRect().width + 'px, ' + lineHeight + ', ' + $(this)[0].getBoundingClientRect().width + 'px)'
                 });
             })
         };

@@ -638,6 +638,10 @@
     background-image: url(../img/tsinghua-bg-min.jpg);
 }
 
+#svc-traffic-bg {
+    background-image: url(../img/networking.jpg);
+}
+
 #machine-learning-bg {
     background-image: url(../img/ml-min.jpg);
 }
@@ -670,6 +674,12 @@
 
 #mlp {
     width: 180px;
+    top: 10px;
+    left: 10%;
+}
+
+#svc {
+    width: 80px;
     top: 10px;
     left: 10%;
 }
