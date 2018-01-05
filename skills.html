@@ -82,7 +82,7 @@
             <li onclick="pageTransition($('body'), 'education.html');">EDUCATION</li>
             <li onclick="pageTransition($('body'), 'projects.html');">PROJECTS</li>
             <li onclick="pageTransition($('body'), 'publications.html');">PUBLICATIONS</li>
-            <li onclick="move(scrollContentSkill, '#skill-main', 0); toggleMenu();">SKILLS</li>
+            <li onclick="move(scrollContentSkill, '#skill-software', 0); toggleMenu();">SKILLS</li>
         </ul>
     </nav>
 
@@ -97,24 +97,34 @@
                     <div class="sub-title">
                         <h2>Coding</h2>
                         <hr class="small">
-                        <p>Sept. 09 &#8211; Oct. 16</p>
+                        <p>Sept. 09 &#8211; Dec. 17</p>
                     </div>
                 </div>
-                <div class="next-logo hide" onclick="move(scrollContentSkill, '#skill-main', 0)">
+                <div class="next-logo hide" onclick="move(scrollContentSkill, '#skill-software', 0)">
                     <div class="next-logo-left"></div>
                     <div class="next-logo-right"></div>
                 </div>
             </div>
         </div>
 
-        <div id="skill-main" class="element bg-white">
+        <div id="skill-software" class="element bg-white">
             <div class="title">
-                <h1>Technical skills</h1>
+                <h1>Software development</h1>
                 <p class="italic">I'm really good at</p>
             </div>
             <div class="skills-container">
+                <div class="skills">C++</div>
+                <div class="line" id="cpp"></div>
+                <div class="skills percent">0%</div>
+            </div>
+            <div class="skills-container">
                 <div class="skills">Python</div>
-                <div class="line" id="html-css"></div>
+                <div class="line" id="python"></div>
+                <div class="skills percent">0%</div>
+            </div>
+            <div class="skills-container">
+                <div class="skills">Java</div>
+                <div class="line" id="java"></div>
                 <div class="skills percent">0%</div>
             </div>
             <div class="skills-container">
@@ -124,22 +134,39 @@
             </div>
             <div class="skills-container">
                 <div class="skills">Javascript</div>
-                <div class="line" id="html-css"></div>
+                <div class="line" id="javascript"></div>
+                <div class="skills percent">0%</div>
+            </div>
+        </div>
+
+        <div id="skill-tools" class="element bg-white">
+            <div class="title">
+                <h1>Data tools</h1>
+                <p class="italic">I'm familiar with</p>
+            </div>
+            <div class="skills-container">
+                <div class="skills">Hive (Presto)</div>
+                <div class="line" id="hive-presto"></div>
                 <div class="skills percent">0%</div>
             </div>
             <div class="skills-container">
-                <div class="skills">C</div>
-                <div class="line" id="html-css"></div>
+                <div class="skills">Scuba</div>
+                <div class="line" id="scuba"></div>
                 <div class="skills percent">0%</div>
             </div>
             <div class="skills-container">
-                <div class="skills">C++</div>
-                <div class="line" id="html-css"></div>
+                <div class="skills">ODS</div>
+                <div class="line" id="ods"></div>
                 <div class="skills percent">0%</div>
             </div>
             <div class="skills-container">
-                <div class="skills">Java</div>
-                <div class="line" id="html-css"></div>
+                <div class="skills">MySQL</div>
+                <div class="line" id="mysql"></div>
+                <div class="skills percent">0%</div>
+            </div>
+            <div class="skills-container">
+                <div class="skills">DataSwarm</div>
+                <div class="line" id="dataswarm"></div>
                 <div class="skills percent">0%</div>
             </div>
         </div>

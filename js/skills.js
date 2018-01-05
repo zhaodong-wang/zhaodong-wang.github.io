@@ -3,18 +3,29 @@
 /* Copyright (c) 2015. All rights reserved. */
 /*********************************************************/
 
-var strokeAnimated = false;
+var strokeSoftwareAnimated = false;
+var strokeDataToolsAnimated = false;
 function scrollAnimations() {
     commonScrollAnimations(this);
     ratio = this.y / $('#skill-home').height();
-    if ($('#skill-main').offset().top < 100 || ifBottom) {
-        if (!strokeAnimated) {
-            $('.line').each(function(index){
-                animateStroke($(this), skillPercents[index]);
+    if ($('#skill-software').offset().top < 100 || ifBottom) {
+        if (!strokeSoftwareAnimated) {
+            strokeSoftwareAnimated = true;
+            $('#skill-software').find('.line').each(function(index){
+                animateStroke($(this), skillSoftwarePct[index]);
             });
-            strokeAnimated = true;
         };
     }
+
+    if ($('#skill-tools').offset().top < 100 || ifBottom) {
+        if (!strokeDataToolsAnimated) {
+            strokeDataToolsAnimated = true;
+            $('#skill-tools').find('.line').each(function(index){
+                animateStroke($(this), skillDataToolsPct[index]);
+            });
+        };
+    }
+
     if ($('#skill-home').next().offset().top > 0) {
         $('#skill-home').css({'background-position-y': -0.5 * this.y});
     };
@@ -59,7 +70,9 @@ $(window).load(function(){
 
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
-var skillPercents = ['80%', '75%', '65%', '65%', '50%', '40%'];
+var skillSoftwarePct = ['75%', '75%', '65%', '65%', '50%'];
+
+var skillDataToolsPct = ['75%', '60%', '65%', '55%', '50%'];
 
 $(document).ready(function(){
 
