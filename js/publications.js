@@ -103,7 +103,7 @@ $(window).load(function(){
     });
     setTimeout(function(){
         animateNumber($('#paper-counter'), 4);
-        animateNumber($('#manu-counter'), 1);
+        animateNumber($('#manu-counter'), 6);
         animateNumber($('#conf-counter'), 8);
     }, 500);
     scrollAnimations();
