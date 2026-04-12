@@ -1,0 +1,129 @@
+/* Brandon Grotesque — primary body/UI font */
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Thin_italic.woff2') format('woff2');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Light_italic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Regular_Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Medium_italic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Bold_Italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon';
+  src: url('/fonts/brandon/BrandonGrotesque_Black_italic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Adobe Caslon Pro — italic/accent font */
+@font-face {
+  font-family: 'ACaslon';
+  src: url('/fonts/acaslon/ACaslonProRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ACaslon';
+  src: url('/fonts/acaslon/ACaslonProItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ACaslon';
+  src: url('/fonts/acaslon/ACaslonProSemibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ACaslon';
+  src: url('/fonts/acaslon/ACaslonProSemiboldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ACaslon';
+  src: url('/fonts/acaslon/ACaslonProBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ACaslon';
+  src: url('/fonts/acaslon/ACaslonProBoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
