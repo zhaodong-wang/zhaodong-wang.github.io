@@ -1,0 +1,35 @@
+@import './tokens.css';
+@import './reset.css';
+
+h1, h2, h3, h4 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-upper);
+  text-transform: uppercase;
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 {
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+}
+h4 { font-size: var(--text-base); }
+
+em, i, .italic {
+  font-family: var(--font-accent);
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+a {
+  color: var(--color-accent-deep);
+  transition: color var(--dur-fast) var(--ease-smooth);
+}
+a:hover { color: var(--color-accent); }
+
+.container {
+  width: min(100% - 2rem, var(--content-max));
+  margin-inline: auto;
+}

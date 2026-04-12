@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Zhaodong Wang">
+  <main class="container">
+    <section class="hero">
+      <h1>Zhaodong<br />Wang</h1>
+      <h2>Meta Superintelligence Lab</h2>
+      <h3>Senior Staff Research Scientist</h3>
+      <p class="note">
+        Astro scaffold is live. Design tokens loaded from
+        <em>src/styles/tokens.css</em>. This placeholder will be replaced in
+        Phase 2 with the ported home page.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .hero {
+    padding: calc(var(--header-h) + var(--section-pad)) 0 var(--section-pad);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .note {
+    margin-top: var(--section-pad);
+    max-width: 60ch;
+    color: var(--color-ink-soft);
+  }
+</style>

@@ -1,0 +1,67 @@
+:root {
+  /* === Color — ported from css/main.css === */
+  --color-accent: #bc8420;
+  --color-accent-deep: #714f13;
+
+  --color-ink: #000;
+  --color-ink-soft: #333;
+  --color-ink-softer: #555;
+  --color-ink-softest: #666;
+  --color-rule: #aaa;
+  --color-rule-soft: #ccc;
+  --color-rule-softer: #ddd;
+  --color-rule-softest: #eee;
+
+  --color-surface: #fff;
+  --color-surface-dark: #222;
+  --color-surface-darker: #111;
+
+  /* === Typography === */
+  --font-body: 'Brandon', 'MyriadSet Pro', 'Kozuka Gothic Pro',
+    'Segoe UI Light', 'Source Sans Pro', system-ui, sans-serif;
+  --font-accent: 'ACaslon', Georgia, 'Times New Roman', serif;
+
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-base: 20px;
+  --text-lg: 28px;
+  --text-xl: 40px;
+  --text-2xl: 64px;
+  --text-3xl: 96px;
+
+  --tracking-upper: 0.125em;
+  --leading-tight: 1;
+  --leading-snug: 1.25;
+  --leading-body: 1.5;
+
+  /* === Motion — the two signature curves from the old site === */
+  --ease-smooth: cubic-bezier(0.6, 0, 0.4, 1);
+  --ease-snap: cubic-bezier(0.835, 0, 0.19, 1);
+  --dur-fast: 240ms;
+  --dur-med: 480ms;
+  --dur-slow: 960ms;
+
+  /* === Layout === */
+  --header-h: 90px;
+  --section-pad: 60px;
+  --content-max: 1200px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --header-h: 60px;
+    --section-pad: 40px;
+    --text-base: 16px;
+    --text-lg: 22px;
+    --text-xl: 32px;
+    --text-2xl: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+  }
+}
