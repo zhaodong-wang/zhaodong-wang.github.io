@@ -1,0 +1,218 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+const links: Link[] = [
+  { label: 'Home', href: '/#home' },
+  { label: 'About', href: '/#about' },
+  { label: 'Education', href: '/education/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'Publications', href: '/publications/' },
+  { label: 'Skills', href: '/skills/' },
+  { label: 'Contact', href: '/#contact' },
+];
+---
+
+<header class="site-header">
+  <a href="/#home" class="site-header__logo" aria-label="Home">
+    <img src="/img/myIcon.svg" alt="" width="60" height="60" />
+  </a>
+  <button
+    class="site-header__menu"
+    type="button"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="site-drawer"
+    data-menu-toggle
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav
+  id="site-drawer"
+  class="site-drawer"
+  aria-hidden="true"
+  aria-label="Main navigation"
+  data-drawer
+>
+  <div class="site-drawer__fill" aria-hidden="true"></div>
+  <ul class="site-drawer__list">
+    <li class="site-drawer__title"><em>Menu</em></li>
+    {links.map((link) => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: var(--header-h);
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .site-header__logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--header-h);
+    height: var(--header-h);
+    display: grid;
+    place-items: center;
+    background: var(--color-surface-dark);
+    pointer-events: auto;
+    transition: transform var(--dur-med) var(--ease-snap);
+  }
+  .site-header__logo img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+  }
+  @media (max-width: 600px) {
+    .site-header__logo img { width: 65%; height: 65%; }
+  }
+
+  .site-header__menu {
+    position: absolute;
+    right: clamp(1rem, 4vw, 3rem);
+    top: 50%;
+    translate: 0 -50%;
+    width: 44px;
+    height: 30px;
+    pointer-events: auto;
+    display: grid;
+    align-content: space-between;
+  }
+  .site-header__menu span {
+    display: block;
+    height: 2px;
+    background: var(--color-ink-softest);
+    transition: transform var(--dur-med) var(--ease-smooth),
+      opacity var(--dur-fast) var(--ease-smooth);
+    transform-origin: right center;
+  }
+  .site-header__menu[aria-expanded='true'] span:nth-child(1) {
+    transform: translateX(-3px) rotate(-45deg);
+  }
+  .site-header__menu[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+  .site-header__menu[aria-expanded='true'] span:nth-child(3) {
+    transform: translateX(-3px) rotate(45deg);
+  }
+
+  /* Drawer */
+  .site-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .site-drawer.is-open {
+    pointer-events: auto;
+    visibility: visible;
+  }
+  .site-drawer__fill {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transition: opacity var(--dur-med) var(--ease-smooth);
+  }
+  .site-drawer.is-open .site-drawer__fill {
+    opacity: 1;
+  }
+
+  .site-drawer__list {
+    position: absolute;
+    top: 12%;
+    right: 8%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: right;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35em;
+  }
+  .site-drawer__list li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--dur-med) var(--ease-smooth),
+      transform var(--dur-med) var(--ease-smooth);
+  }
+  .site-drawer.is-open .site-drawer__list li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .site-drawer__list li:nth-child(1) { transition-delay: 120ms; }
+  .site-drawer__list li:nth-child(2) { transition-delay: 180ms; }
+  .site-drawer__list li:nth-child(3) { transition-delay: 220ms; }
+  .site-drawer__list li:nth-child(4) { transition-delay: 260ms; }
+  .site-drawer__list li:nth-child(5) { transition-delay: 300ms; }
+  .site-drawer__list li:nth-child(6) { transition-delay: 340ms; }
+  .site-drawer__list li:nth-child(7) { transition-delay: 380ms; }
+  .site-drawer__list li:nth-child(8) { transition-delay: 420ms; }
+
+  .site-drawer__title {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: var(--text-lg);
+    margin-bottom: 0.25em;
+  }
+  .site-drawer__list a {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-upper);
+    font-weight: 500;
+    font-size: var(--text-lg);
+    color: #fff;
+    transition: color var(--dur-fast) var(--ease-smooth);
+  }
+  .site-drawer__list a:hover,
+  .site-drawer__list a:focus-visible {
+    color: var(--color-accent);
+  }
+
+  :global(body.drawer-open) {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const drawer = document.querySelector<HTMLElement>('[data-drawer]');
+  if (toggle && drawer) {
+    const open = () => {
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('drawer-open');
+    };
+    const close = () => {
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('drawer-open');
+    };
+    toggle.addEventListener('click', () => {
+      drawer.classList.contains('is-open') ? close() : open();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
+    });
+    drawer.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', close);
+    });
+  }
+</script>

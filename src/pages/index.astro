@@ -1,33 +1,432 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ScrollWords from '../components/ScrollWords.astro';
+import NextArrow from '../components/NextArrow.astro';
+import Socials from '../components/Socials.astro';
+
+const scrollWords = [
+  'Machine Learning',
+  'Large Language Models',
+  'AI Agents',
+  'Distributed Systems',
+  'Research',
+  'Frontend',
+  'Backend',
+  'Applications',
+];
+
+const mosaics = [
+  { id: 'education', title: 'Education', tag: 'Academic Career', date: '17', year: '09' },
+  { id: 'projects', title: 'Projects', tag: 'Research & Industry', date: '24', year: '13' },
+  { id: 'publications', title: 'Publications', tag: 'Papers & Talks', date: '25', year: '15' },
+  { id: 'skills', title: 'Skills', tag: 'Craft', date: '26', year: '09' },
+];
 ---
 
 <Layout title="Zhaodong Wang">
-  <main class="container">
-    <section class="hero">
-      <h1>Zhaodong<br />Wang</h1>
-      <h2>Meta Superintelligence Lab</h2>
-      <h3>Senior Staff Research Scientist</h3>
-      <p class="note">
-        Astro scaffold is live. Design tokens loaded from
-        <em>src/styles/tokens.css</em>. This placeholder will be replaced in
-        Phase 2 with the ported home page.
-      </p>
-    </section>
-  </main>
+  <!-- HERO / HOME -->
+  <section id="home" class="home">
+    <img
+      src="/img/home.png"
+      alt=""
+      class="home__bg"
+      width="2918"
+      height="1026"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <div class="home__inner">
+      <h1 class="home__title">Zhaodong</h1>
+      <h1 class="home__title">Wang</h1>
+      <h2 class="home__info">Meta Superintelligence Lab</h2>
+      <h3 class="home__info home__info--sub">Senior Staff Research Scientist</h3>
+      <div class="home__words">
+        <ScrollWords items={scrollWords} />
+      </div>
+    </div>
+    <NextArrow href="#about" />
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="about__inner">
+      <div class="about__pic">
+        <img
+          src="/img/profile.png"
+          alt="Portrait sketch of Zhaodong Wang"
+          width="364"
+          height="504"
+          loading="lazy"
+        />
+      </div>
+      <div class="about__body">
+        <h2 class="about__heading">Who am I</h2>
+        <p>
+          I'm currently a Senior Staff Research Scientist at
+          <strong>Meta Superintelligence Lab</strong>, working at the
+          intersection of machine learning, large language models, AI agents,
+          and the systems that run them. I design, build, and ship end-to-end
+          AI products — from research prototypes through production frontend
+          and backend systems.
+        </p>
+        <p>
+          I earned my Ph.D. in Transportation and M.S. in Applied Mathematics
+          at the
+          <a href="https://illinois.edu/">University of Illinois at Urbana&#8209;Champaign</a>,
+          and a B.E. in Civil Engineering and Economics at
+          <a href="https://www.tsinghua.edu.cn/en/">Tsinghua University</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallary" class="gallery">
+    <div class="gallery__grid">
+      {mosaics.map((m) => (
+        <a class={`mosaic mosaic--${m.id}`} href={`/${m.id}/`}>
+          <div class="mosaic__cover"></div>
+          <div class="mosaic__meta">
+            <p class="mosaic__tag"><em>{m.tag}</em></p>
+            <hr />
+            <p class="mosaic__date">{m.date}/<br />{m.year}</p>
+          </div>
+          <div class="mosaic__title"><h2>{m.title}</h2></div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="contact__inner">
+      <div class="contact__columns">
+        <div class="contact__column">
+          <img src="/img/email.svg" alt="" width="40" height="40" />
+          <a href="mailto:zhaodong.wang.1992@gmail.com" class="contact__info">
+            zhaodong.wang.1992@gmail.com
+          </a>
+          <small>Email</small>
+        </div>
+        <div class="contact__column">
+          <img src="/img/address.svg" alt="" width="40" height="40" />
+          <p class="contact__info">1 Hacker Way, Menlo Park, CA</p>
+          <small>Address</small>
+        </div>
+        <div class="contact__column">
+          <img src="/img/phone.svg" alt="" width="40" height="40" />
+          <a href="tel:+16508622969" class="contact__info">+1 (650) 862&#8209;2969</a>
+          <small>Phone</small>
+        </div>
+      </div>
+      <div class="contact__socials">
+        <Socials />
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  .hero {
-    padding: calc(var(--header-h) + var(--section-pad)) 0 var(--section-pad);
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+  :global(main) {
+    display: block;
+  }
+
+  /* === HERO === */
+  .home {
+    position: relative;
     min-height: 100vh;
+    background: rgba(214, 214, 214, 0.6);
+    overflow: hidden;
+  }
+  .home__bg {
+    position: absolute;
+    inset: 0;
+    width: 65%;
+    height: auto;
+    margin: auto;
+    opacity: 0.55;
+    z-index: 0;
+    pointer-events: none;
+    max-width: none;
+    object-fit: contain;
+  }
+  .home__inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8%;
+    padding-left: clamp(1rem, 5vw, 5rem);
+    padding-right: clamp(1rem, 5vw, 5rem);
+    z-index: 1;
+  }
+  .home__title {
+    font-size: clamp(56px, 11vw, 150px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: var(--tracking-upper);
+    color: var(--color-ink-softer);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .home__info {
+    font-size: clamp(16px, 1.8vw, 24px);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-ink-softer);
+    margin: 0.25em 0 0;
+  }
+  .home__info--sub {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  .home__words {
+    margin-top: 1em;
+    font-size: clamp(28px, 4.5vw, 60px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-upper);
+    color: var(--color-ink-softer);
+    text-transform: uppercase;
+  }
+
+  /* === ABOUT === */
+  .about {
+    min-height: 100vh;
+    background: rgba(214, 214, 214, 0.35);
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-h) + var(--section-pad)) 1.5rem var(--section-pad);
+  }
+  .about__inner {
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) 1fr;
+    gap: clamp(1.5rem, 5vw, 5rem);
+    max-width: var(--content-max);
+    margin: 0 auto;
+    align-items: center;
+  }
+  .about__pic img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+  }
+  .about__heading {
+    font-size: var(--text-lg);
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-upper);
+    font-weight: 700;
+    margin-bottom: 0.75em;
+  }
+  .about__body p {
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin-bottom: 1em;
+    max-width: 60ch;
+  }
+  .about__body a {
+    color: var(--color-accent);
+    border-bottom: 1px solid currentColor;
+  }
+  .about__body a:hover {
+    color: var(--color-accent-deep);
+  }
+  .about__body strong {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+  @media (max-width: 720px) {
+    .about__inner {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .about__pic {
+      width: 180px;
+    }
+  }
+
+  /* === GALLERY / MOSAIC === */
+  .gallery {
+    min-height: 100vh;
+    padding: var(--section-pad) 0;
+    background: rgba(214, 214, 214, 0.35);
+  }
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      'edu  edu  proj proj proj'
+      'pub  pub  pub  skill skill';
+    min-height: calc(100vh - var(--section-pad) * 2);
+  }
+  .mosaic {
+    position: relative;
+    overflow: hidden;
+    color: inherit;
+    background-size: cover;
+    background-position: center;
+    transition: background-size var(--dur-slow) var(--ease-smooth);
+  }
+  .mosaic--education {
+    background-image: url('/img/education.jpg');
+    grid-area: edu;
+  }
+  .mosaic--projects {
+    background-image: url('/img/projects.jpg');
+    grid-area: proj;
+  }
+  .mosaic--publications {
+    background-image: url('/img/publications.jpg');
+    grid-area: pub;
+  }
+  .mosaic--skills {
+    background-image: url('/img/skills.jpg');
+    grid-area: skill;
+  }
+
+  .mosaic__cover {
+    position: absolute;
+    inset: 0;
+    background: #dedede;
+    opacity: 0.85;
+    transition: opacity var(--dur-slow) var(--ease-smooth);
+  }
+  .mosaic:hover .mosaic__cover,
+  .mosaic:focus-visible .mosaic__cover {
+    opacity: 0.35;
+  }
+  .mosaic:hover {
+    background-size: 110%;
+  }
+
+  .mosaic__title {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .mosaic__title h2 {
+    color: #fff;
+    font-size: clamp(28px, 3.4vw, 56px);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-upper);
+    opacity: 0.75;
+    transform: translateZ(0);
+    transition: opacity var(--dur-med) var(--ease-snap);
+  }
+  .mosaic:hover .mosaic__title h2,
+  .mosaic:focus-visible .mosaic__title h2 {
+    opacity: 1;
+  }
+
+  .mosaic__meta {
+    position: absolute;
+    left: 2rem;
+    top: 1.5rem;
+    color: #fff;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity var(--dur-med) var(--ease-smooth),
+      transform var(--dur-med) var(--ease-smooth);
+  }
+  .mosaic:hover .mosaic__meta,
+  .mosaic:focus-visible .mosaic__meta {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .mosaic__tag {
+    margin: 0;
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: 14px;
+  }
+  .mosaic__meta hr {
+    width: 20px;
+    margin: 8px 0;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  .mosaic__date {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  @media (max-width: 720px) {
+    .gallery__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      grid-template-areas:
+        'edu'
+        'proj'
+        'pub'
+        'skill';
+      min-height: 140vh;
+    }
+    .mosaic__meta { display: none; }
+  }
+
+  /* === CONTACT === */
+  .contact {
+    position: relative;
+    padding: var(--section-pad) 1.5rem;
+    background: rgba(214, 214, 214, 0.25);
+  }
+  .contact__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact__columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 3rem 0;
+  }
+  .contact__column {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
   }
-  .note {
-    margin-top: var(--section-pad);
-    max-width: 60ch;
-    color: var(--color-ink-soft);
+  .contact__column img {
+    width: 40px;
+    height: 40px;
+    transition: transform var(--dur-med) var(--ease-smooth);
+  }
+  .contact__column:hover img {
+    transform: translateY(-6px);
+  }
+  .contact__info {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .contact__column small {
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-upper);
+    color: var(--color-ink-softest);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .contact__socials {
+    padding: 2rem 0 3rem;
+  }
+  @media (max-width: 720px) {
+    .contact__columns {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
   }
 </style>

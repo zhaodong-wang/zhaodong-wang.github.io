@@ -54,7 +54,8 @@
     --text-base: 16px;
     --text-lg: 22px;
     --text-xl: 32px;
-    --text-2xl: 48px;
+    --text-2xl: 40px;
+    --text-3xl: 56px;
   }
 }
 

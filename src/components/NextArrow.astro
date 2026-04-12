@@ -1,0 +1,45 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '#about', label = 'Scroll to next section' } = Astro.props;
+---
+
+<a class="next-arrow" href={href} aria-label={label}>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+    <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</a>
+
+<style>
+  .next-arrow {
+    position: absolute;
+    right: clamp(1rem, 6vw, 6rem);
+    bottom: clamp(2rem, 8vh, 6rem);
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: grid;
+    place-items: center;
+    color: var(--color-ink-softer);
+    transition: border-color var(--dur-med) var(--ease-smooth),
+      transform var(--dur-med) var(--ease-smooth);
+  }
+  .next-arrow svg {
+    width: 28px;
+    height: 28px;
+  }
+  .next-arrow:hover,
+  .next-arrow:focus-visible {
+    border-color: rgba(0, 0, 0, 0.8);
+    color: var(--color-ink);
+    transform: translateY(3px);
+  }
+  @media (max-width: 600px) {
+    .next-arrow { width: 56px; height: 56px; }
+    .next-arrow svg { width: 22px; height: 22px; }
+  }
+</style>
