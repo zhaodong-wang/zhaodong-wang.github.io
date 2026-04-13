@@ -36,19 +36,21 @@ const mosaics = [
       fetchpriority="high"
     />
     <div class="home__inner">
-      <h1 class="home__title">Zhaodong</h1>
-      <h1 class="home__title">Wang</h1>
-      <h2 class="home__info">Meta Superintelligence Lab</h2>
-      <h3 class="home__info home__info--sub">Senior Staff Research Scientist</h3>
-      <div class="home__words">
-        <ScrollWords items={scrollWords} />
+      <div class="home__line" style="--delay: 0ms"><h1 class="home__title">Zhaodong</h1></div>
+      <div class="home__line" style="--delay: 100ms"><h1 class="home__title">Wang</h1></div>
+      <div class="home__line" style="--delay: 350ms"><h2 class="home__info">Meta Superintelligence Lab</h2></div>
+      <div class="home__line" style="--delay: 450ms"><h3 class="home__info home__info--sub">Senior Staff Research Scientist</h3></div>
+      <div class="home__line" style="--delay: 600ms">
+        <div class="home__words">
+          <ScrollWords items={scrollWords} />
+        </div>
       </div>
     </div>
     <NextArrow href="#about" />
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="about">
+  <section id="about" class="about" data-reveal>
     <div class="about__inner">
       <div class="about__pic">
         <img
@@ -83,8 +85,8 @@ const mosaics = [
   <!-- GALLERY -->
   <section id="gallary" class="gallery">
     <div class="gallery__grid">
-      {mosaics.map((m) => (
-        <a class={`mosaic mosaic--${m.id}`} href={`/${m.id}/`}>
+      {mosaics.map((m, i) => (
+        <a class={`mosaic mosaic--${m.id}`} href={`/${m.id}/`} data-reveal style={`--delay: ${i * 120}ms`}>
           <div class="mosaic__cover"></div>
           <div class="mosaic__meta">
             <p class="mosaic__tag"><em>{m.tag}</em></p>
@@ -101,19 +103,19 @@ const mosaics = [
   <section id="contact" class="contact">
     <div class="contact__inner">
       <div class="contact__columns">
-        <div class="contact__column">
+        <div class="contact__column" data-reveal style="--delay: 0ms">
           <img src="/img/email.svg" alt="" width="40" height="40" />
           <a href="mailto:zhaodong.wang.1992@gmail.com" class="contact__info">
             zhaodong.wang.1992@gmail.com
           </a>
           <small>Email</small>
         </div>
-        <div class="contact__column">
+        <div class="contact__column" data-reveal style="--delay: 200ms">
           <img src="/img/address.svg" alt="" width="40" height="40" />
           <p class="contact__info">1 Hacker Way, Menlo Park, CA</p>
           <small>Address</small>
         </div>
-        <div class="contact__column">
+        <div class="contact__column" data-reveal style="--delay: 400ms">
           <img src="/img/phone.svg" alt="" width="40" height="40" />
           <a href="tel:+16508622969" class="contact__info">+1 (650) 862&#8209;2969</a>
           <small>Phone</small>
@@ -162,6 +164,34 @@ const mosaics = [
     padding-right: clamp(1rem, 5vw, 5rem);
     z-index: 1;
   }
+  /* Each title line is a clip-mask container; the text inside slides up
+     through it on page load. Replicates the 2015 .detail .hide behavior. */
+  .home__line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.05;
+    padding: 0.05em 0;
+  }
+  .home__line > * {
+    transform: translateY(105%);
+    opacity: 0;
+    animation: home-reveal 1100ms var(--ease-smooth) forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  @keyframes home-reveal {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home__line > * {
+      animation: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
+
   .home__title {
     font-size: clamp(56px, 11vw, 150px);
     font-weight: 800;
@@ -193,6 +223,18 @@ const mosaics = [
     text-transform: uppercase;
   }
 
+  /* The NextArrow circle should only appear after the hero reveal finishes. */
+  .home :global(.next-arrow) {
+    opacity: 0;
+    animation: next-arrow-in 800ms var(--ease-smooth) 900ms forwards;
+  }
+  @keyframes next-arrow-in {
+    to { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home :global(.next-arrow) { animation: none; opacity: 1; }
+  }
+
   /* === ABOUT === */
   .about {
     min-height: 100vh;
@@ -209,6 +251,28 @@ const mosaics = [
     margin: 0 auto;
     align-items: center;
   }
+  /* Split parallax: photo slides in from the left, body from the right */
+  .about__pic,
+  .about__body {
+    opacity: 0;
+    transition: opacity 900ms var(--ease-smooth),
+      transform 900ms var(--ease-smooth);
+  }
+  .about__pic { transform: translateX(-80px); }
+  .about__body { transform: translateX(80px); }
+  .about.is-visible .about__pic,
+  .about.is-visible .about__body {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about__pic, .about__body {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   .about__pic img {
     width: 100%;
     height: auto;
@@ -325,20 +389,26 @@ const mosaics = [
     opacity: 1;
   }
 
+  /* Aux-info slides in from the left when the mosaic enters the viewport,
+     staggered per card by --delay. Matches the original .mosaic.active
+     p.time-from / p.time-to / hr.small choreography. */
   .mosaic__meta {
     position: absolute;
     left: 2rem;
     top: 1.5rem;
     color: #fff;
     opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity var(--dur-med) var(--ease-smooth),
-      transform var(--dur-med) var(--ease-smooth);
+    transform: translateX(-250px);
+    transition: opacity 800ms var(--ease-smooth),
+      transform 800ms var(--ease-smooth);
+    transition-delay: var(--delay, 0ms);
   }
-  .mosaic:hover .mosaic__meta,
-  .mosaic:focus-visible .mosaic__meta {
+  .mosaic.is-visible .mosaic__meta {
     opacity: 1;
     transform: translateX(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mosaic__meta { opacity: 1; transform: none; transition: none; }
   }
   .mosaic__tag {
     margin: 0;
@@ -392,33 +462,72 @@ const mosaics = [
     gap: 2rem;
     padding: 3rem 0;
   }
+  /* Contact columns: the whole column stagger-rises on scroll-into-view,
+     then the icon lifts, info fades in, label slides up — same effect as
+     the original contact-wrapper.active but compressed from 1s/2s/3s to
+     a crisper stagger. */
   .contact__column {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 800ms var(--ease-smooth),
+      transform 800ms var(--ease-smooth);
+    transition-delay: var(--delay, 0ms);
   }
+  .contact__column.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .contact__column { opacity: 1; transform: none; transition: none; }
+  }
+
   .contact__column img {
     width: 40px;
     height: 40px;
-    transition: transform var(--dur-med) var(--ease-smooth);
+    transform: translateY(10px);
+    transition: transform 600ms var(--ease-smooth);
+    transition-delay: calc(var(--delay, 0ms) + 200ms);
+  }
+  .contact__column.is-visible img {
+    transform: translateY(0);
   }
   .contact__column:hover img {
     transform: translateY(-6px);
   }
+
   .contact__info {
     font-family: var(--font-accent);
     font-style: italic;
     font-size: 16px;
     color: var(--color-accent);
     margin: 0;
+    opacity: 0;
+    transition: opacity 600ms var(--ease-smooth);
+    transition-delay: calc(var(--delay, 0ms) + 400ms);
   }
+  .contact__column.is-visible .contact__info {
+    opacity: 1;
+  }
+
   .contact__column small {
     text-transform: uppercase;
     letter-spacing: var(--tracking-upper);
     color: var(--color-ink-softest);
     font-size: 12px;
     font-weight: 600;
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform 600ms var(--ease-smooth),
+      opacity 600ms var(--ease-smooth);
+    transition-delay: calc(var(--delay, 0ms) + 300ms);
+  }
+  .contact__column.is-visible small {
+    transform: translateY(0);
+    opacity: 1;
   }
   .contact__socials {
     padding: 2rem 0 3rem;
@@ -430,3 +539,8 @@ const mosaics = [
     }
   }
 </style>
+
+<script>
+  import { revealOnScroll } from '../lib/observe';
+  revealOnScroll('[data-reveal]');
+</script>
