@@ -157,12 +157,13 @@ const mosaics = [
   }
   .home__inner {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: clamp(1rem, 5vw, 5rem);
     bottom: 8%;
-    padding-left: clamp(1rem, 5vw, 5rem);
-    padding-right: clamp(1rem, 5vw, 5rem);
     z-index: 1;
+    /* Don't stretch to the right edge — otherwise the scroll-words row
+       (which uses position:absolute;inset:0 for the crossfade) swallows
+       clicks on the next-arrow at bottom right. */
+    max-width: min(85%, 1100px);
   }
   /* Each title line is a clip-mask container; the text inside slides up
      through it on page load. Replicates the 2015 .detail .hide behavior. */
