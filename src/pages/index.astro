@@ -6,9 +6,9 @@ import Socials from '../components/Socials.astro';
 
 const scrollWords = [
   'Machine Learning',
-  'Large Language Models',
+  'LLMs',
   'AI Agents',
-  'Distributed Systems',
+  'Systems',
   'Research',
   'Frontend',
   'Backend',
@@ -194,13 +194,16 @@ const mosaics = [
   }
 
   .home__title {
-    font-size: clamp(56px, 11vw, 150px);
+    font-size: clamp(44px, 11vw, 150px);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: var(--tracking-upper);
+    letter-spacing: 0.1em;
     color: var(--color-ink-softer);
     text-transform: uppercase;
     margin: 0;
+  }
+  @media (min-width: 601px) {
+    .home__title { letter-spacing: var(--tracking-upper); }
   }
   .home__info {
     font-size: clamp(16px, 1.8vw, 24px);
@@ -216,12 +219,15 @@ const mosaics = [
   }
   .home__words {
     margin-top: 1em;
-    font-size: clamp(28px, 4.5vw, 60px);
+    font-size: clamp(22px, 4vw, 56px);
     font-weight: 800;
     line-height: 1.2;
-    letter-spacing: var(--tracking-upper);
+    letter-spacing: 0.08em;
     color: var(--color-ink-softer);
     text-transform: uppercase;
+  }
+  @media (min-width: 601px) {
+    .home__words { letter-spacing: var(--tracking-upper); }
   }
 
   /* The NextArrow circle should only appear after the hero reveal finishes. */
@@ -243,6 +249,7 @@ const mosaics = [
     display: flex;
     align-items: center;
     padding: calc(var(--header-h) + var(--section-pad)) 1.5rem var(--section-pad);
+    overflow: hidden; /* clip the split parallax translateX before it settles */
   }
   .about__inner {
     display: grid;

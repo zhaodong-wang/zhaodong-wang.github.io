@@ -40,13 +40,16 @@ const { title, caption, bgImage } = Astro.props;
     padding: 0 1.5rem;
   }
   .sub-hero__title {
-    font-size: clamp(48px, 9vw, 120px);
+    font-size: clamp(40px, 5.5vw, 78px);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: var(--tracking-upper);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
     margin: 0;
+  }
+  @media (min-width: 601px) {
+    .sub-hero__title { letter-spacing: var(--tracking-upper); }
   }
   .sub-hero__caption {
     font-family: var(--font-accent);
