@@ -252,7 +252,11 @@ const mosaics = [
     margin: 0 auto;
     align-items: center;
   }
-  /* Split parallax: photo slides in from the left, body from the right */
+  /* Split parallax: photo slides in from the left, body from the right.
+     Base implementation is an IntersectionObserver-triggered one-shot reveal
+     (works everywhere including Firefox). Browsers that support CSS
+     Scroll-Driven Animations override it with a continuous scroll-progress
+     parallax that matches the 2015 jQuery behavior more faithfully. */
   .about__pic,
   .about__body {
     opacity: 0;
@@ -266,11 +270,36 @@ const mosaics = [
     opacity: 1;
     transform: translateX(0);
   }
+
+  @supports (animation-timeline: view()) {
+    .about__pic,
+    .about__body,
+    .about.is-visible .about__pic,
+    .about.is-visible .about__body {
+      transition: none;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+    }
+    .about__pic { animation-name: about-pic-slide; }
+    .about__body { animation-name: about-body-slide; }
+    @keyframes about-pic-slide {
+      from { opacity: 0; transform: translateX(-120px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes about-body-slide {
+      from { opacity: 0; transform: translateX(120px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .about__pic, .about__body {
       opacity: 1;
       transform: none;
       transition: none;
+      animation: none !important;
     }
   }
 
@@ -382,12 +411,34 @@ const mosaics = [
     text-transform: uppercase;
     letter-spacing: var(--tracking-upper);
     opacity: 0.75;
-    transform: translateZ(0);
     transition: opacity var(--dur-med) var(--ease-snap);
   }
   .mosaic:hover .mosaic__title h2,
   .mosaic:focus-visible .mosaic__title h2 {
     opacity: 1;
+  }
+
+  /* Continuous scroll-progress float on mosaic titles — the title container
+     translates vertically as you scroll through the gallery, mirroring the
+     2015 scroll-listener which moved .mosaic .title (not the h1 inside). */
+  @supports (animation-timeline: view()) {
+    .mosaic__title {
+      animation-name: mosaic-float;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+    }
+    @keyframes mosaic-float {
+      from { transform: translateY(40px); }
+      to   { transform: translateY(-40px); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    @supports (animation-timeline: view()) {
+      .mosaic__title { animation: none; transform: none; }
+    }
   }
 
   /* Aux-info slides in from the left when the mosaic enters the viewport,
