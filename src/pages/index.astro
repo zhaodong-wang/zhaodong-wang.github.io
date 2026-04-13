@@ -87,6 +87,7 @@ const mosaics = [
     <div class="gallery__grid">
       {mosaics.map((m, i) => (
         <a class={`mosaic mosaic--${m.id}`} href={`/${m.id}/`} data-reveal style={`--delay: ${i * 120}ms`}>
+          <div class="mosaic__bg"></div>
           <div class="mosaic__cover"></div>
           <div class="mosaic__meta">
             <p class="mosaic__tag"><em>{m.tag}</em></p>
@@ -370,26 +371,39 @@ const mosaics = [
     position: relative;
     overflow: hidden;
     color: inherit;
+    isolation: isolate;
+  }
+  /* Inner bg layer — scale()-based zoom so the hover/scroll-in-view
+     transition actually animates (CSS can't interpolate between the
+     `cover` keyword and a percentage). */
+  .mosaic__bg {
+    position: absolute;
+    inset: 0;
     background-size: cover;
     background-position: center;
-    transition: background-size var(--dur-slow) var(--ease-smooth);
+    transition: transform 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 0;
   }
-  .mosaic--education {
+  .mosaic--education .mosaic__bg {
     background-image: url('/img/education.jpg');
-    grid-area: edu;
   }
-  .mosaic--projects {
+  .mosaic--projects .mosaic__bg {
     background-image: url('/img/projects.jpg');
-    grid-area: proj;
   }
-  .mosaic--publications {
+  .mosaic--publications .mosaic__bg {
     background-image: url('/img/publications.jpg');
-    grid-area: pub;
   }
-  .mosaic--skills {
+  .mosaic--skills .mosaic__bg {
     background-image: url('/img/skills.jpg');
-    grid-area: skill;
   }
+  .mosaic--education { grid-area: edu; }
+  .mosaic--projects { grid-area: proj; }
+  .mosaic--publications { grid-area: pub; }
+  .mosaic--skills { grid-area: skill; }
+  /* Zoom the bg on hover AND once when the card enters the viewport */
+  .mosaic.is-visible .mosaic__bg { transform: scale(1.05); }
+  .mosaic:hover .mosaic__bg,
+  .mosaic:focus-visible .mosaic__bg { transform: scale(1.12); }
 
   .mosaic__cover {
     position: absolute;
@@ -397,13 +411,11 @@ const mosaics = [
     background: #dedede;
     opacity: 0.85;
     transition: opacity var(--dur-slow) var(--ease-smooth);
+    z-index: 1;
   }
   .mosaic:hover .mosaic__cover,
   .mosaic:focus-visible .mosaic__cover {
     opacity: 0.35;
-  }
-  .mosaic:hover {
-    background-size: 110%;
   }
 
   .mosaic__title {
@@ -411,18 +423,30 @@ const mosaics = [
     inset: 0;
     display: grid;
     place-items: center;
+    z-index: 2;
     /* Continuous scroll-progress float — driven by a scroll listener that
        writes --mosaic-title-y on each .mosaic element (see the script at
        the bottom of this file). Mirrors the 2015 scroll-listener behavior. */
     transform: translateY(var(--mosaic-title-y, 0px));
   }
+  /* Title reveal on scroll-in-view — starts hidden with a slight Y push
+     (matching the 2015 .mosaic .title h1 base state), settles when the
+     card enters the viewport. Hover/focus bumps opacity further. */
   .mosaic__title h2 {
     color: #fff;
     font-size: clamp(28px, 3.4vw, 56px);
     text-transform: uppercase;
     letter-spacing: var(--tracking-upper);
-    opacity: 0.75;
-    transition: opacity var(--dur-med) var(--ease-snap);
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition:
+      opacity 900ms cubic-bezier(0.835, 0, 0.19, 1),
+      transform 900ms cubic-bezier(0.835, 0, 0.19, 1);
+  }
+  .mosaic.is-visible .mosaic__title h2 {
+    opacity: 0.85;
+    transform: translate3d(0, 0, 0);
+    transition-delay: calc(var(--delay, 0ms) + 400ms);
   }
   .mosaic:hover .mosaic__title h2,
   .mosaic:focus-visible .mosaic__title h2 {
