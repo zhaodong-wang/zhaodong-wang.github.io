@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import SubHero from '../components/SubHero.astro';
 import TimelineItem from '../components/TimelineItem.astro';
+import Panorama from '../components/Panorama.astro';
 import SubNavigator from '../components/SubNavigator.astro';
 
 const entries = (await getCollection('projects')).sort(
@@ -18,19 +19,24 @@ const entries = (await getCollection('projects')).sort(
   />
 
   {
-    entries.map(async (entry) => {
+    entries.map(async (entry, i) => {
       const { Content } = await render(entry);
       return (
-        <TimelineItem
-          side={entry.data.side}
-          from={entry.data.from}
-          to={entry.data.to}
-          logo={entry.data.logo}
-        >
-          <h1>{entry.data.title}</h1>
-          {entry.data.role && <h2>{entry.data.role}</h2>}
-          <Content />
-        </TimelineItem>
+        <>
+          <TimelineItem
+            side={entry.data.side}
+            from={entry.data.from}
+            to={entry.data.to}
+            logo={entry.data.logo}
+          >
+            <h1>{entry.data.title}</h1>
+            {entry.data.role && <h2>{entry.data.role}</h2>}
+            <Content />
+          </TimelineItem>
+          {i < entries.length - 1 && entry.data.panoImage && (
+            <Panorama image={entry.data.panoImage} />
+          )}
+        </>
       );
     })
   }
@@ -43,5 +49,9 @@ const entries = (await getCollection('projects')).sort(
 
 <script>
   import { revealOnScroll } from '../lib/observe';
+  import { parallax } from '../lib/parallax';
   revealOnScroll('[data-reveal]');
+  parallax('.sub-hero', { range: 140 });
+  parallax('.panorama', { range: 100 });
+  parallax('.timeline-item', { range: 80 });
 </script>

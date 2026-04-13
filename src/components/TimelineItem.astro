@@ -127,21 +127,42 @@ const { side, from, to, logo } = Astro.props;
     transition-delay: 350ms;
   }
 
-  /* Content */
+  /* Content — text wipes in from left via clip-path when the item
+     enters the viewport. Matches the 2015 copyTexts clip: rect() reveal
+     that swept each line from width 0 to full width. Mine wipes per
+     block (h1, h2, h3, p) with an index-based stagger, which is a
+     simpler but visually similar effect. Each block animates its own
+     clip-path from inset(0 100% 0 0) to inset(0 0 0 0). */
   .timeline-item__content {
     max-width: 65ch;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 700ms var(--ease-smooth) 200ms,
-      transform 700ms var(--ease-smooth) 200ms;
-  }
-  .timeline-item.is-visible .timeline-item__content {
-    opacity: 1;
-    transform: translateY(0);
   }
   .timeline-item--right .timeline-item__content {
     margin-left: auto;
   }
+  .timeline-item__content :global(> *) {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 900ms cubic-bezier(0.6, 0, 0.4, 1);
+  }
+  .timeline-item.is-visible .timeline-item__content :global(> *) {
+    clip-path: inset(0 0 0 0);
+  }
+  /* Per-block stagger — blocks are the direct children from the MD
+     render, so the stagger is applied via nth-child. */
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(1)) { transition-delay: 300ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(2)) { transition-delay: 360ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(3)) { transition-delay: 420ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(4)) { transition-delay: 480ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(5)) { transition-delay: 540ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(6)) { transition-delay: 600ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(7)) { transition-delay: 660ms; }
+  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(8)) { transition-delay: 720ms; }
+  .timeline-item--right .timeline-item__content :global(> *) {
+    clip-path: inset(0 0 0 100%);
+  }
+  .timeline-item--right.is-visible .timeline-item__content :global(> *) {
+    clip-path: inset(0 0 0 0);
+  }
+
   .timeline-item__content :global(h1) {
     font-size: var(--text-xl);
     text-transform: uppercase;
@@ -177,7 +198,20 @@ const { side, from, to, logo } = Astro.props;
     color: var(--color-ink);
     font-weight: 700;
   }
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-item__content :global(> *) {
+      clip-path: none !important;
+      transition: none !important;
+    }
+  }
 
+  /* Background logo — floats Y as you scroll through the timeline item,
+     matching the 2015 .element img.bg-logo translateY(offset * 0.3)
+     scroll listener. Driven by parallax.ts on the timeline-item
+     container; the logo reads --parallax-y via transform. */
+  .timeline-item {
+    --parallax-y: 0px;
+  }
   .timeline-item__logo {
     position: absolute;
     width: 280px;
@@ -186,6 +220,7 @@ const { side, from, to, logo } = Astro.props;
     pointer-events: none;
     z-index: -1;
     filter: grayscale(100%);
+    transform: translateY(var(--parallax-y, 0));
   }
   .timeline-item--left .timeline-item__logo {
     right: -4rem;
@@ -194,6 +229,9 @@ const { side, from, to, logo } = Astro.props;
   .timeline-item--right .timeline-item__logo {
     left: -4rem;
     top: -2rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-item__logo { transform: none; }
   }
 
   @media (max-width: 720px) {

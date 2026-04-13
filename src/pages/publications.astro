@@ -248,7 +248,9 @@ const preprints = (mlSystems?.data.entries ?? []).filter(
 
 <script>
   import { revealOnScroll } from '../lib/observe';
+  import { parallax } from '../lib/parallax';
   revealOnScroll('[data-reveal]');
+  parallax('.sub-hero', { range: 140 });
 
   // Publication counters: count up from 0 to data-count on scroll-into-view
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

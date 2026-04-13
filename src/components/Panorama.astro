@@ -1,0 +1,36 @@
+---
+interface Props {
+  image: string;
+  height?: string;
+}
+const { image, height = '60vh' } = Astro.props;
+---
+
+<section class="panorama" style={`--pano-h: ${height};`}>
+  <div class="panorama__bg" style={`background-image: url('${image}')`}></div>
+</section>
+
+<style>
+  /* Panorama divider between timeline items — matches the 2015 .pano
+     divs. Uses a scroll listener (src/lib/parallax.ts) to translate
+     the bg at a slower rate than the section for a parallax effect. */
+  .panorama {
+    position: relative;
+    width: 100%;
+    height: var(--pano-h);
+    overflow: hidden;
+    background: var(--color-surface-darker);
+    --parallax-y: 0px;
+  }
+  .panorama__bg {
+    position: absolute;
+    inset: -15% 0;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transform: translateY(var(--parallax-y, 0));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .panorama__bg { transform: none; }
+  }
+</style>

@@ -96,5 +96,7 @@ const categories = skills?.data.categories ?? [];
 
 <script>
   import { revealOnScroll } from '../lib/observe';
+  import { parallax } from '../lib/parallax';
   revealOnScroll('[data-reveal]');
+  parallax('.sub-hero', { range: 140 });
 </script>

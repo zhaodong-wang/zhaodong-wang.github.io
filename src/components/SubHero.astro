@@ -8,7 +8,8 @@ interface Props {
 const { title, caption, bgImage } = Astro.props;
 ---
 
-<section class="sub-hero" style={`--bg-image: url('${bgImage}')`}>
+<section class="sub-hero">
+  <div class="sub-hero__bg" style={`background-image: url('${bgImage}')`}></div>
   <div class="sub-hero__cover"></div>
   <div class="sub-hero__inner">
     <h1 class="sub-hero__title">{title}</h1>
@@ -20,18 +21,36 @@ const { title, caption, bgImage } = Astro.props;
   .sub-hero {
     position: relative;
     min-height: 100vh;
-    background-image: var(--bg-image);
-    background-size: cover;
-    background-position: center;
     display: grid;
     place-items: center;
+    overflow: hidden;
     isolation: isolate;
+  }
+  /* Background layer as a separate element so we can translateY it on
+     scroll for the parallax effect the 2015 site had via
+     #edu-home { background-position-y: -0.5 * scrollY }. Driven by a
+     scroll listener (src/lib/parallax.ts) that writes --parallax-y
+     on the hero section; the bg layer reads it via transform. */
+  .sub-hero {
+    --parallax-y: 0px;
+  }
+  .sub-hero__bg {
+    position: absolute;
+    inset: -10% 0;
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    will-change: transform;
+    transform: translateY(var(--parallax-y, 0));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sub-hero__bg { transform: none; }
   }
   .sub-hero__cover {
     position: absolute;
     inset: 0;
     background: rgba(17, 17, 17, 0.55);
-    z-index: 0;
+    z-index: -1;
   }
   .sub-hero__inner {
     position: relative;
