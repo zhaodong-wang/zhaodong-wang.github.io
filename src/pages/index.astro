@@ -404,6 +404,10 @@ const mosaics = [
     inset: 0;
     display: grid;
     place-items: center;
+    /* Continuous scroll-progress float — driven by a scroll listener that
+       writes --mosaic-title-y on each .mosaic element (see the script at
+       the bottom of this file). Mirrors the 2015 scroll-listener behavior. */
+    transform: translateY(var(--mosaic-title-y, 0px));
   }
   .mosaic__title h2 {
     color: #fff;
@@ -418,27 +422,8 @@ const mosaics = [
     opacity: 1;
   }
 
-  /* Continuous scroll-progress float on mosaic titles — the title container
-     translates vertically as you scroll through the gallery, mirroring the
-     2015 scroll-listener which moved .mosaic .title (not the h1 inside). */
-  @supports (animation-timeline: view()) {
-    .mosaic__title {
-      animation-name: mosaic-float;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-      animation-duration: 1s;
-      animation-fill-mode: both;
-      animation-timing-function: linear;
-    }
-    @keyframes mosaic-float {
-      from { transform: translateY(40px); }
-      to   { transform: translateY(-40px); }
-    }
-  }
   @media (prefers-reduced-motion: reduce) {
-    @supports (animation-timeline: view()) {
-      .mosaic__title { animation: none; transform: none; }
-    }
+    .mosaic__title { transform: none; }
   }
 
   /* Aux-info slides in from the left when the mosaic enters the viewport,
@@ -594,5 +579,7 @@ const mosaics = [
 
 <script>
   import { revealOnScroll } from '../lib/observe';
+  import { mosaicFloat } from '../lib/mosaic-float';
   revealOnScroll('[data-reveal]');
+  mosaicFloat();
 </script>
