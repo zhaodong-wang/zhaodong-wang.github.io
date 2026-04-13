@@ -1,0 +1,53 @@
+{
+  "section": "or-transportation",
+  "entries": [
+    {
+      "title": "On Solving a Class of Continuous Traffic Equilibrium Problems and Planning Facility Location Under Congestion",
+      "authors": ["Zhaodong Wang", "Yanfeng Ouyang", "Ruifeng She"],
+      "venue": "Operations Research",
+      "year": 2022,
+      "note": "70(3): 1465–1484"
+    },
+    {
+      "title": "Planning Reliable Service Facility Location Against Disruption Risks and Last-mile Congestion in a Continuous Space",
+      "authors": ["Zhaodong Wang", "Siyang Xie", "Yanfeng Ouyang"],
+      "venue": "Transportation Research Part B: Methodological",
+      "year": 2022,
+      "note": "165: 123–140"
+    },
+    {
+      "title": "Integrated Planning for Multiple Types of Locomotive Work Facilities Under Location, Routing, and Inventory Considerations",
+      "authors": ["Siyang Xie", "Xi Chen", "Zhaodong Wang", "Yanfeng Ouyang", "Kamalesh Somani", "Jing Huang"],
+      "venue": "Interfaces",
+      "year": 2016,
+      "note": "46(5): 391–408"
+    },
+    {
+      "title": "Assessing Socioeconomic Impacts of Cascading Infrastructure Disruptions in a Dynamic Human-infrastructure Network",
+      "authors": ["Liqun Lu", "Xin Wang", "Zhaodong Wang", "Yanfeng Ouyang", "Jeanne Roningen", "Scott Tweddale", "Patrick Edwards", "Natalie Myers"],
+      "venue": "US Army ERDC Technical Report",
+      "year": 2016
+    },
+    {
+      "title": "Emission Mitigation via Longitudinal Control of Intelligent Vehicles in a Congested Platoon",
+      "authors": ["Zhaodong Wang", "Xiqun Michael Chen", "Yanfeng Ouyang", "Meng Li"],
+      "venue": "Computer-Aided Civil and Infrastructure Engineering",
+      "year": 2015,
+      "note": "30(6): 490–506"
+    },
+    {
+      "title": "Bounded Growth of the Bullwhip Effect Under a Class of Nonlinear Ordering Policies",
+      "authors": ["Zhaodong Wang", "Xin Wang", "Yanfeng Ouyang"],
+      "venue": "European Journal of Operational Research",
+      "year": 2015,
+      "note": "247(1): 72–82"
+    },
+    {
+      "title": "Facility Location Design Under Continuous Traffic Equilibrium",
+      "authors": ["Yanfeng Ouyang", "Zhaodong Wang", "Hai Yang"],
+      "venue": "Transportation Research Part B: Methodological",
+      "year": 2015,
+      "note": "81: 18–33"
+    }
+  ]
+}

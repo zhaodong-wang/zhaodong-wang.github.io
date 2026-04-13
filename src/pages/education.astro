@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import SubHero from '../components/SubHero.astro';
+import TimelineItem from '../components/TimelineItem.astro';
+import SubNavigator from '../components/SubNavigator.astro';
+
+const entries = (await getCollection('education')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Layout title="Zhaodong Wang — Education">
+  <SubHero
+    title="Education"
+    caption="Academic Career"
+    bgImage="/img/education.jpg"
+  />
+
+  {
+    entries.map(async (entry) => {
+      const { Content } = await render(entry);
+      return (
+        <TimelineItem
+          side={entry.data.side}
+          from={entry.data.from}
+          to={entry.data.to}
+          logo={entry.data.logo}
+        >
+          <h1>{entry.data.school}</h1>
+          <h2>{entry.data.degree}</h2>
+          <Content />
+        </TimelineItem>
+      );
+    })
+  }
+
+  <SubNavigator
+    prev={{ label: 'Home', href: '/', bg: '/img/home.png' }}
+    next={{ label: 'Projects', href: '/projects/', bg: '/img/projects.jpg' }}
+  />
+</Layout>
+
+<script>
+  import { revealOnScroll } from '../lib/observe';
+  revealOnScroll('[data-reveal]');
+</script>

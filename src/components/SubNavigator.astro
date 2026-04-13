@@ -1,0 +1,93 @@
+---
+interface Link {
+  label: string;
+  href: string;
+  bg?: string;
+}
+
+interface Props {
+  prev: Link;
+  next: Link;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="sub-nav" aria-label="Section navigation">
+  <a class="sub-nav__cell sub-nav__cell--prev" href={prev.href} style={prev.bg ? `background-image: url('${prev.bg}')` : ''}>
+    <div class="sub-nav__cover"></div>
+    <div class="sub-nav__inner">
+      <em>Previous</em>
+      <hr />
+      <h2>{prev.label}</h2>
+    </div>
+  </a>
+  <a class="sub-nav__cell sub-nav__cell--next" href={next.href} style={next.bg ? `background-image: url('${next.bg}')` : ''}>
+    <div class="sub-nav__cover"></div>
+    <div class="sub-nav__inner">
+      <em>Next</em>
+      <hr />
+      <h2>{next.label}</h2>
+    </div>
+  </a>
+</nav>
+
+<style>
+  .sub-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 40vh;
+  }
+  .sub-nav__cell {
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-surface-dark);
+    isolation: isolate;
+    transition: background-size var(--dur-slow) var(--ease-smooth);
+  }
+  .sub-nav__cell:hover {
+    background-size: 110%;
+  }
+  .sub-nav__cover {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.7);
+    transition: background var(--dur-med) var(--ease-smooth);
+    z-index: 0;
+  }
+  .sub-nav__cell:hover .sub-nav__cover {
+    background: rgba(17, 17, 17, 0.45);
+  }
+  .sub-nav__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+  .sub-nav__inner em {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: 14px;
+  }
+  .sub-nav__inner hr {
+    width: 30px;
+    margin: 0.5rem 0;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .sub-nav__inner h2 {
+    font-size: var(--text-xl);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-upper);
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+</style>

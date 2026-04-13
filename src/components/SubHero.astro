@@ -1,0 +1,58 @@
+---
+interface Props {
+  title: string;
+  caption?: string;
+  bgImage: string;
+}
+
+const { title, caption, bgImage } = Astro.props;
+---
+
+<section class="sub-hero" style={`--bg-image: url('${bgImage}')`}>
+  <div class="sub-hero__cover"></div>
+  <div class="sub-hero__inner">
+    <h1 class="sub-hero__title">{title}</h1>
+    {caption && <p class="sub-hero__caption"><em>{caption}</em></p>}
+  </div>
+</section>
+
+<style>
+  .sub-hero {
+    position: relative;
+    min-height: 100vh;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+  }
+  .sub-hero__cover {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.55);
+    z-index: 0;
+  }
+  .sub-hero__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 1.5rem;
+  }
+  .sub-hero__title {
+    font-size: clamp(48px, 9vw, 120px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: var(--tracking-upper);
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+  }
+  .sub-hero__caption {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: clamp(16px, 1.6vw, 22px);
+    margin-top: 1.25em;
+  }
+</style>

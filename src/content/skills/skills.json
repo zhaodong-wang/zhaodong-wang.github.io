@@ -1,0 +1,48 @@
+{
+  "categories": [
+    {
+      "title": "AI & ML",
+      "tagline": "Foundations, training, and production deployment",
+      "items": [
+        { "name": "Deep Learning", "level": "expert" },
+        { "name": "Machine Learning Systems", "level": "expert" },
+        { "name": "Model Training at Scale", "level": "expert" },
+        { "name": "Optimization & Numerical Methods", "level": "expert" },
+        { "name": "Evaluation & Benchmarking", "level": "proficient" }
+      ]
+    },
+    {
+      "title": "LLMs & Agents",
+      "tagline": "Building with frontier models",
+      "items": [
+        { "name": "LLM Application Patterns", "level": "expert" },
+        { "name": "Agentic Workflows & Tool Use", "level": "expert" },
+        { "name": "Retrieval-Augmented Generation", "level": "proficient" },
+        { "name": "Fine-tuning & Distillation", "level": "proficient" },
+        { "name": "Prompt Engineering", "level": "expert" }
+      ]
+    },
+    {
+      "title": "Frontend",
+      "tagline": "Shipping polished user experiences",
+      "items": [
+        { "name": "TypeScript", "level": "proficient" },
+        { "name": "React / Next.js", "level": "proficient" },
+        { "name": "Astro", "level": "proficient" },
+        { "name": "Modern CSS & Design Tokens", "level": "proficient" },
+        { "name": "Accessibility & Responsive Design", "level": "core" }
+      ]
+    },
+    {
+      "title": "Backend & Systems",
+      "tagline": "From research code to production infra",
+      "items": [
+        { "name": "Python", "level": "expert" },
+        { "name": "C++ / Performance Engineering", "level": "expert" },
+        { "name": "Distributed Systems", "level": "expert" },
+        { "name": "Networking & Infrastructure", "level": "expert" },
+        { "name": "SQL & Data Pipelines", "level": "proficient" }
+      ]
+    }
+  ]
+}
