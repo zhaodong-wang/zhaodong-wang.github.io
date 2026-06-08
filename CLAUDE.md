@@ -38,7 +38,7 @@ The **visual design is the product** — the revamp keeps it intact. Tokens to h
 
 ## Content (source of truth, do not lose)
 
-- **Role**: Senior Staff Research Scientist, Meta Superintelligence Lab.
+- **Role**: Senior Staff Research Scientist, Meta TBD Lab, working on AI agents.
 - **Contact**: zhaodong.wang.1992@gmail.com · 1 Hacker Way, Menlo Park, CA · +1 (650) 862-2969.
 - **Education**: Tsinghua (B.E. Civil Eng & Economics, 2009–2013) · UIUC (M.S. Applied Math, Ph.D. Civil Eng, 2013–2017).
 - **Projects (5)**: FB service-level traffic analysis (2017), ML failure prediction (2015), locomotive footprint (2013–15), bullwhip effect (2013–14), emission mitigation / intelligent vehicles (2013).
