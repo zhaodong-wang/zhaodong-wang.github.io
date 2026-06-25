@@ -43,6 +43,7 @@ interface ParticleSeed {
   phase: number;
   scale: number;
   depth: number;
+  pull: number;
 }
 
 interface ParticleSet {
@@ -52,6 +53,12 @@ interface ParticleSet {
   baseOpacity: number;
   heroColor: THREE.Color;
   paperColor: THREE.Color;
+}
+
+interface PointerField {
+  position: THREE.Vector2;
+  strength: number;
+  speed: number;
 }
 
 const gold = 0xbc8420;
@@ -212,6 +219,7 @@ function makeParticleSeeds(count: number, rand: () => number) {
       phase: rand() * TAU,
       scale: 0.62 + rand() * 1.1,
       depth: 0.35 + rand() * 0.95,
+      pull: 0.52 + rand() * 0.72,
     });
   }
 
@@ -255,6 +263,7 @@ function updateParticleSet(
   intro: number,
   progress: number,
   pointer: THREE.Vector2,
+  pointerField: PointerField,
   dummy: THREE.Object3D,
   reducedMotion: boolean,
 ) {
@@ -263,6 +272,11 @@ function updateParticleSet(
   const paperMix = smoothstep(0.07, 0.2, progress);
   const driftScale = reducedMotion ? 0 : 1 - logoMix * 0.58;
   const target = new THREE.Vector3();
+  const attractorX = pointerField.position.x;
+  const attractorY = pointerField.position.y;
+  const fieldStrength = reducedMotion ? 0 : pointerField.strength * (1 - logoMix * 0.36);
+  const fieldRadius = 0.86 + pointerField.speed * 0.5 + fieldMix * 0.1;
+  const fieldRadiusSq = fieldRadius * fieldRadius;
 
   for (let i = 0; i < set.seeds.length; i += 1) {
     const seed = set.seeds[i];
@@ -274,12 +288,37 @@ function updateParticleSet(
     dummy.position.y += Math.cos(time * 0.43 + seed.phase) * 0.024 * driftScale;
     dummy.position.z += pointer.y * 0.14 * seed.depth;
 
+    let localPulse = 0;
+
+    if (fieldStrength > 0.002) {
+      const dx = attractorX - dummy.position.x;
+      const dy = attractorY - dummy.position.y;
+      const dz = Math.sin(seed.phase + time * 0.72) * 0.42 - dummy.position.z;
+      const distanceSq = dx * dx + dy * dy * 1.22 + dummy.position.z * dummy.position.z * 0.12;
+      const distance = Math.sqrt(distanceSq);
+      const core = Math.exp(-distanceSq / fieldRadiusSq) * fieldStrength * seed.pull;
+      const halo =
+        Math.exp(-distanceSq / (fieldRadiusSq * 3.2)) *
+        (1 - smoothstep(fieldRadius * 0.92, fieldRadius * 1.95, distance)) *
+        fieldStrength *
+        0.08;
+      const focus = core + halo;
+      const swirl = Math.sin(time * 1.18 + seed.phase) * core * 0.13;
+      localPulse = Math.min(1, core * 0.95 + halo * 1.4);
+
+      dummy.position.x += dx * focus * 0.46 - dy * swirl;
+      dummy.position.y += dy * focus * 0.4 + dx * swirl * 0.68;
+      dummy.position.z += dz * focus * 0.2 + Math.sin(time + seed.phase) * core * 0.08;
+    }
+
     dummy.rotation.set(
-      seed.rotation.x + time * 0.18 + progress * 0.7,
-      seed.rotation.y + time * 0.24 + seed.phase * 0.42,
-      seed.rotation.z + time * 0.14,
+      seed.rotation.x + time * (0.18 + localPulse * 0.2) + progress * 0.7,
+      seed.rotation.y + time * (0.24 + localPulse * 0.22) + seed.phase * 0.42,
+      seed.rotation.z + time * (0.14 + localPulse * 0.16),
     );
-    dummy.scale.setScalar(seed.scale * (0.7 + intro * 0.34 + logoMix * 0.18));
+    dummy.scale.setScalar(
+      seed.scale * (0.7 + intro * 0.34 + logoMix * 0.18) * (1 + localPulse * 0.16),
+    );
     dummy.updateMatrix();
     set.mesh.setMatrixAt(i, dummy.matrix);
   }
@@ -356,6 +395,16 @@ export function setupTetraAstrolabe() {
     const dummy = new THREE.Object3D();
     const pointer = new THREE.Vector2(0, 0);
     const targetPointer = new THREE.Vector2(0, 0);
+    const pointerField = {
+      position: new THREE.Vector2(0, 0),
+      strength: 0,
+      speed: 0,
+    };
+    const targetPointerField = {
+      position: new THREE.Vector2(0, 0),
+      strength: 0,
+      speed: 0,
+    };
     const state = { intro: reducedMotion ? 1 : 0, progress: 0 };
     let raf = 0;
     let destroyed = false;
@@ -388,19 +437,42 @@ export function setupTetraAstrolabe() {
     });
 
     const handlePointer = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') return;
       const rect = root.getBoundingClientRect();
-      targetPointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      targetPointer.y = -(((event.clientY - rect.top) / rect.height - 0.5) * 2);
+      const x = clamp01((event.clientX - rect.left) / rect.width);
+      const y = clamp01((event.clientY - rect.top) / rect.height);
+      const nextX = (x - 0.5) * 2;
+      const nextY = -((y - 0.5) * 2);
+      const pointerDelta = Math.hypot(nextX - targetPointer.x, nextY - targetPointer.y);
+
+      targetPointer.x = nextX;
+      targetPointer.y = nextY;
+      targetPointerField.position.x = nextX * 2.72 - rootGroup.position.x;
+      targetPointerField.position.y = nextY * 1.52 - rootGroup.position.y * 0.42;
+      targetPointerField.strength = 1;
+      targetPointerField.speed = Math.min(1, pointerDelta * 5.2);
+    };
+
+    const softenPointer = () => {
+      targetPointerField.strength = 0;
+      targetPointerField.speed = 0;
     };
 
     if (!reducedMotion) {
       window.addEventListener('pointermove', handlePointer, { passive: true });
+      window.addEventListener('pointerleave', softenPointer, { passive: true });
+      window.addEventListener('blur', softenPointer);
     }
 
     const animate = () => {
       if (destroyed) return;
       const elapsed = reducedMotion ? 1 : performance.now() * 0.001;
       pointer.lerp(targetPointer, reducedMotion ? 1 : 0.045);
+      pointerField.position.lerp(targetPointerField.position, reducedMotion ? 1 : 0.075);
+      pointerField.strength +=
+        (targetPointerField.strength - pointerField.strength) * (targetPointerField.strength > 0 ? 0.075 : 0.035);
+      pointerField.speed += (targetPointerField.speed - pointerField.speed) * 0.12;
+      targetPointerField.speed *= 0.94;
 
       const fieldMix = smoothstep(0.06, 0.38, state.progress);
       const logoMix = smoothstep(0.64, 0.9, state.progress);
@@ -425,6 +497,7 @@ export function setupTetraAstrolabe() {
         state.intro,
         state.progress,
         pointer,
+        pointerField,
         dummy,
         reducedMotion,
       );
@@ -434,6 +507,7 @@ export function setupTetraAstrolabe() {
         state.intro,
         clamp01(state.progress + 0.04),
         pointer,
+        pointerField,
         dummy,
         reducedMotion,
       );
@@ -443,6 +517,7 @@ export function setupTetraAstrolabe() {
         state.intro,
         clamp01(state.progress + 0.08),
         pointer,
+        pointerField,
         dummy,
         reducedMotion,
       );
@@ -461,6 +536,8 @@ export function setupTetraAstrolabe() {
       destroyed = true;
       window.cancelAnimationFrame(raf);
       window.removeEventListener('pointermove', handlePointer);
+      window.removeEventListener('pointerleave', softenPointer);
+      window.removeEventListener('blur', softenPointer);
       resizeObserver.disconnect();
       scrollTrigger.kill();
       introTween.kill();
