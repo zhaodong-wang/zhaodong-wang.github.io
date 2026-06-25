@@ -56,7 +56,7 @@ export function setupOpeningMotion() {
     .to(mark, { rotation: 360, duration: 0.58, ease: 'power3.inOut' }, 0.18)
     .set(mark, { rotation: 0 }, 0.78)
     .add(() => mark.classList.add('is-active'), 0.86)
-    .to(mark, { rotation: 30, y: 5, duration: 0.6 }, 0.86)
+    .to(mark, { rotation: 0, y: 0, duration: 0.6 }, 0.86)
     .to(mark, { scale: 0.72, duration: 0.48, ease: 'zwSnap' }, 1.5)
     .to(loader, { autoAlpha: 0, duration: 0.62 }, 1.68);
 }
@@ -99,8 +99,8 @@ export function setupLegacyDrawer() {
   gsap.set(items, { xPercent: 80, autoAlpha: 0 });
   if (logoMark) {
     gsap.set(logoMark, {
-      rotation: 30,
-      y: 5,
+      rotation: 0,
+      y: 0,
       scale: 0.7,
       transformOrigin: '50% 50%',
     });
@@ -173,8 +173,8 @@ export function setupLegacyDrawer() {
       if (isOpen) return;
       logoMark.classList.add('is-active');
       gsap.to(logoMark, {
-        rotation: 30,
-        y: 5,
+        rotation: 0,
+        y: 0,
         scale: 0.7,
         duration: 0.6,
         ease: 'zwSmooth',
