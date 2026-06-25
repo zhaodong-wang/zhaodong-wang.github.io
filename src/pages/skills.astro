@@ -9,7 +9,10 @@ const skills = await getEntry('skills', 'skills');
 const categories = skills?.data.categories ?? [];
 ---
 
-<Layout title="Zhaodong Wang — Skills">
+<Layout
+  title="Zhaodong Wang — Skills"
+  description="Technical skills snapshot for Zhaodong Wang across AI agent systems, ML infrastructure, product engineering, and research."
+>
   <SubHero title="Technical Skills" caption="Craft" bgImage="/img/skills.jpg" />
 
   <section class="skills">

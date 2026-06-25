@@ -63,7 +63,9 @@
 </style>
 
 <script>
-  import { setupTetraAstrolabe } from '../lib/tetra-astrolabe';
-
-  setupTetraAstrolabe();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    import('../lib/tetra-astrolabe').then(({ setupTetraAstrolabe }) => {
+      setupTetraAstrolabe();
+    });
+  }
 </script>

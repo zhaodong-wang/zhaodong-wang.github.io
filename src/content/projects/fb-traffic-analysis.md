@@ -9,4 +9,4 @@ logo: /img/fb.png
 panoImage: /img/networking.jpg
 ---
 
-Designed an end-to-end framework (Fbflow) for modeling and simulating service-level traffic across Facebook's production network. Built a **failure simulator** that projected how topology changes would affect capacity, and contributed to real-time monitoring and **service draining** workflows used for safe migrations.
+Designed an end-to-end framework for modeling and simulating service-level traffic across Facebook's production network. Built a **failure simulator** that projected how topology changes would affect capacity, and contributed to real-time monitoring and **service draining** workflows used for safe migrations.

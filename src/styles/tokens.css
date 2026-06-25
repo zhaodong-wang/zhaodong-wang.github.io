@@ -1,7 +1,7 @@
 :root {
   /* === Color — ported from css/main.css === */
   --color-accent: #bc8420;        /* signature gold — used for headings, icons, bars (large / non-text) */
-  --color-accent-text: #8e5f11;   /* AA-contrast darker gold — used for small italic labels */
+  --color-accent-text: #714f13;   /* AA-contrast darker gold — used for small italic labels */
   --color-accent-deep: #714f13;   /* used for hyperlinks and hover states */
 
   --color-ink: #111;

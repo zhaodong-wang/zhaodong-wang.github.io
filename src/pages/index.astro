@@ -319,59 +319,105 @@ const backgroundRows = [
     width: 40px;
     height: 3px;
     background: var(--color-accent);
-    transition: transform 0.6s var(--ease-smooth);
-    will-change: transform;
+    opacity: 1;
+    transform-origin: 0 50%;
+    transition:
+      left 0.6s var(--ease-smooth),
+      top 0.6s var(--ease-smooth),
+      width 0.6s var(--ease-smooth),
+      opacity 0.45s var(--ease-smooth),
+      transform 0.6s var(--ease-smooth);
+    will-change: transform, opacity;
   }
 
   .opening-loader__stick--left {
-    width: 37px;
-    transform-origin: bottom left;
+    left: 4px;
+    top: 4px;
+    width: 32px;
     transform: rotate(90deg);
   }
 
   .opening-loader__stick--right {
-    right: 0;
-    left: auto;
-    width: 37px;
-    transform-origin: bottom right;
-    transform: rotate(-90deg);
+    left: 36px;
+    right: auto;
+    top: 4px;
+    width: 32px;
+    transform: rotate(90deg);
   }
 
   .opening-loader__stick--top {
-    transform-origin: bottom right;
+    left: 4px;
+    top: 4px;
+    width: 32px;
+    transform: rotate(0deg);
   }
 
   .opening-loader__stick--bottom {
-    transform-origin: bottom left;
-    transform: translateY(37px);
+    left: 4px;
+    top: 36px;
+    width: 32px;
+    transform: rotate(0deg);
+  }
+
+  .opening-loader__stick--inner {
+    left: 20px;
+    top: 20px;
+    opacity: 0;
+    transform: scaleX(0);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--left:not(.opening-loader__stick--inner) {
-    transform: rotate(90deg) scaleX(1.38) translateX(-12px);
+    left: 20px;
+    top: 3px;
+    width: 18px;
+    transform: rotate(90deg);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--top:not(.opening-loader__stick--inner) {
-    transform: rotate(20.1deg) scaleX(1.3) translateX(7px);
+    left: 20px;
+    top: 3px;
+    width: 35px;
+    transform: rotate(117deg);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--right:not(.opening-loader__stick--inner) {
-    transform: rotate(-70.1deg) scaleX(0.96) translate(3px, 12px);
+    left: 20px;
+    top: 3px;
+    width: 35px;
+    transform: rotate(63deg);
+  }
+
+  .opening-loader__mark.is-active .opening-loader__stick--bottom:not(.opening-loader__stick--inner) {
+    left: 4px;
+    top: 34px;
+    width: 32px;
+    transform: rotate(0deg);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--left.opening-loader__stick--inner {
-    transform: rotate(70deg) scaleX(1.1) translateX(-12px) translateY(-6px);
+    left: 4px;
+    top: 34px;
+    width: 25px;
+    opacity: 1;
+    transform: rotate(-32deg);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--right.opening-loader__stick--inner {
-    transform: rotate(30deg) scaleX(0.7) translate(23px, 33px);
+    left: 36px;
+    top: 34px;
+    width: 25px;
+    opacity: 1;
+    transform: rotate(-148deg);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--top.opening-loader__stick--inner {
-    transform: rotate(-30deg) scaleX(0.95) translate(7px, 9px);
+    opacity: 0;
+    transform: scaleX(0);
   }
 
   .opening-loader__mark.is-active .opening-loader__stick--bottom.opening-loader__stick--inner {
-    transform: rotate(-42deg) scaleX(0.5) translate(-43px, 29px);
+    opacity: 0;
+    transform: scaleX(0);
   }
 
   .home {
@@ -559,6 +605,7 @@ const backgroundRows = [
     width: min(100% - 48px, 1240px);
     margin-inline: auto;
     border-top: 1px solid rgba(20, 20, 20, 0.18);
+    scroll-margin-top: calc(var(--header-h) + 24px);
   }
 
   .impact {
@@ -933,6 +980,10 @@ const backgroundRows = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+
     .opening-loader {
       display: none;
     }
@@ -957,9 +1008,12 @@ const backgroundRows = [
     const trigger = document.querySelector<HTMLButtonElement>('[data-contact-email]');
     if (!trigger) return;
 
-    const parts = ['emhhb2Rvbmd3YW5n', 'bWV0YS5jb20='];
+    const encoded = [
+      139, 121, 114, 128, 117, 128, 127, 120, 136, 114, 127, 120, 81, 126, 118,
+      133, 114, 63, 116, 128, 126,
+    ];
     trigger.addEventListener('click', () => {
-      const address = parts.map((part) => window.atob(part)).join('@');
+      const address = encoded.map((code) => String.fromCharCode(code - 17)).join('');
       window.location.href = `mailto:${address}`;
     });
   };

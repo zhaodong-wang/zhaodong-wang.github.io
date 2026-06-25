@@ -8,9 +8,5 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
-  integrations: [
-    sitemap({
-      filter: (page) => !page.includes('/styleguide'),
-    }),
-  ],
+  integrations: [sitemap()],
 });

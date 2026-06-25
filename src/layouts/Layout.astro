@@ -61,11 +61,10 @@ const personSchema = {
     <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/img/myIcon.svg" />
-    <link rel="alternate" type="application/rss+xml" title="Zhaodong Wang" href="/sitemap-index.xml" />
 
     <title>{title}</title>
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <slot name="head" />
   </head>

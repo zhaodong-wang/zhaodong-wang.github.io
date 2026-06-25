@@ -68,6 +68,9 @@ export function setupLegacyDrawer() {
   const drawer = document.querySelector<HTMLElement>('[data-drawer]');
   const header = document.querySelector<HTMLElement>('.site-header');
   if (!toggle || !drawer || !header) return;
+  const reducedMotion = prefersReducedMotion();
+  const duration = (seconds: number) => (reducedMotion ? 0 : seconds);
+  const stagger = (seconds: number) => (reducedMotion ? 0 : seconds);
 
   const panels = Array.from(
     drawer.querySelectorAll<HTMLElement>('.site-drawer__panel-fill'),
@@ -78,6 +81,9 @@ export function setupLegacyDrawer() {
   const logo = header.querySelector<HTMLElement>('.site-header__logo');
   const logoMark = logo?.querySelector<HTMLElement>('[data-logo-mark]');
   const bars = Array.from(toggle.querySelectorAll<HTMLElement>('span'));
+  const backgroundTargets = Array.from(
+    document.querySelectorAll<HTMLElement>('main, footer'),
+  );
   const focusables = () =>
     Array.from(
       drawer.querySelectorAll<HTMLElement>(
@@ -112,37 +118,46 @@ export function setupLegacyDrawer() {
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.classList.toggle('drawer-open', open);
     drawer.classList.toggle('is-open', open);
+    backgroundTargets.forEach((target) => {
+      if (open) {
+        target.setAttribute('aria-hidden', 'true');
+        target.setAttribute('inert', '');
+      } else {
+        target.removeAttribute('aria-hidden');
+        target.removeAttribute('inert');
+      }
+    });
   };
 
   const animateBars = (open: boolean) => {
     if (bars.length !== 3) return;
     gsap.to(bars, {
       backgroundColor: open ? '#ccc' : '#7f7f7f',
-      duration: 0.8,
+      duration: duration(0.8),
       ease: 'power2.out',
     });
     gsap.to(bars[0], {
       x: 0,
       y: open ? 0 : -10,
       rotation: open ? 45 : 0,
-      duration: 0.6,
+      duration: duration(0.6),
       ease: 'zwSmooth',
     });
     gsap.to(bars[1], {
       autoAlpha: open ? 0 : 1,
-      duration: 0.3,
+      duration: duration(0.3),
       ease: 'power1.out',
     });
     gsap.to(bars[2], {
       x: 0,
       y: open ? 0 : 10,
       rotation: open ? -45 : 0,
-      duration: 0.6,
+      duration: duration(0.6),
       ease: 'zwSmooth',
     });
   };
 
-  if (logo && logoMark) {
+  if (logo && logoMark && !reducedMotion) {
     const recoverLogo = () => {
       if (isOpen) return;
       logoMark.classList.remove('is-active');
@@ -180,14 +195,14 @@ export function setupLegacyDrawer() {
     animateBars(true);
 
     const tl = gsap.timeline();
-    tl.to(logo, { yPercent: -100, duration: 0.6, ease: 'zwSnap' }, 0)
+    tl.to(logo, { yPercent: -100, duration: duration(0.6), ease: 'zwSnap' }, 0)
       .to(
         panels,
         {
           scaleX: 1,
-          duration: 0.5,
+          duration: duration(0.5),
           ease: 'none',
-          stagger: 0.08,
+          stagger: stagger(0.08),
         },
         0,
       )
@@ -196,9 +211,9 @@ export function setupLegacyDrawer() {
         {
           xPercent: 0,
           autoAlpha: 1,
-          duration: 0.5,
+          duration: duration(0.5),
           ease: 'zwMenu',
-          stagger: 0.07,
+          stagger: stagger(0.07),
         },
         0.42,
       )
@@ -224,9 +239,9 @@ export function setupLegacyDrawer() {
       {
         xPercent: 80,
         autoAlpha: 0,
-        duration: 0.5,
+        duration: duration(0.5),
         ease: 'zwMenu',
-        stagger: 0.07,
+        stagger: stagger(0.07),
       },
       0,
     )
@@ -234,13 +249,13 @@ export function setupLegacyDrawer() {
         panels.slice().reverse(),
         {
           scaleX: 0,
-          duration: 0.5,
+          duration: duration(0.5),
           ease: 'none',
-          stagger: 0.08,
+          stagger: stagger(0.08),
         },
         0.48,
       )
-      .to(logo, { yPercent: 0, duration: 0.6, ease: 'zwSnap' }, 0.88);
+      .to(logo, { yPercent: 0, duration: duration(0.6), ease: 'zwSnap' }, 0.88);
   };
 
   toggle.addEventListener('click', (event) => {
@@ -275,14 +290,15 @@ export function setupLegacyDrawer() {
     a.addEventListener('click', () => close({ restoreFocus: false }));
   });
 
+  const chromeTarget = logo ?? header;
   const onScroll = () => {
     if (isOpen) return;
     const nextY = window.scrollY;
     const direction = nextY > lastY ? 1 : nextY < lastY ? -1 : 0;
     if (nextY > 100 && direction === 1) {
-      gsap.to(header, { yPercent: -100, duration: 0.6, ease: 'zwSnap' });
+      gsap.to(chromeTarget, { yPercent: -100, duration: duration(0.6), ease: 'zwSnap' });
     } else if (direction === -1 || nextY < 30) {
-      gsap.to(header, { yPercent: 0, duration: 0.6, ease: 'zwSnap' });
+      gsap.to(chromeTarget, { yPercent: 0, duration: duration(0.6), ease: 'zwSnap' });
     }
     lastY = nextY;
   };
