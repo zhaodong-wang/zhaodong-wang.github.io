@@ -74,10 +74,8 @@ const { side, from, to, logo } = Astro.props;
     background: var(--color-surface);
     overflow: hidden;
     flex-shrink: 0;
-    opacity: 0;
-    transform: scale(0.85);
-    transition: opacity 600ms var(--ease-smooth),
-      transform 600ms var(--ease-smooth);
+    opacity: 1;
+    will-change: transform, opacity;
   }
   .timeline-item__circle > .timeline-item__month,
   .timeline-item__circle > .timeline-item__year {
@@ -97,7 +95,7 @@ const { side, from, to, logo } = Astro.props;
   .timeline-item__year {
     align-items: flex-start;
     padding-top: 4px;
-    font-weight: 600;
+    font-weight: var(--font-weight-label);
     font-size: 18px;
     color: var(--color-ink-softest);
   }
@@ -119,20 +117,16 @@ const { side, from, to, logo } = Astro.props;
     height: 38px;
     background: rgba(0, 0, 0, 0.3);
     transform-origin: top;
-    transform: scaleY(0);
-    transition: transform 600ms var(--ease-smooth);
+    will-change: transform;
   }
   .timeline-item.is-visible .timeline-item__bar {
     transform: scaleY(1);
     transition-delay: 350ms;
   }
 
-  /* Content — text wipes in from left via clip-path when the item
-     enters the viewport. Matches the 2015 copyTexts clip: rect() reveal
-     that swept each line from width 0 to full width. Mine wipes per
-     block (h1, h2, h3, p) with an index-based stagger, which is a
-     simpler but visually similar effect. Each block animates its own
-     clip-path from inset(0 100% 0 0) to inset(0 0 0 0). */
+  /* Content keeps the old directional reveal, but GSAP now drives it with
+     opacity + x instead of a hard clip mask so long titles never look
+     accidentally cropped mid-scroll. */
   .timeline-item__content {
     max-width: 65ch;
   }
@@ -140,36 +134,18 @@ const { side, from, to, logo } = Astro.props;
     margin-left: auto;
   }
   .timeline-item__content :global(> *) {
-    clip-path: inset(0 100% 0 0);
-    transition: clip-path 900ms cubic-bezier(0.6, 0, 0.4, 1);
-  }
-  .timeline-item.is-visible .timeline-item__content :global(> *) {
-    clip-path: inset(0 0 0 0);
-  }
-  /* Per-block stagger — blocks are the direct children from the MD
-     render, so the stagger is applied via nth-child. */
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(1)) { transition-delay: 300ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(2)) { transition-delay: 360ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(3)) { transition-delay: 420ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(4)) { transition-delay: 480ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(5)) { transition-delay: 540ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(6)) { transition-delay: 600ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(7)) { transition-delay: 660ms; }
-  .timeline-item.is-visible .timeline-item__content :global(> *:nth-child(8)) { transition-delay: 720ms; }
-  .timeline-item--right .timeline-item__content :global(> *) {
-    clip-path: inset(0 0 0 100%);
-  }
-  .timeline-item--right.is-visible .timeline-item__content :global(> *) {
-    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    will-change: transform, opacity;
   }
 
   .timeline-item__content :global(h1) {
-    font-size: var(--text-xl);
+    font-size: clamp(34px, 4vw, 56px);
     text-transform: uppercase;
-    letter-spacing: var(--tracking-upper);
+    letter-spacing: var(--tracking-heading);
     color: var(--color-ink-soft);
     margin-bottom: 0.25em;
-    font-weight: 700;
+    font-weight: var(--font-weight-display);
+    line-height: 1.08;
   }
   .timeline-item__content :global(h2) {
     font-family: var(--font-accent);
@@ -184,31 +160,32 @@ const { side, from, to, logo } = Astro.props;
   .timeline-item__content :global(h3) {
     font-size: 14px;
     text-transform: uppercase;
-    letter-spacing: var(--tracking-upper);
+    letter-spacing: var(--tracking-label);
     color: var(--color-ink-softest);
     margin: 1.5em 0 0.5em;
-    font-weight: 500;
+    font-weight: var(--font-weight-label);
   }
   .timeline-item__content :global(p) {
     color: var(--color-ink-soft);
-    line-height: 1.65;
+    font-weight: var(--font-weight-copy);
+    letter-spacing: var(--tracking-body);
+    line-height: 1.68;
     margin-bottom: 0.75em;
   }
   .timeline-item__content :global(strong) {
     color: var(--color-ink);
-    font-weight: 700;
+    font-weight: var(--font-weight-strong);
   }
   @media (prefers-reduced-motion: reduce) {
     .timeline-item__content :global(> *) {
-      clip-path: none !important;
+      opacity: 1 !important;
+      transform: none !important;
       transition: none !important;
     }
   }
 
-  /* Background logo — floats Y as you scroll through the timeline item,
-     matching the 2015 .element img.bg-logo translateY(offset * 0.3)
-     scroll listener. Driven by parallax.ts on the timeline-item
-     container; the logo reads --parallax-y via transform. */
+  /* Background logo floats Y as you scroll, matching the 2015
+     translateY(offset * 0.3) treatment through legacy-motion.ts. */
   .timeline-item {
     --parallax-y: 0px;
   }
@@ -253,7 +230,6 @@ const { side, from, to, logo } = Astro.props;
     .timeline-item__bar {
       width: 60px;
       height: 1px;
-      transform: scaleX(0);
       transform-origin: left;
     }
     .timeline-item.is-visible .timeline-item__bar {

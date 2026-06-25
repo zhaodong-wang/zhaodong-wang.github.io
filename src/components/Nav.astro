@@ -5,19 +5,27 @@ interface Link {
 }
 
 const links: Link[] = [
-  { label: 'Home', href: '/#home' },
-  { label: 'About', href: '/#about' },
-  { label: 'Education', href: '/education/' },
-  { label: 'Projects', href: '/projects/' },
-  { label: 'Publications', href: '/publications/' },
-  { label: 'Skills', href: '/skills/' },
+  { label: 'Impact', href: '/#impact' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Systems', href: '/#systems' },
+  { label: 'Research', href: '/#research' },
+  { label: 'Background', href: '/#background' },
   { label: 'Contact', href: '/#contact' },
 ];
 ---
 
 <header class="site-header">
   <a href="/#home" class="site-header__logo" aria-label="Home">
-    <img src="/img/myIcon.svg" alt="" width="60" height="60" />
+    <span class="site-header__logo-mark is-active" data-logo-mark aria-hidden="true">
+      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--left"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--right"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--top"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--bottom"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--left"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--right"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--top"></span>
+      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--bottom"></span>
+    </span>
   </a>
   <button
     class="site-header__menu"
@@ -41,10 +49,10 @@ const links: Link[] = [
   data-drawer
 >
   <div class="site-drawer__panels" aria-hidden="true">
-    <div class="site-drawer__panel"></div>
-    <div class="site-drawer__panel"></div>
-    <div class="site-drawer__panel"></div>
-    <div class="site-drawer__panel"></div>
+    <div class="site-drawer__panel"><div class="site-drawer__panel-fill"></div></div>
+    <div class="site-drawer__panel"><div class="site-drawer__panel-fill"></div></div>
+    <div class="site-drawer__panel"><div class="site-drawer__panel-fill"></div></div>
+    <div class="site-drawer__panel"><div class="site-drawer__panel-fill"></div></div>
   </div>
   <ul class="site-drawer__list">
     <li class="site-drawer__title"><em>Menu</em></li>
@@ -73,19 +81,70 @@ const links: Link[] = [
     place-items: center;
     background: var(--color-surface-dark);
     pointer-events: auto;
-    transition: transform 600ms cubic-bezier(0.835, 0, 0.19, 1);
+    will-change: transform;
   }
-  /* Hide the logo when the drawer is open — matches 2015 .nav-link-home.hide */
-  :global(body.drawer-open) .site-header__logo {
-    transform: translateY(-100%);
+  .site-header__logo-mark {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 40px;
+    overflow: visible;
+    will-change: transform;
   }
-  .site-header__logo img {
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
+  .site-header__logo-stick {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--color-accent);
+    transition: transform 0.6s var(--ease-smooth);
+    will-change: transform;
   }
-  @media (max-width: 600px) {
-    .site-header__logo img { width: 65%; height: 65%; }
+  .site-header__logo-stick--left {
+    width: 37px;
+    transform-origin: bottom left;
+    transform: rotate(90deg);
+  }
+  .site-header__logo-stick--right {
+    right: 0;
+    left: auto;
+    width: 37px;
+    transform-origin: bottom right;
+    transform: rotate(-90deg);
+  }
+  .site-header__logo-stick--top {
+    transform-origin: bottom right;
+  }
+  .site-header__logo-stick--bottom {
+    transform-origin: bottom left;
+    transform: translateY(37px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--left:not(.site-header__logo-stick--inner) {
+    transform: rotate(90deg) scaleX(1.38) translateX(-12px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--top:not(.site-header__logo-stick--inner) {
+    transform: rotate(20.1deg) scaleX(1.3) translateX(7px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--right:not(.site-header__logo-stick--inner) {
+    transform: rotate(-70.1deg) scaleX(0.96) translate(3px, 12px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--left.site-header__logo-stick--inner {
+    transform: rotate(70deg) scaleX(1.1) translateX(-12px) translateY(-6px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--right.site-header__logo-stick--inner {
+    transform: rotate(30deg) scaleX(0.7) translate(23px, 33px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--top.site-header__logo-stick--inner {
+    transform: rotate(-30deg) scaleX(0.95) translate(7px, 9px);
+  }
+  .site-header__logo-mark.is-active .site-header__logo-stick--bottom.site-header__logo-stick--inner {
+    transform: rotate(-42deg) scaleX(0.5) translate(-43px, 29px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header__logo-stick {
+      transition: none;
+    }
   }
 
   .site-header__menu {
@@ -93,34 +152,40 @@ const links: Link[] = [
     right: clamp(1rem, 4vw, 3rem);
     top: 50%;
     translate: 0 -50%;
-    width: 44px;
-    height: 30px;
+    width: 54px;
+    height: 54px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
     pointer-events: auto;
-    display: grid;
-    align-content: space-between;
+    display: block;
+    overflow: hidden;
+    transition: transform var(--dur-fast) var(--ease-smooth);
   }
   .site-header__menu span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
     display: block;
+    width: 34px;
     height: 2px;
+    margin: -1px 0 0 -17px;
     background: #7f7f7f;
-    transition: transform 600ms cubic-bezier(0.6, 0, 0.4, 1),
-      opacity var(--dur-fast) var(--ease-smooth),
-      background-color 800ms cubic-bezier(0.075, 0.82, 0.165, 1);
-    transform-origin: right center;
+    transform-origin: center center;
+    will-change: transform, opacity, background-color;
   }
-  /* When the drawer is open: bars shift to light gray and collapse into an X.
-     Color shift matches 2015 #7f7f7f -> #ccc transition from main.js. */
-  .site-header__menu[aria-expanded='true'] span {
-    background: #ccc;
+  .site-header__menu span:nth-child(1) { transform: translateY(-10px); }
+  .site-header__menu span:nth-child(2) { transform: translateY(0); }
+  .site-header__menu span:nth-child(3) { transform: translateY(10px); }
+  .site-header__menu:hover,
+  .site-header__menu:focus-visible {
+    transform: translateY(-1px);
   }
-  .site-header__menu[aria-expanded='true'] span:nth-child(1) {
-    transform: translateX(-3px) rotate(-45deg);
-  }
-  .site-header__menu[aria-expanded='true'] span:nth-child(2) {
-    opacity: 0;
-  }
-  .site-header__menu[aria-expanded='true'] span:nth-child(3) {
-    transform: translateX(-3px) rotate(45deg);
+  .site-header__menu:focus-visible {
+    outline: 1px solid rgba(248, 246, 238, 0.58);
+    outline-offset: 2px;
   }
 
   /* Drawer */
@@ -147,35 +212,23 @@ const links: Link[] = [
   .site-drawer__panel {
     flex: 1 1 25%;
     position: relative;
-    border-right: 1px solid rgba(170, 170, 170, 0.15);
+    border-right: 1px solid #1d1d1d;
+    overflow: hidden;
   }
-  .site-drawer__panel::before {
-    content: '';
+  .site-drawer__panel-fill {
     position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 0;
-    background: rgba(0, 0, 0, 0.92);
-    transition: width 500ms cubic-bezier(1, 0, 0, 1);
+    inset: 0 -2px;
+    background: #111;
+    transform: scaleX(0);
+    transform-origin: right center;
+    will-change: transform;
   }
-  .site-drawer.is-open .site-drawer__panel::before {
-    width: 100%;
-  }
-  .site-drawer__panel:nth-child(1)::before { transition-delay: 0ms; }
-  .site-drawer__panel:nth-child(2)::before { transition-delay: 80ms; }
-  .site-drawer__panel:nth-child(3)::before { transition-delay: 160ms; }
-  .site-drawer__panel:nth-child(4)::before { transition-delay: 240ms; }
-  /* On close, panels retreat in reverse order so the last-in is first-out */
-  .site-drawer:not(.is-open) .site-drawer__panel:nth-child(1)::before { transition-delay: 240ms; }
-  .site-drawer:not(.is-open) .site-drawer__panel:nth-child(2)::before { transition-delay: 160ms; }
-  .site-drawer:not(.is-open) .site-drawer__panel:nth-child(3)::before { transition-delay: 80ms; }
-  .site-drawer:not(.is-open) .site-drawer__panel:nth-child(4)::before { transition-delay: 0ms; }
 
   .site-drawer__list {
     position: absolute;
-    top: 14%;
-    right: 8%;
+    top: clamp(112px, 17vh, 180px);
+    right: clamp(24px, 8vw, 112px);
+    width: min(72vw, 560px);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -188,37 +241,12 @@ const links: Link[] = [
   /* Menu items slide in from the right — base state (closed) is translateX 80%
      opacity 0, matching the 2015 .move-right class. On open they settle to 0/1
      with a first-to-last stagger; on close they retreat with a last-to-first
-     REVERSE stagger so the last-in is the first-out (matches the 2015 toggleMenu
-     JS behaviour). Typography: 150% of 20px (30px) Brandon, weight 400. */
+     reverse stagger so the last-in is the first-out (matches the 2015 toggleMenu
+     JS behaviour). Typography stays in a light grotesk voice. */
   .site-drawer__list li {
     opacity: 0;
-    transform: translateX(80%);
-    transition:
-      opacity 500ms cubic-bezier(0.19, 1, 0.22, 1),
-      transform 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform, opacity;
   }
-  .site-drawer.is-open .site-drawer__list li {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  /* Open stagger: first→last, starts after the curtain begins to fill */
-  .site-drawer.is-open .site-drawer__list li:nth-child(1) { transition-delay: 420ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(2) { transition-delay: 490ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(3) { transition-delay: 560ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(4) { transition-delay: 630ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(5) { transition-delay: 700ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(6) { transition-delay: 770ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(7) { transition-delay: 840ms; }
-  .site-drawer.is-open .site-drawer__list li:nth-child(8) { transition-delay: 910ms; }
-  /* Close stagger: last→first — the 8th child leaves first with 0ms delay */
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(1) { transition-delay: 490ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(2) { transition-delay: 420ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(3) { transition-delay: 350ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(4) { transition-delay: 280ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(5) { transition-delay: 210ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(6) { transition-delay: 140ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(7) { transition-delay: 70ms; }
-  .site-drawer:not(.is-open) .site-drawer__list li:nth-child(8) { transition-delay: 0ms; }
 
   .site-drawer__title {
     font-family: var(--font-accent);
@@ -231,84 +259,65 @@ const links: Link[] = [
   .site-drawer__list a {
     font-family: var(--font-body);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-nav);
     font-weight: 300;
-    font-size: var(--text-lg);
+    font-size: clamp(28px, 3.2vw, 42px);
+    line-height: 1.08;
     color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.55);
     transition: color var(--dur-fast) var(--ease-smooth);
   }
-  .site-drawer__list a:hover,
-  .site-drawer__list a:focus-visible {
+  .site-drawer__list a:hover {
     color: var(--color-accent);
+  }
+  .site-drawer__list a:focus-visible {
+    color: #fff;
+    outline: 1px solid var(--color-accent);
+    outline-offset: 5px;
   }
 
   :global(body.drawer-open) {
     overflow: hidden;
   }
+
+  @media (max-width: 720px) {
+    .site-header__menu {
+      right: 22px;
+      width: 50px;
+      height: 50px;
+    }
+    .site-header__menu span {
+      width: 32px;
+      margin-left: -16px;
+    }
+    .site-drawer__panel {
+      border-right-color: #1d1d1d;
+    }
+    .site-drawer__list {
+      top: clamp(150px, 30vh, 220px);
+      right: 30px;
+      width: min(68vw, 300px);
+      gap: 0.42em;
+    }
+    .site-drawer__list a {
+      font-size: clamp(27px, 7vw, 34px);
+      line-height: 1.02;
+      letter-spacing: 0.035em;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .site-drawer__list {
+      right: 24px;
+      width: calc(100vw - 96px);
+    }
+    .site-drawer__list a {
+      font-size: clamp(24px, 7.2vw, 30px);
+    }
+  }
 </style>
 
 <script>
-  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
-  const drawer = document.querySelector<HTMLElement>('[data-drawer]');
-
-  if (toggle && drawer) {
-    const focusables = () =>
-      Array.from(
-        drawer.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ),
-      );
-
-    const open = () => {
-      drawer.classList.add('is-open');
-      drawer.setAttribute('aria-hidden', 'false');
-      toggle.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('drawer-open');
-      // Focus the first link after the curtain animation settles
-      requestAnimationFrame(() => {
-        focusables()[0]?.focus();
-      });
-    };
-
-    const close = () => {
-      drawer.classList.remove('is-open');
-      drawer.setAttribute('aria-hidden', 'true');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('drawer-open');
-      toggle.focus();
-    };
-
-    toggle.addEventListener('click', () => {
-      drawer.classList.contains('is-open') ? close() : open();
-    });
-
-    // Focus trap: when the drawer is open, cycle Tab between its focusables.
-    // Escape always closes. Tab on the last wraps to the first; Shift+Tab on
-    // the first wraps to the last.
-    document.addEventListener('keydown', (e) => {
-      if (!drawer.classList.contains('is-open')) return;
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        close();
-        return;
-      }
-      if (e.key !== 'Tab') return;
-      const list = focusables();
-      if (!list.length) return;
-      const first = list[0];
-      const last = list[list.length - 1];
-      const active = document.activeElement;
-      if (e.shiftKey && active === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    });
-
-    drawer.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', close);
-    });
-  }
+  import { setupLegacyDrawer } from '../lib/legacy-motion';
+  setupLegacyDrawer();
 </script>

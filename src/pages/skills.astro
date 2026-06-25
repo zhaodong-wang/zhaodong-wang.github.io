@@ -67,9 +67,9 @@ const categories = skills?.data.categories ?? [];
   .skills__cat-head h2 {
     font-size: var(--text-lg);
     text-transform: uppercase;
-    letter-spacing: var(--tracking-upper);
+    letter-spacing: var(--tracking-heading);
     color: var(--color-ink-soft);
-    font-weight: 700;
+    font-weight: var(--font-weight-heading);
     margin-bottom: 0.35em;
   }
   .skills__cat-head p {
@@ -95,8 +95,7 @@ const categories = skills?.data.categories ?? [];
 </style>
 
 <script>
-  import { revealOnScroll } from '../lib/observe';
-  import { parallax } from '../lib/parallax';
-  revealOnScroll('[data-reveal]');
-  parallax('.sub-hero', { range: 140 });
+  import { setupListRevealMotion, setupSubpageMotion } from '../lib/legacy-motion';
+  setupSubpageMotion();
+  setupListRevealMotion('.skills__cat, .skill-bar');
 </script>

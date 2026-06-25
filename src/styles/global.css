@@ -4,9 +4,9 @@
 
 h1, h2, h3, h4 {
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: var(--font-weight-heading);
   line-height: var(--leading-snug);
-  letter-spacing: var(--tracking-upper);
+  letter-spacing: var(--tracking-heading);
   text-transform: uppercase;
 }
 

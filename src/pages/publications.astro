@@ -138,7 +138,7 @@ const preprints = (mlSystems?.data.entries ?? []).filter(
   .counts__cell img { width: 40px; height: 40px; }
   .counts__n {
     font-size: 48px;
-    font-weight: 700;
+    font-weight: var(--font-weight-display);
     color: var(--color-ink-soft);
     font-variant-numeric: tabular-nums;
   }
@@ -183,8 +183,8 @@ const preprints = (mlSystems?.data.entries ?? []).filter(
   }
   .pubs__heading span {
     font-size: 13px;
-    font-weight: 500;
-    letter-spacing: var(--tracking-upper);
+    font-weight: var(--font-weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-ink-softest);
   }
@@ -208,7 +208,7 @@ const preprints = (mlSystems?.data.entries ?? []).filter(
   }
   .pubs__item h3 {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: var(--font-weight-label);
     color: var(--color-ink);
     line-height: 1.35;
     margin-bottom: 0.35em;
@@ -225,6 +225,7 @@ const preprints = (mlSystems?.data.entries ?? []).filter(
   .pubs__authors {
     font-size: 14px;
     color: var(--color-ink-softest);
+    letter-spacing: var(--tracking-body);
     line-height: 1.5;
     margin-bottom: 0.25em;
   }
@@ -247,41 +248,13 @@ const preprints = (mlSystems?.data.entries ?? []).filter(
 </style>
 
 <script>
-  import { revealOnScroll } from '../lib/observe';
-  import { parallax } from '../lib/parallax';
-  revealOnScroll('[data-reveal]');
-  parallax('.sub-hero', { range: 140 });
+  import {
+    setupListRevealMotion,
+    setupPublicationCounters,
+    setupSubpageMotion,
+  } from '../lib/legacy-motion';
 
-  // Publication counters: count up from 0 to data-count on scroll-into-view
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const counters = Array.from(
-    document.querySelectorAll<HTMLElement>('[data-count]'),
-  );
-  if (counters.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          const target = Number(el.dataset.count ?? '0');
-          if (reduced) {
-            el.textContent = String(target);
-          } else {
-            const start = performance.now();
-            const duration = 1400;
-            const step = (now: number) => {
-              const t = Math.min(1, (now - start) / duration);
-              const eased = 1 - Math.pow(1 - t, 3);
-              el.textContent = String(Math.round(eased * target));
-              if (t < 1) requestAnimationFrame(step);
-            };
-            requestAnimationFrame(step);
-          }
-          io.unobserve(el);
-        }
-      },
-      { threshold: 0.5 },
-    );
-    counters.forEach((c) => io.observe(c));
-  }
+  setupSubpageMotion();
+  setupListRevealMotion('[data-reveal]');
+  setupPublicationCounters();
 </script>

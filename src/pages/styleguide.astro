@@ -50,7 +50,7 @@ const weights = [100, 300, 400, 500, 700, 900];
     </section>
 
     <section class="sg__section">
-      <h2>Typography — Brandon Grotesque</h2>
+      <h2>Typography - Hanken Grotesk</h2>
       <div class="sg__type">
         <div class="sg__row">
           <span class="sg__label"><code>h1</code> · 96px / 900</span>
@@ -76,10 +76,10 @@ const weights = [100, 300, 400, 500, 700, 900];
           <div class="sg__weight">
             <span class="sg__label">{w}</span>
             <span class="sg__sample" style={`font-weight:${w}`}>
-              Brandon {w}
+              Hanken {w}
             </span>
             <span class="sg__sample sg__sample--italic" style={`font-weight:${w}`}>
-              Brandon {w} italic
+              Hanken {w} accent
             </span>
           </div>
         ))}
@@ -118,7 +118,9 @@ const weights = [100, 300, 400, 500, 700, 900];
         <li><code>--header-h</code> — 90px (60px mobile)</li>
         <li><code>--section-pad</code> — 60px (40px mobile)</li>
         <li><code>--content-max</code> — 1200px</li>
-        <li><code>--tracking-upper</code> — 0.125em (applied to all uppercase headings)</li>
+        <li><code>--tracking-display</code> - 0 (large personal display)</li>
+        <li><code>--tracking-heading</code> — 0.075em (section headings)</li>
+        <li><code>--tracking-label</code> — 0.055em (small uppercase labels)</li>
       </ul>
     </section>
   </main>
@@ -202,7 +204,7 @@ const weights = [100, 300, 400, 500, 700, 900];
   }
   .sg__label {
     font-size: 12px;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--color-ink-softest);
     font-family: ui-monospace, monospace;

@@ -4,7 +4,7 @@
   --color-accent-text: #8e5f11;   /* AA-contrast darker gold — used for small italic labels */
   --color-accent-deep: #714f13;   /* used for hyperlinks and hover states */
 
-  --color-ink: #000;
+  --color-ink: #111;
   --color-ink-soft: #333;
   --color-ink-softer: #555;
   --color-ink-softest: #666;
@@ -18,22 +18,33 @@
   --color-surface-darker: #111;
 
   /* === Typography === */
-  --font-body: 'Brandon', 'MyriadSet Pro', 'Kozuka Gothic Pro',
-    'Segoe UI Light', 'Source Sans Pro', system-ui, sans-serif;
-  --font-accent: 'ACaslon', Georgia, 'Times New Roman', serif;
+  --font-body: 'Hanken Grotesk', 'MyriadSet Pro', 'Kozuka Gothic Pro',
+    'Segoe UI', system-ui, sans-serif;
+  --font-accent: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
 
   --text-xs: 14px;
   --text-sm: 16px;
-  --text-base: 20px;
+  --text-base: 18px;
   --text-lg: 28px;
   --text-xl: 40px;
   --text-2xl: 64px;
   --text-3xl: 96px;
 
-  --tracking-upper: 0.125em;
+  --font-weight-copy: 400;
+  --font-weight-display: 500;
+  --font-weight-heading: 500;
+  --font-weight-label: 600;
+  --font-weight-strong: 700;
+
+  --tracking-body: 0;
+  --tracking-display: 0;
+  --tracking-heading: 0;
+  --tracking-label: 0.025em;
+  --tracking-nav: 0.025em;
+  --tracking-upper: var(--tracking-heading);
   --leading-tight: 1;
   --leading-snug: 1.25;
-  --leading-body: 1.5;
+  --leading-body: 1.6;
 
   /* === Motion — the two signature curves from the old site === */
   --ease-smooth: cubic-bezier(0.6, 0, 0.4, 1);

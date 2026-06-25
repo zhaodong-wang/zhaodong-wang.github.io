@@ -11,9 +11,8 @@ const { image, height = '60vh' } = Astro.props;
 </section>
 
 <style>
-  /* Panorama divider between timeline items — matches the 2015 .pano
-     divs. Uses a scroll listener (src/lib/parallax.ts) to translate
-     the bg at a slower rate than the section for a parallax effect. */
+  /* Panorama divider between timeline items. legacy-motion.ts writes
+     --parallax-y so the image drifts at the 2015 site's slower rate. */
   .panorama {
     position: relative;
     width: 100%;

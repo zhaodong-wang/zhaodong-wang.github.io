@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = 'Zhaodong Wang — Senior Staff Research Scientist at Meta TBD Lab, working on AI agents.',
+  description = 'Zhaodong Wang - Senior Staff Research Scientist at Meta TBD Lab building agentic AI platforms, ML systems, and production AI products.',
   ogImage = '/img/home.png',
 } = Astro.props;
 
@@ -28,15 +28,9 @@ const personSchema = {
     name: 'Meta TBD Lab',
   },
   url: 'https://www.zhaodongwang.net',
-  email: 'mailto:zhaodong.wang.1992@gmail.com',
   alumniOf: [
     { '@type': 'CollegeOrUniversity', name: 'University of Illinois at Urbana–Champaign' },
     { '@type': 'CollegeOrUniversity', name: 'Tsinghua University' },
-  ],
-  sameAs: [
-    'https://scholar.google.com/citations?user=6Ewpn7wAAAAJ&hl=en',
-    'https://github.com/zhaodong-wang',
-    'https://www.linkedin.com/in/zhaodong-wang',
   ],
 };
 ---
@@ -93,7 +87,7 @@ const personSchema = {
     padding: 0.6rem 1rem;
     background: var(--color-ink);
     color: #fff;
-    font-weight: 600;
+    font-weight: var(--font-weight-label);
     text-decoration: none;
     border-radius: 4px;
     z-index: 1000;

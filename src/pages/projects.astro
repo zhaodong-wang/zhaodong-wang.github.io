@@ -48,10 +48,6 @@ const entries = (await getCollection('projects')).sort(
 </Layout>
 
 <script>
-  import { revealOnScroll } from '../lib/observe';
-  import { parallax } from '../lib/parallax';
-  revealOnScroll('[data-reveal]');
-  parallax('.sub-hero', { range: 140 });
-  parallax('.panorama', { range: 100 });
-  parallax('.timeline-item', { range: 80 });
+  import { setupSubpageMotion } from '../lib/legacy-motion';
+  setupSubpageMotion();
 </script>

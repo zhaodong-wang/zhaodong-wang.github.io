@@ -4,7 +4,7 @@ interface Props {
   interval?: number;
 }
 
-const { items, interval = 1800 } = Astro.props;
+const { items, interval = 2500 } = Astro.props;
 ---
 
 <div class="scroll-words" data-scroll-words data-interval={interval}>
@@ -46,7 +46,7 @@ const { items, interval = 1800 } = Astro.props;
   const el = document.querySelector<HTMLElement>('[data-scroll-words]');
   if (el) {
     const items = Array.from(el.querySelectorAll<HTMLElement>('p'));
-    const interval = Number(el.dataset.interval ?? 1800);
+    const interval = Number(el.dataset.interval ?? 2500);
     if (items.length > 1) {
       let i = 0;
       setInterval(() => {

@@ -18,6 +18,8 @@ body {
   line-height: var(--leading-body);
   font-family: var(--font-body);
   font-size: var(--text-base);
+  font-weight: var(--font-weight-copy);
+  letter-spacing: var(--tracking-body);
   color: var(--color-ink);
   background: var(--color-surface);
 }
