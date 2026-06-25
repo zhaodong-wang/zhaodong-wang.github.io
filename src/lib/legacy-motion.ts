@@ -183,6 +183,8 @@ export function setupLegacyDrawer() {
 
     logo.addEventListener('pointerenter', recoverLogo);
     logo.addEventListener('pointerleave', transformLogo);
+    logo.addEventListener('mouseenter', recoverLogo);
+    logo.addEventListener('mouseleave', transformLogo);
     logo.addEventListener('focus', recoverLogo);
     logo.addEventListener('blur', transformLogo);
   }
