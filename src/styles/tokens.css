@@ -1,0 +1,80 @@
+:root {
+  /* === Color — ported from css/main.css === */
+  --color-accent: #bc8420;        /* signature gold — used for headings, icons, bars (large / non-text) */
+  --color-accent-text: #714f13;   /* AA-contrast darker gold — used for small italic labels */
+  --color-accent-deep: #714f13;   /* used for hyperlinks and hover states */
+
+  --color-ink: #111;
+  --color-ink-soft: #333;
+  --color-ink-softer: #555;
+  --color-ink-softest: #666;
+  --color-rule: #aaa;
+  --color-rule-soft: #ccc;
+  --color-rule-softer: #ddd;
+  --color-rule-softest: #eee;
+
+  --color-surface: #fff;
+  --color-surface-dark: #222;
+  --color-surface-darker: #111;
+
+  /* === Typography === */
+  --font-body: 'Hanken Grotesk', 'MyriadSet Pro', 'Kozuka Gothic Pro',
+    'Segoe UI', system-ui, sans-serif;
+  --font-accent: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
+
+  --text-xs: 14px;
+  --text-sm: 16px;
+  --text-base: 18px;
+  --text-lg: 28px;
+  --text-xl: 40px;
+  --text-2xl: 64px;
+  --text-3xl: 96px;
+
+  --font-weight-copy: 400;
+  --font-weight-display: 500;
+  --font-weight-heading: 500;
+  --font-weight-label: 600;
+  --font-weight-strong: 700;
+
+  --tracking-body: 0;
+  --tracking-display: 0;
+  --tracking-heading: 0;
+  --tracking-label: 0.025em;
+  --tracking-nav: 0.025em;
+  --tracking-upper: var(--tracking-heading);
+  --leading-tight: 1;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+
+  /* === Motion — the two signature curves from the old site === */
+  --ease-smooth: cubic-bezier(0.6, 0, 0.4, 1);
+  --ease-snap: cubic-bezier(0.835, 0, 0.19, 1);
+  --dur-fast: 240ms;
+  --dur-med: 480ms;
+  --dur-slow: 960ms;
+
+  /* === Layout === */
+  --header-h: 90px;
+  --section-pad: 60px;
+  --content-max: 1200px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --header-h: 60px;
+    --section-pad: 40px;
+    --text-base: 16px;
+    --text-lg: 22px;
+    --text-xl: 32px;
+    --text-2xl: 40px;
+    --text-3xl: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+  }
+}

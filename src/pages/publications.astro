@@ -1,0 +1,263 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import SubHero from '../components/SubHero.astro';
+import SubNavigator from '../components/SubNavigator.astro';
+
+const mlSystems = await getEntry('publications', 'ml-systems');
+const orTransportation = await getEntry('publications', 'or-transportation');
+const dissertation = await getEntry('publications', 'dissertation');
+
+const totalPublished =
+  (mlSystems?.data.entries.length ?? 0) +
+  (orTransportation?.data.entries.length ?? 0);
+const preprints = (mlSystems?.data.entries ?? []).filter(
+  (e) => e.note === 'Preprint',
+).length;
+---
+
+<Layout
+  title="Zhaodong Wang — Publications"
+  description="Selected publications and public research by Zhaodong Wang across AI agents, ML systems, optimization, and transportation."
+>
+  <SubHero
+    title="Publications"
+    caption="Papers & Manuscripts"
+    bgImage="/img/publications.jpg"
+  />
+
+  <section class="counts">
+    <div class="counts__grid">
+      <div class="counts__cell" data-reveal>
+        <img src="/img/papers.svg" alt="" width="40" height="40" />
+        <span class="counts__n" data-count={totalPublished - preprints}>0</span>
+        <small>Peer-reviewed</small>
+      </div>
+      <div class="counts__cell" data-reveal style="--delay: 150ms">
+        <img src="/img/conferences.svg" alt="" width="40" height="40" />
+        <span class="counts__n" data-count={mlSystems?.data.entries.length ?? 0}>0</span>
+        <small>ML & Systems</small>
+      </div>
+      <div class="counts__cell" data-reveal style="--delay: 300ms">
+        <img src="/img/manuscripts.svg" alt="" width="40" height="40" />
+        <span class="counts__n" data-count={preprints}>0</span>
+        <small>Preprints</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="pubs">
+    <h2 class="pubs__heading" data-reveal>
+      <em>ML & Systems</em>
+      <span>2023 — present</span>
+    </h2>
+    <ol class="pubs__list">
+      {
+        mlSystems?.data.entries.map((entry, i) => (
+          <li class="pubs__item" data-reveal style={`--delay: ${i * 80}ms`}>
+            <h3>
+              {entry.url ? (
+                <a href={entry.url} target="_blank" rel="noopener">{entry.title}</a>
+              ) : (
+                entry.title
+              )}
+            </h3>
+            <p class="pubs__authors">{entry.authors.join(', ')}</p>
+            <p class="pubs__venue">
+              <em>{entry.venue}</em> · {entry.year}
+              {entry.note && <span class="pubs__note"> · {entry.note}</span>}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="pubs__heading" data-reveal>
+      <em>Operations Research & Transportation</em>
+      <span>2015 — 2022</span>
+    </h2>
+    <ol class="pubs__list">
+      {
+        orTransportation?.data.entries.map((entry, i) => (
+          <li class="pubs__item" data-reveal style={`--delay: ${i * 80}ms`}>
+            <h3>{entry.title}</h3>
+            <p class="pubs__authors">{entry.authors.join(', ')}</p>
+            <p class="pubs__venue">
+              <em>{entry.venue}</em> · {entry.year}
+              {entry.note && <span class="pubs__note"> · {entry.note}</span>}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="pubs__heading" data-reveal>
+      <em>Dissertation</em>
+    </h2>
+    <ol class="pubs__list">
+      {
+        dissertation?.data.entries.map((entry) => (
+          <li class="pubs__item" data-reveal>
+            <h3>{entry.title}</h3>
+            <p class="pubs__venue"><em>{entry.venue}</em> · {entry.year}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <SubNavigator
+    prev={{ label: 'Projects', href: '/projects/', bg: '/img/projects.jpg' }}
+    next={{ label: 'Skills', href: '/skills/', bg: '/img/skills.jpg' }}
+  />
+</Layout>
+
+<style>
+  .counts {
+    padding: calc(var(--section-pad) + 1rem) 1.5rem var(--section-pad);
+    background: rgba(214, 214, 214, 0.25);
+  }
+  .counts__grid {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .counts__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 800ms var(--ease-smooth) var(--delay, 0ms),
+      transform 800ms var(--ease-smooth) var(--delay, 0ms);
+  }
+  .counts__cell.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .counts__cell img { width: 40px; height: 40px; }
+  .counts__n {
+    font-size: 48px;
+    font-weight: var(--font-weight-display);
+    color: var(--color-ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .counts__cell small {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: 14px;
+  }
+  @media (max-width: 720px) {
+    .counts__grid { grid-template-columns: 1fr; }
+  }
+
+  .pubs {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: var(--section-pad) 1.5rem;
+  }
+  .pubs__heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 3rem 0 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-rule-soft);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 700ms var(--ease-smooth),
+      transform 700ms var(--ease-smooth);
+  }
+  .pubs__heading.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .pubs__heading em {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: var(--text-lg);
+    font-weight: 400;
+  }
+  .pubs__heading span {
+    font-size: 13px;
+    font-weight: var(--font-weight-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-ink-softest);
+  }
+  .pubs__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .pubs__item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 700ms var(--ease-smooth) var(--delay, 0ms),
+      transform 700ms var(--ease-smooth) var(--delay, 0ms);
+  }
+  .pubs__item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .pubs__item h3 {
+    font-size: 18px;
+    font-weight: var(--font-weight-label);
+    color: var(--color-ink);
+    line-height: 1.35;
+    margin-bottom: 0.35em;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-body);
+  }
+  .pubs__item h3 a {
+    color: var(--color-ink);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease-smooth);
+  }
+  .pubs__item h3 a:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .pubs__authors {
+    font-size: 14px;
+    color: var(--color-ink-softest);
+    letter-spacing: var(--tracking-body);
+    line-height: 1.5;
+    margin-bottom: 0.25em;
+  }
+  .pubs__venue {
+    font-size: 14px;
+    color: var(--color-ink-soft);
+  }
+  .pubs__venue em {
+    font-family: var(--font-accent);
+    color: var(--color-accent);
+    font-style: italic;
+  }
+  .pubs__note { color: var(--color-ink-softest); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .counts__cell, .pubs__heading, .pubs__item {
+      opacity: 1 !important; transform: none !important; transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  import {
+    setupListRevealMotion,
+    setupPublicationCounters,
+    setupSubpageMotion,
+  } from '../lib/legacy-motion';
+
+  setupSubpageMotion();
+  setupListRevealMotion('[data-reveal]');
+  setupPublicationCounters();
+</script>

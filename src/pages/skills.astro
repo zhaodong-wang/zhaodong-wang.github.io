@@ -1,0 +1,104 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import SubHero from '../components/SubHero.astro';
+import SubNavigator from '../components/SubNavigator.astro';
+import SkillBar from '../components/SkillBar.astro';
+
+const skills = await getEntry('skills', 'skills');
+const categories = skills?.data.categories ?? [];
+---
+
+<Layout
+  title="Zhaodong Wang — Skills"
+  description="Technical skills snapshot for Zhaodong Wang across AI agent systems, ML infrastructure, product engineering, and research."
+>
+  <SubHero title="Technical Skills" caption="Craft" bgImage="/img/skills.jpg" />
+
+  <section class="skills">
+    <div class="skills__grid">
+      {
+        categories.map((cat, i) => (
+          <div class="skills__cat" data-reveal style={`--delay: ${i * 120}ms`}>
+            <header class="skills__cat-head">
+              <h2>{cat.title}</h2>
+              {cat.tagline && <p><em>{cat.tagline}</em></p>}
+            </header>
+            <ul class="skills__list">
+              {cat.items.map((item) => (
+                <SkillBar name={item.name} level={item.level} />
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <SubNavigator
+    prev={{ label: 'Publications', href: '/publications/', bg: '/img/publications.jpg' }}
+    next={{ label: 'Home', href: '/', bg: '/img/home.png' }}
+  />
+</Layout>
+
+<style>
+  .skills {
+    padding: calc(var(--section-pad) + 1rem) 1.5rem var(--section-pad);
+  }
+  .skills__grid {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  .skills__cat {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 800ms var(--ease-smooth) var(--delay, 0ms),
+      transform 800ms var(--ease-smooth) var(--delay, 0ms);
+  }
+  .skills__cat.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .skills__cat-head {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+  .skills__cat-head h2 {
+    font-size: var(--text-lg);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-ink-soft);
+    font-weight: var(--font-weight-heading);
+    margin-bottom: 0.35em;
+  }
+  .skills__cat-head p {
+    font-family: var(--font-accent);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: 14px;
+  }
+  .skills__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  @media (max-width: 720px) {
+    .skills__grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skills__cat { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+</style>
+
+<script>
+  import { setupListRevealMotion, setupSubpageMotion } from '../lib/legacy-motion';
+  setupSubpageMotion();
+  setupListRevealMotion('.skills__cat, .skill-bar');
+</script>

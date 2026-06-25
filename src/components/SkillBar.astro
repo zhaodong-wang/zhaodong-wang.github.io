@@ -1,0 +1,80 @@
+---
+interface Props {
+  name: string;
+  level: 'core' | 'proficient' | 'expert';
+}
+
+const { name, level } = Astro.props;
+
+const fills: Record<Props['level'], number> = {
+  core: 60,
+  proficient: 80,
+  expert: 95,
+};
+---
+
+<li class="skill-bar" data-reveal style={`--fill: ${fills[level]}%`}>
+  <div class="skill-bar__label">
+    <span class="skill-bar__name">{name}</span>
+    <span class="skill-bar__level">{level}</span>
+  </div>
+  <div class="skill-bar__track">
+    <div class="skill-bar__fill"></div>
+  </div>
+</li>
+
+<style>
+  .skill-bar {
+    list-style: none;
+  }
+  .skill-bar__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.35em;
+  }
+  .skill-bar__name {
+    font-weight: var(--font-weight-label);
+    font-size: 16px;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+  }
+  .skill-bar__level {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--color-accent-text);
+    text-transform: lowercase;
+    opacity: 0;
+    transition: opacity 500ms var(--ease-smooth) 900ms;
+  }
+  .skill-bar.is-visible .skill-bar__level {
+    opacity: 1;
+  }
+  .skill-bar__track {
+    height: 6px;
+    background: rgba(170, 170, 170, 0.25);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .skill-bar__fill {
+    height: 100%;
+    width: 0;
+    background: var(--color-accent);
+    border-radius: 999px;
+    transition: width 1200ms var(--ease-smooth) 100ms;
+  }
+  .skill-bar.is-visible .skill-bar__fill {
+    width: var(--fill);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skill-bar__fill,
+    .skill-bar__level {
+      transition: none;
+    }
+    .skill-bar.is-visible .skill-bar__fill {
+      width: var(--fill);
+    }
+  }
+</style>

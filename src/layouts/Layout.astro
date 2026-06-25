@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Zhaodong Wang - Senior Staff Research Scientist at Meta TBD Lab building agentic AI platforms, ML systems, and production AI products.',
+  ogImage = '/img/home.png',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Zhaodong Wang',
+  jobTitle: 'Senior Staff Research Scientist',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Meta TBD Lab',
+  },
+  url: 'https://www.zhaodongwang.net',
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'University of Illinois at Urbana–Champaign' },
+    { '@type': 'CollegeOrUniversity', name: 'Tsinghua University' },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Zhaodong Wang" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#bc8420" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Zhaodong Wang" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/img/myIcon.svg" />
+
+    <title>{title}</title>
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Nav />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0.6rem 1rem;
+    background: var(--color-ink);
+    color: #fff;
+    font-weight: var(--font-weight-label);
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transform: translateY(-200%);
+    transition: transform var(--dur-fast) var(--ease-smooth);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+</style>

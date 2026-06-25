@@ -41,12 +41,12 @@ The **visual design is the product** — the revamp keeps it intact. Tokens to h
 ## Content (source of truth, do not lose)
 
 - **Role**: Senior Staff Research Scientist, Meta TBD Lab, working on AI agents.
-- **Contact**: zhaodong.wang.1992@gmail.com · 1 Hacker Way, Menlo Park, CA · +1 (650) 862-2969.
+- **Contact**: Email hidden on the public site; public social media links are intentionally omitted.
 - **Education**: Tsinghua (B.E. Civil Eng & Economics, 2009–2013) · UIUC (M.S. Applied Math, Ph.D. Civil Eng, 2013–2017).
 - **Projects (5)**: FB service-level traffic analysis (2017), ML failure prediction (2015), locomotive footprint (2013–15), bullwhip effect (2013–14), emission mitigation / intelligent vehicles (2013).
 - **Publications**: 5 papers (Operations Research 2021, Transp. Research Part B 2015, EJOR 2015, CACAIE 2015, INFORMS 2016 Wagner finalist), 5 manuscripts, 8 conference talks.
 - **Skills**: Software (C++ 75, Python 75, Java 65, HTML/CSS 65, JS 50) · Data tools (Hive/Presto 75, Scuba 60, ODS 65, MySQL 55, DataSwarm 50). *Note: these percentages and the data-tools list are ~2017 Facebook-era — likely want to refresh during the rebuild, confirm with Zhaodong.*
-- **Socials**: Facebook, Twitter, Google+, LinkedIn, Renren, Weibo, Instagram. Google+ is dead (shut down 2019) — drop on rebuild.
+- **Socials**: Public social media links are intentionally omitted on the rebuild.
 
 ## How to run / deploy
 

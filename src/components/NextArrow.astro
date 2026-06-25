@@ -1,0 +1,83 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '#about', label = 'Scroll to next section' } = Astro.props;
+---
+
+<a class="next-arrow" href={href} aria-label={label}>
+  <span class="next-arrow__bar next-arrow__bar--left" aria-hidden="true"></span>
+  <span class="next-arrow__bar next-arrow__bar--right" aria-hidden="true"></span>
+</a>
+
+<style>
+  .next-arrow {
+    position: absolute;
+    right: clamp(1rem, 6vw, 6rem);
+    bottom: clamp(2rem, 8vh, 6rem);
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: block;
+    color: var(--color-ink-softer);
+    isolation: isolate;
+    transition: border-color var(--dur-med) var(--ease-smooth),
+      transform var(--dur-med) var(--ease-smooth);
+  }
+  .next-arrow__bar {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    width: 40%;
+    height: 2px;
+    background: #999;
+    border-radius: 1.5px;
+    transform-origin: center;
+    transition: transform 100ms var(--ease-smooth),
+      background-color var(--dur-med) var(--ease-smooth);
+    will-change: transform;
+  }
+  .next-arrow__bar--left {
+    transform: translate(-34%, -50%) rotate(45deg);
+  }
+  .next-arrow__bar--right {
+    transform: translate(34%, -50%) rotate(-45deg);
+  }
+  .next-arrow:hover,
+  .next-arrow:focus-visible {
+    border-color: rgba(0, 0, 0, 0.8);
+    color: var(--color-ink);
+    transform: translateY(3px);
+  }
+  .next-arrow:hover .next-arrow__bar,
+  .next-arrow:focus-visible .next-arrow__bar {
+    background: #111;
+  }
+  .next-arrow:hover .next-arrow__bar--left,
+  .next-arrow:focus-visible .next-arrow__bar--left {
+    transform: translate(-34%, -50%) rotate(225deg);
+  }
+  .next-arrow:hover .next-arrow__bar--right,
+  .next-arrow:focus-visible .next-arrow__bar--right {
+    transform: translate(34%, -50%) rotate(-225deg);
+  }
+  .next-arrow__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    pointer-events: none;
+    z-index: -1;
+  }
+  @media (max-width: 600px) {
+    .next-arrow { width: 56px; height: 56px; }
+  }
+</style>
+
+<script>
+  import { setupNextArrowMotion } from '../lib/legacy-motion';
+  setupNextArrowMotion();
+</script>

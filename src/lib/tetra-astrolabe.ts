@@ -1,0 +1,433 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import * as THREE from 'three';
+
+let registered = false;
+
+function initGsap() {
+  if (registered) return;
+  gsap.registerPlugin(ScrollTrigger);
+  registered = true;
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function clamp01(value: number) {
+  return Math.min(1, Math.max(0, value));
+}
+
+function smoothstep(edge0: number, edge1: number, value: number) {
+  const x = clamp01((value - edge0) / (edge1 - edge0));
+  return x * x * (3 - 2 * x);
+}
+
+function makeRandom(seed: number) {
+  let state = seed;
+  return () => {
+    state |= 0;
+    state = (state + 0x6d2b79f5) | 0;
+    let t = Math.imul(state ^ (state >>> 15), 1 | state);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+interface ParticleSeed {
+  scatter: THREE.Vector3;
+  volume: THREE.Vector3;
+  field: THREE.Vector3;
+  logo: THREE.Vector3;
+  rotation: THREE.Euler;
+  phase: number;
+  scale: number;
+  depth: number;
+}
+
+interface ParticleSet {
+  mesh: THREE.InstancedMesh;
+  seeds: ParticleSeed[];
+  material: THREE.MeshBasicMaterial;
+  baseOpacity: number;
+  heroColor: THREE.Color;
+  paperColor: THREE.Color;
+}
+
+const gold = 0xbc8420;
+const paleGold = 0xd6aa52;
+const ash = 0xd9d6cd;
+const paperGold = 0x8e5f11;
+const paperPaleGold = 0x9d6814;
+const paperAsh = 0x47443d;
+const heroBackground = new THREE.Color(0x101010);
+const paperBackground = new THREE.Color(0xf2f2ef);
+const TAU = Math.PI * 2;
+
+const tetraVertices = [
+  new THREE.Vector3(0, 0.82, 0),
+  new THREE.Vector3(-0.72, -0.42, 0.52),
+  new THREE.Vector3(0.72, -0.42, 0.52),
+  new THREE.Vector3(0, -0.42, -0.82),
+];
+
+const tetraEdges = [
+  [0, 1],
+  [0, 2],
+  [0, 3],
+  [1, 2],
+  [2, 3],
+  [3, 1],
+];
+
+function rotateY(point: THREE.Vector3, angle: number) {
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const x = point.x * cos - point.z * sin;
+  const z = point.x * sin + point.z * cos;
+  point.x = x;
+  point.z = z;
+  return point;
+}
+
+function pointOnSphere(rand: () => number, radius: number) {
+  const theta = rand() * TAU;
+  const z = rand() * 2 - 1;
+  const r = Math.sqrt(Math.max(0, 1 - z * z)) * radius;
+  return new THREE.Vector3(Math.cos(theta) * r, z * radius, Math.sin(theta) * r);
+}
+
+function pointInCrystalVolume(rand: () => number, index: number, count: number) {
+  const theta = rand() * TAU;
+  const yUnit = rand() * 2 - 1;
+  const shell = index % 6 === 0 ? 0.9 + rand() * 0.13 : Math.cbrt(rand());
+  const circle = Math.sqrt(Math.max(0, 1 - yUnit * yUnit));
+  const facet = 0.92 + Math.sin(theta * 3 + yUnit * 2.8) * 0.08;
+
+  const point = new THREE.Vector3(
+    Math.cos(theta) * circle * shell * 1.5 * facet,
+    yUnit * shell * 1.16,
+    Math.sin(theta) * circle * shell * 0.98 * (1.02 - (facet - 0.92) * 0.42),
+  );
+
+  const twist = point.y * 0.42 + Math.sin(shell * Math.PI) * 0.18;
+  rotateY(point, twist);
+
+  if (index % 9 === 0) {
+    const vertex = tetraVertices[index % tetraVertices.length].clone().multiplyScalar(1.3);
+    point.lerp(vertex, 0.22 + rand() * 0.22);
+  }
+
+  if (index > count * 0.68) {
+    point.x += 0.14;
+    point.y *= 0.92;
+  }
+
+  return point;
+}
+
+function pointInSignalField(rand: () => number, index: number, count: number) {
+  const t = index / Math.max(1, count - 1);
+  const wave = Math.sin(t * TAU * 1.55);
+  const counter = Math.cos(t * TAU * 2.1);
+  return new THREE.Vector3(
+    (rand() - 0.5) * 5.8 + wave * 0.5,
+    (rand() - 0.5) * 2.9 + Math.sin(t * TAU * 4.2) * 0.34,
+    (rand() - 0.5) * 2.15 + counter * 0.62,
+  );
+}
+
+function pointOnLogoTetra(rand: () => number, index: number) {
+  if (index % 5 === 0) {
+    return pointOnSphere(rand, 0.36 + rand() * 0.42);
+  }
+
+  const edge = tetraEdges[index % tetraEdges.length];
+  const a = tetraVertices[edge[0]];
+  const b = tetraVertices[edge[1]];
+  return a.clone().lerp(b, rand()).multiplyScalar(0.94);
+}
+
+function makeParticleSeeds(count: number, rand: () => number) {
+  const seeds: ParticleSeed[] = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const volume = pointInCrystalVolume(rand, i, count);
+    const scatter = pointOnSphere(rand, 2.7 + rand() * 2.1);
+    scatter.x += (rand() - 0.5) * 1.1;
+    scatter.y += (rand() - 0.5) * 0.62;
+
+    seeds.push({
+      scatter,
+      volume,
+      field: pointInSignalField(rand, i, count),
+      logo: pointOnLogoTetra(rand, i),
+      rotation: new THREE.Euler(rand() * Math.PI, rand() * Math.PI, rand() * Math.PI),
+      phase: rand() * TAU,
+      scale: 0.62 + rand() * 1.1,
+      depth: 0.35 + rand() * 0.95,
+    });
+  }
+
+  return seeds;
+}
+
+function createParticleSet(
+  count: number,
+  rand: () => number,
+  color: number,
+  paperColor: number,
+  opacity: number,
+  size: number,
+  wireframe: boolean,
+) {
+  const geometry = new THREE.TetrahedronGeometry(size, 0);
+  const material = new THREE.MeshBasicMaterial({
+    color,
+    wireframe,
+    transparent: true,
+    opacity,
+    depthWrite: false,
+  });
+  const mesh = new THREE.InstancedMesh(geometry, material, count);
+  mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  mesh.frustumCulled = false;
+
+  return {
+    mesh,
+    material,
+    seeds: makeParticleSeeds(count, rand),
+    baseOpacity: opacity,
+    heroColor: new THREE.Color(color),
+    paperColor: new THREE.Color(paperColor),
+  };
+}
+
+function updateParticleSet(
+  set: ParticleSet,
+  time: number,
+  intro: number,
+  progress: number,
+  pointer: THREE.Vector2,
+  dummy: THREE.Object3D,
+  reducedMotion: boolean,
+) {
+  const fieldMix = smoothstep(0.06, 0.38, progress);
+  const logoMix = smoothstep(0.64, 0.9, progress);
+  const paperMix = smoothstep(0.07, 0.2, progress);
+  const driftScale = reducedMotion ? 0 : 1 - logoMix * 0.58;
+  const target = new THREE.Vector3();
+
+  for (let i = 0; i < set.seeds.length; i += 1) {
+    const seed = set.seeds[i];
+    target.copy(seed.volume).lerp(seed.field, fieldMix).lerp(seed.logo, logoMix);
+    dummy.position.copy(seed.scatter).lerp(target, intro);
+
+    const breath = Math.sin(time * 0.58 + seed.phase) * 0.032 * driftScale;
+    dummy.position.x += breath + pointer.x * 0.16 * seed.depth * (1 - logoMix * 0.55);
+    dummy.position.y += Math.cos(time * 0.43 + seed.phase) * 0.024 * driftScale;
+    dummy.position.z += pointer.y * 0.14 * seed.depth;
+
+    dummy.rotation.set(
+      seed.rotation.x + time * 0.18 + progress * 0.7,
+      seed.rotation.y + time * 0.24 + seed.phase * 0.42,
+      seed.rotation.z + time * 0.14,
+    );
+    dummy.scale.setScalar(seed.scale * (0.7 + intro * 0.34 + logoMix * 0.18));
+    dummy.updateMatrix();
+    set.mesh.setMatrixAt(i, dummy.matrix);
+  }
+
+  set.material.color.lerpColors(set.heroColor, set.paperColor, paperMix);
+
+  const targetOpacity =
+    set.baseOpacity * (0.52 + intro * 0.48 + fieldMix * 0.2 + logoMix * 0.12);
+  set.material.opacity = set.material.opacity * 0.9 + targetOpacity * 0.1;
+  set.mesh.instanceMatrix.needsUpdate = true;
+}
+
+export function setupTetraAstrolabe() {
+  initGsap();
+
+  const roots = Array.from(document.querySelectorAll<HTMLElement>('[data-tetra-astrolabe]'));
+  roots.forEach((root) => {
+    if (root.dataset.tetraBound === 'true') return;
+    root.dataset.tetraBound = 'true';
+
+    const canvas = root.querySelector<HTMLCanvasElement>('[data-tetra-canvas]');
+    if (!canvas) return;
+
+    const reducedMotion = prefersReducedMotion();
+    const rand = makeRandom(20260624);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 18);
+    camera.position.set(0, 0, 5.8);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.55));
+
+    const rootGroup = new THREE.Group();
+    scene.add(rootGroup);
+
+    const mobile = window.innerWidth < 760;
+    const mainCount = mobile ? 420 : 1040;
+    const skinParticles = createParticleSet(
+      mainCount,
+      rand,
+      gold,
+      paperGold,
+      0.66,
+      0.024,
+      false,
+    );
+    const edgeParticles = createParticleSet(
+      Math.round(mainCount * 0.34),
+      rand,
+      ash,
+      paperAsh,
+      0.4,
+      0.034,
+      true,
+    );
+    const emberParticles = createParticleSet(
+      Math.round(mainCount * 0.28),
+      rand,
+      paleGold,
+      paperPaleGold,
+      0.5,
+      0.018,
+      false,
+    );
+    rootGroup.add(skinParticles.mesh, edgeParticles.mesh, emberParticles.mesh);
+
+    const dummy = new THREE.Object3D();
+    const pointer = new THREE.Vector2(0, 0);
+    const targetPointer = new THREE.Vector2(0, 0);
+    const state = { intro: reducedMotion ? 1 : 0, progress: 0 };
+    let raf = 0;
+    let destroyed = false;
+    const setSize = () => {
+      const rect = root.getBoundingClientRect();
+      const width = Math.max(1, rect.width);
+      const height = Math.max(1, rect.height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height, false);
+    };
+
+    const resizeObserver = new ResizeObserver(setSize);
+    resizeObserver.observe(root);
+    setSize();
+
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => {
+        state.progress = self.progress;
+      },
+    });
+
+    const introTween = gsap.to(state, {
+      intro: 1,
+      duration: reducedMotion ? 0 : 1.95,
+      ease: 'power3.out',
+    });
+
+    const handlePointer = (event: PointerEvent) => {
+      const rect = root.getBoundingClientRect();
+      targetPointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+      targetPointer.y = -(((event.clientY - rect.top) / rect.height - 0.5) * 2);
+    };
+
+    if (!reducedMotion) {
+      window.addEventListener('pointermove', handlePointer, { passive: true });
+    }
+
+    const animate = () => {
+      if (destroyed) return;
+      const elapsed = reducedMotion ? 1 : performance.now() * 0.001;
+      pointer.lerp(targetPointer, reducedMotion ? 1 : 0.045);
+
+      const fieldMix = smoothstep(0.06, 0.38, state.progress);
+      const logoMix = smoothstep(0.64, 0.9, state.progress);
+      const paperMix = smoothstep(0.07, 0.2, state.progress);
+
+      const fieldBackground = heroBackground.clone().lerp(paperBackground, paperMix);
+      const fieldShell = root.parentElement as HTMLElement | null;
+      if (fieldShell) {
+        fieldShell.style.backgroundColor = `#${fieldBackground.getHexString()}`;
+      }
+
+      rootGroup.rotation.x = pointer.y * 0.11 + Math.sin(elapsed * 0.16) * 0.035;
+      rootGroup.rotation.y = pointer.x * 0.13 + elapsed * (reducedMotion ? 0 : 0.034);
+      rootGroup.rotation.z = Math.sin(elapsed * 0.11) * 0.02;
+      rootGroup.position.x = 0.92 * (1 - fieldMix) - logoMix * 0.18;
+      rootGroup.position.y = 0.06 * (1 - fieldMix) + logoMix * 0.08;
+      rootGroup.scale.setScalar(1.08 - fieldMix * 0.18 + logoMix * 0.2);
+
+      updateParticleSet(
+        skinParticles,
+        elapsed,
+        state.intro,
+        state.progress,
+        pointer,
+        dummy,
+        reducedMotion,
+      );
+      updateParticleSet(
+        edgeParticles,
+        elapsed + 5,
+        state.intro,
+        clamp01(state.progress + 0.04),
+        pointer,
+        dummy,
+        reducedMotion,
+      );
+      updateParticleSet(
+        emberParticles,
+        elapsed + 11,
+        state.intro,
+        clamp01(state.progress + 0.08),
+        pointer,
+        dummy,
+        reducedMotion,
+      );
+
+      renderer.render(scene, camera);
+      root.dataset.ready = 'true';
+
+      if (reducedMotion) return;
+      raf = window.requestAnimationFrame(animate);
+    };
+
+    raf = window.requestAnimationFrame(animate);
+    ScrollTrigger.refresh();
+
+    const dispose = () => {
+      destroyed = true;
+      window.cancelAnimationFrame(raf);
+      window.removeEventListener('pointermove', handlePointer);
+      resizeObserver.disconnect();
+      scrollTrigger.kill();
+      introTween.kill();
+      renderer.dispose();
+      [
+        skinParticles.mesh.geometry,
+        skinParticles.material,
+        edgeParticles.mesh.geometry,
+        edgeParticles.material,
+        emberParticles.mesh.geometry,
+        emberParticles.material,
+      ].forEach((item) => item.dispose());
+    };
+
+    document.addEventListener('astro:before-swap', dispose, { once: true });
+  });
+}

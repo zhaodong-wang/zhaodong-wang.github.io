@@ -1,0 +1,26 @@
+{
+  "name": "zhaodong-wang-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/three": "^0.184.1",
+    "astro": "^5.0.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "@fontsource/hanken-grotesk": "^5.2.8",
+    "gsap": "^3.15.0",
+    "three": "^0.184.0"
+  }
+}

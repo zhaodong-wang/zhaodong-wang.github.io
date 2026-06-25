@@ -6,6 +6,8 @@ Notes for Claude Code working in this repo. Covers current state, how it runs, a
 
 Personal portfolio for Zhaodong Wang, deployed via **GitHub Pages** from `master` at **www.zhaodongwang.net** (CNAME in repo root). GitHub Pages build source: branch `master`, path `/` (legacy build). No custom CI, no build step — Pages serves the HTML/CSS/JS as-is.
 
+The apex domain `zhaodongwang.net` is handled at GoDaddy as permanent forwarding to `https://www.zhaodongwang.net`; do not point apex DNS back at GitHub Pages unless intentionally reworking HTTPS again.
+
 ## Current stack (circa 2015)
 
 - **5 static HTML pages** (not a SPA): `index.html`, `education.html`, `projects.html`, `publications.html`, `skills.html`. Linear flow Home → Education → Projects → Publications → Skills → Home, with a hamburger drawer for direct jumps.
@@ -39,17 +41,17 @@ The **visual design is the product** — the revamp keeps it intact. Tokens to h
 ## Content (source of truth, do not lose)
 
 - **Role**: Senior Staff Research Scientist, Meta TBD Lab, working on AI agents.
-- **Contact**: zhaodong.wang.1992@gmail.com · 1 Hacker Way, Menlo Park, CA · +1 (650) 862-2969.
+- **Contact**: Email hidden on the public site; public social media links are intentionally omitted.
 - **Education**: Tsinghua (B.E. Civil Eng & Economics, 2009–2013) · UIUC (M.S. Applied Math, Ph.D. Civil Eng, 2013–2017).
 - **Projects (5)**: FB service-level traffic analysis (2017), ML failure prediction (2015), locomotive footprint (2013–15), bullwhip effect (2013–14), emission mitigation / intelligent vehicles (2013).
 - **Publications**: 5 papers (Operations Research 2021, Transp. Research Part B 2015, EJOR 2015, CACAIE 2015, INFORMS 2016 Wagner finalist), 5 manuscripts, 8 conference talks.
 - **Skills**: Software (C++ 75, Python 75, Java 65, HTML/CSS 65, JS 50) · Data tools (Hive/Presto 75, Scuba 60, ODS 65, MySQL 55, DataSwarm 50). *Note: these percentages and the data-tools list are ~2017 Facebook-era — likely want to refresh during the rebuild, confirm with Zhaodong.*
-- **Socials**: Facebook, Twitter, Google+, LinkedIn, Renren, Weibo, Instagram. Google+ is dead (shut down 2019) — drop on rebuild.
+- **Socials**: Public social media links are intentionally omitted on the rebuild.
 
 ## How to run / deploy
 
 - **Local preview**: open any `.html` file in a browser, or `python3 -m http.server` from repo root. No build.
-- **Deploy**: push to `master`. GitHub Pages rebuilds automatically (~1 min). Domain `www.zhaodongwang.net` is enforced HTTPS via GitHub's cert (current cert expires 2026-05-29).
+- **Deploy**: push to `master`. GitHub Pages rebuilds automatically (~1 min). The repo `CNAME` should remain `www.zhaodongwang.net`; apex `zhaodongwang.net` forwards at GoDaddy to `https://www.zhaodongwang.net`.
 - **Check Pages status**: `gh api repos/zhaodong-wang/zhaodong-wang.github.io/pages`.
 
 ## Revamp ground rules
@@ -65,5 +67,6 @@ The **visual design is the product** — the revamp keeps it intact. Tokens to h
 
 - `.DS_Store` files present in root and subdirs — add to `.gitignore` (done).
 - `.claude/memory` is a symlink to the user's auto-memory directory; both `.claude/` and `.DS_Store` are gitignored.
+- DNS/HTTPS: GoDaddy authoritative DNS uses forwarding A records for apex; apex AAAA records should stay absent; `www` is a CNAME to `zhaodong-wang.github.io`.
 - Git user is `TeXnicians`; main branch is `master` (not `main`).
 - Recent commit style is short imperative: "Update info", "Update skills", "Add pubs".

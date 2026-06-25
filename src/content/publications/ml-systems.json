@@ -1,0 +1,43 @@
+{
+  "section": "ml-systems",
+  "entries": [
+    {
+      "title": "LayerDAG: A Layerwise Autoregressive Diffusion Model for Directed Acyclic Graph Generation",
+      "authors": ["Mufei Li", "Viraj Shitole", "Eli Chien", "Changhai Man", "Zhaodong Wang", "Srinivas Sridharan", "Ying Zhang", "Tushar Krishna", "Pan Li"],
+      "venue": "ICLR",
+      "year": 2025
+    },
+    {
+      "title": "MCCS: A Service-based Approach to Collective Communication for Multi-tenant Cloud",
+      "authors": ["Yongji Wu", "Yechen Xu", "Jingrong Chen", "Zhaodong Wang", "Ying Zhang", "Matthew Lentz", "Danyang Zhuo"],
+      "venue": "ACM SIGCOMM",
+      "year": 2024
+    },
+    {
+      "title": "Transferable Neural WAN TE for Changing Topologies",
+      "authors": ["Abd AlRhman AlQiam", "Yuanjun Yao", "Zhaodong Wang", "Satyajeet Singh Ahuja", "Ying Zhang", "Sanjay G. Rao", "Bruno Ribeiro", "Mohit Tawarmalani"],
+      "venue": "ACM SIGCOMM",
+      "year": 2024
+    },
+    {
+      "title": "Klotski: Efficient and Safe Network Migration of Large Production Datacenters",
+      "authors": ["Yihao Zhao", "Xiaoxiang Zhang", "Hang Zhu", "Ying Zhang", "Zhaodong Wang", "Yuandong Tian", "Alex Nikulkov", "Joao Ferreira", "Xuanzhe Liu", "Xin Jin"],
+      "venue": "ACM SIGCOMM",
+      "year": 2023
+    },
+    {
+      "title": "Practical Intent-driven Routing Configuration Synthesis",
+      "authors": ["Sivaramakrishnan Ramanathan", "Ying Zhang", "Mohab Gawish", "Yogesh Mundada", "Zhaodong Wang", "Sangki Yun", "Eric Lippert", "Walid Taha", "Minlan Yu", "Jelena Mirkovic"],
+      "venue": "USENIX NSDI",
+      "year": 2023
+    },
+    {
+      "title": "Chakra: Advancing Performance Benchmarking and Co-design Using Standardized Execution Traces",
+      "authors": ["Srinivas Sridharan", "Taekyung Heo", "Louis Feng", "Zhaodong Wang", "Matt Bergeron", "Wenyin Fu", "Shengbao Zheng", "Brian Coutinho", "Saeed Rashidi", "Changhai Man", "et al."],
+      "venue": "arXiv preprint",
+      "year": 2023,
+      "note": "Preprint",
+      "url": "https://arxiv.org/abs/2305.14516"
+    }
+  ]
+}

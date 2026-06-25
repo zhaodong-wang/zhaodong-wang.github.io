@@ -1,0 +1,63 @@
+---
+interface Props {
+  items: string[];
+  interval?: number;
+}
+
+const { items, interval = 2500 } = Astro.props;
+---
+
+<div class="scroll-words" data-scroll-words data-interval={interval}>
+  {items.map((word, i) => (
+    <p class={i === 0 ? 'is-active' : ''}>{word}</p>
+  ))}
+</div>
+
+<style>
+  .scroll-words {
+    position: relative;
+    overflow: hidden;
+    height: 1.2em;
+    min-height: 1.2em;
+  }
+  .scroll-words p {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform var(--dur-slow) var(--ease-smooth),
+      opacity var(--dur-slow) var(--ease-smooth);
+  }
+  .scroll-words p.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .scroll-words p.is-leaving {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-words p { transition: opacity 0.2s linear; transform: none !important; }
+  }
+</style>
+
+<script>
+  const el = document.querySelector<HTMLElement>('[data-scroll-words]');
+  if (el) {
+    const items = Array.from(el.querySelectorAll<HTMLElement>('p'));
+    const interval = Number(el.dataset.interval ?? 2500);
+    if (items.length > 1) {
+      let i = 0;
+      setInterval(() => {
+        const current = items[i];
+        i = (i + 1) % items.length;
+        const next = items[i];
+        current.classList.remove('is-active');
+        current.classList.add('is-leaving');
+        next.classList.add('is-active');
+        setTimeout(() => current.classList.remove('is-leaving'), 900);
+      }, interval);
+    }
+  }
+</script>
