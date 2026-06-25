@@ -148,6 +148,52 @@ function pointOnLogoTetra(rand: () => number, index: number) {
   return a.clone().lerp(b, rand()).multiplyScalar(0.94);
 }
 
+function createTetraFrameGeometry(size: number, strokeRadius: number) {
+  const positions: number[] = [];
+  const sourceAxis = new THREE.Vector3(0, 1, 0);
+  const direction = new THREE.Vector3();
+  const midpoint = new THREE.Vector3();
+  const vertex = new THREE.Vector3();
+  const quaternion = new THREE.Quaternion();
+  const matrix = new THREE.Matrix4();
+  const scale = new THREE.Vector3(1, 1, 1);
+
+  tetraEdges.forEach(([startIndex, endIndex]) => {
+    const start = tetraVertices[startIndex].clone().multiplyScalar(size);
+    const end = tetraVertices[endIndex].clone().multiplyScalar(size);
+    direction.copy(end).sub(start);
+    const length = direction.length();
+    midpoint.copy(start).add(end).multiplyScalar(0.5);
+    quaternion.setFromUnitVectors(sourceAxis, direction.normalize());
+    matrix.compose(midpoint, quaternion, scale);
+
+    const edge = new THREE.CylinderGeometry(strokeRadius, strokeRadius, length, 4, 1, false);
+    const edgePositions = edge.getAttribute('position');
+    const edgeIndex = edge.getIndex();
+
+    if (edgeIndex) {
+      for (let i = 0; i < edgeIndex.count; i += 1) {
+        vertex.fromBufferAttribute(edgePositions, edgeIndex.getX(i));
+        vertex.applyMatrix4(matrix);
+        positions.push(vertex.x, vertex.y, vertex.z);
+      }
+    } else {
+      for (let i = 0; i < edgePositions.count; i += 1) {
+        vertex.fromBufferAttribute(edgePositions, i);
+        vertex.applyMatrix4(matrix);
+        positions.push(vertex.x, vertex.y, vertex.z);
+      }
+    }
+
+    edge.dispose();
+  });
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
 function makeParticleSeeds(count: number, rand: () => number) {
   const seeds: ParticleSeed[] = [];
 
@@ -179,15 +225,15 @@ function createParticleSet(
   paperColor: number,
   opacity: number,
   size: number,
-  wireframe: boolean,
+  strokeRadius: number,
 ) {
-  const geometry = new THREE.TetrahedronGeometry(size, 0);
+  const geometry = createTetraFrameGeometry(size, strokeRadius);
   const material = new THREE.MeshBasicMaterial({
     color,
-    wireframe,
     transparent: true,
     opacity,
     depthWrite: false,
+    toneMapped: false,
   });
   const mesh = new THREE.InstancedMesh(geometry, material, count);
   mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -240,8 +286,9 @@ function updateParticleSet(
 
   set.material.color.lerpColors(set.heroColor, set.paperColor, paperMix);
 
+  const paperOpacity = 1 - paperMix * 0.24;
   const targetOpacity =
-    set.baseOpacity * (0.52 + intro * 0.48 + fieldMix * 0.2 + logoMix * 0.12);
+    set.baseOpacity * (0.52 + intro * 0.48 + fieldMix * 0.2 + logoMix * 0.12) * paperOpacity;
   set.material.opacity = set.material.opacity * 0.9 + targetOpacity * 0.1;
   set.mesh.instanceMatrix.needsUpdate = true;
 }
@@ -276,33 +323,33 @@ export function setupTetraAstrolabe() {
     scene.add(rootGroup);
 
     const mobile = window.innerWidth < 760;
-    const mainCount = mobile ? 420 : 1040;
+    const mainCount = mobile ? 380 : 1020;
     const skinParticles = createParticleSet(
       mainCount,
       rand,
       gold,
       paperGold,
-      0.66,
-      0.024,
-      false,
+      0.56,
+      0.028,
+      0.0025,
     );
     const edgeParticles = createParticleSet(
-      Math.round(mainCount * 0.34),
+      Math.round(mainCount * 0.38),
       rand,
       ash,
       paperAsh,
       0.4,
-      0.034,
-      true,
+      0.036,
+      0.0028,
     );
     const emberParticles = createParticleSet(
-      Math.round(mainCount * 0.28),
+      Math.round(mainCount * 0.3),
       rand,
       paleGold,
       paperPaleGold,
-      0.5,
-      0.018,
-      false,
+      0.42,
+      0.022,
+      0.0021,
     );
     rootGroup.add(skinParticles.mesh, edgeParticles.mesh, emberParticles.mesh);
 

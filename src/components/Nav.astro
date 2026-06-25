@@ -1,4 +1,6 @@
 ---
+import LogoMark from './LogoMark.astro';
+
 interface Link {
   label: string;
   href: string;
@@ -21,15 +23,8 @@ const links: Link[] = [
 
 <header class="site-header">
   <a href="/#home" class="site-header__logo" aria-label="Home">
-    <span class="site-header__logo-mark is-active" data-logo-mark aria-hidden="true">
-      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--left"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--right"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--top"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--outer site-header__logo-stick--bottom"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--left"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--right"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--top"></span>
-      <span class="site-header__logo-stick site-header__logo-stick--inner site-header__logo-stick--bottom"></span>
+    <span class="site-header__logo-mark" data-logo-mark aria-hidden="true">
+      <LogoMark hoverSquare />
     </span>
   </a>
   <button
@@ -96,136 +91,17 @@ const links: Link[] = [
     width: 40px;
     height: 40px;
     overflow: visible;
-    transform: rotate(0deg) translateY(0) scale(0.7);
+    transform: translateY(0) scale(0.72);
     transform-origin: 50% 50%;
     transition: transform 0.6s var(--ease-smooth);
     will-change: transform;
   }
-  .site-header__logo-mark:not(.is-active) {
-    transform: rotate(0deg) translateY(0) scale(0.7);
-  }
-  .site-header__logo-stick {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--color-accent);
-    transform-origin: 0 50%;
-    transition:
-      left 0.6s var(--ease-smooth),
-      top 0.6s var(--ease-smooth),
-      width 0.6s var(--ease-smooth),
-      transform 0.6s var(--ease-smooth);
-    will-change: transform;
-  }
-  .site-header__logo-stick--left {
-    left: 1.5px;
-    top: 37px;
-    width: 37px;
-    transform: rotate(-90deg);
-  }
-  .site-header__logo-stick--right {
-    left: 38.5px;
-    top: 0;
-    width: 37px;
-    transform: rotate(90deg);
-  }
-  .site-header__logo-stick--top {
-    left: 1.5px;
-    top: 0;
-    width: 37px;
-    transform: rotate(0deg);
-  }
-  .site-header__logo-stick--bottom {
-    left: 1.5px;
-    top: 37px;
-    width: 37px;
-    transform: rotate(0deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--outer.site-header__logo-stick--left {
-    left: 4px;
-    top: 27.75px;
-    width: 28.84px;
-    transform: rotate(-56.31deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--outer.site-header__logo-stick--top {
-    left: 20px;
-    top: 3.75px;
-    width: 29.55px;
-    transform: rotate(44.62deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--outer.site-header__logo-stick--right {
-    left: 36px;
-    top: 24.25px;
-    width: 16.14px;
-    transform: rotate(139.4deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--outer.site-header__logo-stick--bottom {
-    left: 23.75px;
-    top: 34.75px;
-    width: 20.05px;
-    transform: rotate(-159.64deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--left.site-header__logo-stick--inner {
-    left: 20px;
-    top: 3.75px;
-    width: 20.25px;
-    transform: rotate(104.34deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--right.site-header__logo-stick--inner {
-    left: 15px;
-    top: 23.5px;
-    width: 16.26px;
-    transform: rotate(52.13deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--top.site-header__logo-stick--inner {
-    left: 15px;
-    top: 23.5px;
-    width: 21.01px;
-    transform: rotate(2.05deg);
-  }
-  .site-header__logo-mark.is-active .site-header__logo-stick--bottom.site-header__logo-stick--inner {
-    left: 15px;
-    top: 23.5px;
-    width: 11.24px;
-    transform: rotate(156.8deg);
-  }
   .site-header__logo:hover .site-header__logo-mark,
   .site-header__logo:focus-visible .site-header__logo-mark {
-    transform: rotate(0deg) translateY(0) scale(0.7) !important;
-  }
-  .site-header__logo:hover .site-header__logo-stick--left,
-  .site-header__logo:focus-visible .site-header__logo-stick--left {
-    left: 1.5px;
-    top: 37px;
-    width: 37px;
-    transform: rotate(-90deg);
-  }
-  .site-header__logo:hover .site-header__logo-stick--top,
-  .site-header__logo:focus-visible .site-header__logo-stick--top {
-    left: 1.5px;
-    top: 0;
-    width: 37px;
-    transform: rotate(0deg);
-  }
-  .site-header__logo:hover .site-header__logo-stick--right,
-  .site-header__logo:focus-visible .site-header__logo-stick--right {
-    left: 38.5px;
-    top: 0;
-    width: 37px;
-    transform: rotate(90deg);
-  }
-  .site-header__logo:hover .site-header__logo-stick--bottom,
-  .site-header__logo:focus-visible .site-header__logo-stick--bottom {
-    left: 1.5px;
-    top: 37px;
-    width: 37px;
-    transform: rotate(0deg);
+    transform: translateY(0) scale(0.72);
   }
   @media (prefers-reduced-motion: reduce) {
-    .site-header__logo-mark,
-    .site-header__logo-stick {
+    .site-header__logo-mark {
       transition: none;
     }
   }

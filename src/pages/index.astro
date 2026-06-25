@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LogoMark from '../components/LogoMark.astro';
 import NextArrow from '../components/NextArrow.astro';
 import TetraAstrolabe from '../components/TetraAstrolabe.astro';
 
@@ -124,14 +125,7 @@ const backgroundRows = [
 
   <div class="opening-loader" data-opening-loader aria-hidden="true">
     <div class="opening-loader__mark" data-opening-mark>
-      <span class="opening-loader__stick opening-loader__stick--outer opening-loader__stick--left" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--outer opening-loader__stick--right" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--outer opening-loader__stick--top" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--outer opening-loader__stick--bottom" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--inner opening-loader__stick--left" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--inner opening-loader__stick--right" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--inner opening-loader__stick--top" data-opening-stick></span>
-      <span class="opening-loader__stick opening-loader__stick--inner opening-loader__stick--bottom" data-opening-stick></span>
+      <LogoMark />
     </div>
   </div>
 
@@ -310,107 +304,6 @@ const backgroundRows = [
     opacity: 0;
     overflow: visible;
     will-change: transform, opacity;
-  }
-
-  .opening-loader__stick {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--color-accent);
-    opacity: 1;
-    transform-origin: 0 50%;
-    transition:
-      left 0.6s var(--ease-smooth),
-      top 0.6s var(--ease-smooth),
-      width 0.6s var(--ease-smooth),
-      transform 0.6s var(--ease-smooth);
-    will-change: transform;
-  }
-
-  .opening-loader__stick--left {
-    left: 1.5px;
-    top: 37px;
-    width: 37px;
-    transform: rotate(-90deg);
-  }
-
-  .opening-loader__stick--right {
-    left: 38.5px;
-    top: 0;
-    width: 37px;
-    transform: rotate(90deg);
-  }
-
-  .opening-loader__stick--top {
-    left: 1.5px;
-    top: 0;
-    width: 37px;
-    transform: rotate(0deg);
-  }
-
-  .opening-loader__stick--bottom {
-    left: 1.5px;
-    top: 37px;
-    width: 37px;
-    transform: rotate(0deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--outer.opening-loader__stick--left {
-    left: 4px;
-    top: 27.75px;
-    width: 28.84px;
-    transform: rotate(-56.31deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--outer.opening-loader__stick--top {
-    left: 20px;
-    top: 3.75px;
-    width: 29.55px;
-    transform: rotate(44.62deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--outer.opening-loader__stick--right {
-    left: 36px;
-    top: 24.25px;
-    width: 16.14px;
-    transform: rotate(139.4deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--outer.opening-loader__stick--bottom {
-    left: 23.75px;
-    top: 34.75px;
-    width: 20.05px;
-    transform: rotate(-159.64deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--left.opening-loader__stick--inner {
-    left: 20px;
-    top: 3.75px;
-    width: 20.25px;
-    transform: rotate(104.34deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--right.opening-loader__stick--inner {
-    left: 15px;
-    top: 23.5px;
-    width: 16.26px;
-    transform: rotate(52.13deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--top.opening-loader__stick--inner {
-    left: 15px;
-    top: 23.5px;
-    width: 21.01px;
-    transform: rotate(2.05deg);
-  }
-
-  .opening-loader__mark.is-active .opening-loader__stick--bottom.opening-loader__stick--inner {
-    left: 15px;
-    top: 23.5px;
-    width: 11.24px;
-    transform: rotate(156.8deg);
   }
 
   .home {

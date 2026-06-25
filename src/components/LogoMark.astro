@@ -1,0 +1,92 @@
+---
+interface Props {
+  hoverSquare?: boolean;
+}
+
+const { hoverSquare = false } = Astro.props;
+---
+
+<span class:list={['logo-mark', hoverSquare && 'logo-mark--square-hover']}>
+  <svg
+    class="logo-mark__glyph"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <polygon points="1.6,11.7 8,2.1 14.4,10.3 9.5,14.5" />
+    <line x1="8" y1="2.1" x2="6" y2="10" />
+    <line x1="6" y1="10" x2="9.5" y2="14.5" />
+    <line x1="6" y1="10" x2="14.4" y2="10.3" />
+    <line x1="6" y1="10" x2="1.6" y2="11.7" />
+  </svg>
+
+  <svg
+    class="logo-mark__square"
+    viewBox="0 0 16 16"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M2.2 2.2H13.8V13.8H2.2Z" />
+  </svg>
+</span>
+
+<style>
+  .logo-mark {
+    position: absolute;
+    inset: 0;
+    display: block;
+    color: var(--color-accent);
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .logo-mark__glyph,
+  .logo-mark__square {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.08;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    transition:
+      opacity 0.56s var(--ease-smooth),
+      transform 0.56s var(--ease-smooth);
+    will-change: opacity, transform;
+  }
+
+  .logo-mark__glyph {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transform-origin: 50% 50%;
+  }
+
+  .logo-mark__square {
+    opacity: 0;
+    transform: scale(0.82) rotate(-9deg);
+    transform-origin: 50% 50%;
+  }
+
+  :global(.site-header__logo:hover) .logo-mark--square-hover .logo-mark__glyph,
+  :global(.site-header__logo:focus-visible) .logo-mark--square-hover .logo-mark__glyph {
+    opacity: 0;
+    transform: scale(0.86) rotate(7deg);
+  }
+
+  :global(.site-header__logo:hover) .logo-mark--square-hover .logo-mark__square,
+  :global(.site-header__logo:focus-visible) .logo-mark--square-hover .logo-mark__square {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-mark__glyph,
+    .logo-mark__square {
+      transition: none;
+    }
+  }
+</style>
