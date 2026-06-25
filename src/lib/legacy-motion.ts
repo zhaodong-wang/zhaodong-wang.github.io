@@ -55,10 +55,10 @@ export function setupOpeningMotion() {
     .to(mark, { autoAlpha: 1, y: 0, duration: 0.62 }, 0)
     .to(mark, { rotation: 360, duration: 0.58, ease: 'power3.inOut' }, 0.18)
     .set(mark, { rotation: 0 }, 0.78)
-    .add(() => mark.classList.add('is-active'), 0.86)
-    .to(mark, { rotation: 0, y: 0, duration: 0.6 }, 0.86)
-    .to(mark, { scale: 0.72, duration: 0.48, ease: 'zwSnap' }, 1.5)
-    .to(loader, { autoAlpha: 0, duration: 0.62 }, 1.68);
+    .add(() => mark.classList.add('is-active'), 0.42)
+    .to(mark, { rotation: 0, y: 0, duration: 0.6 }, 0.78)
+    .to(mark, { scale: 0.72, duration: 0.48, ease: 'zwSnap' }, 1.62)
+    .to(loader, { autoAlpha: 0, duration: 0.62 }, 1.94);
 }
 
 export function setupLegacyDrawer() {
