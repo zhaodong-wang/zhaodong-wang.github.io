@@ -52,6 +52,26 @@ const checks = [
     'setupScrambleHover',
   ],
   [
+    'Scope scramble prepares a layout-preserving text overlay',
+    legacyMotion,
+    'prepareScopePhrase',
+  ],
+  [
+    'Scope scramble animates overlay text without resizing the flex item',
+    legacyMotion,
+    'home__scope-text',
+  ],
+  [
+    'Scope phrase ghost keeps original text in layout',
+    homePage,
+    '.home__scope :global(.home__scope-ghost)',
+  ],
+  [
+    'Scope phrase overlay is absolutely positioned for scramble text',
+    homePage,
+    '.home__scope :global(.home__scope-text)',
+  ],
+  [
     'Reduced motion branch restores split text',
     legacyMotion,
     'revertHeroTextMotion',
@@ -75,6 +95,11 @@ const forbidden = [
     'Hero deck line classes must not ship because they can flash during two-line/three-line reflow',
     homePage,
     'home__deck-line',
+  ],
+  [
+    'Scope phrases must not be directly rewritten for scramble because that resizes flex items',
+    legacyMotion,
+    'phrase.textContent = makeScrambleSeed(text);',
   ],
 ];
 

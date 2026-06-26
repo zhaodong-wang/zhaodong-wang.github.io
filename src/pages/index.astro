@@ -452,10 +452,24 @@ const backgroundRows = [
   }
 
   .home__scope :global([data-scope-phrase]) {
+    position: relative;
     display: inline-block;
     color: rgba(248, 246, 238, 0.58);
     transition: color 420ms var(--ease-smooth);
     will-change: color;
+  }
+
+  .home__scope :global(.home__scope-ghost) {
+    visibility: hidden;
+  }
+
+  .home__scope :global(.home__scope-text) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: inherit;
+    white-space: pre;
+    pointer-events: none;
   }
 
   .home__scope :global([data-scope-phrase]:hover) {
