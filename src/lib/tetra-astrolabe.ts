@@ -70,6 +70,7 @@ const paperAsh = 0x47443d;
 const heroBackground = new THREE.Color(0x101010);
 const paperBackground = new THREE.Color(0xf2f2ef);
 const TAU = Math.PI * 2;
+const SCROLL_POINTER_COOLDOWN = 420;
 
 const tetraVertices = [
   new THREE.Vector3(0, 0.82, 0),
@@ -430,6 +431,8 @@ export function setupTetraAstrolabe() {
 
     const markScrollMotion = () => {
       lastScrollAt = performance.now();
+      targetPointerField.strength = 0;
+      targetPointerField.speed = 0;
     };
 
     const scrollTrigger = ScrollTrigger.create({
@@ -450,6 +453,13 @@ export function setupTetraAstrolabe() {
 
     const handlePointer = (event: PointerEvent) => {
       if (event.pointerType === 'touch') return;
+      const now = performance.now();
+      if (now - lastScrollAt < SCROLL_POINTER_COOLDOWN) {
+        targetPointerField.strength = 0;
+        targetPointerField.speed = 0;
+        return;
+      }
+
       const rect = root.getBoundingClientRect();
       const x = clamp01((event.clientX - rect.left) / rect.width);
       const y = clamp01((event.clientY - rect.top) / rect.height);
@@ -492,17 +502,18 @@ export function setupTetraAstrolabe() {
       if (destroyed) return;
       const now = performance.now();
       const elapsed = reducedMotion ? 1 : now * 0.001;
-      const pointerSuspended = !reducedMotion && now - lastScrollAt < 180;
+      const pointerSuspended = !reducedMotion && now - lastScrollAt < SCROLL_POINTER_COOLDOWN;
       const pointerTargetStrength = pointerSuspended ? 0 : targetPointerField.strength;
       const pointerTargetSpeed = pointerSuspended ? 0 : targetPointerField.speed;
+      const fieldTargetPosition = pointerSuspended ? neutralPointer : targetPointerField.position;
 
       pointer.lerp(targetPointer, reducedMotion ? 1 : 0.045);
       activePointer.lerp(pointerSuspended ? neutralPointer : pointer, reducedMotion ? 1 : 0.22);
-      pointerField.position.lerp(targetPointerField.position, reducedMotion ? 1 : 0.2);
+      pointerField.position.lerp(fieldTargetPosition, reducedMotion ? 1 : pointerSuspended ? 0.16 : 0.2);
       pointerField.strength +=
-        (pointerTargetStrength - pointerField.strength) * (pointerTargetStrength > 0 ? 0.075 : 0.18);
-      pointerField.speed += (pointerTargetSpeed - pointerField.speed) * (pointerSuspended ? 0.24 : 0.12);
-      targetPointerField.speed *= pointerSuspended ? 0.82 : 0.94;
+        (pointerTargetStrength - pointerField.strength) * (pointerTargetStrength > 0 ? 0.075 : 0.28);
+      pointerField.speed += (pointerTargetSpeed - pointerField.speed) * (pointerSuspended ? 0.32 : 0.12);
+      targetPointerField.speed *= pointerSuspended ? 0.78 : 0.94;
 
       const fieldMix = smoothstep(0.06, 0.38, state.progress);
       const logoMix = smoothstep(0.64, 0.9, state.progress);
