@@ -184,6 +184,8 @@ export function setupLegacyDrawer() {
   const backgroundTargets = Array.from(
     document.querySelectorAll<HTMLElement>('main, footer'),
   );
+  const drawerItemOffset = () =>
+    window.matchMedia('(max-width: 720px)').matches ? 42 : 96;
   const focusables = () =>
     Array.from(
       drawer.querySelectorAll<HTMLElement>(
@@ -196,7 +198,7 @@ export function setupLegacyDrawer() {
   let closeTimer = 0;
 
   gsap.set(panels, { scaleX: 0, transformOrigin: 'right center' });
-  gsap.set(items, { xPercent: 80, autoAlpha: 0 });
+  gsap.set(items, { x: drawerItemOffset(), xPercent: 0, autoAlpha: 0 });
   logoUnit?.classList.add('is-active');
   if (logoMark) {
     gsap.set(logoMark, {
@@ -286,6 +288,7 @@ export function setupLegacyDrawer() {
     if (isOpen) return;
     window.clearTimeout(closeTimer);
     isOpen = true;
+    gsap.set(items, { x: drawerItemOffset(), xPercent: 0, autoAlpha: 0 });
     setA11y(true);
     animateBars(true);
 
@@ -304,7 +307,7 @@ export function setupLegacyDrawer() {
       .to(
         items,
         {
-          xPercent: 0,
+          x: 0,
           autoAlpha: 1,
           duration: duration(0.5),
           ease: 'zwMenu',
@@ -325,14 +328,14 @@ export function setupLegacyDrawer() {
     const tl = gsap.timeline({
       onComplete: () => {
         setA11y(false);
-        gsap.set(items, { xPercent: 80, autoAlpha: 0 });
+        gsap.set(items, { x: drawerItemOffset(), xPercent: 0, autoAlpha: 0 });
         if (restoreFocus) toggle.focus();
       },
     });
     tl.to(
       items.slice().reverse(),
       {
-        xPercent: 80,
+        x: drawerItemOffset(),
         autoAlpha: 0,
         duration: duration(0.5),
         ease: 'zwMenu',
