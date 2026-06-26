@@ -7,7 +7,7 @@ const homePage = readFileSync(resolve(root, 'src/pages/index.astro'), 'utf8');
 
 const checks = [
   [
-    'GSAP SplitText is imported for hero title and deck reveals',
+    'GSAP SplitText is imported for hero title reveal',
     legacyMotion,
     "import { SplitText } from 'gsap/SplitText';",
   ],
@@ -32,7 +32,7 @@ const checks = [
     '<p class="home__kicker" data-scramble-text>AI Research Scientist / Meta TBD Lab</p>',
   ],
   [
-    'Hero deck exposes line reveal target',
+    'Hero deck exposes a stable block reveal target',
     homePage,
     '<p class="home__deck" data-home-deck>',
   ],
@@ -65,9 +65,25 @@ const checks = [
 
 const failures = checks.filter(([, source, needle]) => !source.includes(needle));
 
-if (failures.length > 0) {
+const forbidden = [
+  [
+    'Hero deck must not be SplitText line-split because line wrapping changes with viewport width',
+    legacyMotion,
+    'SplitText.create(deck',
+  ],
+  [
+    'Hero deck line classes must not ship because they can flash during two-line/three-line reflow',
+    homePage,
+    'home__deck-line',
+  ],
+];
+
+const forbiddenHits = forbidden.filter(([, source, needle]) => source.includes(needle));
+
+if (failures.length > 0 || forbiddenHits.length > 0) {
   console.error('Homepage text motion validation failed:');
   failures.forEach(([label]) => console.error(`- ${label}`));
+  forbiddenHits.forEach(([label]) => console.error(`- ${label}`));
   process.exit(1);
 }
 
