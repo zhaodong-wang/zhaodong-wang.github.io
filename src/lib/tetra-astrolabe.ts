@@ -71,6 +71,9 @@ const heroBackground = new THREE.Color(0x101010);
 const paperBackground = new THREE.Color(0xf2f2ef);
 const TAU = Math.PI * 2;
 const SCROLL_POINTER_COOLDOWN = 420;
+const LOGO_POSE_TILT_X = 0.26;
+const LOGO_POSE_YAW_Y = -0.14;
+const LOGO_POSE_ROLL_Z = 0.018;
 
 const tetraVertices = [
   new THREE.Vector3(0, 0.82, 0),
@@ -518,6 +521,7 @@ export function setupTetraAstrolabe() {
       const fieldMix = smoothstep(0.06, 0.38, state.progress);
       const logoMix = smoothstep(0.64, 0.9, state.progress);
       const paperMix = smoothstep(0.07, 0.2, state.progress);
+      const logoPose = smoothstep(0.72, 0.94, state.progress);
 
       const fieldBackground = heroBackground.clone().lerp(paperBackground, paperMix);
       const fieldShell = root.parentElement as HTMLElement | null;
@@ -525,9 +529,15 @@ export function setupTetraAstrolabe() {
         fieldShell.style.backgroundColor = `#${fieldBackground.getHexString()}`;
       }
 
-      rootGroup.rotation.x = activePointer.y * 0.11 + Math.sin(elapsed * 0.16) * 0.035;
-      rootGroup.rotation.y = activePointer.x * 0.13 + elapsed * (reducedMotion ? 0 : 0.034);
-      rootGroup.rotation.z = Math.sin(elapsed * 0.11) * 0.02;
+      rootGroup.rotation.x =
+        activePointer.y * 0.11 +
+        Math.sin(elapsed * 0.16) * 0.035 +
+        logoPose * LOGO_POSE_TILT_X;
+      rootGroup.rotation.y =
+        activePointer.x * 0.13 +
+        elapsed * (reducedMotion ? 0 : 0.034) * (1 - logoPose * 0.48) +
+        logoPose * LOGO_POSE_YAW_Y;
+      rootGroup.rotation.z = Math.sin(elapsed * 0.11) * 0.02 + logoPose * LOGO_POSE_ROLL_Z;
       rootGroup.position.x = 0.92 * (1 - fieldMix) - logoMix * 0.18;
       rootGroup.position.y = 0.06 * (1 - fieldMix) + logoMix * 0.08;
       rootGroup.scale.setScalar(1.08 - fieldMix * 0.18 + logoMix * 0.2);
