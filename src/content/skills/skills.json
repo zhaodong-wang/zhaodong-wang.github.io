@@ -13,7 +13,7 @@
     },
     {
       "title": "LLMs & Agents",
-      "tagline": "Building with frontier models",
+      "tagline": "Agents, tools, and evaluation loops",
       "items": [
         { "name": "LLM Application Patterns", "level": "expert" },
         { "name": "Agentic Workflows & Tool Use", "level": "expert" },
