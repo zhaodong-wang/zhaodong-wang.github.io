@@ -300,8 +300,30 @@ export function setupLegacyDrawer() {
     }
   });
 
-  drawer.querySelectorAll('a').forEach((a) => {
-    a.addEventListener('click', () => close({ restoreFocus: false }));
+  drawer.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((a) => {
+    a.addEventListener('click', (event) => {
+      const href = a.getAttribute('href');
+      if (!href?.startsWith('#')) {
+        close({ restoreFocus: false });
+        return;
+      }
+
+      const target = document.querySelector<HTMLElement>(href);
+      if (!target) {
+        close({ restoreFocus: false });
+        return;
+      }
+
+      event.preventDefault();
+      close({ restoreFocus: false });
+      window.setTimeout(() => {
+        target.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'start',
+        });
+        history.pushState(null, '', href);
+      }, duration(920));
+    });
   });
 
   const chromeTarget = logo ?? header;

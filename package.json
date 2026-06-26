@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "check:logo": "node scripts/validate-logo-motion.mjs"
+    "check:logo": "node scripts/validate-logo-motion.mjs",
+    "check:drawer": "node scripts/validate-drawer-links.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
