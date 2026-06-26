@@ -29,7 +29,6 @@ function markVisible(targets: string) {
 
 type HeroTextMotion = {
   title?: SplitText;
-  deck?: SplitText;
 };
 
 const SCRAMBLE_CHARS = '01/<>AI-ZW';
@@ -44,7 +43,6 @@ function makeScrambleSeed(text: string) {
 
 function setupHeroTextMotion(home: HTMLElement): HeroTextMotion {
   const title = home.querySelector<HTMLElement>('[data-home-title]');
-  const deck = home.querySelector<HTMLElement>('[data-home-deck]');
 
   const textMotion: HeroTextMotion = {};
 
@@ -57,21 +55,10 @@ function setupHeroTextMotion(home: HTMLElement): HeroTextMotion {
     });
   }
 
-  if (deck) {
-    textMotion.deck = SplitText.create(deck, {
-      type: 'lines',
-      mask: 'lines',
-      linesClass: 'home__deck-line',
-      tag: 'span',
-      aria: 'auto',
-    });
-  }
-
   return textMotion;
 }
 
 function revertHeroTextMotion(textMotion?: HeroTextMotion) {
-  textMotion?.deck?.revert();
   textMotion?.title?.revert();
 }
 
@@ -463,7 +450,6 @@ export function setupHomeMotion() {
   const textMotion = setupHeroTextMotion(home);
   const lineContents = gsap.utils.toArray<HTMLElement>('.home__line > *');
   const titleWords = textMotion.title?.words ?? [];
-  const deckLines = textMotion.deck?.lines ?? [];
   const kicker = home.querySelector<HTMLElement>('[data-scramble-text]');
   const scope = home.querySelector<HTMLElement>('[data-home-scope]');
   const scopePhrases = gsap.utils.toArray<HTMLElement>('[data-scope-phrase]');
@@ -482,7 +468,6 @@ export function setupHomeMotion() {
 
   gsap.set(lineContents, { yPercent: 105, autoAlpha: 0 });
   gsap.set(titleWords, { yPercent: 118, rotationX: -24, autoAlpha: 0 });
-  gsap.set(deckLines, { yPercent: 110, autoAlpha: 0 });
 
   const intro = gsap.timeline({
     defaults: { ease: 'zwMenu' },
@@ -523,17 +508,6 @@ export function setupHomeMotion() {
         stagger: 0.08,
       },
       0.32,
-    )
-    .to(
-      deckLines,
-      {
-        yPercent: 0,
-        autoAlpha: 1,
-        duration: 0.9,
-        ease: 'zwOut',
-        stagger: 0.08,
-      },
-      0.78,
     );
 
   scopePhrases.forEach((phrase, index) => {

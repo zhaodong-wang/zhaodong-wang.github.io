@@ -437,15 +437,6 @@ const backgroundRows = [
     letter-spacing: 0;
   }
 
-  .home__deck :global(.home__deck-line),
-  .home__deck :global(.home__deck-line-mask) {
-    display: block;
-  }
-
-  .home__deck :global(.home__deck-line) {
-    will-change: transform, opacity;
-  }
-
   .home__scope {
     display: flex;
     flex-wrap: wrap;
@@ -921,7 +912,6 @@ const backgroundRows = [
 
     .home__line > *,
     .home__title :global(.home__title-word),
-    .home__deck :global(.home__deck-line),
     [data-reveal] {
       opacity: 1;
       transform: none;
