@@ -395,6 +395,10 @@ export function setupTetraAstrolabe() {
     const dummy = new THREE.Object3D();
     const pointer = new THREE.Vector2(0, 0);
     const targetPointer = new THREE.Vector2(0, 0);
+    const pointerPlanePoint = new THREE.Vector3();
+    const pointerDirection = new THREE.Vector3();
+    const pointerWorld = new THREE.Vector3();
+    const pointerLocal = new THREE.Vector3();
     const pointerField = {
       position: new THREE.Vector2(0, 0),
       strength: 0,
@@ -447,8 +451,17 @@ export function setupTetraAstrolabe() {
 
       targetPointer.x = nextX;
       targetPointer.y = nextY;
-      targetPointerField.position.x = nextX * 2.72 - rootGroup.position.x;
-      targetPointerField.position.y = nextY * 1.52 - rootGroup.position.y * 0.42;
+
+      pointerPlanePoint.set(nextX, nextY, 0.5).unproject(camera);
+      pointerDirection.copy(pointerPlanePoint).sub(camera.position).normalize();
+      pointerWorld.copy(camera.position).addScaledVector(pointerDirection, -camera.position.z / pointerDirection.z);
+      rootGroup.updateMatrixWorld(true);
+      pointerLocal.copy(pointerWorld);
+      rootGroup.worldToLocal(pointerLocal);
+      targetPointerField.position.set(
+        THREE.MathUtils.clamp(pointerLocal.x, -1.56, 1.56),
+        THREE.MathUtils.clamp(pointerLocal.y, -1.14, 1.14),
+      );
       targetPointerField.strength = 1;
       targetPointerField.speed = Math.min(1, pointerDelta * 5.2);
     };
@@ -468,7 +481,7 @@ export function setupTetraAstrolabe() {
       if (destroyed) return;
       const elapsed = reducedMotion ? 1 : performance.now() * 0.001;
       pointer.lerp(targetPointer, reducedMotion ? 1 : 0.045);
-      pointerField.position.lerp(targetPointerField.position, reducedMotion ? 1 : 0.075);
+      pointerField.position.lerp(targetPointerField.position, reducedMotion ? 1 : 0.2);
       pointerField.strength +=
         (targetPointerField.strength - pointerField.strength) * (targetPointerField.strength > 0 ? 0.075 : 0.035);
       pointerField.speed += (targetPointerField.speed - pointerField.speed) * 0.12;
