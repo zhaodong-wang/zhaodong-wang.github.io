@@ -1,56 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import SubHero from '../components/SubHero.astro';
-import TimelineItem from '../components/TimelineItem.astro';
-import Panorama from '../components/Panorama.astro';
-import SubNavigator from '../components/SubNavigator.astro';
-
-const entries = (await getCollection('projects')).sort(
-  (a, b) => a.data.order - b.data.order,
-);
+import LegacyRedirect from '../components/LegacyRedirect.astro';
 ---
 
-<Layout
-  title="Zhaodong Wang — Projects"
-  description="Selected projects from Zhaodong Wang across production AI systems, ML reliability, infrastructure, and earlier research."
->
-  <SubHero
-    title="Projects"
-    caption="Research & Industry"
-    bgImage="/img/projects.jpg"
-  />
+<LegacyRedirect
+  title="Projects moved - Zhaodong Wang"
+  target="/#systems"
+  label="Systems"
+/>
 
-  {
-    entries.map(async (entry, i) => {
-      const { Content } = await render(entry);
-      return (
-        <>
-          <TimelineItem
-            side={entry.data.side}
-            from={entry.data.from}
-            to={entry.data.to}
-            logo={entry.data.logo}
-          >
-            <h1>{entry.data.title}</h1>
-            {entry.data.role && <h2>{entry.data.role}</h2>}
-            <Content />
-          </TimelineItem>
-          {i < entries.length - 1 && entry.data.panoImage && (
-            <Panorama image={entry.data.panoImage} />
-          )}
-        </>
-      );
-    })
-  }
-
-  <SubNavigator
-    prev={{ label: 'Education', href: '/education/', bg: '/img/education.jpg' }}
-    next={{ label: 'Publications', href: '/publications/', bg: '/img/publications.jpg' }}
-  />
-</Layout>
-
-<script>
-  import { setupSubpageMotion } from '../lib/legacy-motion';
-  setupSubpageMotion();
-</script>
