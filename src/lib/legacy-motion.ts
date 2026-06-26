@@ -30,6 +30,7 @@ export function setupOpeningMotion() {
 
   const loader = document.querySelector<HTMLElement>('[data-opening-loader]');
   const mark = loader?.querySelector<HTMLElement>('[data-opening-mark]');
+  const markUnit = mark?.querySelector<HTMLElement>('[data-logo-unit]');
   if (!loader || !mark) return;
 
   if (prefersReducedMotion()) {
@@ -37,27 +38,38 @@ export function setupOpeningMotion() {
     return;
   }
 
+  markUnit?.classList.remove('is-active');
   gsap.set(loader, { autoAlpha: 1 });
   gsap.set(mark, {
     autoAlpha: 0,
     scale: 1,
     x: 0,
-    y: 40,
+    y: 50,
     rotation: 0,
     transformOrigin: '50% 50%',
   });
 
   gsap
     .timeline({
-      defaults: { ease: 'zwSmooth' },
       onComplete: () => loader.remove(),
     })
-    .to(mark, { autoAlpha: 1, y: 0, duration: 0.62 }, 0)
-    .to(mark, { rotation: 360, duration: 0.58, ease: 'power3.inOut' }, 0.18)
-    .set(mark, { rotation: 0 }, 0.78)
-    .to(mark, { rotation: 0, y: 0, duration: 0.6 }, 0.78)
-    .to(mark, { scale: 0.72, duration: 0.48, ease: 'zwSnap' }, 1.62)
-    .to(loader, { autoAlpha: 0, duration: 0.62 }, 1.94);
+    .to(mark, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'circ.out' }, 0)
+    .to(
+      mark,
+      {
+        rotation: 360,
+        duration: 0.5,
+        ease: 'power4.inOut',
+        repeat: 2,
+        repeatDelay: 0.01,
+      },
+      0.6,
+    )
+    .set(mark, { rotation: 0 }, 2.0)
+    .add(() => markUnit?.classList.add('is-active'), 2.5)
+    .to(mark, { rotation: 30, y: 5, duration: 0.6, ease: 'power4.inOut' }, 2.5)
+    .to(mark, { scale: 0.7, duration: 0.5, ease: 'power4.inOut' }, 4.0)
+    .to(loader, { autoAlpha: 0, duration: 0.6, ease: 'zwSmooth' }, 4.0);
 }
 
 export function setupLegacyDrawer() {
@@ -79,6 +91,7 @@ export function setupLegacyDrawer() {
   );
   const logo = header.querySelector<HTMLElement>('.site-header__logo');
   const logoMark = logo?.querySelector<HTMLElement>('[data-logo-mark]');
+  const logoUnit = logoMark?.querySelector<HTMLElement>('[data-logo-unit]');
   const bars = Array.from(toggle.querySelectorAll<HTMLElement>('span'));
   const backgroundTargets = Array.from(
     document.querySelectorAll<HTMLElement>('main, footer'),
@@ -96,11 +109,12 @@ export function setupLegacyDrawer() {
 
   gsap.set(panels, { scaleX: 0, transformOrigin: 'right center' });
   gsap.set(items, { xPercent: 80, autoAlpha: 0 });
+  logoUnit?.classList.add('is-active');
   if (logoMark) {
     gsap.set(logoMark, {
-      rotation: 0,
-      y: 0,
-      scale: 0.72,
+      rotation: 30,
+      y: 5,
+      scale: 0.7,
       transformOrigin: '50% 50%',
     });
   }
@@ -153,6 +167,30 @@ export function setupLegacyDrawer() {
       rotation: open ? -45 : 0,
       duration: duration(0.6),
       ease: 'zwSmooth',
+    });
+  };
+
+  const transformLogo = () => {
+    if (!logoMark || !logoUnit || isOpen) return;
+    logoUnit.classList.add('is-active');
+    gsap.to(logoMark, {
+      rotation: 30,
+      y: 5,
+      scale: 0.7,
+      duration: duration(0.6),
+      ease: 'power4.inOut',
+    });
+  };
+
+  const recoverLogo = () => {
+    if (!logoMark || !logoUnit || isOpen) return;
+    logoUnit.classList.remove('is-active');
+    gsap.to(logoMark, {
+      rotation: 0,
+      y: 0,
+      scale: 0.7,
+      duration: duration(0.6),
+      ease: 'power4.inOut',
     });
   };
 
@@ -232,6 +270,13 @@ export function setupLegacyDrawer() {
     if (isOpen) close();
     else open({ focusFirst });
   });
+
+  logo?.addEventListener('pointerenter', recoverLogo);
+  logo?.addEventListener('pointerleave', transformLogo);
+  logo?.addEventListener('mouseenter', recoverLogo);
+  logo?.addEventListener('mouseleave', transformLogo);
+  logo?.addEventListener('focusin', recoverLogo);
+  logo?.addEventListener('focusout', transformLogo);
 
   document.addEventListener('keydown', (e) => {
     if (!isOpen) return;

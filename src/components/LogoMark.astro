@@ -1,91 +1,115 @@
 ---
 interface Props {
-  hoverSquare?: boolean;
+  active?: boolean;
 }
 
-const { hoverSquare = false } = Astro.props;
+const { active = false } = Astro.props;
+
+const sticks = [
+  ['outer', 'left'],
+  ['outer', 'right'],
+  ['outer', 'top'],
+  ['outer', 'bottom'],
+  ['inner', 'left'],
+  ['inner', 'right'],
+  ['inner', 'top'],
+  ['inner', 'bottom'],
+];
 ---
 
-<span class:list={['logo-mark', hoverSquare && 'logo-mark--square-hover']}>
-  <svg
-    class="logo-mark__glyph"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <polygon points="1.6,11.7 8,2.1 14.4,10.3 9.5,14.5" />
-    <line x1="8" y1="2.1" x2="6" y2="10" />
-    <line x1="6" y1="10" x2="9.5" y2="14.5" />
-    <line x1="6" y1="10" x2="14.4" y2="10.3" />
-    <line x1="6" y1="10" x2="1.6" y2="11.7" />
-  </svg>
-
-  <svg
-    class="logo-mark__square"
-    viewBox="0 0 16 16"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path d="M2.2 2.2H13.8V13.8H2.2Z" />
-  </svg>
+<span class:list={['logo-mark', active && 'is-active']} data-logo-unit>
+  {
+    sticks.map(([layer, side]) => (
+      <span
+        class:list={[
+          'logo-mark__stick',
+          `logo-mark__stick--${layer}`,
+          `logo-mark__stick--${side}`,
+        ]}
+      />
+    ))
+  }
 </span>
 
 <style>
   .logo-mark {
     position: absolute;
-    inset: 0;
+    left: 0;
+    top: 0;
     display: block;
+    width: 40px;
+    height: 40px;
     color: var(--color-accent);
     overflow: visible;
     pointer-events: none;
   }
 
-  .logo-mark__glyph,
-  .logo-mark__square {
+  .logo-mark__stick {
     position: absolute;
-    inset: 0;
+    left: 0;
+    top: 0;
     display: block;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.08;
-    stroke-linecap: butt;
-    stroke-linejoin: miter;
-    transition:
-      opacity 0.56s var(--ease-smooth),
-      transform 0.56s var(--ease-smooth);
-    will-change: opacity, transform;
+    width: 40px;
+    height: 3px;
+    background: currentColor;
+    transform-origin: 0 100%;
+    transition: transform 0.6s var(--ease-smooth);
+    will-change: transform;
   }
 
-  .logo-mark__glyph {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-    transform-origin: 50% 50%;
+  .logo-mark__stick--left {
+    width: 37px;
+    transform: rotate(90deg);
+    transform-origin: 0 100%;
   }
 
-  .logo-mark__square {
-    opacity: 0;
-    transform: scale(0.82) rotate(-9deg);
-    transform-origin: 50% 50%;
+  .logo-mark__stick--right {
+    right: 0;
+    left: auto;
+    width: 37px;
+    transform: rotate(-90deg);
+    transform-origin: 100% 100%;
   }
 
-  :global(.site-header__logo:hover) .logo-mark--square-hover .logo-mark__glyph,
-  :global(.site-header__logo:focus-visible) .logo-mark--square-hover .logo-mark__glyph {
-    opacity: 0;
-    transform: scale(0.86) rotate(7deg);
+  .logo-mark__stick--top {
+    transform-origin: 100% 100%;
   }
 
-  :global(.site-header__logo:hover) .logo-mark--square-hover .logo-mark__square,
-  :global(.site-header__logo:focus-visible) .logo-mark--square-hover .logo-mark__square {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
+  .logo-mark__stick--bottom {
+    transform: translateY(37px);
+    transform-origin: 0 100%;
+  }
+
+  .logo-mark.is-active .logo-mark__stick--left {
+    transform: rotate(90deg) scaleX(1.38) translateX(-12px);
+  }
+
+  .logo-mark.is-active .logo-mark__stick--top {
+    transform: rotate(20.1deg) scaleX(1.3) translateX(7px);
+  }
+
+  .logo-mark.is-active .logo-mark__stick--right {
+    transform: rotate(-70.1deg) scaleX(0.96) translate(3px, 12px);
+  }
+
+  .logo-mark.is-active .logo-mark__stick--left.logo-mark__stick--inner {
+    transform: rotate(70deg) scaleX(1.1) translateX(-12px) translateY(-6px);
+  }
+
+  .logo-mark.is-active .logo-mark__stick--right.logo-mark__stick--inner {
+    transform: rotate(30deg) scaleX(0.7) translate(23px, 33px);
+  }
+
+  .logo-mark.is-active .logo-mark__stick--top.logo-mark__stick--inner {
+    transform: rotate(-30deg) scaleX(0.95) translate(7px, 9px);
+  }
+
+  .logo-mark.is-active .logo-mark__stick--bottom.logo-mark__stick--inner {
+    transform: rotate(-42deg) scaleX(0.5) translate(-43px, 29px);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .logo-mark__glyph,
-    .logo-mark__square {
+    .logo-mark__stick {
       transition: none;
     }
   }
