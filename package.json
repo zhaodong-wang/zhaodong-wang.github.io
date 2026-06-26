@@ -12,7 +12,8 @@
     "check": "astro check",
     "check:logo": "node scripts/validate-logo-motion.mjs",
     "check:drawer": "node scripts/validate-drawer-links.mjs",
-    "check:text-motion": "node scripts/validate-home-text-motion.mjs"
+    "check:text-motion": "node scripts/validate-home-text-motion.mjs",
+    "check:copy": "node scripts/validate-copy-quality.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
