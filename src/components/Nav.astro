@@ -4,7 +4,6 @@ import LogoMark from './LogoMark.astro';
 interface Link {
   label: string;
   href: string;
-  tone?: 'secondary';
 }
 
 const links: Link[] = [
@@ -14,10 +13,6 @@ const links: Link[] = [
   { label: 'Research', href: '/#research' },
   { label: 'Background', href: '/#background' },
   { label: 'Contact', href: '/#contact' },
-  { label: 'Education', href: '/education/', tone: 'secondary' },
-  { label: 'Projects', href: '/projects/', tone: 'secondary' },
-  { label: 'Publications', href: '/publications/', tone: 'secondary' },
-  { label: 'Skills', href: '/skills/', tone: 'secondary' },
 ];
 ---
 
@@ -57,7 +52,7 @@ const links: Link[] = [
   <ul class="site-drawer__list">
     <li class="site-drawer__title"><em>Menu</em></li>
     {links.map((link) => (
-      <li class:list={['site-drawer__item', link.tone === 'secondary' && 'site-drawer__item--secondary']}>
+      <li class="site-drawer__item">
         <a href={link.href}>{link.label}</a>
       </li>
     ))}
@@ -246,20 +241,6 @@ const links: Link[] = [
     outline: 2px solid var(--color-accent);
     outline-offset: 5px;
   }
-  .site-drawer__item--secondary {
-    margin-top: 0.08em;
-  }
-  .site-drawer__item--secondary + .site-drawer__item--secondary {
-    margin-top: 0;
-  }
-  .site-drawer__item--secondary a {
-    color: #d5d5d5;
-    font-size: clamp(18px, 1.75vw, 24px);
-    letter-spacing: 0.055em;
-    line-height: 1.1;
-    margin-right: 0.72em;
-  }
-
   :global(body.drawer-open) {
     overflow: hidden;
   }
@@ -289,10 +270,6 @@ const links: Link[] = [
       line-height: 1.02;
       letter-spacing: 0.035em;
     }
-    .site-drawer__item--secondary a {
-      font-size: clamp(17px, 4.8vw, 22px);
-      letter-spacing: 0.05em;
-    }
   }
 
   @media (max-width: 420px) {
@@ -303,11 +280,6 @@ const links: Link[] = [
     }
     .site-drawer__list a {
       font-size: clamp(24px, 7.2vw, 30px);
-    }
-    .site-drawer__item--secondary a {
-      font-size: clamp(16px, 4.6vw, 19px);
-      line-height: 1.08;
-      letter-spacing: 0.045em;
     }
   }
 </style>

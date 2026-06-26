@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  target: string;
+  label: string;
+}
+
+const { title, target, label } = Astro.props;
+const canonical = new URL(target, Astro.site).href;
+const redirectScript = `window.location.replace(${JSON.stringify(target)});`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <script is:inline set:html={redirectScript}></script>
+  </head>
+  <body>
+    <main>
+      <p>
+        This archive page now lives on the one-page site.
+        <a href={target}>Continue to {label}</a>.
+      </p>
+    </main>
+  </body>
+</html>
+
