@@ -31,7 +31,15 @@ type HeroTextMotion = {
   title?: SplitText;
 };
 
+type ScopePhraseMotion = {
+  host: HTMLElement;
+  text: HTMLElement;
+  originalText: string;
+};
+
 const SCRAMBLE_CHARS = '01/<>AI-ZW';
+const SCOPE_GHOST_CLASS = 'home__scope-ghost';
+const SCOPE_TEXT_CLASS = 'home__scope-text';
 
 function makeScrambleSeed(text: string) {
   return Array.from(text, (char, index) => {
@@ -62,20 +70,39 @@ function revertHeroTextMotion(textMotion?: HeroTextMotion) {
   textMotion?.title?.revert();
 }
 
-function setupScrambleHover(targets: HTMLElement[]) {
-  targets.forEach((target) => {
-    const text = target.textContent?.trim();
-    if (!text) return;
-    target.dataset.originalText = text;
+function prepareScopePhrase(host: HTMLElement): ScopePhraseMotion | undefined {
+  const originalText = host.textContent?.trim();
+  if (!originalText) return undefined;
 
-    target.addEventListener('pointerenter', () => {
+  host.dataset.originalText = originalText;
+  host.setAttribute('aria-label', originalText);
+  host.textContent = '';
+
+  const ghost = document.createElement('span');
+  ghost.className = SCOPE_GHOST_CLASS;
+  ghost.textContent = originalText;
+  ghost.setAttribute('aria-hidden', 'true');
+
+  const text = document.createElement('span');
+  text.className = SCOPE_TEXT_CLASS;
+  text.textContent = makeScrambleSeed(originalText);
+  text.setAttribute('aria-hidden', 'true');
+
+  host.append(ghost, text);
+
+  return { host, text, originalText };
+}
+
+function setupScrambleHover(targets: ScopePhraseMotion[]) {
+  targets.forEach(({ host, text, originalText }) => {
+    host.addEventListener('pointerenter', () => {
       if (prefersReducedMotion()) return;
-      gsap.killTweensOf(target);
-      gsap.to(target, {
+      gsap.killTweensOf(text);
+      gsap.to(text, {
         duration: 0.62,
         ease: 'none',
         scrambleText: {
-          text,
+          text: originalText,
           chars: SCRAMBLE_CHARS,
           speed: 0.48,
           revealDelay: 0.08,
@@ -453,18 +480,14 @@ export function setupHomeMotion() {
   const kicker = home.querySelector<HTMLElement>('[data-scramble-text]');
   const scope = home.querySelector<HTMLElement>('[data-home-scope]');
   const scopePhrases = gsap.utils.toArray<HTMLElement>('[data-scope-phrase]');
+  const scopePhraseMotion = scopePhrases
+    .map((phrase) => prepareScopePhrase(phrase))
+    .filter((phrase): phrase is ScopePhraseMotion => Boolean(phrase));
 
   if (kicker?.textContent) {
     kicker.dataset.originalText = kicker.textContent;
     kicker.textContent = makeScrambleSeed(kicker.dataset.originalText);
   }
-
-  scopePhrases.forEach((phrase) => {
-    const text = phrase.textContent?.trim();
-    if (!text) return;
-    phrase.dataset.originalText = text;
-    phrase.textContent = makeScrambleSeed(text);
-  });
 
   gsap.set(lineContents, { yPercent: 105, autoAlpha: 0 });
   gsap.set(titleWords, { yPercent: 118, rotationX: -24, autoAlpha: 0 });
@@ -472,7 +495,7 @@ export function setupHomeMotion() {
   const intro = gsap.timeline({
     defaults: { ease: 'zwMenu' },
     delay: hasOpeningLoader ? 4.18 : 0,
-    onComplete: () => setupScrambleHover(scopePhrases),
+    onComplete: () => setupScrambleHover(scopePhraseMotion),
   });
 
   intro
@@ -510,14 +533,14 @@ export function setupHomeMotion() {
       0.32,
     );
 
-  scopePhrases.forEach((phrase, index) => {
+  scopePhraseMotion.forEach((phrase, index) => {
     intro.to(
-      phrase,
+      phrase.text,
       {
         duration: 0.72,
         ease: 'none',
         scrambleText: {
-          text: phrase.dataset.originalText ?? '',
+          text: phrase.originalText,
           chars: SCRAMBLE_CHARS,
           speed: 0.45,
           revealDelay: 0.1,
