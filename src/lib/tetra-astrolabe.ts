@@ -395,6 +395,8 @@ export function setupTetraAstrolabe() {
     const dummy = new THREE.Object3D();
     const pointer = new THREE.Vector2(0, 0);
     const targetPointer = new THREE.Vector2(0, 0);
+    const activePointer = new THREE.Vector2(0, 0);
+    const neutralPointer = new THREE.Vector2(0, 0);
     const pointerPlanePoint = new THREE.Vector3();
     const pointerDirection = new THREE.Vector3();
     const pointerWorld = new THREE.Vector3();
@@ -412,6 +414,7 @@ export function setupTetraAstrolabe() {
     const state = { intro: reducedMotion ? 1 : 0, progress: 0 };
     let raf = 0;
     let destroyed = false;
+    let lastScrollAt = Number.NEGATIVE_INFINITY;
     const setSize = () => {
       const rect = root.getBoundingClientRect();
       const width = Math.max(1, rect.width);
@@ -425,12 +428,17 @@ export function setupTetraAstrolabe() {
     resizeObserver.observe(root);
     setSize();
 
+    const markScrollMotion = () => {
+      lastScrollAt = performance.now();
+    };
+
     const scrollTrigger = ScrollTrigger.create({
       trigger: document.body,
       start: 'top top',
       end: 'bottom bottom',
       onUpdate: (self) => {
         state.progress = self.progress;
+        markScrollMotion();
       },
     });
 
@@ -475,17 +483,26 @@ export function setupTetraAstrolabe() {
       window.addEventListener('pointermove', handlePointer, { passive: true });
       window.addEventListener('pointerleave', softenPointer, { passive: true });
       window.addEventListener('blur', softenPointer);
+      window.addEventListener('scroll', markScrollMotion, { passive: true });
+      window.addEventListener('wheel', markScrollMotion, { passive: true });
+      window.addEventListener('touchmove', markScrollMotion, { passive: true });
     }
 
     const animate = () => {
       if (destroyed) return;
-      const elapsed = reducedMotion ? 1 : performance.now() * 0.001;
+      const now = performance.now();
+      const elapsed = reducedMotion ? 1 : now * 0.001;
+      const pointerSuspended = !reducedMotion && now - lastScrollAt < 180;
+      const pointerTargetStrength = pointerSuspended ? 0 : targetPointerField.strength;
+      const pointerTargetSpeed = pointerSuspended ? 0 : targetPointerField.speed;
+
       pointer.lerp(targetPointer, reducedMotion ? 1 : 0.045);
+      activePointer.lerp(pointerSuspended ? neutralPointer : pointer, reducedMotion ? 1 : 0.22);
       pointerField.position.lerp(targetPointerField.position, reducedMotion ? 1 : 0.2);
       pointerField.strength +=
-        (targetPointerField.strength - pointerField.strength) * (targetPointerField.strength > 0 ? 0.075 : 0.035);
-      pointerField.speed += (targetPointerField.speed - pointerField.speed) * 0.12;
-      targetPointerField.speed *= 0.94;
+        (pointerTargetStrength - pointerField.strength) * (pointerTargetStrength > 0 ? 0.075 : 0.18);
+      pointerField.speed += (pointerTargetSpeed - pointerField.speed) * (pointerSuspended ? 0.24 : 0.12);
+      targetPointerField.speed *= pointerSuspended ? 0.82 : 0.94;
 
       const fieldMix = smoothstep(0.06, 0.38, state.progress);
       const logoMix = smoothstep(0.64, 0.9, state.progress);
@@ -497,8 +514,8 @@ export function setupTetraAstrolabe() {
         fieldShell.style.backgroundColor = `#${fieldBackground.getHexString()}`;
       }
 
-      rootGroup.rotation.x = pointer.y * 0.11 + Math.sin(elapsed * 0.16) * 0.035;
-      rootGroup.rotation.y = pointer.x * 0.13 + elapsed * (reducedMotion ? 0 : 0.034);
+      rootGroup.rotation.x = activePointer.y * 0.11 + Math.sin(elapsed * 0.16) * 0.035;
+      rootGroup.rotation.y = activePointer.x * 0.13 + elapsed * (reducedMotion ? 0 : 0.034);
       rootGroup.rotation.z = Math.sin(elapsed * 0.11) * 0.02;
       rootGroup.position.x = 0.92 * (1 - fieldMix) - logoMix * 0.18;
       rootGroup.position.y = 0.06 * (1 - fieldMix) + logoMix * 0.08;
@@ -509,7 +526,7 @@ export function setupTetraAstrolabe() {
         elapsed,
         state.intro,
         state.progress,
-        pointer,
+        activePointer,
         pointerField,
         dummy,
         reducedMotion,
@@ -519,7 +536,7 @@ export function setupTetraAstrolabe() {
         elapsed + 5,
         state.intro,
         clamp01(state.progress + 0.04),
-        pointer,
+        activePointer,
         pointerField,
         dummy,
         reducedMotion,
@@ -529,7 +546,7 @@ export function setupTetraAstrolabe() {
         elapsed + 11,
         state.intro,
         clamp01(state.progress + 0.08),
-        pointer,
+        activePointer,
         pointerField,
         dummy,
         reducedMotion,
@@ -551,6 +568,9 @@ export function setupTetraAstrolabe() {
       window.removeEventListener('pointermove', handlePointer);
       window.removeEventListener('pointerleave', softenPointer);
       window.removeEventListener('blur', softenPointer);
+      window.removeEventListener('scroll', markScrollMotion);
+      window.removeEventListener('wheel', markScrollMotion);
+      window.removeEventListener('touchmove', markScrollMotion);
       resizeObserver.disconnect();
       scrollTrigger.kill();
       introTween.kill();
