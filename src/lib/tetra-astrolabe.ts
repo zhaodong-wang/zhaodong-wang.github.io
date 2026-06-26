@@ -288,7 +288,7 @@ function updateParticleSet(
     dummy.position.y += Math.cos(time * 0.43 + seed.phase) * 0.024 * driftScale;
     dummy.position.z += pointer.y * 0.14 * seed.depth;
 
-    let localPulse = 0;
+    let localPresence = 0;
 
     if (fieldStrength > 0.002) {
       const dx = attractorX - dummy.position.x;
@@ -303,8 +303,8 @@ function updateParticleSet(
         fieldStrength *
         0.08;
       const focus = core + halo;
-      const swirl = Math.sin(time * 1.18 + seed.phase) * core * 0.13;
-      localPulse = Math.min(1, core * 0.95 + halo * 1.4);
+      const swirl = Math.sin(time * 0.72 + seed.phase) * core * 0.07;
+      localPresence = Math.min(1, core * 0.72 + halo * 0.92);
 
       dummy.position.x += dx * focus * 0.46 - dy * swirl;
       dummy.position.y += dy * focus * 0.4 + dx * swirl * 0.68;
@@ -312,12 +312,12 @@ function updateParticleSet(
     }
 
     dummy.rotation.set(
-      seed.rotation.x + time * (0.18 + localPulse * 0.2) + progress * 0.7,
-      seed.rotation.y + time * (0.24 + localPulse * 0.22) + seed.phase * 0.42,
-      seed.rotation.z + time * (0.14 + localPulse * 0.16),
+      seed.rotation.x + time * 0.045 * driftScale + progress * 0.7,
+      seed.rotation.y + time * 0.058 * driftScale + seed.phase * 0.42,
+      seed.rotation.z + time * 0.034 * driftScale,
     );
     dummy.scale.setScalar(
-      seed.scale * (0.7 + intro * 0.34 + logoMix * 0.18) * (1 + localPulse * 0.16),
+      seed.scale * (0.7 + intro * 0.34 + logoMix * 0.18) * (1 + localPresence * 0.055),
     );
     dummy.updateMatrix();
     set.mesh.setMatrixAt(i, dummy.matrix);
