@@ -609,8 +609,8 @@ const backgroundRows = [
 
   .stat-ledger div {
     display: grid;
-    grid-template-columns: 8.6rem 1fr;
-    gap: 1.4rem;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: clamp(1.8rem, 3vw, 3.8rem);
     align-items: start;
     padding: 1.35rem 0;
     border-bottom: 1px solid rgba(20, 20, 20, 0.16);
@@ -626,6 +626,7 @@ const backgroundRows = [
 
   .stat-ledger dd {
     margin: 0;
+    min-width: 0;
   }
 
   .stat-ledger span {
@@ -820,10 +821,6 @@ const backgroundRows = [
     .stat-ledger {
       grid-column: auto;
       grid-row: auto;
-    }
-
-    .stat-ledger div {
-      grid-template-columns: minmax(13rem, 0.42fr) 1fr;
     }
 
   }
