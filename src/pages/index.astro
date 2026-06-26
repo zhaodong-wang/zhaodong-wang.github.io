@@ -134,19 +134,31 @@ const backgroundRows = [
 
     <div class="home__inner">
       <div class="home__line" style="--delay: 0ms">
-        <p class="home__kicker">AI Research Scientist / Meta TBD Lab</p>
+        <p class="home__kicker" data-scramble-text>AI Research Scientist / Meta TBD Lab</p>
       </div>
       <div class="home__line home__line--title" style="--delay: 120ms">
-        <h1 class="home__title">Zhaodong Wang</h1>
+        <h1 class="home__title" data-home-title>Zhaodong Wang</h1>
       </div>
       <div class="home__line" style="--delay: 260ms">
-        <p class="home__deck">
+        <p class="home__deck" data-home-deck>
           I build production AI agents, ML systems, and research-to-product loops for
           software that has to work every day.
         </p>
       </div>
       <div class="home__line" style="--delay: 420ms">
-        <p class="home__scope">AI agents / ML systems / product engineering / applied research</p>
+        <p
+          class="home__scope"
+          aria-label="AI agents / ML systems / product engineering / applied research"
+          data-home-scope
+        >
+          <span data-scope-phrase>AI agents</span>
+          <span class="home__scope-separator" aria-hidden="true">/</span>
+          <span data-scope-phrase>ML systems</span>
+          <span class="home__scope-separator" aria-hidden="true">/</span>
+          <span data-scope-phrase>product engineering</span>
+          <span class="home__scope-separator" aria-hidden="true">/</span>
+          <span data-scope-phrase>applied research</span>
+        </p>
       </div>
     </div>
 
@@ -409,6 +421,12 @@ const backgroundRows = [
     text-wrap: balance;
   }
 
+  .home__title :global(.home__title-word) {
+    display: inline-block;
+    will-change: transform, opacity;
+    transform-origin: 50% 85%;
+  }
+
   .home__deck {
     max-width: 36rem;
     margin: 1.35rem 0 0;
@@ -419,7 +437,19 @@ const backgroundRows = [
     letter-spacing: 0;
   }
 
+  .home__deck :global(.home__deck-line),
+  .home__deck :global(.home__deck-line-mask) {
+    display: block;
+  }
+
+  .home__deck :global(.home__deck-line) {
+    will-change: transform, opacity;
+  }
+
   .home__scope {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.12em 0.42em;
     max-width: 34rem;
     margin: 1.7rem 0 0;
     color: rgba(248, 246, 238, 0.58);
@@ -428,6 +458,21 @@ const backgroundRows = [
     line-height: 1.5;
     letter-spacing: 0.035em;
     text-transform: uppercase;
+  }
+
+  .home__scope :global([data-scope-phrase]) {
+    display: inline-block;
+    color: rgba(248, 246, 238, 0.58);
+    transition: color 420ms var(--ease-smooth);
+    will-change: color;
+  }
+
+  .home__scope :global([data-scope-phrase]:hover) {
+    color: rgba(248, 246, 238, 0.92);
+  }
+
+  .home__scope-separator {
+    color: rgba(188, 132, 32, 0.54);
   }
 
   .home__side-label {
@@ -875,6 +920,8 @@ const backgroundRows = [
     }
 
     .home__line > *,
+    .home__title :global(.home__title-word),
+    .home__deck :global(.home__deck-line),
     [data-reveal] {
       opacity: 1;
       transform: none;

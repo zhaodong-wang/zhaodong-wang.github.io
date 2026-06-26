@@ -1,12 +1,14 @@
 import { gsap } from 'gsap';
 import { CustomEase } from 'gsap/CustomEase';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 
 let registered = false;
 
 function initGsap() {
   if (registered) return;
-  gsap.registerPlugin(CustomEase, ScrollTrigger);
+  gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, ScrambleTextPlugin);
   CustomEase.create('zwSmooth', 'M0,0 C0.6,0 0.4,1 1,1');
   CustomEase.create('zwSnap', 'M0,0 C0.835,0 0.19,1 1,1');
   CustomEase.create('zwMenu', 'M0,0 C0.19,1 0.22,1 1,1');
@@ -22,6 +24,78 @@ function prefersReducedMotion() {
 function markVisible(targets: string) {
   document.querySelectorAll<HTMLElement>(targets).forEach((el) => {
     el.classList.add('is-visible');
+  });
+}
+
+type HeroTextMotion = {
+  title?: SplitText;
+  deck?: SplitText;
+};
+
+const SCRAMBLE_CHARS = '01/<>AI-ZW';
+
+function makeScrambleSeed(text: string) {
+  return Array.from(text, (char, index) => {
+    if (/\s/.test(char)) return char;
+    if (char === '/') return '/';
+    return SCRAMBLE_CHARS[(index * 5 + text.length) % SCRAMBLE_CHARS.length];
+  }).join('');
+}
+
+function setupHeroTextMotion(home: HTMLElement): HeroTextMotion {
+  const title = home.querySelector<HTMLElement>('[data-home-title]');
+  const deck = home.querySelector<HTMLElement>('[data-home-deck]');
+
+  const textMotion: HeroTextMotion = {};
+
+  if (title) {
+    textMotion.title = SplitText.create(title, {
+      type: 'words',
+      wordsClass: 'home__title-word',
+      tag: 'span',
+      aria: 'auto',
+    });
+  }
+
+  if (deck) {
+    textMotion.deck = SplitText.create(deck, {
+      type: 'lines',
+      mask: 'lines',
+      linesClass: 'home__deck-line',
+      tag: 'span',
+      aria: 'auto',
+    });
+  }
+
+  return textMotion;
+}
+
+function revertHeroTextMotion(textMotion?: HeroTextMotion) {
+  textMotion?.deck?.revert();
+  textMotion?.title?.revert();
+}
+
+function setupScrambleHover(targets: HTMLElement[]) {
+  targets.forEach((target) => {
+    const text = target.textContent?.trim();
+    if (!text) return;
+    target.dataset.originalText = text;
+
+    target.addEventListener('pointerenter', () => {
+      if (prefersReducedMotion()) return;
+      gsap.killTweensOf(target);
+      gsap.to(target, {
+        duration: 0.62,
+        ease: 'none',
+        scrambleText: {
+          text,
+          chars: SCRAMBLE_CHARS,
+          speed: 0.48,
+          revealDelay: 0.08,
+          tweenLength: false,
+        },
+      });
+    });
   });
 }
 
@@ -373,6 +447,7 @@ export function setupHomeMotion() {
   initGsap();
 
   if (prefersReducedMotion()) {
+    revertHeroTextMotion();
     markVisible('[data-reveal], .mosaic');
     gsap.set('.home__line > *', { clearProps: 'all', autoAlpha: 1 });
     return;
@@ -384,16 +459,104 @@ export function setupHomeMotion() {
   const contact = document.querySelector<HTMLElement>('.contact');
   if (!home) return;
 
-  gsap.set('.home__line > *', { yPercent: 105, autoAlpha: 0 });
-  gsap
-    .timeline({ defaults: { ease: 'zwMenu' } })
-    .to('.home__line > *', {
+  const hasOpeningLoader = Boolean(document.querySelector<HTMLElement>('[data-opening-loader]'));
+  const textMotion = setupHeroTextMotion(home);
+  const lineContents = gsap.utils.toArray<HTMLElement>('.home__line > *');
+  const titleWords = textMotion.title?.words ?? [];
+  const deckLines = textMotion.deck?.lines ?? [];
+  const kicker = home.querySelector<HTMLElement>('[data-scramble-text]');
+  const scope = home.querySelector<HTMLElement>('[data-home-scope]');
+  const scopePhrases = gsap.utils.toArray<HTMLElement>('[data-scope-phrase]');
+
+  if (kicker?.textContent) {
+    kicker.dataset.originalText = kicker.textContent;
+    kicker.textContent = makeScrambleSeed(kicker.dataset.originalText);
+  }
+
+  scopePhrases.forEach((phrase) => {
+    const text = phrase.textContent?.trim();
+    if (!text) return;
+    phrase.dataset.originalText = text;
+    phrase.textContent = makeScrambleSeed(text);
+  });
+
+  gsap.set(lineContents, { yPercent: 105, autoAlpha: 0 });
+  gsap.set(titleWords, { yPercent: 118, rotationX: -24, autoAlpha: 0 });
+  gsap.set(deckLines, { yPercent: 110, autoAlpha: 0 });
+
+  const intro = gsap.timeline({
+    defaults: { ease: 'zwMenu' },
+    delay: hasOpeningLoader ? 4.18 : 0,
+    onComplete: () => setupScrambleHover(scopePhrases),
+  });
+
+  intro
+    .to(lineContents, {
       yPercent: 0,
       autoAlpha: 1,
-      duration: 1,
-      stagger: 0.1,
+      duration: 0.72,
+      stagger: 0.08,
     })
-    .to('.home .next-arrow', { autoAlpha: 1, duration: 0.8 }, 0.9);
+    .to(
+      kicker,
+      {
+        duration: 0.96,
+        ease: 'none',
+        scrambleText: {
+          text: kicker?.dataset.originalText ?? '',
+          chars: SCRAMBLE_CHARS,
+          speed: 0.5,
+          revealDelay: 0.18,
+          tweenLength: false,
+        },
+      },
+      0.08,
+    )
+    .to(
+      titleWords,
+      {
+        yPercent: 0,
+        rotationX: 0,
+        autoAlpha: 1,
+        duration: 1.15,
+        ease: 'zwOut',
+        stagger: 0.08,
+      },
+      0.32,
+    )
+    .to(
+      deckLines,
+      {
+        yPercent: 0,
+        autoAlpha: 1,
+        duration: 0.9,
+        ease: 'zwOut',
+        stagger: 0.08,
+      },
+      0.78,
+    );
+
+  scopePhrases.forEach((phrase, index) => {
+    intro.to(
+      phrase,
+      {
+        duration: 0.72,
+        ease: 'none',
+        scrambleText: {
+          text: phrase.dataset.originalText ?? '',
+          chars: SCRAMBLE_CHARS,
+          speed: 0.45,
+          revealDelay: 0.1,
+          tweenLength: false,
+        },
+      },
+      1.1 + index * 0.055,
+    );
+  });
+
+  intro
+    .to(scope, { color: 'rgba(248, 246, 238, 0.62)', duration: 0.7 }, 1.18)
+    .to('.home .next-arrow', { autoAlpha: 1, duration: 0.8 }, 1.25);
 
   gsap.to('.home__cover', {
     autoAlpha: 1,
