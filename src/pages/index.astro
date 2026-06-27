@@ -583,6 +583,14 @@ const backgroundRows = [
     letter-spacing: -0.035em;
     text-transform: none;
     text-wrap: balance;
+    perspective: 900px;
+  }
+
+  .section-intro h2 :global(.section-title-word),
+  .contact h2 :global(.section-title-word) {
+    display: inline-block;
+    transform-origin: 0% 100%;
+    will-change: transform, opacity;
   }
 
   .impact__body p {
@@ -927,6 +935,8 @@ const backgroundRows = [
 
     .home__line > *,
     .home__title :global(.home__title-word),
+    .section-intro h2 :global(.section-title-word),
+    .contact h2 :global(.section-title-word),
     [data-reveal] {
       opacity: 1;
       transform: none;
@@ -940,7 +950,12 @@ const backgroundRows = [
 </style>
 
 <script>
-  import { setupHomeMotion, setupListRevealMotion, setupOpeningMotion } from '../lib/legacy-motion';
+  import {
+    setupHomeMotion,
+    setupListRevealMotion,
+    setupOpeningMotion,
+    setupSectionTitleMotion,
+  } from '../lib/legacy-motion';
 
   const setupHiddenEmail = () => {
     const trigger = document.querySelector<HTMLButtonElement>('[data-contact-email]');
@@ -958,6 +973,7 @@ const backgroundRows = [
 
   setupOpeningMotion();
   setupHomeMotion();
+  setupSectionTitleMotion();
   setupListRevealMotion('[data-reveal]');
   setupHiddenEmail();
 </script>
