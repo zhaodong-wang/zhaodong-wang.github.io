@@ -151,8 +151,8 @@ const links: Link[] = [
   }
 
   /* Four-panel curtain: each panel is a 25% column anchored to the right
-     edge, width 0 → 100%, staggered by 80ms so the panels sweep in like
-     a curtain. Matches the 2015 .nav-column .fill behaviour. */
+     edge, width 0 → 100%. The JS uses the legacy 500ms
+     cubic-bezier(1, 0, 0, 1) timing from the 2015 .nav-column .fill. */
   .site-drawer__panels {
     position: absolute;
     inset: 0;
@@ -192,10 +192,8 @@ const links: Link[] = [
     scrollbar-width: thin;
   }
   /* Menu items slide in from the right — base state (closed) is translateX 80%
-     opacity 0, matching the 2015 .move-right class. On open they settle to 0/1
-     with a first-to-last stagger; on close they retreat with a last-to-first
-     reverse stagger so the last-in is the first-out (matches the 2015 toggleMenu
-     JS behaviour). Typography stays in a light grotesk voice. */
+     opacity 0, matching the 2015 .move-right class. JS preserves the old
+     500ms transition, 500ms curtain delay, and 70ms item cadence. */
   .site-drawer__list li {
     opacity: 0;
     will-change: transform, opacity;

@@ -11,6 +11,7 @@ function initGsap() {
   gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText, ScrambleTextPlugin);
   CustomEase.create('zwSmooth', 'M0,0 C0.6,0 0.4,1 1,1');
   CustomEase.create('zwSnap', 'M0,0 C0.835,0 0.19,1 1,1');
+  CustomEase.create('zwCurtain', '1,0,0,1');
   CustomEase.create('zwMenu', 'M0,0 C0.19,1 0.22,1 1,1');
   CustomEase.create('zwOut', 'M0,0 C0.23,1 0.32,1 1,1');
   gsap.defaults({ overwrite: 'auto' });
@@ -186,6 +187,10 @@ export function setupLegacyDrawer() {
   );
   const drawerItemOffset = () =>
     window.matchMedia('(max-width: 720px)').matches ? 42 : 96;
+  const menuItemStagger = () => stagger(0.07);
+  const menuItemDuration = () => duration(0.5);
+  const legacyPanelDelay = () =>
+    Math.max(0, (items.length - 1) * menuItemStagger() + menuItemDuration());
   const focusables = () =>
     Array.from(
       drawer.querySelectorAll<HTMLElement>(
@@ -299,8 +304,7 @@ export function setupLegacyDrawer() {
         {
           scaleX: 1,
           duration: duration(0.5),
-          ease: 'none',
-          stagger: stagger(0.08),
+          ease: 'zwCurtain',
         },
         0,
       )
@@ -309,11 +313,11 @@ export function setupLegacyDrawer() {
         {
           x: 0,
           autoAlpha: 1,
-          duration: duration(0.5),
+          duration: menuItemDuration(),
           ease: 'zwMenu',
-          stagger: stagger(0.07),
+          stagger: menuItemStagger(),
         },
-        0.42,
+        0.5,
       )
       .call(() => {
         if (focusFirst) focusables()[0]?.focus();
@@ -337,23 +341,26 @@ export function setupLegacyDrawer() {
       {
         x: drawerItemOffset(),
         autoAlpha: 0,
-        duration: duration(0.5),
+        duration: menuItemDuration(),
         ease: 'zwMenu',
-        stagger: stagger(0.07),
+        stagger: menuItemStagger(),
       },
-      0,
+      0.07,
     )
       .to(
         panels.slice().reverse(),
         {
           scaleX: 0,
           duration: duration(0.5),
-          ease: 'none',
-          stagger: stagger(0.08),
+          ease: 'zwCurtain',
         },
-        0.48,
+        legacyPanelDelay(),
       )
-      .to(logo, { yPercent: 0, duration: duration(0.6), ease: 'zwSnap' }, 0.88);
+      .to(
+        logo,
+        { yPercent: 0, duration: duration(0.6), ease: 'zwSnap' },
+        legacyPanelDelay() + duration(0.5),
+      );
   };
 
   toggle.addEventListener('click', (event) => {
