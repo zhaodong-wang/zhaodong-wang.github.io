@@ -673,6 +673,57 @@ export function setupHomeMotion() {
   ScrollTrigger.refresh();
 }
 
+export function setupSectionTitleMotion(selector = '.section-intro h2, .contact h2') {
+  initGsap();
+
+  const titles = gsap.utils.toArray<HTMLElement>(selector);
+  if (!titles.length) return;
+
+  if (prefersReducedMotion()) {
+    titles.forEach((title) => title.classList.add('is-section-title-ready'));
+    return;
+  }
+
+  titles.forEach((title, index) => {
+    const split = SplitText.create(title, {
+      type: 'words',
+      wordsClass: 'section-title-word',
+      tag: 'span',
+      aria: 'auto',
+    });
+    const words = split.words as HTMLElement[];
+
+    title.classList.add('has-section-title-motion');
+    gsap.set(words, {
+      autoAlpha: 0,
+      yPercent: 86,
+      rotationX: -18,
+      transformOrigin: '0% 100%',
+      willChange: 'transform, opacity',
+    });
+
+    gsap
+      .timeline({
+        defaults: { ease: 'zwOut' },
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 82%',
+          toggleActions: 'play none none reverse',
+          id: `section-title-${index}`,
+        },
+      })
+      .to(words, {
+        autoAlpha: 1,
+        yPercent: 0,
+        rotationX: 0,
+        duration: 0.92,
+        stagger: 0.045,
+      });
+  });
+
+  ScrollTrigger.refresh();
+}
+
 export function setupSubpageMotion() {
   initGsap();
 
