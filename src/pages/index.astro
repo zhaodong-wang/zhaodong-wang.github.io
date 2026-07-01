@@ -272,9 +272,9 @@ const backgroundRows = [
       <div class="contact__copy" data-reveal>
         <p class="paper-label">Contact</p>
         <h2 id="contact-heading">Agent systems, ML infrastructure, and AI products.</h2>
-        <button class="contact__email" type="button" data-contact-email>
+        <a class="contact__email" href="#contact" data-contact-email aria-label="Email Zhaodong">
           Email me
-        </button>
+        </a>
       </div>
     </section>
   </article>
@@ -744,6 +744,7 @@ const backgroundRows = [
     font-weight: 500;
     line-height: 1.1;
     letter-spacing: -0.025em;
+    text-decoration: none;
     cursor: pointer;
   }
 
@@ -958,17 +959,23 @@ const backgroundRows = [
   } from '../lib/legacy-motion';
 
   const setupHiddenEmail = () => {
-    const trigger = document.querySelector<HTMLButtonElement>('[data-contact-email]');
+    const trigger = document.querySelector<HTMLAnchorElement>('[data-contact-email]');
     if (!trigger) return;
 
     const encoded = [
       139, 121, 114, 128, 117, 128, 127, 120, 136, 114, 127, 120, 81, 126, 118,
       133, 114, 63, 116, 128, 126,
     ];
-    trigger.addEventListener('click', () => {
+
+    const primeHref = () => {
       const address = encoded.map((code) => String.fromCharCode(code - 17)).join('');
-      window.location.href = `mailto:${address}`;
-    });
+      trigger.href = `mailto:${address}`;
+    };
+
+    trigger.addEventListener('pointerenter', primeHref, { once: true });
+    trigger.addEventListener('focus', primeHref, { once: true });
+    trigger.addEventListener('pointerdown', primeHref);
+    trigger.addEventListener('click', primeHref);
   };
 
   setupOpeningMotion();
